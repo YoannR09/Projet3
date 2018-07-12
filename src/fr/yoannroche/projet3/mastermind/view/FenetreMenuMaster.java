@@ -102,6 +102,16 @@ public class FenetreMenuMaster extends JFrame{
 		    lancer.setPreferredSize(new Dimension(90,40));
 		    lancer.setBackground(Color.getHSBColor(0.234f, 0.65f, 0.94f));
 		    lancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		    lancer.addActionListener(new ActionListener(){
+			      public void actionPerformed(ActionEvent event){
+			    	  ((JFrame) contentPaneMenu.getTopLevelAncestor()).dispose() ;
+			    	  
+			    	  if(mode1.isSelected()==true) {
+						Challenger chal = new Challenger();	
+						chal.setVisible(true);
+			    	  }
+				      }
+				    });
 		    
 		    retour.setPreferredSize(new Dimension(50,40));
 		    retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.84f));
