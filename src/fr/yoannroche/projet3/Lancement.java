@@ -3,6 +3,8 @@ package fr.yoannroche.projet3;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -12,6 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+
+import fr.yoannroche.projet3.mastermind.view.FenetreMenuMaster;
 
 public class Lancement extends JFrame{
 
@@ -23,16 +27,17 @@ public class Lancement extends JFrame{
 	private JButton jeu3 = new JButton(new ImageIcon("images/fond1.png"));
 	private Dimension dim = new Dimension(400,100);
 	private Dimension dim2 = new Dimension(250,535);
+	private Lancement l;
 
 
 	public Lancement() {
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(" Projet 3 ");
-		this.setLocationRelativeTo(null);
 		this.setSize(600, 450);
 		this.setContentPane(contentPane);
 		this.setResizable(false);
+		this.setLocationRelativeTo(null);
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		initMenuBar();
 		initEcran();
@@ -49,7 +54,7 @@ public class Lancement extends JFrame{
 
 
 	private void initEcran() {
-		blocJeu.setPreferredSize(new Dimension(420,320));
+		blocJeu.setPreferredSize(new Dimension(420,325));
 		blocJeu.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
 		blocJeu.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.black));
 
@@ -57,6 +62,13 @@ public class Lancement extends JFrame{
 		jeu1.setPreferredSize(dim);
 		jeu1.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 		jeu1.addMouseListener(new SourisListener());
+		jeu1.addActionListener(new ActionListener(){
+		      public void actionPerformed(ActionEvent event){
+		    	  ((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
+					FenetreMenuMaster menu = new FenetreMenuMaster();	
+					menu.setVisible(true);
+			      }
+			    });
 
 
 
