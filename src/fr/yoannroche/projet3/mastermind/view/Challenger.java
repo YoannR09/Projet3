@@ -72,6 +72,7 @@ public class Challenger extends JFrame {
 	 JLabel reglePoint = new JLabel();
 	 reglePoint.setFont(arial);
 	 reglePoint.setText("P = Nombres de chiffres bien placés " + " B = Nombres de chiffres bon mais mal placés");
+	 reglePoint.setHorizontalAlignment(JLabel.CENTER);
 	 blocRegle.add(regle);
 	 blocRegle.add(reglePoint);
 	 contentPane.add(blocRegle);
@@ -144,7 +145,8 @@ public class Challenger extends JFrame {
 			cases[i].setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
 			cases[i].setFont(impact);
 			cases[i].setForeground(Color.getHSBColor(0.095f, 0.75f, 0.86f));
-			cases[i].setText(" P : " + 0 + "    B : "+0);
+			cases[i].setText("P : " + 0 + "    B : "+0);
+			cases[i].setHorizontalAlignment(JLabel.CENTER);
 			
 			
 		}

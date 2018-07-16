@@ -1,10 +1,17 @@
 package fr.yoannroche.projet3.mastermind.model;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.sql.Time;
 import java.util.ArrayList;
 
 import javax.management.timer.Timer;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 
@@ -13,6 +20,7 @@ import javax.swing.JTextArea;
 public class ModelDefenseur {
 
 	private JProgressBar bar;
+    static ImageIcon ordi1 = new ImageIcon("images/ordi1.png");
 
 
 
@@ -24,40 +32,17 @@ public class ModelDefenseur {
 	public static <JTexteArea> void propositionOrdi(JLabel pro1,JLabel pro2,JLabel pro3,JLabel pro4,JLabel pro5,JLabel pro6,JLabel pro7,JLabel pro8,JTextArea dialog,JLabel image) {
 
 				proposition1(pro1,dialog,image);
-				try {
-					Thread t = new Thread();
-					t.sleep(5000);
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
-				proposition2(pro2,dialog,image);
-				try {
-					Thread C = new Thread();
-					C.sleep(5000);
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
-
-			
+				proposition2(pro2,dialog,image);	
 				proposition3(pro3,dialog,image);
 				proposition4(pro4,dialog,image);
 				proposition5(pro5,dialog,image);
 				proposition6(pro6,dialog,image);
 				proposition7(pro7,dialog,image);
 				proposition8(pro8,dialog,image);
+				proposition1(pro1,dialog,image);
 				
 	}
 
-
-	private static void sleep() {
-		try {
-			Thread t = new Thread();
-			t.sleep(5000);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-
-	}
 
 
 	private static void proposition1(JLabel pro1,JTextArea dialog, JLabel image) {
@@ -65,7 +50,11 @@ public class ModelDefenseur {
 
 		CodeCacher code = new CodeCacher();
 		pro1.setText(code.getTableauChiffre().toString());
-		dialog.setText("  Hhmmmmm je dirai  "+ code.getTableauChiffre().toString() );
+		dialog.setText("  Hhmmmmm je dirai \n  "+ code.getTableauChiffre().toString() );
+		image.removeAll();
+		image.setIcon(ordi1);
+	
+		image.revalidate();
 
 	}
 	private static void proposition2(JLabel pro2,JTextArea dialog, JLabel image) {

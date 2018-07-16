@@ -1,5 +1,6 @@
 package fr.yoannroche.projet3.mastermind.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -10,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -45,6 +47,7 @@ public class Defenseur extends JFrame {
 	JLabel test8 = new JLabel();
 	JTextArea dialog = new JTextArea();
 	JLabel image = new JLabel();
+	static ImageIcon ordi0 = new ImageIcon("images/ordi3.png");
 
 	public Defenseur() {
 
@@ -59,6 +62,9 @@ public class Defenseur extends JFrame {
 		initBlocOrdinateur();
 		initTentative();
 		initBlocProposition();
+		image.setIcon(ordi0);
+		image.setPreferredSize(new Dimension(160,140));
+		image.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 
 	private void initTentative() {
