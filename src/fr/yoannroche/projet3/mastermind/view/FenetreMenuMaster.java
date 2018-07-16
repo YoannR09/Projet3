@@ -110,6 +110,10 @@ public class FenetreMenuMaster extends JFrame{
 						Challenger chal = new Challenger();	
 						chal.setVisible(true);
 			    	  }
+			    	  if(mode2.isSelected()==true) {
+			    		  Defenseur def = new Defenseur();
+			    		  def.setVisible(true);
+			    	  }
 				      }
 				    });
 		    
