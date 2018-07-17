@@ -51,7 +51,7 @@ public class Challenger extends JFrame {
 
 	public Challenger() {
 		this.setTitle("Challenger");
-		this.setSize(400, 490);
+		this.setSize(400, 500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
@@ -65,6 +65,20 @@ public class Challenger extends JFrame {
 	}
 
 	private void initRegle() {
+		JPanel espaceRetour = new JPanel ();
+		espaceRetour.setPreferredSize(new Dimension(320,20));
+		espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		JButton retour = new JButton("Retour");
+		retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
+		retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
+		retour.setForeground(Color.white);
+		retour.addActionListener(new ActionListener(){
+		      public void actionPerformed(ActionEvent event){
+		    	  ((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
+					FenetreMenuMaster menu = new FenetreMenuMaster();	
+					menu.setVisible(true);
+			      }
+			    });
 	JPanel blocRegle = new JPanel();
 	blocRegle.setPreferredSize(new Dimension(400,40));
 	 JLabel regle = new JLabel();
@@ -73,6 +87,8 @@ public class Challenger extends JFrame {
 	 reglePoint.setFont(arial);
 	 reglePoint.setText("P = Nombres de chiffres bien placés " + " B = Nombres de chiffres bon mais mal placés");
 	 reglePoint.setHorizontalAlignment(JLabel.CENTER);
+	 contentPane.add(retour);
+	 contentPane.add(espaceRetour);
 	 blocRegle.add(regle);
 	 blocRegle.add(reglePoint);
 	 contentPane.add(blocRegle);

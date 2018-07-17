@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.RootPaneContainer;
 
+import fr.yoannroche.projet3.Lancement;
 import fr.yoannroche.projet3.mastermind.model.ModelChallenger;
 import fr.yoannroche.projet3.mastermind.model.ModelDefenseur;
 import fr.yoannroche.projet3.mastermind.view.Challenger.SourisListener;
@@ -27,7 +28,7 @@ public class Defenseur extends JFrame {
 
 	private JPanel contentPane = new JPanel();
 	Font impact = new Font ("impact", 15,15);
-	Font arial = new Font ("arial", 9,9);
+	Font arial = new Font ("arial", 12,12);
 	private JLabel proposition = new JLabel();
 	private JPanel blocProposition = new JPanel();
 	int  [] clavier = {0,1,2,3,4,5,6,7,8,9};
@@ -47,12 +48,12 @@ public class Defenseur extends JFrame {
 	JLabel test8 = new JLabel();
 	JTextArea dialog = new JTextArea();
 	JLabel image = new JLabel();
-	static ImageIcon ordi0 = new ImageIcon("images/ordi3.png");
+	static ImageIcon ordi0 = new ImageIcon("images/ordi0.png");
 
 	public Defenseur() {
 
-		this.setTitle("Challenger");
-		this.setSize(400, 400);
+		this.setTitle("Defenseur");
+		this.setSize(400, 420);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
@@ -129,10 +130,27 @@ public class Defenseur extends JFrame {
 	}
 
 	private void initRegle() {
+		JPanel espaceRetour = new JPanel ();
+		espaceRetour.setPreferredSize(new Dimension(320,20));
+		espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		JButton retour = new JButton("Retour");
+		retour.addActionListener(new ActionListener(){
+		      public void actionPerformed(ActionEvent event){
+		    	  ((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
+					FenetreMenuMaster menu = new FenetreMenuMaster();	
+					menu.setVisible(true);
+			      }
+			    });
+		retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
+		retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
+		retour.setForeground(Color.white);
 		JPanel blocRegle = new JPanel();
 		blocRegle.setPreferredSize(new Dimension(435,30));
 		JLabel regle = new JLabel();
 		regle.setText("L'ordinateur a "+0+" tentative pour trouver le code secret à "+0+" chiffres.");
+		regle.setFont(arial);
+		contentPane.add(retour);
+		contentPane.add(espaceRetour);
 		blocRegle.add(regle);
 		contentPane.add(blocRegle);
 

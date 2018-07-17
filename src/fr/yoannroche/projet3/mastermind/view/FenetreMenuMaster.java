@@ -29,13 +29,13 @@ public class FenetreMenuMaster extends JFrame{
 	Font impact = new Font ("impact", 17,17);
 	private Dimension dim = new Dimension(150,50);
 	private JButton lancer = new JButton("LANCER");
-	private JButton retour = new JButton(new ImageIcon("images/back.png"));
+	private JButton retour = new JButton("Retour");
 	JTextArea regle = new JTextArea();
 	
 	
 	public FenetreMenuMaster() {
 		this.setTitle("Menu du MasterMind");
-		this.setSize(550, 400);
+		this.setSize(550, 335);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPaneMenu);
@@ -50,7 +50,7 @@ public class FenetreMenuMaster extends JFrame{
 		
 		JPanel espace1 = new JPanel();
 		JPanel espace2 = new JPanel();
-		espace2.setPreferredSize(new Dimension(600,20));
+		espace2.setPreferredSize(new Dimension(400,10));
 		BorderLayout bl=new BorderLayout(100,100);
 		FlowLayout fl=new FlowLayout(FlowLayout.CENTER,100,100);
 		
@@ -99,7 +99,7 @@ public class FenetreMenuMaster extends JFrame{
 		    regle.setFont(police);
 			regle.setEditable(false);
 		    
-		    lancer.setPreferredSize(new Dimension(90,40));
+		    lancer.setPreferredSize(new Dimension(60,30));
 		    lancer.setBackground(Color.getHSBColor(0.234f, 0.65f, 0.94f));
 		    lancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		    lancer.addActionListener(new ActionListener(){
@@ -114,12 +114,16 @@ public class FenetreMenuMaster extends JFrame{
 			    		  Defenseur def = new Defenseur();
 			    		  def.setVisible(true);
 			    	  }
+			    	  if(mode3.isSelected()==true) {
+			    		  Duel du = new Duel();
+			    		  du.setVisible(true);
+			    	  }
 				      }
 				    });
 		    
-		    retour.setPreferredSize(new Dimension(50,40));
-		    retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.84f));
-		    retour.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.orange));
+		    retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
+			retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
+			retour.setForeground(Color.white);
             retour.setLayout(new GridLayout(3, 50));
             retour.addActionListener(new ActionListener(){
   		      public void actionPerformed(ActionEvent event){
@@ -133,7 +137,7 @@ public class FenetreMenuMaster extends JFrame{
 		   
 		    contentPaneMenu.add(retour);
 		    contentPaneMenu.add(espace1);
-		    espace1.setPreferredSize(new Dimension(450,50));
+		    espace1.setPreferredSize(new Dimension(450,20));
 		    espace1.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
 		    contentPaneMenu.add(regle);
 		    contentPaneMenu.add(blocMode);

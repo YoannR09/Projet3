@@ -25,8 +25,8 @@ public class Lancement extends JFrame{
 	private JPanel blocJeu = new JPanel();
 	private JMenuBar menuBar = new JMenuBar();
 	private JButton jeu1 = new JButton(new ImageIcon("images/fond1.png"));
-	private JButton jeu2 = new JButton(new ImageIcon("images/fond1.png"));
-	private JButton jeu3 = new JButton(new ImageIcon("images/fond1.png"));
+	private JButton jeu2 = new JButton(new ImageIcon("images/fond2.png"));
+	private JButton jeu3 = new JButton(new ImageIcon("images/fond3.png"));
 	private JButton infos = new JButton(" ? ");
 	JLabel infosJeu = new JLabel();
 	JButton masterMind = new JButton(" MasterMind ");
@@ -92,7 +92,7 @@ public class Lancement extends JFrame{
 		infosJeu.setText("  Informations des jeux     ");
 		infosJeu.setForeground(Color.WHITE);
 		infosJeu.setFont(impact);
-		menuBar.setPreferredSize(new Dimension(585,51));
+		menuBar.setPreferredSize(new Dimension(595,51));
 		menuBar.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
 		menuBar.setBorder(BorderFactory.createLineBorder(Color.black));
 		menuBar.add(infosJeu);
