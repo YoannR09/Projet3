@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
+import fr.yoannroche.projet3.mastermind.model.Reglage;
 import fr.yoannroche.projet3.mastermind.view.FenetreMenuMaster;
 
 public class Lancement extends JFrame{
@@ -38,6 +39,9 @@ public class Lancement extends JFrame{
 	private Lancement l;
 	Font impact = new Font ("impact", 15,15);
 	Font impact2 = new Font ("impact", 13,13);
+	private int tentative;
+	private int cases;
+	Reglage reglage = new Reglage(cases, tentative);
 
 
 	public Lancement() {
@@ -101,9 +105,9 @@ public class Lancement extends JFrame{
 		menuBar.add(jeuT3);
 		menuBar.add(espace);
 		menuBar.add(infos);
-		infos.setBorder(BorderFactory.createLineBorder(Color.black));
 		infos.setPreferredSize(new Dimension(30,40));
-		infos.setBackground(Color.orange);
+		infos.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));
+		infos.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 056f, 0.64f)));
 		infos.addMouseListener(new SourisListener2());
 		contentPane.add(menuBar);
 	}
@@ -217,9 +221,10 @@ public class Lancement extends JFrame{
 				jeuT3.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
 			}
 			if(arg0.getSource()==infos) {
-				infos.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.getHSBColor(0.094f, 0.55f, 0.94f)));
-				infos.setBackground(Color.getHSBColor(0.094f, 0.75f, 0.94f));
+				infos.setBackground(Color.getHSBColor(0.112f, 076f, 0.84f));
+				infos.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 066f, 0.74f)));
 			}
+			
 			
 		}
 		public void mouseExited(MouseEvent arg0) {
@@ -229,8 +234,8 @@ public class Lancement extends JFrame{
 			jeuT2.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 			jeuT3.setBorder(BorderFactory.createLineBorder(Color.black));
 		    jeuT3.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
-			infos.setBorder(BorderFactory.createLineBorder(Color.black));
-			infos.setBackground(Color.orange);
+		    infos.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));
+			infos.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 056f, 0.64f)));
 			
 		}
 

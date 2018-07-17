@@ -22,6 +22,7 @@ import javax.swing.RootPaneContainer;
 import fr.yoannroche.projet3.Lancement;
 import fr.yoannroche.projet3.mastermind.model.ModelChallenger;
 import fr.yoannroche.projet3.mastermind.model.ModelDefenseur;
+import fr.yoannroche.projet3.mastermind.model.Reglage;
 import fr.yoannroche.projet3.mastermind.view.Challenger.SourisListener;
 
 public class Defenseur extends JFrame {
@@ -35,6 +36,7 @@ public class Defenseur extends JFrame {
 	JButton [] button = new JButton[clavier.length];
 	private JButton bouton[];
 	JButton supprimer = new JButton(" Suppr ");
+	JButton ok = new JButton(" OK ");
 	private int tentativeO =0;
 	JLabel find = new JLabel ();
 	JLabel cases[] = new JLabel[9];
@@ -49,6 +51,10 @@ public class Defenseur extends JFrame {
 	JTextArea dialog = new JTextArea();
 	JLabel image = new JLabel();
 	static ImageIcon ordi0 = new ImageIcon("images/ordi0.png");
+	private int nbreCases = 0;
+	private int essaie = 0;
+	private Reglage reglage = new Reglage(nbreCases,essaie );
+	JButton retour = new JButton("Retour");
 
 	public Defenseur() {
 
@@ -133,7 +139,6 @@ public class Defenseur extends JFrame {
 		JPanel espaceRetour = new JPanel ();
 		espaceRetour.setPreferredSize(new Dimension(320,20));
 		espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
-		JButton retour = new JButton("Retour");
 		retour.addActionListener(new ActionListener(){
 		      public void actionPerformed(ActionEvent event){
 		    	  ((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
@@ -144,10 +149,11 @@ public class Defenseur extends JFrame {
 		retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		retour.setForeground(Color.white);
+		retour.addMouseListener(new SourisListener());
 		JPanel blocRegle = new JPanel();
 		blocRegle.setPreferredSize(new Dimension(435,30));
 		JLabel regle = new JLabel();
-		regle.setText("L'ordinateur a "+0+" tentative pour trouver le code secret à "+0+" chiffres.");
+		regle.setText("L'ordinateur à "+essaie+" tentative pour trouver le code secret à "+nbreCases+" chiffres.");
 		regle.setFont(arial);
 		contentPane.add(retour);
 		contentPane.add(espaceRetour);
@@ -189,9 +195,10 @@ public class Defenseur extends JFrame {
 		contentPane.add(espace);
 		contentPane.add(blocProposition);
 		contentPane.add(blocTest);
-		JButton ok = new JButton(" OK ");
+		
 		ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
 		ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		ok.addMouseListener(new SourisListener());
 		ok.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				ok.setVisible(false);
@@ -211,6 +218,8 @@ public class Defenseur extends JFrame {
 
 
 		supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
+		supprimer.addMouseListener(new SourisListener());
 		supprimer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				proposition.setText("");
@@ -233,7 +242,19 @@ public class Defenseur extends JFrame {
 		}
 
 		public void mouseEntered(MouseEvent arg0) {
-			((JButton)arg0.getSource()).setBorder(BorderFactory.createMatteBorder(0, 2, 0, 2,Color.white));
+			((JButton)arg0.getSource()).setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0,Color.white));
+			if(arg0.getSource()==ok) {
+				ok.setBackground(Color.getHSBColor(0.345f, 0.58f, 0.88f));
+				ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.64f)));
+			}
+			if(arg0.getSource()==supprimer) {
+				supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.64f)));
+				supprimer.setBackground(Color.getHSBColor(0.534f, 0.65f, 0.84f));
+			}
+			if(arg0.getSource()==retour) {
+				retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.54f));
+				retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.34f)));
+			}
 		}
 
 		public void mouseExited(MouseEvent arg0) {
@@ -241,6 +262,13 @@ public class Defenseur extends JFrame {
 			if(((JButton)arg0.getSource()).isEnabled()==false) {
 				((JButton)arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.orange));
 			}
+			retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
+			retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
+			retour.setForeground(Color.white);
+			ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
+			ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+			supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+			supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
 		}
 
 		public void mousePressed(MouseEvent arg0) {
@@ -248,7 +276,13 @@ public class Defenseur extends JFrame {
 		}
 
 		public void mouseReleased(MouseEvent arg0) {
-
+			retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
+			retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
+			retour.setForeground(Color.white);
+			ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
+			ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+			supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+			supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
 		}
 
 	}

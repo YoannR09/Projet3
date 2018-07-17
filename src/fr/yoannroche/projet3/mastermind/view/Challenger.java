@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import fr.yoannroche.projet3.mastermind.control.ControlChallenger;
 import fr.yoannroche.projet3.mastermind.model.CodeCacher;
 import fr.yoannroche.projet3.mastermind.model.ModelChallenger;
+import fr.yoannroche.projet3.mastermind.model.Reglage;
+import fr.yoannroche.projet3.mastermind.view.Duel.SourisListener;
 
 public class Challenger extends JFrame {
 
@@ -38,6 +40,9 @@ public class Challenger extends JFrame {
 	JLabel test6 = new JLabel();
 	JLabel test7 = new JLabel();
 	JLabel test8 = new JLabel();
+	JButton ok = new JButton(" OK ");
+	JButton supprimer = new JButton(" Suppr ");
+	JButton retour = new JButton("Retour");
 	
 	Font impact = new Font ("impact", 17,17);
 	Font arial = new Font ("arial", 9,9);
@@ -48,6 +53,10 @@ public class Challenger extends JFrame {
 	private JButton bouton[];
 	private Component test;
 	private int tentative= 0;
+	
+	private int nbreCases = 0;
+	private int essaie = 0;
+	private Reglage reglage = Reglage(nbreCases,essaie);
 
 	public Challenger() {
 		this.setTitle("Challenger");
@@ -64,14 +73,19 @@ public class Challenger extends JFrame {
 		initBlocTest();
 	}
 
+	private Reglage Reglage(int nbreCases2, int essaie2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	private void initRegle() {
 		JPanel espaceRetour = new JPanel ();
 		espaceRetour.setPreferredSize(new Dimension(320,20));
 		espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
-		JButton retour = new JButton("Retour");
 		retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		retour.setForeground(Color.white);
+		retour.addMouseListener(new SourisListener());
 		retour.addActionListener(new ActionListener(){
 		      public void actionPerformed(ActionEvent event){
 		    	  ((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
@@ -82,7 +96,7 @@ public class Challenger extends JFrame {
 	JPanel blocRegle = new JPanel();
 	blocRegle.setPreferredSize(new Dimension(400,40));
 	 JLabel regle = new JLabel();
-	 regle.setText("Vous avez "+0+" tentative pour trouver le code secret à "+0+" chiffres.");
+	 regle.setText("Vous avez "+ essaie +" tentative pour trouver le code secret à "+ nbreCases +" chiffres.");
 	 JLabel reglePoint = new JLabel();
 	 reglePoint.setFont(arial);
 	 reglePoint.setText("P = Nombres de chiffres bien placés " + " B = Nombres de chiffres bon mais mal placés");
@@ -104,9 +118,9 @@ public class Challenger extends JFrame {
 		proposition.setForeground(Color.DARK_GRAY);
 		proposition.setFont(impact);
 		contentPane.add(blocTest);
-		JButton ok = new JButton(" OK ");
 		ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
 		ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		ok.addMouseListener(new SourisListener());
 		ok.addActionListener(new ActionListener(){
 		      public void actionPerformed(ActionEvent event){
 		    	  ModelChallenger.tentativeCheck(test1,test2,test3,test4,test5,test6,test7,test8, tentative,proposition);
@@ -117,10 +131,10 @@ public class Challenger extends JFrame {
 		    	  
 		      }  
 		      });
-		
-		
-		JButton supprimer = new JButton(" Suppr ");
+
 		supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
+		supprimer.addMouseListener(new SourisListener());
 		supprimer.addActionListener(new ActionListener(){
 		      public void actionPerformed(ActionEvent event){
 		    	  proposition.setText("");
@@ -251,7 +265,19 @@ public class Challenger extends JFrame {
 		}
 
 		public void mouseEntered(MouseEvent arg0) {
-			((JButton)arg0.getSource()).setBorder(BorderFactory.createMatteBorder(0, 2, 0, 2,Color.white));
+			((JButton)arg0.getSource()).setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0,Color.white));
+			if(arg0.getSource()==ok) {
+				ok.setBackground(Color.getHSBColor(0.345f, 0.58f, 0.88f));
+				ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.64f)));
+			}
+			if(arg0.getSource()==supprimer) {
+				supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.64f)));
+				supprimer.setBackground(Color.getHSBColor(0.534f, 0.65f, 0.84f));
+			}
+			if(arg0.getSource()==retour) {
+				retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.54f));
+				retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.34f)));
+			}
 		}
 
 		public void mouseExited(MouseEvent arg0) {
@@ -259,6 +285,13 @@ public class Challenger extends JFrame {
 			if(((JButton)arg0.getSource()).isEnabled()==false) {
 				((JButton)arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.orange));
 			}
+			ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
+			ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+			supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+			supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
+			retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
+			retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
+			retour.setForeground(Color.white);
 		}
 
 		public void mousePressed(MouseEvent arg0) {
@@ -266,7 +299,13 @@ public class Challenger extends JFrame {
 		}
 
 		public void mouseReleased(MouseEvent arg0) {
-			
+			ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
+			ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+			supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+			supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
+			retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
+			retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
+			retour.setForeground(Color.white);
 		}
 
 	}

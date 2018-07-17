@@ -8,17 +8,22 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
 import fr.yoannroche.projet3.Lancement;
+import fr.yoannroche.projet3.mastermind.model.Reglage;
+import fr.yoannroche.projet3.mastermind.view.Defenseur.SourisListener;
 
 
 public class FenetreMenuMaster extends JFrame{
@@ -27,9 +32,11 @@ public class FenetreMenuMaster extends JFrame{
 	private JPanel blocMode = new JPanel();
 	Font police = new Font ("arial black", 12,12);
 	Font impact = new Font ("impact", 17,17);
+	Font impact2 = new Font ("impact", 20,20);
 	private Dimension dim = new Dimension(150,50);
-	private JButton lancer = new JButton("LANCER");
+	private JButton lancer = new JButton("Lancer");
 	private JButton retour = new JButton("Retour");
+	private SourisListener sListener = new SourisListener();
 	JTextArea regle = new JTextArea();
 	
 	
@@ -39,6 +46,7 @@ public class FenetreMenuMaster extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPaneMenu);
+		this.setResizable(false);
 		contentPaneMenu.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
 		
 		initMenu();
@@ -47,12 +55,11 @@ public class FenetreMenuMaster extends JFrame{
 
 	private void initMenu() {
 		
-		
+
 		JPanel espace1 = new JPanel();
 		JPanel espace2 = new JPanel();
 		espace2.setPreferredSize(new Dimension(400,10));
-		BorderLayout bl=new BorderLayout(100,100);
-		FlowLayout fl=new FlowLayout(FlowLayout.CENTER,100,100);
+		
 		
 		 mode1 = new JRadioButton("Mode Challenger");
 		    mode1.setSelected(true);
@@ -70,13 +77,15 @@ public class FenetreMenuMaster extends JFrame{
 		    mode1.setPreferredSize(dim);
 		    mode1.setForeground((Color.DARK_GRAY));
 		    mode1.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
-		    
-		    
+		    mode1.addMouseListener(new SourisListener());
+
+			    	 
 		    blocMode.add(mode2);
 		    mode2.setFont(impact);
 		    mode2.setPreferredSize(dim);
 		    mode2.setForeground((Color.DARK_GRAY));
 		    mode2.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
+		    mode2.addMouseListener(new SourisListener());
 		    
 		    
 		    blocMode.add(mode3);
@@ -84,6 +93,7 @@ public class FenetreMenuMaster extends JFrame{
 		    mode3.setPreferredSize(dim);
 		    mode3.setForeground((Color.DARK_GRAY));
 		    mode3.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
+		    mode3.addMouseListener(new SourisListener());
 		    
 		    
 		    
@@ -99,9 +109,10 @@ public class FenetreMenuMaster extends JFrame{
 		    regle.setFont(police);
 			regle.setEditable(false);
 		    
-		    lancer.setPreferredSize(new Dimension(60,30));
+		    lancer.setPreferredSize(new Dimension(50,30));
 		    lancer.setBackground(Color.getHSBColor(0.234f, 0.65f, 0.94f));
 		    lancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		    lancer.addMouseListener(sListener);
 		    lancer.addActionListener(new ActionListener(){
 			      public void actionPerformed(ActionEvent event){
 			    	  ((JFrame) contentPaneMenu.getTopLevelAncestor()).dispose() ;
@@ -125,6 +136,7 @@ public class FenetreMenuMaster extends JFrame{
 			retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 			retour.setForeground(Color.white);
             retour.setLayout(new GridLayout(3, 50));
+            retour.addMouseListener(sListener);
             retour.addActionListener(new ActionListener(){
   		      public void actionPerformed(ActionEvent event){
   		    	  ((JFrame) contentPaneMenu.getTopLevelAncestor()).dispose() ;
@@ -137,8 +149,19 @@ public class FenetreMenuMaster extends JFrame{
 		   
 		    contentPaneMenu.add(retour);
 		    contentPaneMenu.add(espace1);
-		    espace1.setPreferredSize(new Dimension(450,20));
+		    espace1.setPreferredSize(new Dimension(150,20));
 		    espace1.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		    JLabel mastermind = new JLabel();
+		    contentPaneMenu.add(mastermind);
+		    mastermind.setText("MASTERMIND");
+		    mastermind.setForeground(Color.white);
+		    mastermind.setFont(impact2);
+		    mastermind.setOpaque(true);
+		    mastermind.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
+		    JPanel espaceMaster = new JPanel();
+		    espaceMaster.setPreferredSize(new Dimension(200,20));
+		    espaceMaster.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		    contentPaneMenu.add(espaceMaster);
 		    contentPaneMenu.add(regle);
 		    contentPaneMenu.add(blocMode);
 		    contentPaneMenu.add(espace2);
@@ -147,5 +170,57 @@ public class FenetreMenuMaster extends JFrame{
   
 		
 	}
+	
+	class SourisListener implements MouseListener{
 
-}
+		public void mouseClicked(MouseEvent arg0) {
+
+		}
+
+		public void mouseEntered(MouseEvent arg0) {
+	if(arg0.getSource()==retour) {
+		retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.54f));
+		retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.34f)));
+	}
+	if(arg0.getSource()==lancer) {
+		lancer.setBackground(Color.getHSBColor(0.234f, 0.75f, 0.99f));
+	    lancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.64f)));
+	}
+	if(arg0.getSource()==mode1) {
+		mode1.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.84f));
+	}
+	if(arg0.getSource()==mode2) {
+		mode2.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.84f));
+	}
+	if(arg0.getSource()==mode3) {
+		mode3.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.84f));
+	}
+		}
+
+		public void mouseExited(MouseEvent arg0) {
+			retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
+			retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
+			lancer.setBackground(Color.getHSBColor(0.234f, 0.65f, 0.94f));
+		    lancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		    mode1.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
+		    mode2.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
+		    mode3.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
+		}
+
+		public void mousePressed(MouseEvent arg0) {
+	
+		}
+
+		public void mouseReleased(MouseEvent arg0) {
+			retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
+			retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
+			lancer.setBackground(Color.getHSBColor(0.234f, 0.65f, 0.94f));
+		    lancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		    mode1.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
+		    mode2.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
+		    mode3.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
+		}
+	}
+	}
+
+
