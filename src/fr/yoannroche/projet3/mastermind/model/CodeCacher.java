@@ -8,6 +8,7 @@ public class CodeCacher {
 	private int tentative = 0;
 	private int nombreCellules = 4;
 	private ArrayList<Integer> tabInt = new ArrayList<Integer>();
+	private ArrayList<String> tabString = new ArrayList<String>();
 	
 	public CodeCacher() {
 		initCodeCacher();

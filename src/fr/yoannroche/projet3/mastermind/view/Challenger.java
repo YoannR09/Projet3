@@ -65,7 +65,7 @@ public class Challenger extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
 		this.setResizable(false);
-		contentPane.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		initRegle();
 		initBlocGauche();
 		initBlocDroit();
@@ -81,7 +81,7 @@ public class Challenger extends JFrame {
 	private void initRegle() {
 		JPanel espaceRetour = new JPanel ();
 		espaceRetour.setPreferredSize(new Dimension(320,20));
-		espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		retour.setForeground(Color.white);
@@ -194,7 +194,7 @@ public class Challenger extends JFrame {
 
 	private void initBlocGauche() {
 		espace.setPreferredSize(new Dimension(400,15));
-		espace.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		
 		cases[0]=test1;
 		cases[1]=test2;

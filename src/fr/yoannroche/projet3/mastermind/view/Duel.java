@@ -75,7 +75,7 @@ public class Duel extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
 		this.setResizable(false);
-		contentPane.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 
 		initRegle();
 		initBlocGauche();
@@ -100,7 +100,7 @@ public class Duel extends JFrame{
 	private void initRegle() {
 		JPanel espaceRetour = new JPanel ();
 		espaceRetour.setPreferredSize(new Dimension(550,20));
-		espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		retour.addMouseListener(new SourisListener());
@@ -288,7 +288,7 @@ public class Duel extends JFrame{
 		}
 		JPanel espaceClavier = new JPanel();
 		espaceClavier.setPreferredSize(new Dimension(600,18));
-		espaceClavier.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		espaceClavier.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		espaceClavier.add(clavierText);
 		clavierText.setText("Entrez votre code secret que l'ordinateur doit découvrir");
 		clavierText.setForeground(Color.white);

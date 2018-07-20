@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 
 import fr.yoannroche.projet3.mastermind.model.Reglage;
 import fr.yoannroche.projet3.mastermind.view.FenetreMenuMaster;
+import fr.yoannroche.projet3.plusmoins.view.FenetreMenuPlusMoins;
 
 public class Lancement extends JFrame{
 
@@ -31,7 +32,7 @@ public class Lancement extends JFrame{
 	private JButton infos = new JButton(" ? ");
 	JLabel infosJeu = new JLabel();
 	JButton masterMind = new JButton(" MasterMind ");
-	JButton jeuT2 = new JButton ("  Jeu 2  ");
+	JButton plusMoins = new JButton ("  Plus ou Moins  ");
 	JButton jeuT3 = new JButton ("  Jeu 3  ");
 	private Dimension dim = new Dimension(400,100);
 	private Dimension dim2 = new Dimension(50,55);
@@ -81,10 +82,10 @@ public class Lancement extends JFrame{
 		masterMind.addMouseListener(new SourisListener2());
 		
 		
-		jeuT2.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
-		jeuT2.setBorder(BorderFactory.createLineBorder(Color.black));
-		jeuT2.setPreferredSize(dim3);
-		jeuT2.addMouseListener(new SourisListener2());
+		plusMoins.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
+		plusMoins.setBorder(BorderFactory.createLineBorder(Color.black));
+		plusMoins.setPreferredSize(dim3);
+		plusMoins.addMouseListener(new SourisListener2());
 		
 		
 		jeuT3.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
@@ -101,7 +102,7 @@ public class Lancement extends JFrame{
 		menuBar.setBorder(BorderFactory.createLineBorder(Color.black));
 		menuBar.add(infosJeu);
 		menuBar.add(masterMind);
-		menuBar.add(jeuT2);
+		menuBar.add(plusMoins);
 		menuBar.add(jeuT3);
 		menuBar.add(espace);
 		menuBar.add(infos);
@@ -137,6 +138,13 @@ public class Lancement extends JFrame{
 		jeu2.setPreferredSize(dim);
 		jeu2.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 		jeu2.addMouseListener(new SourisListener());
+		jeu2.addActionListener(new ActionListener(){
+		      public void actionPerformed(ActionEvent event){
+		    	  ((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
+					FenetreMenuPlusMoins menu = new FenetreMenuPlusMoins();	
+					menu.setVisible(true);
+			      }
+			    });
 
 
 
@@ -212,9 +220,9 @@ public class Lancement extends JFrame{
 				masterMind.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.getHSBColor(0.534f, 0.25f, 0.94f)));
 				masterMind.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
 			}
-			if(arg0.getSource()==jeuT2) {
-				jeuT2.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.getHSBColor(0.534f, 0.25f, 0.94f)));
-				jeuT2.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
+			if(arg0.getSource()==plusMoins) {
+				plusMoins.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.getHSBColor(0.534f, 0.25f, 0.94f)));
+				plusMoins.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
 			}
 			if(arg0.getSource()==jeuT3) {
 				jeuT3.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.getHSBColor(0.534f, 0.25f, 0.94f)));
@@ -230,8 +238,8 @@ public class Lancement extends JFrame{
 		public void mouseExited(MouseEvent arg0) {
 			masterMind.setBorder(BorderFactory.createLineBorder(Color.black));
 			masterMind.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
-			jeuT2.setBorder(BorderFactory.createLineBorder(Color.black));
-			jeuT2.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
+			plusMoins.setBorder(BorderFactory.createLineBorder(Color.black));
+			plusMoins.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 			jeuT3.setBorder(BorderFactory.createLineBorder(Color.black));
 		    jeuT3.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		    infos.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));

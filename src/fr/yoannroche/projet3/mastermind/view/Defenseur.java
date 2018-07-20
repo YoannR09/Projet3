@@ -64,7 +64,7 @@ public class Defenseur extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
 		this.setResizable(false);
-		contentPane.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		initRegle();
 		initBlocOrdinateur();
 		initTentative();
@@ -138,7 +138,7 @@ public class Defenseur extends JFrame {
 	private void initRegle() {
 		JPanel espaceRetour = new JPanel ();
 		espaceRetour.setPreferredSize(new Dimension(320,20));
-		espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		retour.addActionListener(new ActionListener(){
 		      public void actionPerformed(ActionEvent event){
 		    	  ((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
@@ -191,7 +191,7 @@ public class Defenseur extends JFrame {
 		}
 		JPanel espace = new JPanel();
 		espace.setPreferredSize(new Dimension(400,5));
-		espace.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		contentPane.add(espace);
 		contentPane.add(blocProposition);
 		contentPane.add(blocTest);
