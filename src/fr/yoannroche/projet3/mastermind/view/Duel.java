@@ -70,7 +70,7 @@ public class Duel extends JFrame{
 	public Duel() {
 
 		this.setTitle("Duel");
-		this.setSize(650, 500);
+		this.setSize(650, 510);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
@@ -115,11 +115,16 @@ public class Duel extends JFrame{
 		JPanel blocRegle = new JPanel();
 		blocRegle.setPreferredSize(new Dimension(750,40));
 		JLabel regle = new JLabel();
-		regle.setText("Vous et l'ordinateur avez " + essaie + " tentative pour trouver le code secret à " + nbreCases + " de l'autre joueur" );
+		regle.setText("Vous et l'ordinateur avez " + essaie + " tentative pour trouver le code secret à " + nbreCases + " chiffres de l'autre joueur" );
 		regle.setHorizontalAlignment(JLabel.CENTER);
+		JLabel reglePoint = new JLabel();
+		 reglePoint.setFont(arial);
+		 reglePoint.setText("P = Nombres de chiffres bien placés " + " B = Nombres de chiffres bon mais mal placés");
+		 reglePoint.setHorizontalAlignment(JLabel.CENTER);
 		contentPane.add(retour);
 		contentPane.add(espaceRetour);
 		blocRegle.add(regle);
+		blocRegle.add(reglePoint);
 
 		contentPane.add(blocRegle);
 	}

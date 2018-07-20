@@ -60,7 +60,7 @@ public class Challenger extends JFrame {
 
 	public Challenger() {
 		this.setTitle("Challenger");
-		this.setSize(400, 500);
+		this.setSize(400, 510);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);

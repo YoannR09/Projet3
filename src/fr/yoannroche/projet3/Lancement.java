@@ -49,21 +49,12 @@ public class Lancement extends JFrame{
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(" Projet 3 ");
-		this.setSize(600, 450);
+		this.setSize(600, 430);
 		this.setContentPane(contentPane);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
-		JPanel espaceTop = new JPanel();
-		JLabel choix = new JLabel();
-		choix.setText("  Choisissez un jeu parmis ces 3 ");
-		choix.setFont(impact2);
-		espaceTop.add(choix);
-		espaceTop.setPreferredSize(new Dimension(600,25));
-		choix.setForeground(Color.DARK_GRAY);
-		espaceTop.setBackground(Color.ORANGE);
-		espaceTop.setBorder(BorderFactory.createLineBorder(Color.black));
-		contentPane.add(espaceTop);
+		
 		
 		initEcran();
 		initMenuBar();

@@ -59,7 +59,7 @@ public class Defenseur extends JFrame {
 	public Defenseur() {
 
 		this.setTitle("Defenseur");
-		this.setSize(400, 420);
+		this.setSize(400, 430);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
