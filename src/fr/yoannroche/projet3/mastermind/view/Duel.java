@@ -29,6 +29,7 @@ public class Duel extends JFrame{
 	private int tentative = 0;
 	Font impact = new Font ("impact", 17,17);
 	Font arial = new Font ("arial", 9,9);
+	Font arial2 = new Font("arial",12,12);
 	JLabel cases[] = new JLabel[9];
 	JLabel test1 = new JLabel();
 	JLabel test2 = new JLabel();
@@ -113,8 +114,10 @@ public class Duel extends JFrame{
 			}
 		});
 		JPanel blocRegle = new JPanel();
+		blocRegle.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		blocRegle.setPreferredSize(new Dimension(750,40));
 		JLabel regle = new JLabel();
+		regle.setFont(arial2);
 		regle.setText("Vous et l'ordinateur avez " + essaie + " tentative pour trouver le code secret à " + nbreCases + " chiffres de l'autre joueur" );
 		regle.setHorizontalAlignment(JLabel.CENTER);
 		JLabel reglePoint = new JLabel();

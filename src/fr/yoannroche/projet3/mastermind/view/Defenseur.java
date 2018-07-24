@@ -72,6 +72,7 @@ public class Defenseur extends JFrame {
 		image.setIcon(ordi0);
 		image.setPreferredSize(new Dimension(160,140));
 		image.setBorder(BorderFactory.createLineBorder(Color.black));
+		
 	}
 
 	private void initTentative() {
@@ -151,6 +152,7 @@ public class Defenseur extends JFrame {
 		retour.setForeground(Color.white);
 		retour.addMouseListener(new SourisListener());
 		JPanel blocRegle = new JPanel();
+		blocRegle.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		blocRegle.setPreferredSize(new Dimension(435,30));
 		JLabel regle = new JLabel();
 		regle.setText("L'ordinateur à "+essaie+" tentative pour trouver le code secret à "+nbreCases+" chiffres.");

@@ -28,12 +28,10 @@ public class Lancement extends JFrame{
 	private JMenuBar menuBar = new JMenuBar();
 	private JButton jeu1 = new JButton(new ImageIcon("images/fond1.png"));
 	private JButton jeu2 = new JButton(new ImageIcon("images/fond2.png"));
-	private JButton jeu3 = new JButton(new ImageIcon("images/fond3.png"));
 	private JButton infos = new JButton(" ? ");
 	JLabel infosJeu = new JLabel();
-	JButton masterMind = new JButton(" MasterMind ");
+	JButton masterMind = new JButton("  MasterMind  ");
 	JButton plusMoins = new JButton ("  Plus ou Moins  ");
-	JButton jeuT3 = new JButton ("  Jeu 3  ");
 	private Dimension dim = new Dimension(400,100);
 	private Dimension dim2 = new Dimension(50,55);
 	private Dimension dim3 = new Dimension(100,30);
@@ -49,7 +47,7 @@ public class Lancement extends JFrame{
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(" Projet 3 ");
-		this.setSize(600, 430);
+		this.setSize(600, 330);
 		this.setContentPane(contentPane);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
@@ -66,7 +64,7 @@ public class Lancement extends JFrame{
 		
 		JPanel espace = new JPanel();
 		espace.setPreferredSize(dim2);
-		espace.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));	
 		masterMind.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		masterMind.setBorder(BorderFactory.createLineBorder(Color.black));
 		masterMind.setPreferredSize(dim3);
@@ -78,23 +76,20 @@ public class Lancement extends JFrame{
 		plusMoins.setPreferredSize(dim3);
 		plusMoins.addMouseListener(new SourisListener2());
 		
-		
-		jeuT3.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
-		jeuT3.setBorder(BorderFactory.createLineBorder(Color.black));
-		jeuT3.setPreferredSize(dim3);
-		jeuT3.addMouseListener(new SourisListener2());
-		
-		
-		infosJeu.setText("  Informations des jeux     ");
+		JPanel espaceInfosJeu = new JPanel();
+		espaceInfosJeu.setPreferredSize(new Dimension(15,30));
+		espaceInfosJeu.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
+		infosJeu.setText(" Informations des jeux ");
 		infosJeu.setForeground(Color.WHITE);
 		infosJeu.setFont(impact);
 		menuBar.setPreferredSize(new Dimension(595,51));
-		menuBar.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		menuBar.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		menuBar.setBorder(BorderFactory.createLineBorder(Color.black));
 		menuBar.add(infosJeu);
+		
+		menuBar.add(espaceInfosJeu);
 		menuBar.add(masterMind);
 		menuBar.add(plusMoins);
-		menuBar.add(jeuT3);
 		menuBar.add(espace);
 		menuBar.add(infos);
 		infos.setPreferredSize(new Dimension(30,40));
@@ -107,8 +102,8 @@ public class Lancement extends JFrame{
 
 
 	private void initEcran() {
-		blocJeu.setPreferredSize(new Dimension(420,325));
-		blocJeu.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		blocJeu.setPreferredSize(new Dimension(420,225));
+		blocJeu.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		blocJeu.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.black));
 
 		blocJeu.add(jeu1,BorderLayout.CENTER);
@@ -139,12 +134,6 @@ public class Lancement extends JFrame{
 
 
 
-		blocJeu.add(jeu3,BorderLayout.CENTER);
-		jeu3.setPreferredSize(dim);
-		jeu3.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
-		jeu3.addMouseListener(new SourisListener());
-
-
 
 		contentPane.add(blocJeu);
 
@@ -162,18 +151,11 @@ public class Lancement extends JFrame{
 		public void mouseEntered(MouseEvent arg0) {
 			if(arg0.getSource()==jeu1) {
 			jeu1.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0,Color.getHSBColor(0.534f, 0.45f, 0.94f)));
-			jeu2.setBorder(BorderFactory.createMatteBorder(10,0,10,0 ,Color.getHSBColor(0.534f, 0.25f, 0.24f)));
-			jeu3.setBorder(BorderFactory.createMatteBorder(10,0,10,0 ,Color.getHSBColor(0.534f, 0.25f, 0.24f)));
+			jeu2.setBorder(BorderFactory.createMatteBorder(10,0,10,0 ,Color.getHSBColor(0.534f, 0.35f, 0.34f)));
 			}
 			if(arg0.getSource()==jeu2) {
 			jeu2.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0,Color.getHSBColor(0.534f, 0.45f, 0.94f)));
-			jeu1.setBorder(BorderFactory.createMatteBorder(10,0,10,0 ,Color.getHSBColor(0.534f, 0.25f, 0.24f)));
-			jeu3.setBorder(BorderFactory.createMatteBorder(10,0,10,0 ,Color.getHSBColor(0.534f, 0.25f, 0.24f)));
-			}
-			if(arg0.getSource()==jeu3) {
-			jeu3.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0,Color.getHSBColor(0.534f, 0.45f, 0.94f)));
-			jeu2.setBorder(BorderFactory.createMatteBorder(10,0,10,0 ,Color.getHSBColor(0.534f, 0.25f, 0.24f)));
-			jeu1.setBorder(BorderFactory.createMatteBorder(10,0,10,0 ,Color.getHSBColor(0.534f, 0.25f, 0.24f)));
+			jeu1.setBorder(BorderFactory.createMatteBorder(10,0,10,0 ,Color.getHSBColor(0.534f, 0.35f, 0.34f)));
 			}
 
 
@@ -183,8 +165,6 @@ public class Lancement extends JFrame{
 			jeu1.setSize(dim);
 			jeu2.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 			jeu2.setSize(dim);
-			jeu3.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
-			jeu3.setSize(dim);
 
 
 		}
@@ -215,10 +195,6 @@ public class Lancement extends JFrame{
 				plusMoins.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.getHSBColor(0.534f, 0.25f, 0.94f)));
 				plusMoins.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
 			}
-			if(arg0.getSource()==jeuT3) {
-				jeuT3.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.getHSBColor(0.534f, 0.25f, 0.94f)));
-				jeuT3.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
-			}
 			if(arg0.getSource()==infos) {
 				infos.setBackground(Color.getHSBColor(0.112f, 076f, 0.84f));
 				infos.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 066f, 0.74f)));
@@ -231,8 +207,6 @@ public class Lancement extends JFrame{
 			masterMind.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 			plusMoins.setBorder(BorderFactory.createLineBorder(Color.black));
 			plusMoins.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
-			jeuT3.setBorder(BorderFactory.createLineBorder(Color.black));
-		    jeuT3.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		    infos.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));
 			infos.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 056f, 0.64f)));
 			

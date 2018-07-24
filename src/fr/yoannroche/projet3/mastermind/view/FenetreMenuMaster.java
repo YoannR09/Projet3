@@ -47,7 +47,7 @@ public class FenetreMenuMaster extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPaneMenu);
 		this.setResizable(false);
-		contentPaneMenu.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		contentPaneMenu.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		
 		initMenu();
 
@@ -150,22 +150,23 @@ public class FenetreMenuMaster extends JFrame{
 		    contentPaneMenu.add(retour);
 		    contentPaneMenu.add(espace1);
 		    espace1.setPreferredSize(new Dimension(150,20));
-		    espace1.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		    espace1.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		    JLabel mastermind = new JLabel();
 		    contentPaneMenu.add(mastermind);
 		    mastermind.setText("MASTERMIND");
 		    mastermind.setForeground(Color.white);
+		    mastermind.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.534f, 0.85f, 0.34f)));
 		    mastermind.setFont(impact2);
 		    mastermind.setOpaque(true);
 		    mastermind.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		    JPanel espaceMaster = new JPanel();
 		    espaceMaster.setPreferredSize(new Dimension(200,20));
-		    espaceMaster.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		    espaceMaster.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		    contentPaneMenu.add(espaceMaster);
 		    contentPaneMenu.add(regle);
 		    contentPaneMenu.add(blocMode);
 		    contentPaneMenu.add(espace2);
-		    espace2.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.24f));
+		    espace2.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		    contentPaneMenu.add(lancer,BorderLayout.SOUTH);
   
 		

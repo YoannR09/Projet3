@@ -46,6 +46,7 @@ public class Challenger extends JFrame {
 	
 	Font impact = new Font ("impact", 17,17);
 	Font arial = new Font ("arial", 9,9);
+	Font arial2 = new Font ("arial", 12,12);
 	int  [] clavier = {0,1,2,3,4,5,6,7,8,9};
 	JLabel [] testLabel = new JLabel[8];
 	
@@ -94,8 +95,10 @@ public class Challenger extends JFrame {
 			      }
 			    });
 	JPanel blocRegle = new JPanel();
+	blocRegle.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 	blocRegle.setPreferredSize(new Dimension(400,40));
 	 JLabel regle = new JLabel();
+	 regle.setFont(arial2);
 	 regle.setText("Vous avez "+ essaie +" tentative pour trouver le code secret à "+ nbreCases +" chiffres.");
 	 JLabel reglePoint = new JLabel();
 	 reglePoint.setFont(arial);
