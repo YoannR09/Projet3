@@ -47,7 +47,7 @@ public class Lancement extends JFrame{
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(" Projet 3 ");
-		this.setSize(600, 330);
+		this.setSize(550, 315);
 		this.setContentPane(contentPane);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
@@ -77,12 +77,12 @@ public class Lancement extends JFrame{
 		plusMoins.addMouseListener(new SourisListener2());
 		
 		JPanel espaceInfosJeu = new JPanel();
-		espaceInfosJeu.setPreferredSize(new Dimension(15,30));
+		espaceInfosJeu.setPreferredSize(new Dimension(10,30));
 		espaceInfosJeu.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
-		infosJeu.setText(" Informations des jeux ");
+		infosJeu.setText(" Informations des jeux");
 		infosJeu.setForeground(Color.WHITE);
 		infosJeu.setFont(impact);
-		menuBar.setPreferredSize(new Dimension(595,51));
+		menuBar.setPreferredSize(new Dimension(545,51));
 		menuBar.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		menuBar.setBorder(BorderFactory.createLineBorder(Color.black));
 		menuBar.add(infosJeu);
@@ -102,7 +102,7 @@ public class Lancement extends JFrame{
 
 
 	private void initEcran() {
-		blocJeu.setPreferredSize(new Dimension(420,225));
+		blocJeu.setPreferredSize(new Dimension(420,218));
 		blocJeu.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		blocJeu.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.black));
 

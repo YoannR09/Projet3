@@ -102,6 +102,7 @@ public class ChallengerPlusMoins extends JFrame{
 		infosTentative.setHorizontalAlignment(JLabel.CENTER);
 		infosTentative.setFont(impact);
 		infosTentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		infosTentative.setText(" Les + - ou = ");
 		infosCadre.add(infosTentative);
 
 		contentPane.add(infosCadre);
@@ -131,6 +132,7 @@ public class ChallengerPlusMoins extends JFrame{
 		tentative.setHorizontalAlignment(JLabel.CENTER);
 		tentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		tentative.setFont(impact);
+		tentative.setText(" Votre tentative ");
 
 		tentativePanel.add(tentative);
 		contentPane.add(tentativePanel);
