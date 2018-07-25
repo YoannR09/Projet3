@@ -16,16 +16,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 
 import fr.yoannroche.projet3.mastermind.model.Reglage;
 import fr.yoannroche.projet3.mastermind.view.FenetreMenuMaster;
+import fr.yoannroche.projet3.mastermind.view.RegleMastermind;
 import fr.yoannroche.projet3.plusmoins.view.FenetreMenuPlusMoins;
+import fr.yoannroche.projet3.plusmoins.view.ReglePlusMoins;
 
 public class Lancement extends JFrame{
 
 	private JPanel contentPane = new JPanel();
 	private JPanel blocJeu = new JPanel();
-	private JMenuBar menuBar = new JMenuBar();
+	private JToolBar menuBar = new JToolBar();
 	private JButton jeu1 = new JButton(new ImageIcon("images/fond1.png"));
 	private JButton jeu2 = new JButton(new ImageIcon("images/fond2.png"));
 	private JButton infos = new JButton(" ? ");
@@ -61,7 +64,7 @@ public class Lancement extends JFrame{
 
 	private void initMenuBar() {
 		
-		
+		menuBar.addSeparator();
 		JPanel espace = new JPanel();
 		espace.setPreferredSize(dim2);
 		espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));	
@@ -69,12 +72,27 @@ public class Lancement extends JFrame{
 		masterMind.setBorder(BorderFactory.createLineBorder(Color.black));
 		masterMind.setPreferredSize(dim3);
 		masterMind.addMouseListener(new SourisListener2());
+		masterMind.addActionListener(new ActionListener(){
+		      public void actionPerformed(ActionEvent event){
+		    	  ((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
+					RegleMastermind regle = new RegleMastermind();	
+					regle.setVisible(true);
+			      }
+			    });
+		
 		
 		
 		plusMoins.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		plusMoins.setBorder(BorderFactory.createLineBorder(Color.black));
 		plusMoins.setPreferredSize(dim3);
 		plusMoins.addMouseListener(new SourisListener2());
+		plusMoins.addActionListener(new ActionListener(){
+		      public void actionPerformed(ActionEvent event){
+		    	  ((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
+					ReglePlusMoins regle = new ReglePlusMoins();	
+					regle.setVisible(true);
+			      }
+			    });
 		
 		JPanel espaceInfosJeu = new JPanel();
 		espaceInfosJeu.setPreferredSize(new Dimension(10,30));

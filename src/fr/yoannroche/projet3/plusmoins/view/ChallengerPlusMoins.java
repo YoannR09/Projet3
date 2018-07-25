@@ -13,20 +13,23 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
 
 
 
 public class ChallengerPlusMoins extends JFrame{
 
+	private static Generateur code = new Generateur();
 	private static final Logger logger = LogManager.getLogger();
-	
+	private int nombreClick =0;
 	private static String tentatives;
 	private static String bloc;
 	private JPanel contentPane = new JPanel();
@@ -42,8 +45,9 @@ public class ChallengerPlusMoins extends JFrame{
 	Font arial = new Font ("arial", 12,12);
 	int  [] clavier = {0,1,2,3,4,5,6,7,8,9};
 	JButton [] button = new JButton[clavier.length];
-	private int nbreTentative = 0;
+	private int nbreTentative =0;
 	private JButton bouton[];
+	JLabel nbreTen = new JLabel();
 	JPanel espace2 = new JPanel ();
 
 	public ChallengerPlusMoins() {}
@@ -54,8 +58,6 @@ public class ChallengerPlusMoins extends JFrame{
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
 		tentatives = reglage.getString("tentatives");
 		bloc = reglage.getString("cases");
-
-
 		this.setTitle("Challenger");
 		this.setSize(400, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,7 +81,6 @@ public class ChallengerPlusMoins extends JFrame{
 			codeSecret.setFont(impact);
 			codeSecret.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
 			codeSecret.setText("");
-
 			JPanel cadreDev = new JPanel();
 			JLabel text = new JLabel();
 			text.setText("Code secret : ");
@@ -109,17 +110,13 @@ public class ChallengerPlusMoins extends JFrame{
 		infosTentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		infosTentative.setText(" Les + - ou = ");
 		infosCadre.add(infosTentative);
-
 		contentPane.add(infosCadre);
 
 		espace2.setPreferredSize(new Dimension(320,25));
 		espace2.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
-		JLabel nbreTen = new JLabel();
-		nbreTen.setText("Nombre de tentative : " + nbreTentative);
 		espace2.add(nbreTen);
 		nbreTen.setFont(arial);
 		nbreTen.setForeground(Color.white);
-
 		contentPane.add(espace2);
 
 	}
@@ -128,8 +125,6 @@ public class ChallengerPlusMoins extends JFrame{
 		JPanel tentativePanel = new JPanel();
 		tentativePanel.setPreferredSize(new Dimension(150,50));
 		tentativePanel.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
-
-
 		tentative.setOpaque(true);
 		tentative.setBackground(Color.white);
 		tentative.setPreferredSize(new Dimension(120,40));
@@ -138,10 +133,10 @@ public class ChallengerPlusMoins extends JFrame{
 		tentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		tentative.setFont(impact);
 		tentative.setText(" Votre tentative ");
-
 		tentativePanel.add(tentative);
 		contentPane.add(tentativePanel);
 
+		nbreTen.setText("Nombre de tentatives : "+nbreTentative);
 		JPanel espace3 = new JPanel ();
 		espace3.setPreferredSize(new Dimension(40,15));
 		espace3.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.74f));
@@ -150,7 +145,7 @@ public class ChallengerPlusMoins extends JFrame{
 	}
 
 	private void initRegle() {
-		
+
 		JPanel espaceRetour = new JPanel ();
 		espaceRetour.setPreferredSize(new Dimension(320,20));
 		espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
@@ -186,7 +181,6 @@ public class ChallengerPlusMoins extends JFrame{
 
 	private void initBlocTest() {
 
-
 		blocTest.add(proposition);
 		blocTest.setPreferredSize(new Dimension(130,40));
 		blocTest.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
@@ -199,28 +193,37 @@ public class ChallengerPlusMoins extends JFrame{
 		ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
 		ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		ok.addMouseListener(new SourisListener());
-		
 		ok.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
 			public void actionPerformed(ActionEvent event){ 
-				tentative.setText(proposition.getText());
-				logger.info("Récuperation de la proposition :"+proposition.getText());
-				ChallengerPlusMoinsModel.check(tentative, infosTentative);
-				proposition.setText(""); // remise à zéro de la ligne.
+				try {
+					tentative.setText(proposition.getText());
+					logger.info("Récuperation de la proposition :"+proposition.getText());
+					ChallengerPlusMoinsModel.check(tentative, infosTentative);
+					++nbreTentative;
+					ChallengerPlusMoinsModel.checkCode(proposition,contentPane);
+					ChallengerPlusMoinsModel.chechTentative(nbreTentative,contentPane);
+					proposition.setText("");
+					nbreTen.setText("Nombre de tentatives : "+nbreTentative);
+					nombreClick = 0;
+					blocProposition.setVisible(true);
+				}catch(Exception e) {
+					JOptionPane joperreur = new JOptionPane(); // Si la personne décide de ne pas utiliser le clavier et dépasse la longueur du code secret
+					joperreur.showMessageDialog(null,"Votre code est trop long !!","Erreur",JOptionPane.ERROR_MESSAGE);
+				}
 			}  
 		});
-
 		supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
 		supprimer.addMouseListener(new SourisListener());
 		supprimer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				proposition.setText("");
+				nombreClick = 0;
+				blocProposition.setVisible(true);
 			}  
 		});
-
 		contentPane.add(supprimer);
 		contentPane.add(ok);
-
 
 	}
 	private void initBlocProposition() {
@@ -232,37 +235,24 @@ public class ChallengerPlusMoins extends JFrame{
 		int i = 0;
 		for(int c : clavier){
 			this.bouton[i] = new JButton(String.valueOf(c).toUpperCase());
-
 			bouton[i].setPreferredSize(new Dimension(23,23));
 			bouton[i].setBackground(Color.DARK_GRAY);
 			bouton[i].setBorder(BorderFactory.createLineBorder(Color.black));
 			bouton[i].setForeground(Color.white);
 			bouton[i].addMouseListener(new SourisListener2());
-
 			blocProposition.add(bouton[i]).setEnabled(true);
 			i++;
 		}
 		contentPane.add(blocProposition);
-
 	}
-
 
 	class SourisListener implements MouseListener {
 
-
 		public void mouseClicked(MouseEvent arg0) {
-
-			/**
-			 * Je n'arrive pas à savoir si le problème de l'espace vient de la. 
-			 */
-			
-			
-			
-
 		}
 
 		public void mouseEntered(MouseEvent arg0) {
-			
+
 			if(arg0.getSource()==ok) {
 				ok.setBackground(Color.getHSBColor(0.345f, 0.58f, 0.88f));
 				ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.64f)));
@@ -278,7 +268,7 @@ public class ChallengerPlusMoins extends JFrame{
 		}
 
 		public void mouseExited(MouseEvent arg0) {
-			
+
 			retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 			retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 			retour.setForeground(Color.white);
@@ -289,7 +279,6 @@ public class ChallengerPlusMoins extends JFrame{
 		}
 
 		public void mousePressed(MouseEvent arg0) {
-
 		}
 
 		public void mouseReleased(MouseEvent arg0) {
@@ -302,44 +291,29 @@ public class ChallengerPlusMoins extends JFrame{
 			supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 			supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
 		}
-
 	}
 
 
 	class SourisListener2 implements MouseListener {
 
-
 		public void mouseClicked(MouseEvent arg0) {
 			char entrer = ((JButton)arg0.getSource()).getText().charAt(0);
 			proposition.setText(proposition.getText()+entrer);
+			nombreClick++;
+			ChallengerPlusMoinsModel.RangeWord(blocProposition,nombreClick);
 		}
-
-
-		@Override
 		public void mouseEntered(MouseEvent arg0) {
 			((JButton)arg0.getSource()).setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0,Color.white));
-			
 		}
-
-		@Override
 		public void mouseExited(MouseEvent arg0) {
 			((JButton)arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.black));
 			if(((JButton)arg0.getSource()).isEnabled()==false) {
 				((JButton)arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.orange));
 			}
-			
 		}
-
-		@Override
 		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
 		}
-
-		@Override
 		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
 		}
 	}
 }
