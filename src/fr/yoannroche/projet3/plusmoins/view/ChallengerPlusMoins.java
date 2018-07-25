@@ -14,6 +14,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
 
@@ -21,15 +25,16 @@ import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
 
 public class ChallengerPlusMoins extends JFrame{
 
-
+	private static final Logger logger = LogManager.getLogger();
+	
 	private static String tentatives;
 	private static String bloc;
 	private JPanel contentPane = new JPanel();
-	private JLabel proposition = new JLabel();
+	private JTextField proposition = new JTextField(); // Votre proposition ( problème, un espace ce met devant le nombre à chaque deuxième coup)
 	private JPanel blocProposition = new JPanel();
 	private JPanel blocTest = new JPanel();
-	private JLabel tentative = new JLabel();
-	private JLabel infosTentative = new JLabel();
+	private JLabel infosTentative = new JLabel(); // La ou sera écrit + - = 
+	private JLabel tentative = new JLabel(); // Le texte généré de votre proposition quand vous cliquez sur Ok .
 	JButton ok = new JButton(" OK ");
 	JButton supprimer = new JButton(" Suppr ");
 	JButton retour = new JButton("Retour");
@@ -145,6 +150,7 @@ public class ChallengerPlusMoins extends JFrame{
 	}
 
 	private void initRegle() {
+		
 		JPanel espaceRetour = new JPanel ();
 		espaceRetour.setPreferredSize(new Dimension(320,20));
 		espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
@@ -187,16 +193,19 @@ public class ChallengerPlusMoins extends JFrame{
 		blocTest.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		proposition.setForeground(Color.DARK_GRAY);
 		proposition.setFont(impact);
+		proposition.setPreferredSize(new Dimension(120,27));
+		proposition.setBorder(BorderFactory.createLineBorder(Color.black));
 		contentPane.add(blocTest);
 		ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
 		ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		ok.addMouseListener(new SourisListener());
-		ok.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le chiffre generé.
+		
+		ok.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
 			public void actionPerformed(ActionEvent event){ 
 				tentative.setText(proposition.getText());
+				logger.info("Récuperation de la proposition :"+proposition.getText());
 				ChallengerPlusMoinsModel.check(tentative, infosTentative);
-				proposition.setText("");
-
+				proposition.setText(""); // remise à zéro de la ligne.
 			}  
 		});
 
@@ -228,7 +237,7 @@ public class ChallengerPlusMoins extends JFrame{
 			bouton[i].setBackground(Color.DARK_GRAY);
 			bouton[i].setBorder(BorderFactory.createLineBorder(Color.black));
 			bouton[i].setForeground(Color.white);
-			bouton[i].addMouseListener(new SourisListener());
+			bouton[i].addMouseListener(new SourisListener2());
 
 			blocProposition.add(bouton[i]).setEnabled(true);
 			i++;
@@ -243,13 +252,17 @@ public class ChallengerPlusMoins extends JFrame{
 
 		public void mouseClicked(MouseEvent arg0) {
 
-			char entrer = ((JButton)arg0.getSource()).getText().charAt(0);
-			proposition.setText(proposition.getText()+entrer);
+			/**
+			 * Je n'arrive pas à savoir si le problème de l'espace vient de la. 
+			 */
+			
+			
+			
 
 		}
 
 		public void mouseEntered(MouseEvent arg0) {
-			((JButton)arg0.getSource()).setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0,Color.white));
+			
 			if(arg0.getSource()==ok) {
 				ok.setBackground(Color.getHSBColor(0.345f, 0.58f, 0.88f));
 				ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.64f)));
@@ -265,10 +278,7 @@ public class ChallengerPlusMoins extends JFrame{
 		}
 
 		public void mouseExited(MouseEvent arg0) {
-			((JButton)arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.black));
-			if(((JButton)arg0.getSource()).isEnabled()==false) {
-				((JButton)arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.orange));
-			}
+			
 			retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 			retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 			retour.setForeground(Color.white);
@@ -296,4 +306,40 @@ public class ChallengerPlusMoins extends JFrame{
 	}
 
 
+	class SourisListener2 implements MouseListener {
+
+
+		public void mouseClicked(MouseEvent arg0) {
+			char entrer = ((JButton)arg0.getSource()).getText().charAt(0);
+			proposition.setText(proposition.getText()+entrer);
+		}
+
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			((JButton)arg0.getSource()).setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0,Color.white));
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			((JButton)arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.black));
+			if(((JButton)arg0.getSource()).isEnabled()==false) {
+				((JButton)arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.orange));
+			}
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
 }

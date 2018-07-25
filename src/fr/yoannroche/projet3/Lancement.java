@@ -47,7 +47,7 @@ public class Lancement extends JFrame{
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(" Projet 3 ");
-		this.setSize(550, 315);
+		this.setSize(555, 315);
 		this.setContentPane(contentPane);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);

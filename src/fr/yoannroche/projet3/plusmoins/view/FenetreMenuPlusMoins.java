@@ -48,7 +48,7 @@ public class FenetreMenuPlusMoins extends JFrame{
 
 	public FenetreMenuPlusMoins() {
 		this.setTitle("Menu du Plus ou Moins");
-		this.setSize(550, 335);
+		this.setSize(550, 340);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPaneMenu);

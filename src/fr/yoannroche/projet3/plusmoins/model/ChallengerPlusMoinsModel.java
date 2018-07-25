@@ -1,6 +1,7 @@
 package fr.yoannroche.projet3.plusmoins.model;
 
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 import fr.yoannroche.projet3.Generateur;
 

@@ -42,7 +42,7 @@ public class FenetreMenuMaster extends JFrame{
 	
 	public FenetreMenuMaster() {
 		this.setTitle("Menu du MasterMind");
-		this.setSize(550, 335);
+		this.setSize(550, 340);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPaneMenu);
