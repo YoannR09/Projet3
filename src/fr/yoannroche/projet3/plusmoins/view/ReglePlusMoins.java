@@ -23,7 +23,7 @@ public class ReglePlusMoins extends JFrame {
 	private JPanel contentPane = new JPanel();
 	Font arial = new Font ("arial", 12,12);
 	Font impact2 = new Font ("impact", 20,20);
-	private JButton retour = new JButton("Retour");
+	private JButton retour = new JButton(" Retour ");
 	
 	
 	public ReglePlusMoins() {

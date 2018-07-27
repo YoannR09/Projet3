@@ -39,7 +39,7 @@ public class FenetreMenuPlusMoins extends JFrame{
 	Font impact2 = new Font ("impact", 20,20);
 	private Dimension dim = new Dimension(150,50);
 	private JButton lancer = new JButton("Lancer");
-	private JButton retour = new JButton("Retour");
+	private JButton retour = new JButton(" Retour ");
 	private SourisListener sListener = new SourisListener();
 	private JCheckBox dev = new JCheckBox(" Mode Développeur ");
 	JTextArea regle = new JTextArea();
@@ -146,10 +146,12 @@ public class FenetreMenuPlusMoins extends JFrame{
 					chal.setVisible(true);
 				}
 				if(mode2.isSelected()==true) {
-					
+					DefenseurPlusMoins def = new DefenseurPlusMoins();	
+					def.setVisible(true);
 				}
 				if(mode3.isSelected()==true) {
-					
+					DuelPlusMoins duel = new DuelPlusMoins();
+					duel.setVisible(true);
 				}
 				
 			}

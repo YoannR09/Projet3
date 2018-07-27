@@ -10,122 +10,137 @@ import java.awt.event.MouseListener;
 import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
+import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins.SourisListener;
+import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins.SourisListener2;
 
-
-
-public class ChallengerPlusMoins extends JFrame{
-
-	private static Generateur code = new Generateur();
-	private static final Logger logger = LogManager.getLogger();
-	private int nombreClick =0;
+public class DuelPlusMoins extends JFrame{
+	
+	private JPanel contentPane = new JPanel();
+	private JButton retour = new JButton(" Retour ");
+	private JButton supprimer = new JButton(" Suppr ");
+	private JButton ok = new JButton(" Ok ");
 	private static String tentatives;
 	private static String bloc;
-	private JPanel contentPane = new JPanel();
-	private JTextField proposition = new JTextField(); // Votre proposition ( problème, un espace ce met devant le nombre à chaque deuxième coup)
 	private JPanel blocProposition = new JPanel();
 	private JPanel blocTest = new JPanel();
-	private JLabel infosTentative = new JLabel(); // La ou sera écrit + - = 
-	private JLabel tentative = new JLabel(); // Le texte généré de votre proposition quand vous cliquez sur Ok .
-	JButton ok = new JButton(" OK ");
-	JButton supprimer = new JButton(" Suppr ");
-	JButton retour = new JButton(" Retour ");
-	Font impact = new Font ("impact", 17,17);
-	Font arial = new Font ("arial", 12,12);
+	private JLabel tentative = new JLabel();
+	private JLabel codeSecret = new JLabel();
+	private JLabel tentativeIA =new JLabel();
+	static ImageIcon ordi0 = new ImageIcon("images/ordi0.png");
+	JLabel image = new JLabel();
 	int  [] clavier = {0,1,2,3,4,5,6,7,8,9};
 	JButton [] button = new JButton[clavier.length];
-	private int nbreTentative =0;
+	private JTextField proposition = new JTextField();
+	private JLabel infosTentative = new JLabel();
 	private JButton bouton[];
-	JLabel nbreTen = new JLabel();
-	JPanel espace2 = new JPanel ();
-
-	public ChallengerPlusMoins() {}
-
-	public ChallengerPlusMoins(boolean modeDev) {
-
-
+	private int nombreClick = 0;
+	private int nombreCoup = 0;
+	Font impact = new Font ("impact", 17,17);
+	Font arial = new Font ("arial", 12,12);
+	
+	
+	public DuelPlusMoins() {
+	
+	this.setTitle("Duel");
+	this.setSize(450,400);
+	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	this.setLocationRelativeTo(null);
+	this.setContentPane(contentPane);
+	this.setResizable(false);
+	contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
+	
+	ResourceBundle reglage = ResourceBundle.getBundle("Config");
+	tentatives = reglage.getString("tentatives");
+	bloc = reglage.getString("cases");
+	
+	initRegle();
+	initCadreJoueur();
+	initVs();
+	initCadreOrdi();
+	initBlocProposition();
+	initBlocTest();
+	
+	
+	}
+	
+	private void initVs() {
+		JLabel vs = new JLabel();
 		
-		this.setTitle("Challenger");
-		this.setSize(400, 300);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.setContentPane(contentPane);
-		this.setResizable(false);
-		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
-
-		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		tentatives = reglage.getString("tentatives");
-		bloc = reglage.getString("cases");
-
-		initRegle();
-		initTentative();
-		initInfos();
-		initBlocProposition();
-		initBlocTest();
-		initCadreDev(modeDev);
+		vs.setText(" V.S " );
+		vs.setOpaque(true);
+		vs.setFont(impact);
+		vs.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		vs.setBackground(Color.getHSBColor(0.143f, 0.84f, 0.86f));
+		contentPane.add(vs);
+		
 	}
 
-	private void initCadreDev(boolean modeDev) {
-		if(modeDev==true) {
-			JLabel codeSecret = new JLabel();
-			codeSecret.setFont(impact);
-			codeSecret.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
-			codeSecret.setText("");
-			JPanel cadreDev = new JPanel();
-			JLabel text = new JLabel();
-			text.setText("Code secret : ");
-			text.setFont(arial);
-			text.setForeground(Color.WHITE);
-			cadreDev.add(codeSecret);
-			cadreDev.setPreferredSize(new Dimension(50,15));
-			cadreDev.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
-			espace2.add(cadreDev);
-			espace2.add(text);
-			espace2.add(codeSecret);
-			ChallengerPlusMoinsModel.dev(codeSecret);
-		}
-
-	}
-
-	private void initInfos() {
-		JPanel infosCadre = new JPanel();
-		infosCadre.setPreferredSize(new Dimension(150,50));
-		infosCadre.setBackground(Color.getHSBColor(0.134f, 0.15f, 0.94f));
-		infosTentative.setOpaque(true);
-		infosTentative.setBackground(Color.WHITE);
-		infosTentative.setBorder(BorderFactory.createLineBorder(Color.black));
-		infosTentative.setPreferredSize(new Dimension(120,40));
-		infosTentative.setHorizontalAlignment(JLabel.CENTER);
-		infosTentative.setFont(impact);
-		infosTentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
-		infosTentative.setText(" Les + - ou = ");
-		infosCadre.add(infosTentative);
-		contentPane.add(infosCadre);
-
-		espace2.setPreferredSize(new Dimension(320,25));
-		espace2.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
-		espace2.add(nbreTen);
-		nbreTen.setFont(arial);
-		nbreTen.setForeground(Color.white);
-		contentPane.add(espace2);
-
-	}
-
-	private void initTentative() {
+	private void initCadreOrdi() {
+		JLabel ordi = new JLabel();
+		ordi.setText(" Ordinateur ");
+		ordi.setOpaque(true);
+		ordi.setFont(arial);
+		ordi.setBorder(BorderFactory.createLineBorder(Color.black));
+		JTextArea dialog = new JTextArea();
+		dialog.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
+		dialog.setPreferredSize(new Dimension(150,80));
+		dialog.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		dialog.setEditable(false);
+		dialog.setText(" \n Je suis prêt \n c'est quand vous voulez ! ");
 		JPanel tentativePanel = new JPanel();
-		tentativePanel.setPreferredSize(new Dimension(150,50));
+		tentativePanel.setPreferredSize(new Dimension(150,55));
 		tentativePanel.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
+		tentativePanel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		tentativeIA.setOpaque(true);
+		tentativeIA.setBackground(Color.white);
+		tentativeIA.setPreferredSize(new Dimension(120,40));
+		tentativeIA.setHorizontalAlignment(JLabel.CENTER);
+		tentativeIA.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		tentativeIA.setFont(impact);
+		tentativeIA.setText(" Tentative IA ");
+		JPanel espace2 = new JPanel();
+		espace2.setPreferredSize(new Dimension(65,5));
+		espace2.setBackground(Color.DARK_GRAY);
+		espace2.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		
+		JPanel cadreOrdi = new JPanel();
+		cadreOrdi.setPreferredSize(new Dimension(180,185));
+		cadreOrdi.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
+		cadreOrdi.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		cadreOrdi.add(ordi);
+		cadreOrdi.add(dialog);
+		cadreOrdi.add(espace2);
+		tentativePanel.add(tentativeIA);
+		cadreOrdi.add(tentativePanel);
+		contentPane.add(cadreOrdi);
+		
+		JPanel espace = new JPanel ();
+		espace.setPreferredSize(new Dimension(520,5));
+		espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
+		contentPane.add(espace);
+		
+	}
+
+	private void initCadreJoueur() {
+		JLabel joueur = new JLabel();
+		joueur.setText(" Vous ");
+		joueur.setOpaque(true);
+		joueur.setFont(arial);
+		joueur.setBorder(BorderFactory.createLineBorder(Color.black));
+		JPanel tentativePanel = new JPanel();
+		tentativePanel.setPreferredSize(new Dimension(150,55));
+		tentativePanel.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
+		tentativePanel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		tentative.setOpaque(true);
 		tentative.setBackground(Color.white);
 		tentative.setPreferredSize(new Dimension(120,40));
@@ -135,14 +150,43 @@ public class ChallengerPlusMoins extends JFrame{
 		tentative.setFont(impact);
 		tentative.setText(" Votre tentative ");
 		tentativePanel.add(tentative);
-		contentPane.add(tentativePanel);
-
-		nbreTen.setText("Nombre de tentatives : "+nbreTentative);
-		JPanel espace3 = new JPanel ();
-		espace3.setPreferredSize(new Dimension(40,15));
-		espace3.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.74f));
-		espace3.setBorder(BorderFactory.createLineBorder(Color.black));
-		contentPane.add(espace3);
+		JPanel infosCadre = new JPanel();
+		infosCadre.setPreferredSize(new Dimension(150,55));
+		infosCadre.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
+		infosCadre.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		infosTentative.setOpaque(true);
+		infosTentative.setBackground(Color.WHITE);
+		infosTentative.setBorder(BorderFactory.createLineBorder(Color.black));
+		infosTentative.setPreferredSize(new Dimension(120,40));
+		infosTentative.setHorizontalAlignment(JLabel.CENTER);
+		infosTentative.setFont(impact);
+		infosTentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		infosTentative.setText(" Les + - ou = ");
+		infosCadre.add(infosTentative);
+		JPanel espace = new JPanel();
+		espace.setPreferredSize(new Dimension(165,30));
+		espace.setBackground(Color.DARK_GRAY);
+		espace.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		JLabel codeText = new JLabel();
+		codeText.setText("Votre code secret : ");
+		codeText.setFont(arial);
+		codeText.setForeground(Color.WHITE);
+		codeSecret.setText("????");
+		codeSecret.setForeground(Color.getHSBColor(0.143f, 0.84f, 0.86f));
+		codeSecret.setFont(arial);
+		
+		espace.add(codeText);
+		espace.add(codeSecret);
+		JPanel cadreJ = new JPanel();
+		cadreJ.setPreferredSize(new Dimension(180,185));
+		cadreJ.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
+		cadreJ.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		cadreJ.add(joueur);
+		cadreJ.add(tentativePanel);
+		cadreJ.add(infosCadre);
+		cadreJ.add(espace);
+		contentPane.add(cadreJ);
+		
 	}
 
 	private void initRegle() {
@@ -174,12 +218,11 @@ public class ChallengerPlusMoins extends JFrame{
 		blocRegle.add(regle);
 		contentPane.add(blocRegle);
 		JPanel espace = new JPanel ();
-		espace.setPreferredSize(new Dimension(320,15));
+		espace.setPreferredSize(new Dimension(520,5));
 		espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		contentPane.add(espace);
 
 	}
-
 	private void initBlocTest() {
 
 		blocTest.add(proposition);
@@ -197,16 +240,8 @@ public class ChallengerPlusMoins extends JFrame{
 		ok.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
 			public void actionPerformed(ActionEvent event){ 
 				try {
-					tentative.setText(proposition.getText());
-					logger.info("Récuperation de la proposition :"+proposition.getText());
-					ChallengerPlusMoinsModel.check(tentative, infosTentative);
-					++nbreTentative;
-					ChallengerPlusMoinsModel.checkCode(proposition,contentPane);
-					ChallengerPlusMoinsModel.chechTentative(nbreTentative,contentPane);
-					proposition.setText("");
-					nbreTen.setText("Nombre de tentatives : "+nbreTentative);
-					nombreClick = 0;
-					blocProposition.setVisible(true);
+					
+					
 				}catch(Exception e) {
 					JOptionPane joperreur = new JOptionPane(); // Si la personne décide de ne pas utiliser le clavier et dépasse la longueur du code secret
 					joperreur.showMessageDialog(null,"Votre code est trop long !!","Erreur",JOptionPane.ERROR_MESSAGE);
@@ -246,7 +281,7 @@ public class ChallengerPlusMoins extends JFrame{
 		}
 		contentPane.add(blocProposition);
 	}
-
+	
 	class SourisListener implements MouseListener {
 
 		public void mouseClicked(MouseEvent arg0) {
@@ -293,8 +328,7 @@ public class ChallengerPlusMoins extends JFrame{
 			supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
 		}
 	}
-
-
+	
 	class SourisListener2 implements MouseListener {
 
 		public void mouseClicked(MouseEvent arg0) {
@@ -317,4 +351,5 @@ public class ChallengerPlusMoins extends JFrame{
 		public void mouseReleased(MouseEvent arg0) {
 		}
 	}
+
 }

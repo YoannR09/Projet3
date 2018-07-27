@@ -29,8 +29,8 @@ public class Lancement extends JFrame{
 	private JPanel contentPane = new JPanel();
 	private JPanel blocJeu = new JPanel();
 	private JToolBar menuBar = new JToolBar();
-	private JButton jeu1 = new JButton(new ImageIcon("images/fond1.png"));
-	private JButton jeu2 = new JButton(new ImageIcon("images/fond2.png"));
+	private JButton jeu1 = new JButton(new ImageIcon("images/master.png"));
+	private JButton jeu2 = new JButton(new ImageIcon("images/plusmoins.png"));
 	private JButton infos = new JButton(" ? ");
 	JLabel infosJeu = new JLabel();
 	JButton masterMind = new JButton("  MasterMind  ");
