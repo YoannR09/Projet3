@@ -45,7 +45,7 @@ public class ChallengerPlusMoinsModel {
 	 * @param infosTentative
 	 * @param proposition 
 	 */
-	public static void check(JLabel tentative, JLabel infosTentative) {  // Probleme au deuxieme ajouts , un espace ce place devant le chiffre generé.
+	public static void check(JLabel tentative, JLabel infosTentative) {
 		infosTentative.setText("");
 		String test=tentative.getText();
 

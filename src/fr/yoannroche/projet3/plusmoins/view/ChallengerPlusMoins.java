@@ -109,7 +109,7 @@ public class ChallengerPlusMoins extends JFrame{
 		infosTentative.setHorizontalAlignment(JLabel.CENTER);
 		infosTentative.setFont(impact);
 		infosTentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
-		infosTentative.setText(" Les + - ou = ");
+		infosTentative.setText(" Indices + - ou = ");
 		infosCadre.add(infosTentative);
 		contentPane.add(infosCadre);
 

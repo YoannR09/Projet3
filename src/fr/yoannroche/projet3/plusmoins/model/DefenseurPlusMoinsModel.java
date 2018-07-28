@@ -1,10 +1,16 @@
 package fr.yoannroche.projet3.plusmoins.model;
 
+import java.awt.Font;
+import java.util.ResourceBundle;
+
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class DefenseurPlusMoinsModel {
 
-	private static String tentative;
 	private static String bloc;
 	private static String maximum = "9999";
 	private static String minimum = "1111";
@@ -19,6 +25,10 @@ public class DefenseurPlusMoinsModel {
 	static int prop;
 	static int min;
 	static int code;
+	static Font impact = new Font ("impact", 17,17);
+	Font arial = new Font ("arial", 12,12);
+	Font arial2 = new Font ("arial", 10,10);
+	static ImageIcon ordi1 = new ImageIcon("images/ordi1.png");
 
 	public DefenseurPlusMoinsModel() {}
 	
@@ -68,4 +78,33 @@ public class DefenseurPlusMoinsModel {
 	
 
 	}
+	
+	public static void okClick(JTextField proposition, JLabel codeSecret, JPanel contentPane, JPanel boiteDialog, JPanel ordi,JPanel blocProposition, JLabel image) {
+		
+		ResourceBundle reglage = ResourceBundle.getBundle("Config");
+		bloc = reglage.getString("cases");
+		int cases = Integer.parseInt(bloc);
+	
+		if(proposition.getText().length()<cases) {
+			JOptionPane joperreur = new JOptionPane(); // Si la personne décide de ne pas utiliser le clavier et dépasse la longueur du code secret
+			joperreur.showMessageDialog(null,"Votre code est trop court !!","Erreur",JOptionPane.ERROR_MESSAGE);
+			proposition.setText("");
+			blocProposition.setVisible(true);
+		}
+		else if(proposition.getText().length()>cases) {
+			JOptionPane joperreur = new JOptionPane(); // Si la personne décide de ne pas utiliser le clavier et la longueur du code tapé et inférieur au code secret
+			joperreur.showMessageDialog(null,"Votre code est trop long !!","Erreur",JOptionPane.ERROR_MESSAGE);
+			proposition.setText("");
+			blocProposition.setVisible(true);
+		}
+		else if(proposition.getText().length()==cases) {
+			boiteDialog.setVisible(false);
+			codeSecret.setText(proposition.getText());
+			proposition.setText("");
+			proposition.setFont(impact);
+			ordi.setVisible(true);	
+			image.setIcon(ordi1);
+		}
+		
+}
 }

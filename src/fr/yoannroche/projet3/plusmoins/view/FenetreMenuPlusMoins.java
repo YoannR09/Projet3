@@ -150,7 +150,7 @@ public class FenetreMenuPlusMoins extends JFrame{
 					def.setVisible(true);
 				}
 				if(mode3.isSelected()==true) {
-					DuelPlusMoins duel = new DuelPlusMoins();
+					DuelPlusMoins duel = new DuelPlusMoins(modeDev);
 					duel.setVisible(true);
 				}
 				

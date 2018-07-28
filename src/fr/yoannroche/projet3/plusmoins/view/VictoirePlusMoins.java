@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.Lancement;
 import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins.SourisListener;
 
@@ -79,7 +80,7 @@ public class VictoirePlusMoins extends JDialog {
 	home.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
 		    setVisible(false);
-		    ((JFrame) contentPane2.getTopLevelAncestor()).dispose() ;
+		    ((JFrame) contentPane2.getTopLevelAncestor()).dispose();
 			Lancement menu = new Lancement();	
 			menu.setVisible(true);
 		}
@@ -108,13 +109,6 @@ public class VictoirePlusMoins extends JDialog {
 
 
 		public void mouseClicked(MouseEvent arg0) {
-
-			/**
-			 * Je n'arrive pas à savoir si le problème de l'espace vient de la. 
-			 */
-			
-			
-			
 
 		}
 

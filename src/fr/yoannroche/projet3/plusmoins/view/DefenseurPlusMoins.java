@@ -25,7 +25,7 @@ import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins.SourisListener;
 import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins.SourisListener2;
 
 public class DefenseurPlusMoins extends JFrame{
-	
+
 	private JLabel codeSecret = new JLabel();
 	private JPanel contentPane = new JPanel();
 	private JButton retour = new JButton(" Retour ");
@@ -48,11 +48,12 @@ public class DefenseurPlusMoins extends JFrame{
 	JLabel image = new JLabel();
 	Font impact = new Font ("impact", 17,17);
 	Font arial = new Font ("arial", 12,12);
+	Font arial2 = new Font ("arial", 10,10);
 	static ImageIcon ordi0 = new ImageIcon("images/ordi0.png");
-	
-	
+
+
 	public DefenseurPlusMoins() {
-		
+
 		this.setTitle("Challenger");
 		this.setSize(400, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,7 +61,7 @@ public class DefenseurPlusMoins extends JFrame{
 		this.setContentPane(contentPane);
 		this.setResizable(false);
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
-		
+
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
 		tentatives = reglage.getString("tentatives");
 		bloc = reglage.getString("cases");
@@ -74,7 +75,7 @@ public class DefenseurPlusMoins extends JFrame{
 
 
 	private void initCadreDialogOrdi() {
-	   ordi.setVisible(false);
+		ordi.setVisible(false);
 		ordi.setPreferredSize(new Dimension(170,150));
 		ordi.setBackground(Color.GRAY);
 		ordi.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
@@ -95,7 +96,7 @@ public class DefenseurPlusMoins extends JFrame{
 		tentativeOrdi.setFont(impact);
 		code.add(codeSecret);
 		ordi.add(code);
-		
+
 		ordi.add(dialog);
 		ordi.add(tentativeOrdi);
 		contentPane.add(ordi);
@@ -104,7 +105,7 @@ public class DefenseurPlusMoins extends JFrame{
 
 
 	private void initCode() {
-		
+
 		blocProposition.setPreferredSize(new Dimension(160,65));
 		blocProposition.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		blocProposition.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
@@ -120,44 +121,39 @@ public class DefenseurPlusMoins extends JFrame{
 			blocProposition.add(bouton[i]).setEnabled(true);
 			i++;
 		}
-		
-		
+
+
 		blocTest.add(proposition);
 		blocTest.setPreferredSize(new Dimension(130,40));
 		blocTest.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
 		blocTest.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		proposition.setText(" Entrez votre code secret ");
 		proposition.setForeground(Color.DARK_GRAY);
-		proposition.setFont(impact);
+		proposition.setFont(arial2);
 		proposition.setPreferredSize(new Dimension(120,27));
 		proposition.setBorder(BorderFactory.createLineBorder(Color.black));
-		
-	ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
-	ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
-	ok.addMouseListener(new SourisListener());
-	ok.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
-		public void actionPerformed(ActionEvent event){ 
-			try {
-				boiteDialog.setVisible(false);
-				
-				ordi.setVisible(true);		
+
+		ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
+		ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		ok.addMouseListener(new SourisListener());
+		ok.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
+			public void actionPerformed(ActionEvent event){ 
+
+				DefenseurPlusMoinsModel.okClick(proposition,codeSecret,contentPane,boiteDialog,ordi,blocProposition,image);	
 				nombreClick = 0;
-				codeSecret.setText(proposition.getText());
-			}catch(Exception e) {
-				JOptionPane joperreur = new JOptionPane(); // Si la personne décide de ne pas utiliser le clavier et dépasse la longueur du code secret
-				joperreur.showMessageDialog(null,"Votre code est trop long !!","Erreur",JOptionPane.ERROR_MESSAGE);
-			}
-		}  
-	});
-	supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
-	supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
-	supprimer.addMouseListener(new SourisListener());
-	supprimer.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent event){
-			proposition.setText("");
-			nombreClick = 0;
-			blocProposition.setVisible(true);
-		}  
-	});
+
+			}  
+		});
+		supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
+		supprimer.addMouseListener(new SourisListener());
+		supprimer.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent event){
+				proposition.setText("");
+				nombreClick = 0;
+				blocProposition.setVisible(true);
+			}  
+		});
 	}
 
 
@@ -170,7 +166,7 @@ public class DefenseurPlusMoins extends JFrame{
 		boiteDialog.add(blocProposition);
 		boiteDialog.add(supprimer);
 		boiteDialog.add(ok);
-		
+
 		contentPane.add(boiteDialog);
 	}
 
@@ -190,7 +186,7 @@ public class DefenseurPlusMoins extends JFrame{
 		imageOrdi.add(image);
 		ordinateur.add(imageOrdi);
 		contentPane.add(ordinateur);
-		
+
 	}
 
 
@@ -227,7 +223,7 @@ public class DefenseurPlusMoins extends JFrame{
 		contentPane.add(espace);
 
 	}
-	
+
 	class SourisListener implements MouseListener {
 
 		public void mouseClicked(MouseEvent arg0) {
@@ -297,8 +293,8 @@ public class DefenseurPlusMoins extends JFrame{
 		}
 	}
 }
-		
-	
-	
+
+
+
 
 

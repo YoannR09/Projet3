@@ -20,6 +20,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
+import fr.yoannroche.projet3.plusmoins.model.DuelPlusMoinsModel;
 import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins.SourisListener;
 import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins.SourisListener2;
 
@@ -47,12 +48,14 @@ public class DuelPlusMoins extends JFrame{
 	private int nombreCoup = 0;
 	Font impact = new Font ("impact", 17,17);
 	Font arial = new Font ("arial", 12,12);
+	Font arial2 = new Font ("arial", 10,10);
+	JPanel espaceDev = new JPanel ();
 	
 	
-	public DuelPlusMoins() {
+	public DuelPlusMoins(boolean modeDev) {
 	
 	this.setTitle("Duel");
-	this.setSize(450,400);
+	this.setSize(450,410);
 	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	this.setLocationRelativeTo(null);
 	this.setContentPane(contentPane);
@@ -69,10 +72,28 @@ public class DuelPlusMoins extends JFrame{
 	initCadreOrdi();
 	initBlocProposition();
 	initBlocTest();
+	initCadreDev(modeDev);
 	
 	
 	}
 	
+	private void initCadreDev(boolean modeDev) {
+		if(modeDev==true) {
+		JLabel codeSecret = new JLabel();
+		codeSecret.setFont(arial2);
+		codeSecret.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
+		codeSecret.setText("");
+		JPanel cadreDev = new JPanel();
+		JLabel text = new JLabel();
+		text.setText("Code secret de l'ordinateur : ");
+		text.setFont(arial2);
+		text.setForeground(Color.WHITE);
+		espaceDev.add(text);
+		espaceDev.add(codeSecret);
+		DuelPlusMoinsModel.dev(codeSecret);
+		}
+	}
+
 	private void initVs() {
 		JLabel vs = new JLabel();
 		
@@ -124,10 +145,10 @@ public class DuelPlusMoins extends JFrame{
 		cadreOrdi.add(tentativePanel);
 		contentPane.add(cadreOrdi);
 		
-		JPanel espace = new JPanel ();
-		espace.setPreferredSize(new Dimension(520,5));
-		espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
-		contentPane.add(espace);
+		
+		espaceDev.setPreferredSize(new Dimension(520,15));
+		espaceDev.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
+		contentPane.add(espaceDev);
 		
 	}
 
@@ -152,7 +173,7 @@ public class DuelPlusMoins extends JFrame{
 		tentativePanel.add(tentative);
 		JPanel infosCadre = new JPanel();
 		infosCadre.setPreferredSize(new Dimension(150,55));
-		infosCadre.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
+		infosCadre.setBackground(Color.getHSBColor(0.134f, 0.15f, 0.94f));
 		infosCadre.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		infosTentative.setOpaque(true);
 		infosTentative.setBackground(Color.WHITE);
@@ -161,7 +182,7 @@ public class DuelPlusMoins extends JFrame{
 		infosTentative.setHorizontalAlignment(JLabel.CENTER);
 		infosTentative.setFont(impact);
 		infosTentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
-		infosTentative.setText(" Les + - ou = ");
+		infosTentative.setText(" Indices + - ou = ");
 		infosCadre.add(infosTentative);
 		JPanel espace = new JPanel();
 		espace.setPreferredSize(new Dimension(165,30));
@@ -171,7 +192,7 @@ public class DuelPlusMoins extends JFrame{
 		codeText.setText("Votre code secret : ");
 		codeText.setFont(arial);
 		codeText.setForeground(Color.WHITE);
-		codeSecret.setText("????");
+		codeSecret.setText("?");
 		codeSecret.setForeground(Color.getHSBColor(0.143f, 0.84f, 0.86f));
 		codeSecret.setFont(arial);
 		
@@ -211,7 +232,7 @@ public class DuelPlusMoins extends JFrame{
 		JLabel regle = new JLabel();
 		int tentativeInt = Integer.parseInt(tentatives);
 		int casesInt = Integer.parseInt(bloc);
-		regle.setText("Vous avez "+ tentativeInt +" tentative pour trouver le code secret à "+ casesInt +" chiffres.");
+		regle.setText(" Le plus rapide à trouver le code secret à "+ casesInt +" chiffres de l'autre gagne.");
 		regle.setFont(arial);
 		contentPane.add(retour);
 		contentPane.add(espaceRetour);
@@ -221,6 +242,7 @@ public class DuelPlusMoins extends JFrame{
 		espace.setPreferredSize(new Dimension(520,5));
 		espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		contentPane.add(espace);
+		
 
 	}
 	private void initBlocTest() {
@@ -230,22 +252,22 @@ public class DuelPlusMoins extends JFrame{
 		blocTest.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
 		blocTest.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		proposition.setForeground(Color.DARK_GRAY);
-		proposition.setFont(impact);
+		proposition.setFont(arial2);
 		proposition.setPreferredSize(new Dimension(120,27));
 		proposition.setBorder(BorderFactory.createLineBorder(Color.black));
+		proposition.setText("Entrez votre code secret");
+		
 		contentPane.add(blocTest);
 		ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
 		ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		ok.addMouseListener(new SourisListener());
 		ok.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
 			public void actionPerformed(ActionEvent event){ 
-				try {
-					
-					
-				}catch(Exception e) {
-					JOptionPane joperreur = new JOptionPane(); // Si la personne décide de ne pas utiliser le clavier et dépasse la longueur du code secret
-					joperreur.showMessageDialog(null,"Votre code est trop long !!","Erreur",JOptionPane.ERROR_MESSAGE);
-				}
+			
+					DuelPlusMoinsModel.okClick(proposition,codeSecret,tentative,infosTentative,contentPane);
+					blocProposition.setVisible(true);
+					nombreClick=0;
+				
 			}  
 		});
 		supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
