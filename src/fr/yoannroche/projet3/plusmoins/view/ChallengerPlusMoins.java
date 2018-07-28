@@ -22,6 +22,7 @@ import org.apache.logging.log4j.Logger;
 
 import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
+import fr.yoannroche.projet3.plusmoins.model.DuelPlusMoinsModel;
 
 
 
@@ -55,7 +56,7 @@ public class ChallengerPlusMoins extends JFrame{
 	public ChallengerPlusMoins(boolean modeDev) {
 
 
-		
+
 		this.setTitle("Challenger");
 		this.setSize(400, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -196,21 +197,20 @@ public class ChallengerPlusMoins extends JFrame{
 		ok.addMouseListener(new SourisListener());
 		ok.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
 			public void actionPerformed(ActionEvent event){ 
-				try {
-					tentative.setText(proposition.getText());
-					logger.info("Récuperation de la proposition :"+proposition.getText());
-					ChallengerPlusMoinsModel.check(tentative, infosTentative);
-					++nbreTentative;
-					ChallengerPlusMoinsModel.checkCode(proposition,contentPane);
-					ChallengerPlusMoinsModel.chechTentative(nbreTentative,contentPane);
-					proposition.setText("");
-					nbreTen.setText("Nombre de tentatives : "+nbreTentative);
-					nombreClick = 0;
-					blocProposition.setVisible(true);
-				}catch(Exception e) {
-					JOptionPane joperreur = new JOptionPane(); // Si la personne décide de ne pas utiliser le clavier et dépasse la longueur du code secret
-					joperreur.showMessageDialog(null,"Votre code est trop long !!","Erreur",JOptionPane.ERROR_MESSAGE);
+
+				int cases = Integer.parseInt(bloc);
+				ChallengerPlusMoinsModel.okClick(proposition, tentative, infosTentative,contentPane,blocProposition,nbreTentative);
+				logger.info("Récuperation de la proposition :"+proposition.getText());
+				++nbreTentative;
+				if(tentative.getText().length()!=cases) {
+
+					nbreTentative=0;
 				}
+				nbreTen.setText("Nombre de tentatives : "+nbreTentative);
+				ChallengerPlusMoinsModel.chechTentative(nbreTentative,contentPane);
+				nombreClick = 0;
+				
+				
 			}  
 		});
 		supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));

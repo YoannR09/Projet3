@@ -1,5 +1,6 @@
 package fr.yoannroche.projet3.plusmoins.model;
 
+import java.awt.Font;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -23,6 +24,8 @@ public class ChallengerPlusMoinsModel {
 	private static String bloc;
 	static JOptionPane jop1;
 	static JOptionPane jop2;
+	static Font arial2 = new Font ("arial", 10,10);
+	static Font impact = new Font ("impact", 17,17);
 
 
 	public ChallengerPlusMoinsModel() {
@@ -55,9 +58,10 @@ public class ChallengerPlusMoinsModel {
 		 * Affiche + - = dans le JLabel infosTentative
 		 * En fonction des conditions
 		 */
+		  try {
 		for(int i =0;i<test.length();i++){
 
-
+      
 			if(test.charAt(i)==nombreString.charAt(i)) {
 				infosTentative.setText(infosTentative.getText()+"=");
 			}
@@ -68,6 +72,10 @@ public class ChallengerPlusMoinsModel {
 				infosTentative.setText(infosTentative.getText()+"-");
 			}
 
+			
+				
+			}
+		  }catch(Exception e) {
 		}
 
 
@@ -93,17 +101,6 @@ public class ChallengerPlusMoinsModel {
 	}
 
 
-
-	public static void checkCode(JTextField proposition,JPanel contentPane) {
-		String propositionString = proposition.getText();
-
-		if(propositionString.equals(nombreString)) {
-
-			VictoirePlusMoins jop2 = new VictoirePlusMoins(null, "Gagner",nombreString,contentPane);
-
-		}
-
-	}
 	public static void RangeWord(JPanel blocProposition, int nombreClick) {
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
 		bloc = reglage.getString("cases");
@@ -114,5 +111,33 @@ public class ChallengerPlusMoinsModel {
 		}
 
 
+	}
+	public static void okClick(JTextField proposition, JLabel tentative, JLabel infosTentative,JPanel contentPane, JPanel blocProposition,int nbreTentative) {
+		if(proposition.getText().length()<nombreString.length()) {
+			JOptionPane joperreur = new JOptionPane(); // Si la personne décide de ne pas utiliser le clavier et dépasse la longueur du code secret
+			joperreur.showMessageDialog(null,"Votre code est trop court !!","Erreur",JOptionPane.ERROR_MESSAGE);
+			proposition.setText("");
+			blocProposition.setVisible(true);
+			
+		}
+		else if(proposition.getText().length()>nombreString.length()) {
+			JOptionPane joperreur = new JOptionPane(); // Si la personne décide de ne pas utiliser le clavier et la longueur du code tapé et inférieur au code secret
+			joperreur.showMessageDialog(null,"Votre code est trop long !!","Erreur",JOptionPane.ERROR_MESSAGE);
+			proposition.setText("");
+			blocProposition.setVisible(true);
+			
+		}
+		
+		else {
+			tentative.setText(proposition.getText());
+            check(tentative, infosTentative);
+			tentative.setText(proposition.getText());
+			proposition.setText("");
+			proposition.setFont(impact);
+			blocProposition.setVisible(true);
+		}
+		if(tentative.getText().equals(nombreString)) {
+			VictoirePlusMoins jop2 = new VictoirePlusMoins(null, "Gagner",nombreString,contentPane);
+		}
 	}
 }
