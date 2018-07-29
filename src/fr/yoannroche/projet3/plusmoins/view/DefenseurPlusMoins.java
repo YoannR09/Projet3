@@ -50,6 +50,7 @@ public class DefenseurPlusMoins extends JFrame{
 	Font arial = new Font ("arial", 12,12);
 	Font arial2 = new Font ("arial", 10,10);
 	static ImageIcon ordi0 = new ImageIcon("images/ordi0.png");
+    static int nombreCoup = 0;
 
 
 	public DefenseurPlusMoins() {
@@ -140,6 +141,7 @@ public class DefenseurPlusMoins extends JFrame{
 			public void actionPerformed(ActionEvent event){ 
 
 				DefenseurPlusMoinsModel.okClick(proposition,codeSecret,contentPane,boiteDialog,ordi,blocProposition,image);	
+				DefenseurPlusMoinsModel.tentativeOrdi(tentativeOrdi,codeSecret,nombreCoup,dialog);
 				nombreClick = 0;
 
 			}  
