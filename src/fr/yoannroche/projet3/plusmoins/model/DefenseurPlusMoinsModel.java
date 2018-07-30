@@ -108,7 +108,7 @@ public class DefenseurPlusMoinsModel {
 				+ "J'ai réussi en "+nombreCoup+" tentatives");
 	}
 
-	public static void okClick(JTextField proposition, JLabel codeSecret, JPanel contentPane, JPanel boiteDialog, JPanel ordi,JPanel blocProposition, JLabel image) {
+	public static void okClick(JTextField proposition, JLabel codeSecret, JPanel contentPane, JPanel boiteDialog, JPanel ordi,JPanel blocProposition, JLabel image, JLabel tentativeOrdi, JTextArea dialog) {
 
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
 		bloc = reglage.getString("cases");
@@ -133,6 +133,7 @@ public class DefenseurPlusMoinsModel {
 			proposition.setFont(impact);
 			ordi.setVisible(true);	
 			image.setIcon(ordi1);
+			DefenseurPlusMoinsModel.tentativeOrdi(tentativeOrdi,codeSecret,nombreCoup,dialog);
 		}
 
 	}

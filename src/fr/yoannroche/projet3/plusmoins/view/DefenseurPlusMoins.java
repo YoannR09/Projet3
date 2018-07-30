@@ -140,8 +140,7 @@ public class DefenseurPlusMoins extends JFrame{
 		ok.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
 			public void actionPerformed(ActionEvent event){ 
 
-				DefenseurPlusMoinsModel.okClick(proposition,codeSecret,contentPane,boiteDialog,ordi,blocProposition,image);	
-				DefenseurPlusMoinsModel.tentativeOrdi(tentativeOrdi,codeSecret,nombreCoup,dialog);
+				DefenseurPlusMoinsModel.okClick(proposition,codeSecret,contentPane,boiteDialog,ordi,blocProposition,image,tentativeOrdi,dialog);	
 				nombreClick = 0;
 
 			}  
