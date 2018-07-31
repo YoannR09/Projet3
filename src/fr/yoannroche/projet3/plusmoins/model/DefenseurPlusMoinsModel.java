@@ -25,6 +25,8 @@ public class DefenseurPlusMoinsModel {
 
 	private static String tentative;
 	private static String blocs;
+	static int resultMax;
+	static int resultMin;
 
 	static Font impact = new Font ("impact", 17,17);
 	Font arial = new Font ("arial", 12,12);
@@ -114,11 +116,17 @@ public class DefenseurPlusMoinsModel {
 
 		for(int i=0; i<codeSecret.length();i++) {
 			if(tabProp[i]>tabCode[i]) {
-				tabProp[i]= intToChar(tabMin[i] +(int)(Math.random()*(tabMax[i] - tabMin[i])));
+				resultMax = Character.getNumericValue(tabMin[i]);
+				resultMin = Character.getNumericValue(tabMax[i]);
+				tabProp[i]= intToChar((int)(Math.random()*(resultMax - resultMin))+resultMin); 
+				
 
 			}
 			else if(tabProp[i]<tabCode[i]){
-				tabProp[i]= intToChar(tabMin[i] +(int)(Math.random()*(tabMax[i] - tabMin[i])));
+				resultMax = Character.getNumericValue(tabMin[i]);
+				resultMin = Character.getNumericValue(tabMax[i]);
+				tabProp[i]= intToChar((int)(Math.random()*(resultMax - resultMin))+resultMin); 
+			
 
 			}
 			resultProp = new String(tabProp);

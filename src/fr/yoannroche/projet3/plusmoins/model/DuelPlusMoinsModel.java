@@ -124,12 +124,9 @@ public class DuelPlusMoinsModel {
 	}
 	public static void checkWord(String proposition,String codeSecret2) {
 
-		if(gagner==0) {
-			if(proposition.equals(codeSecret2)){
-				++gagner;
-
-
-			}
+		if(proposition.equals(codeSecret2)){
+			++gagner;
+         PerduPlusMoinsDef perd = new PerduPlusMoinsDef(null, codeSecret2, cases, null );
 		}
 	}
 	public static void tour0(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel tentativeIA) {
@@ -195,7 +192,7 @@ public class DuelPlusMoinsModel {
 
 				resultMax = Character.getNumericValue(tabMin[i]);
 				resultMin = Character.getNumericValue(tabMax[i]);
-				tabProp[i]= intToChar((int)(Math.random()*(resultMax - resultMin))+resultMin);   //problème ici !!
+				tabProp[i]= intToChar((int)(Math.random()*(resultMax - resultMin))+resultMin);  
 
 			}
 			resultProp = new String(tabProp);
