@@ -38,6 +38,7 @@ public class DuelPlusMoins extends JFrame{
 	private JLabel codeSecret = new JLabel();
 	private JLabel tentativeIA =new JLabel();
 	static ImageIcon ordi0 = new ImageIcon("images/ordi0.png");
+	JTextArea dialog = new JTextArea();
 	JLabel image = new JLabel();
 	int  [] clavier = {0,1,2,3,4,5,6,7,8,9};
 	JButton [] button = new JButton[clavier.length];
@@ -112,7 +113,6 @@ public class DuelPlusMoins extends JFrame{
 		ordi.setOpaque(true);
 		ordi.setFont(arial);
 		ordi.setBorder(BorderFactory.createLineBorder(Color.black));
-		JTextArea dialog = new JTextArea();
 		dialog.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
 		dialog.setPreferredSize(new Dimension(150,80));
 		dialog.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
@@ -264,7 +264,7 @@ public class DuelPlusMoins extends JFrame{
 		ok.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
 			public void actionPerformed(ActionEvent event){ 
 			
-					DuelPlusMoinsModel.okClick(proposition,codeSecret,tentative,infosTentative,contentPane);
+					DuelPlusMoinsModel.okClick(proposition,codeSecret,tentative,infosTentative,contentPane,tentativeIA,dialog,tentativeIA);
 					blocProposition.setVisible(true);
 					nombreClick=0;
 				

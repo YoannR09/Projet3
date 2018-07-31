@@ -1,6 +1,5 @@
-package fr.yoannroche.projet3.plusmoins.view;
+package fr.yoannroche.projet3.plusmoins.view.gagner;
 
-import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -17,9 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fr.yoannroche.projet3.Lancement;
-import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins.SourisListener;
+import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins;
 
-public class PerduPlusMoins extends JDialog {
+public class VictoirePlusMoinsDef extends JDialog {
 	
 	JPanel contentPane = new JPanel();
 	JPanel contentPane2;
@@ -29,12 +28,13 @@ public class PerduPlusMoins extends JDialog {
 	Font arial = new Font ("arial", 12,12);
 	String proposition;
 	ChallengerPlusMoins chal;
+	int nombreCoup;
 
-	public PerduPlusMoins(JFrame parent, String title,String proposition, JPanel contentPane2){
+	public VictoirePlusMoinsDef(JFrame parent, String title,String proposition, JPanel contentPane2, int nombreCoup){
 		
 		super(parent, title);
 		
-		this.setSize(270, 110);
+		this.setSize(400, 110);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setVisible(true);
@@ -42,18 +42,19 @@ public class PerduPlusMoins extends JDialog {
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		this.proposition = proposition;
 		this.contentPane2 = contentPane2;
+		this.nombreCoup = nombreCoup;
 		initText();
 		initCadre();
 	}
 
 	private void initText() {
 	JPanel cadreText = new JPanel();
-	cadreText.setPreferredSize(new Dimension(250,25));
+	cadreText.setPreferredSize(new Dimension(380,25));
 	cadreText.setBackground(Color.DARK_GRAY);
 	JLabel text = new JLabel();
 	text.setFont(arial);
 	text.setForeground(Color.white);
-	text.setText("Vous avez perdu, le code secret était : "+proposition);
+	text.setText("Vous avez gagné, l'ordinateur à trouvé le code avec + de "+nombreCoup+" tentatives.");
 	cadreText.add(text);
 	contentPane.add(cadreText);
 	}
@@ -81,7 +82,7 @@ public class PerduPlusMoins extends JDialog {
 	home.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
 		    setVisible(false);
-		    ((JFrame) contentPane2.getTopLevelAncestor()).dispose() ;
+		    ((JFrame) contentPane2.getTopLevelAncestor()).dispose();
 			Lancement menu = new Lancement();	
 			menu.setVisible(true);
 		}
@@ -110,13 +111,6 @@ public class PerduPlusMoins extends JDialog {
 
 
 		public void mouseClicked(MouseEvent arg0) {
-
-			/**
-			 * Je n'arrive pas à savoir si le problème de l'espace vient de la. 
-			 */
-			
-			
-			
 
 		}
 
@@ -164,5 +158,3 @@ public class PerduPlusMoins extends JDialog {
 
 	}
 }
-
-

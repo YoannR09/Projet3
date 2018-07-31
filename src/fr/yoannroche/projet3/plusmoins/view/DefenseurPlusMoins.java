@@ -50,7 +50,7 @@ public class DefenseurPlusMoins extends JFrame{
 	Font arial = new Font ("arial", 12,12);
 	Font arial2 = new Font ("arial", 10,10);
 	static ImageIcon ordi0 = new ImageIcon("images/ordi0.png");
-    static int nombreCoup = 0;
+	static int nombreCoup = 0;
 
 
 	public DefenseurPlusMoins() {
@@ -93,6 +93,7 @@ public class DefenseurPlusMoins extends JFrame{
 		dialog.setPreferredSize(new Dimension(150,95));
 		dialog.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		dialog.setEditable(false);
+		dialog.setFont(arial);
 		tentativeOrdi.setForeground(Color.orange);
 		tentativeOrdi.setFont(impact);
 		code.add(codeSecret);

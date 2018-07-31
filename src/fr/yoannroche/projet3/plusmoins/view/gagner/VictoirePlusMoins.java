@@ -1,4 +1,4 @@
-package fr.yoannroche.projet3.plusmoins.view;
+package fr.yoannroche.projet3.plusmoins.view.gagner;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -16,7 +16,8 @@ import javax.swing.JPanel;
 
 import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.Lancement;
-import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins.SourisListener;
+import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins;
+
 
 public class VictoirePlusMoins extends JDialog {
 	

@@ -12,8 +12,8 @@ import javax.swing.JTextField;
 
 import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins;
-import fr.yoannroche.projet3.plusmoins.view.PerduPlusMoins;
-import fr.yoannroche.projet3.plusmoins.view.VictoirePlusMoins;
+import fr.yoannroche.projet3.plusmoins.view.gagner.VictoirePlusMoins;
+import fr.yoannroche.projet3.plusmoins.view.perdu.PerduPlusMoins;
 
 
 public class ChallengerPlusMoinsModel {
@@ -28,9 +28,8 @@ public class ChallengerPlusMoinsModel {
 	static Font impact = new Font ("impact", 17,17);
 
 
-	public ChallengerPlusMoinsModel() {
+	public ChallengerPlusMoinsModel() {}
 	
-	}
 	/**
 	 * Méthode qui s'execute si le mode développeur est actif.
 	 * Dans ce cas le code secret s'affiche.
@@ -39,7 +38,6 @@ public class ChallengerPlusMoinsModel {
 	public static void dev(JLabel codeSecret){
 		codeSecret.setText(nombreString);
 	}
-
 
 
 	/**
@@ -52,37 +50,28 @@ public class ChallengerPlusMoinsModel {
 		infosTentative.setText("");
 		String test=tentative.getText();
 
-
 		/**
 		 * Boucle qui test le code écrit pour le comparer au code caché
 		 * Affiche + - = dans le JLabel infosTentative
 		 * En fonction des conditions
 		 */
-		  try {
-		for(int i =0;i<test.length();i++){
+		try {
+			for(int i =0;i<test.length();i++){
 
-      
-			if(test.charAt(i)==nombreString.charAt(i)) {
-				infosTentative.setText(infosTentative.getText()+"=");
-			}
-			if(test.charAt(i)<nombreString.charAt(i)) {
-				infosTentative.setText(infosTentative.getText()+"+");
-			}
-			if(test.charAt(i)>nombreString.charAt(i)) {
-				infosTentative.setText(infosTentative.getText()+"-");
-			}
+				if(test.charAt(i)==nombreString.charAt(i)) {
+					infosTentative.setText(infosTentative.getText()+"=");
+				}
+				if(test.charAt(i)<nombreString.charAt(i)) {
+					infosTentative.setText(infosTentative.getText()+"+");
+				}
+				if(test.charAt(i)>nombreString.charAt(i)) {
+					infosTentative.setText(infosTentative.getText()+"-");
+				}
 
-			
-				
 			}
-		  }catch(Exception e) {
+		}catch(Exception e) {
 		}
-
-
 	}
-
-
-
 
 	/**
 	 * Méthode qui permet de vérifier si le joueur n'a pas dépassé le nombre de tentative.
@@ -118,19 +107,19 @@ public class ChallengerPlusMoinsModel {
 			joperreur.showMessageDialog(null,"Votre code est trop court !!","Erreur",JOptionPane.ERROR_MESSAGE);
 			proposition.setText("");
 			blocProposition.setVisible(true);
-			
+
 		}
 		else if(proposition.getText().length()>nombreString.length()) {
 			JOptionPane joperreur = new JOptionPane(); // Si la personne décide de ne pas utiliser le clavier et la longueur du code tapé et inférieur au code secret
 			joperreur.showMessageDialog(null,"Votre code est trop long !!","Erreur",JOptionPane.ERROR_MESSAGE);
 			proposition.setText("");
 			blocProposition.setVisible(true);
-			
+
 		}
-		
+
 		else {
 			tentative.setText(proposition.getText());
-            check(tentative, infosTentative);
+			check(tentative, infosTentative);
 			tentative.setText(proposition.getText());
 			proposition.setText("");
 			proposition.setFont(impact);
