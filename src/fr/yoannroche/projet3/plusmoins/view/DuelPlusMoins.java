@@ -25,13 +25,17 @@ import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins.SourisListener;
 import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins.SourisListener2;
 
 public class DuelPlusMoins extends JFrame{
-	
+
 	private JPanel contentPane = new JPanel();
 	private JButton retour = new JButton(" Retour ");
 	private JButton supprimer = new JButton(" Suppr ");
 	private JButton ok = new JButton(" Ok ");
+	private JButton fin = new JButton(" Ok ");
+	private JButton refresh = new JButton("⟲");
 	private static String tentatives;
 	private static String bloc;
+	private JPanel cadreJ = new JPanel();
+	JPanel cadreOrdi = new JPanel();
 	private JPanel blocProposition = new JPanel();
 	private JPanel blocTest = new JPanel();
 	private JLabel tentative = new JLabel();
@@ -42,69 +46,82 @@ public class DuelPlusMoins extends JFrame{
 	JLabel image = new JLabel();
 	int  [] clavier = {0,1,2,3,4,5,6,7,8,9};
 	JButton [] button = new JButton[clavier.length];
+	private JButton bouton[];
+	String [] indice = {"+","-","="};
+	JButton [] indices = new JButton[indice.length];
+	private JButton indi[];
 	private JTextField proposition = new JTextField();
 	private JLabel infosTentative = new JLabel();
-	private JButton bouton[];
+	private JLabel indiceDev = new JLabel();
 	private int nombreClick = 0;
 	private int nombreCoup = 0;
 	Font impact = new Font ("impact", 17,17);
 	Font arial = new Font ("arial", 12,12);
 	Font arial2 = new Font ("arial", 10,10);
 	JPanel espaceDev = new JPanel ();
-	
-	
+
+
 	public DuelPlusMoins(boolean modeDev) {
-	
-	this.setTitle("Duel");
-	this.setSize(450,410);
-	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	this.setLocationRelativeTo(null);
-	this.setContentPane(contentPane);
-	this.setResizable(false);
-	contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
-	
-	ResourceBundle reglage = ResourceBundle.getBundle("Config");
-	tentatives = reglage.getString("tentatives");
-	bloc = reglage.getString("cases");
-	
-	initRegle();
-	initCadreJoueur();
-	initVs();
-	initCadreOrdi();
-	initBlocProposition();
-	initBlocTest();
-	initCadreDev(modeDev);
-	
-	
+
+		this.setTitle("Duel");
+		this.setSize(450,450);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setContentPane(contentPane);
+		this.setResizable(false);
+		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
+
+		ResourceBundle reglage = ResourceBundle.getBundle("Config");
+		tentatives = reglage.getString("tentatives");
+		bloc = reglage.getString("cases");
+
+		initRegle();
+		initCadreJoueur();
+		initVs();
+		initCadreOrdi();
+		initBlocProposition();
+		initBlocTest();
+		initCadreDev(modeDev);
+
+
 	}
-	
+
 	private void initCadreDev(boolean modeDev) {
 		if(modeDev==true) {
-		JLabel codeSecret = new JLabel();
-		codeSecret.setFont(arial2);
-		codeSecret.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
-		codeSecret.setText("");
-		JPanel cadreDev = new JPanel();
-		JLabel text = new JLabel();
-		text.setText("Code secret de l'ordinateur : ");
-		text.setFont(arial2);
-		text.setForeground(Color.WHITE);
-		espaceDev.add(text);
-		espaceDev.add(codeSecret);
-		DuelPlusMoinsModel.dev(codeSecret);
+			JLabel codeSecret = new JLabel();
+			codeSecret.setFont(arial2);
+			codeSecret.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
+			codeSecret.setText("");
+			JPanel cadreDev = new JPanel();
+			JLabel text = new JLabel();
+			text.setText("Code secret de l'ordinateur :");
+			text.setFont(arial2);
+			text.setForeground(Color.WHITE);
+			JLabel text2 = new JLabel();
+			text2.setText(" Les indices à indiquer sont :");
+			text2.setFont(arial2);
+			text2.setForeground(Color.WHITE);
+			espaceDev.add(text);
+			espaceDev.add(codeSecret);
+			DuelPlusMoinsModel.dev(codeSecret);
+			espaceDev.add(text2);
+			espaceDev.add(indiceDev);
+			indiceDev.setForeground(Color.orange);
+			indiceDev.setFont(arial2);
+			
 		}
 	}
 
 	private void initVs() {
 		JLabel vs = new JLabel();
-		
+
 		vs.setText(" V.S " );
 		vs.setOpaque(true);
 		vs.setFont(impact);
 		vs.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		vs.setBackground(Color.getHSBColor(0.143f, 0.84f, 0.86f));
 		contentPane.add(vs);
-		
+
 	}
 
 	private void initCadreOrdi() {
@@ -119,37 +136,60 @@ public class DuelPlusMoins extends JFrame{
 		dialog.setEditable(false);
 		dialog.setText(" \n Je suis prêt \n c'est quand vous voulez ! ");
 		JPanel tentativePanel = new JPanel();
-		tentativePanel.setPreferredSize(new Dimension(150,55));
-		tentativePanel.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
+		tentativePanel.setPreferredSize(new Dimension(150,70));
+		tentativePanel.setBackground(Color.getHSBColor(0.134f, 0.15f, 0.94f));
 		tentativePanel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		tentativeIA.setOpaque(true);
 		tentativeIA.setBackground(Color.white);
-		tentativeIA.setPreferredSize(new Dimension(120,40));
+		tentativeIA.setPreferredSize(new Dimension(130,30));
 		tentativeIA.setHorizontalAlignment(JLabel.CENTER);
 		tentativeIA.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
-		tentativeIA.setFont(impact);
-		tentativeIA.setText(" Tentative IA ");
+		tentativeIA.setFont(arial);
+		tentativeIA.setText("Entrez les indices");
 		JPanel espace2 = new JPanel();
 		espace2.setPreferredSize(new Dimension(65,5));
 		espace2.setBackground(Color.DARK_GRAY);
 		espace2.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
-		
-		JPanel cadreOrdi = new JPanel();
-		cadreOrdi.setPreferredSize(new Dimension(180,185));
+		cadreOrdi.setPreferredSize(new Dimension(180,205));
 		cadreOrdi.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		cadreOrdi.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		cadreOrdi.add(ordi);
 		cadreOrdi.add(dialog);
 		cadreOrdi.add(espace2);
+
 		tentativePanel.add(tentativeIA);
+	
+		refresh.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
+		refresh.setBorder(BorderFactory.createLineBorder(Color.black));
+		refresh.setBackground(Color.DARK_GRAY);
+		refresh.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
+			public void actionPerformed(ActionEvent event){ 
+				tentativeIA.setText("");
+
+			}  
+		});
+		refresh.setPreferredSize(new Dimension(20,20));
 		cadreOrdi.add(tentativePanel);
 		contentPane.add(cadreOrdi);
-		
-		
-		espaceDev.setPreferredSize(new Dimension(520,15));
+		this.indi = new JButton[3];
+		int i = 0;
+		for(String c : indice){
+			this.indi[i] = new JButton(indice[i]);
+			indi[i].setPreferredSize(new Dimension(20,20));
+			indi[i].setBackground(Color.DARK_GRAY);
+			indi[i].setBorder(BorderFactory.createLineBorder(Color.black));
+			indi[i].setForeground(Color.white);
+			indi[i].addMouseListener(new SourisListener3());
+			tentativePanel.add(indi[i]).setEnabled(true);
+			i++;
+		}
+		fin.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
+		tentativePanel.add(fin);
+		tentativePanel.add(refresh);
+		espaceDev.setPreferredSize(new Dimension(520,25));
 		espaceDev.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		contentPane.add(espaceDev);
-		
+
 	}
 
 	private void initCadreJoueur() {
@@ -159,7 +199,7 @@ public class DuelPlusMoins extends JFrame{
 		joueur.setFont(arial);
 		joueur.setBorder(BorderFactory.createLineBorder(Color.black));
 		JPanel tentativePanel = new JPanel();
-		tentativePanel.setPreferredSize(new Dimension(150,55));
+		tentativePanel.setPreferredSize(new Dimension(150,53));
 		tentativePanel.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
 		tentativePanel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		tentative.setOpaque(true);
@@ -170,9 +210,13 @@ public class DuelPlusMoins extends JFrame{
 		tentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		tentative.setFont(impact);
 		tentative.setText(" Votre tentative ");
+		JPanel espace2 = new JPanel();
+		espace2.setPreferredSize(new Dimension(65,5));
+		espace2.setBackground(Color.DARK_GRAY);
+		espace2.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		tentativePanel.add(tentative);
 		JPanel infosCadre = new JPanel();
-		infosCadre.setPreferredSize(new Dimension(150,55));
+		infosCadre.setPreferredSize(new Dimension(150,53));
 		infosCadre.setBackground(Color.getHSBColor(0.134f, 0.15f, 0.94f));
 		infosCadre.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		infosTentative.setOpaque(true);
@@ -183,6 +227,10 @@ public class DuelPlusMoins extends JFrame{
 		infosTentative.setFont(impact);
 		infosTentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		infosTentative.setText(" Indices + - ou = ");
+		JPanel espaceCode = new JPanel();
+		espaceCode.setPreferredSize(new Dimension(160,5));
+		espaceCode.setBackground(Color.DARK_GRAY);
+		espaceCode.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		infosCadre.add(infosTentative);
 		JPanel espace = new JPanel();
 		espace.setPreferredSize(new Dimension(165,30));
@@ -195,19 +243,19 @@ public class DuelPlusMoins extends JFrame{
 		codeSecret.setText("?");
 		codeSecret.setForeground(Color.getHSBColor(0.143f, 0.84f, 0.86f));
 		codeSecret.setFont(arial);
-		
 		espace.add(codeText);
 		espace.add(codeSecret);
-		JPanel cadreJ = new JPanel();
-		cadreJ.setPreferredSize(new Dimension(180,185));
+		cadreJ.setPreferredSize(new Dimension(180,205));
 		cadreJ.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
-		cadreJ.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		cadreJ.add(joueur);
 		cadreJ.add(tentativePanel);
+		cadreJ.add(espace2);
 		cadreJ.add(infosCadre);
+		cadreJ.add(espaceCode);
 		cadreJ.add(espace);
+		cadreJ.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.154f, 0.85f, 0.94f)));
 		contentPane.add(cadreJ);
-		
+
 	}
 
 	private void initRegle() {
@@ -242,11 +290,15 @@ public class DuelPlusMoins extends JFrame{
 		espace.setPreferredSize(new Dimension(520,5));
 		espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		contentPane.add(espace);
-		
+
 
 	}
 	private void initBlocTest() {
 
+		JPanel blocBouton = new JPanel();
+		blocBouton.setPreferredSize(new Dimension(100,58));
+		blocBouton.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
+		blocBouton.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		blocTest.add(proposition);
 		blocTest.setPreferredSize(new Dimension(130,40));
 		blocTest.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
@@ -255,19 +307,21 @@ public class DuelPlusMoins extends JFrame{
 		proposition.setFont(arial2);
 		proposition.setPreferredSize(new Dimension(120,27));
 		proposition.setBorder(BorderFactory.createLineBorder(Color.black));
-		proposition.setText("Entrez votre code secret");
-		
+		proposition.setText("Entrez votre code secret");		
 		contentPane.add(blocTest);
 		ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
 		ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		ok.addMouseListener(new SourisListener());
 		ok.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
 			public void actionPerformed(ActionEvent event){ 
-			
-					DuelPlusMoinsModel.okClick(proposition,codeSecret,tentative,infosTentative,contentPane,tentativeIA,dialog,tentativeIA);
-					blocProposition.setVisible(true);
-					nombreClick=0;
+
+				ok.setEnabled(false);
+				ok.setBackground(Color.getHSBColor(0.345f, 0.38f, 0.58f));
+				DuelPlusMoinsModel.okClick(proposition,codeSecret,tentative,infosTentative,contentPane,dialog,indiceDev,cadreJ,cadreOrdi,ok,fin);
+				blocProposition.setVisible(true);
+				nombreClick=0;
 				
+
 			}  
 		});
 		supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
@@ -278,6 +332,18 @@ public class DuelPlusMoins extends JFrame{
 				proposition.setText("");
 				nombreClick = 0;
 				blocProposition.setVisible(true);
+			}  
+		});
+		fin.setPreferredSize(new Dimension(25,14));
+		fin.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.BLACK));
+		fin.setBackground(Color.getHSBColor(0.154f, 0.45f, 0.44f));
+		fin.setEnabled(false);
+		fin.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
+			public void actionPerformed(ActionEvent event){ 
+				
+				DuelPlusMoinsModel.finClick(tentativeIA,ok,indiceDev,fin,cadreJ,cadreOrdi);
+				fin.setBackground(Color.getHSBColor(0.154f, 0.45f, 0.44f));
+
 			}  
 		});
 		contentPane.add(supprimer);
@@ -303,7 +369,7 @@ public class DuelPlusMoins extends JFrame{
 		}
 		contentPane.add(blocProposition);
 	}
-	
+
 	class SourisListener implements MouseListener {
 
 		public void mouseClicked(MouseEvent arg0) {
@@ -350,7 +416,7 @@ public class DuelPlusMoins extends JFrame{
 			supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
 		}
 	}
-	
+
 	class SourisListener2 implements MouseListener {
 
 		public void mouseClicked(MouseEvent arg0) {
@@ -367,6 +433,26 @@ public class DuelPlusMoins extends JFrame{
 			if(((JButton)arg0.getSource()).isEnabled()==false) {
 				((JButton)arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.orange));
 			}
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class SourisListener3 implements MouseListener {
+
+		public void mouseClicked(MouseEvent arg0) {
+			char entrer = ((JButton)arg0.getSource()).getText().charAt(0);
+			tentativeIA.setText(tentativeIA.getText()+entrer);
+			nombreClick++;
+
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			((JButton)arg0.getSource()).setBorder(BorderFactory.createMatteBorder(0, 2, 0, 2,Color.orange));
+		}
+		public void mouseExited(MouseEvent arg0) {
+			((JButton)arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.black));
+
 		}
 		public void mousePressed(MouseEvent arg0) {
 		}

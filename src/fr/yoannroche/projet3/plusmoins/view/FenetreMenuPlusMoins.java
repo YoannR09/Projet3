@@ -41,7 +41,7 @@ public class FenetreMenuPlusMoins extends JFrame{
 	private JButton lancer = new JButton("Lancer");
 	private JButton retour = new JButton(" Retour ");
 	private SourisListener sListener = new SourisListener();
-	private JCheckBox dev = new JCheckBox(" Mode Développeur ");
+	private JButton dev = new JButton(" Réglages ");
 	JTextArea regle = new JTextArea();
 	private boolean modeDev = false;
 
@@ -69,15 +69,12 @@ public class FenetreMenuPlusMoins extends JFrame{
 
 		espace2.setPreferredSize(new Dimension(210,10));
 		dev.setBackground(Color.getHSBColor(0.141f, 0.74f, 0.87f));
+		dev.setPreferredSize(new Dimension(70,30));
+		dev.addMouseListener(new SourisListener());
 		dev.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		dev.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
-				if(dev.isSelected()) {
-					dev.setBackground(Color.getHSBColor(0.141f, 0.84f, 0.97f));
-				}
-				else {
-					dev.setBackground(Color.getHSBColor(0.141f, 0.74f, 0.87f));
-				}
+				
 			}
 
 		});
@@ -223,6 +220,9 @@ public class FenetreMenuPlusMoins extends JFrame{
 			if(arg0.getSource()==mode3) {
 				mode3.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.84f));
 			}
+			if(arg0.getSource()==dev) {
+				dev.setBackground(Color.getHSBColor(0.141f, 0.84f, 0.97f));
+			}
 		}
 
 		public void mouseExited(MouseEvent arg0) {
@@ -233,6 +233,7 @@ public class FenetreMenuPlusMoins extends JFrame{
 			mode1.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
 			mode2.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
 			mode3.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
+			dev.setBackground(Color.getHSBColor(0.141f, 0.74f, 0.87f));
 		}
 
 		public void mousePressed(MouseEvent arg0) {
@@ -247,6 +248,7 @@ public class FenetreMenuPlusMoins extends JFrame{
 			mode1.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
 			mode2.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
 			mode3.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
+			dev.setBackground(Color.getHSBColor(0.141f, 0.74f, 0.87f));
 		}
 	}
 }
