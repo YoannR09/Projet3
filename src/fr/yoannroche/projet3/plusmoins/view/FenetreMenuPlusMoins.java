@@ -23,7 +23,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
 import fr.yoannroche.projet3.Lancement;
-import fr.yoannroche.projet3.mastermind.model.Reglage;
+import fr.yoannroche.projet3.Reglage;
 import fr.yoannroche.projet3.mastermind.view.Challenger;
 import fr.yoannroche.projet3.mastermind.view.Defenseur;
 import fr.yoannroche.projet3.mastermind.view.Duel;
@@ -42,6 +42,7 @@ public class FenetreMenuPlusMoins extends JFrame{
 	private JButton retour = new JButton(" Retour ");
 	private SourisListener sListener = new SourisListener();
 	private JButton dev = new JButton(" Réglages ");
+	
 	JTextArea regle = new JTextArea();
 	private boolean modeDev = false;
 
@@ -74,7 +75,9 @@ public class FenetreMenuPlusMoins extends JFrame{
 		dev.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		dev.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
-				
+				((JFrame) contentPaneMenu.getTopLevelAncestor()).dispose() ;
+				Reglage reglage = new Reglage();
+				reglage.setVisible(true);
 			}
 
 		});

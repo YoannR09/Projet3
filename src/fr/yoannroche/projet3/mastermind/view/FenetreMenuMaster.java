@@ -3,7 +3,6 @@ package fr.yoannroche.projet3.mastermind.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -13,7 +12,6 @@ import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,8 +20,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
 import fr.yoannroche.projet3.Lancement;
-import fr.yoannroche.projet3.mastermind.model.Reglage;
-import fr.yoannroche.projet3.mastermind.view.Defenseur.SourisListener;
 
 
 public class FenetreMenuMaster extends JFrame{

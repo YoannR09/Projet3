@@ -13,22 +13,18 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
-import fr.yoannroche.projet3.plusmoins.model.DuelPlusMoinsModel;
 
 
 
 public class ChallengerPlusMoins extends JFrame{
 
-	private static Generateur code = new Generateur();
 	private static final Logger logger = LogManager.getLogger();
 	private int nombreClick =0;
 	private static String tentatives;
@@ -78,7 +74,10 @@ public class ChallengerPlusMoins extends JFrame{
 	}
 
 	private void initCadreDev(boolean modeDev) {
-		if(modeDev==true) {
+		ResourceBundle reglage = ResourceBundle.getBundle("Config");
+		String devStatus = reglage.getString("dev");
+		int devMode = Integer.parseInt(devStatus);
+		if(devMode==1) {
 			JLabel codeSecret = new JLabel();
 			codeSecret.setFont(impact);
 			codeSecret.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
@@ -209,8 +208,8 @@ public class ChallengerPlusMoins extends JFrame{
 				nbreTen.setText("Nombre de tentatives : "+nbreTentative);
 				ChallengerPlusMoinsModel.chechTentative(nbreTentative,contentPane);
 				nombreClick = 0;
-				
-				
+
+
 			}  
 		});
 		supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));

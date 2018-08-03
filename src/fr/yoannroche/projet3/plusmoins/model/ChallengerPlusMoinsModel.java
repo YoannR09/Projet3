@@ -3,15 +3,12 @@ package fr.yoannroche.projet3.plusmoins.model;
 import java.awt.Font;
 import java.util.ResourceBundle;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import fr.yoannroche.projet3.Generateur;
-import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.gagner.VictoirePlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.perdu.PerduPlusMoins;
 
@@ -84,7 +81,7 @@ public class ChallengerPlusMoinsModel {
 		int tentatives = Integer.parseInt(tentative);
 
 		if(nbreTentative==tentatives) {
-			PerduPlusMoins jop2 = new PerduPlusMoins(null, "Perdu",nombreString,contentPane);
+			new PerduPlusMoins(null, "Perdu",nombreString,contentPane);
 		}
 
 	}
@@ -103,15 +100,13 @@ public class ChallengerPlusMoinsModel {
 	}
 	public static void okClick(JTextField proposition, JLabel tentative, JLabel infosTentative,JPanel contentPane, JPanel blocProposition,int nbreTentative) {
 		if(proposition.getText().length()<nombreString.length()) {
-			JOptionPane joperreur = new JOptionPane(); // Si la personne décide de ne pas utiliser le clavier et dépasse la longueur du code secret
-			joperreur.showMessageDialog(null,"Votre code est trop court !!","Erreur",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,"Votre code est trop court !!","Erreur",JOptionPane.ERROR_MESSAGE);
 			proposition.setText("");
 			blocProposition.setVisible(true);
 
 		}
 		else if(proposition.getText().length()>nombreString.length()) {
-			JOptionPane joperreur = new JOptionPane(); // Si la personne décide de ne pas utiliser le clavier et la longueur du code tapé et inférieur au code secret
-			joperreur.showMessageDialog(null,"Votre code est trop long !!","Erreur",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,"Votre code est trop long !!","Erreur",JOptionPane.ERROR_MESSAGE);
 			proposition.setText("");
 			blocProposition.setVisible(true);
 
@@ -126,7 +121,7 @@ public class ChallengerPlusMoinsModel {
 			blocProposition.setVisible(true);
 		}
 		if(tentative.getText().equals(nombreString)) {
-			VictoirePlusMoins jop2 = new VictoirePlusMoins(null, "Gagner",nombreString,contentPane);
+			new VictoirePlusMoins(null, "Gagner",nombreString,contentPane);
 		}
 	}
 }

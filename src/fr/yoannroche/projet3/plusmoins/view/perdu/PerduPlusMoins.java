@@ -1,6 +1,5 @@
 package fr.yoannroche.projet3.plusmoins.view.perdu;
 
-import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;

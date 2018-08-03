@@ -1,7 +1,6 @@
 package fr.yoannroche.projet3.mastermind.view;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -15,11 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import fr.yoannroche.projet3.mastermind.control.ControlChallenger;
-import fr.yoannroche.projet3.mastermind.model.CodeCacher;
 import fr.yoannroche.projet3.mastermind.model.ModelChallenger;
-import fr.yoannroche.projet3.mastermind.model.Reglage;
-import fr.yoannroche.projet3.mastermind.view.Duel.SourisListener;
 
 public class Challenger extends JFrame {
 
@@ -52,12 +47,10 @@ public class Challenger extends JFrame {
 	
 	JButton [] button = new JButton[clavier.length];
 	private JButton bouton[];
-	private Component test;
 	private int tentative= 0;
 	
 	private int nbreCases = 0;
 	private int essaie = 0;
-	private Reglage reglage = Reglage(nbreCases,essaie);
 
 	public Challenger() {
 		this.setTitle("Challenger");
@@ -72,11 +65,6 @@ public class Challenger extends JFrame {
 		initBlocDroit();
 		initBlocProposition();
 		initBlocTest();
-	}
-
-	private Reglage Reglage(int nbreCases2, int essaie2) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	private void initRegle() {

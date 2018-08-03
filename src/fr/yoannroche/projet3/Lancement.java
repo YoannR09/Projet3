@@ -14,11 +14,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
-import fr.yoannroche.projet3.mastermind.model.Reglage;
 import fr.yoannroche.projet3.mastermind.view.FenetreMenuMaster;
 import fr.yoannroche.projet3.mastermind.view.RegleMastermind;
 import fr.yoannroche.projet3.plusmoins.view.FenetreMenuPlusMoins;
@@ -43,7 +41,6 @@ public class Lancement extends JFrame{
 	Font impact2 = new Font ("impact", 13,13);
 	private int tentative;
 	private int cases;
-	Reglage reglage = new Reglage(cases, tentative);
 
 
 	public Lancement() {

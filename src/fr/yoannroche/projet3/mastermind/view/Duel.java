@@ -16,11 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import fr.yoannroche.projet3.mastermind.model.ModelChallenger;
-import fr.yoannroche.projet3.mastermind.model.ModelDefenseur;
+import fr.yoannroche.projet3.Reglage;
 import fr.yoannroche.projet3.mastermind.model.ModelDuel;
-import fr.yoannroche.projet3.mastermind.model.Reglage;
-import fr.yoannroche.projet3.mastermind.view.Challenger.SourisListener;
 
 public class Duel extends JFrame{
 
@@ -64,7 +61,6 @@ public class Duel extends JFrame{
 	private JLabel proposition = new JLabel();
 	private int nbreCases = 0;
 	private int essaie = 0;
-	private Reglage reglage = new Reglage(nbreCases, essaie);
 	
 
 

@@ -1,10 +1,8 @@
 package fr.yoannroche.projet3.mastermind.view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -17,13 +15,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.RootPaneContainer;
 
-import fr.yoannroche.projet3.Lancement;
-import fr.yoannroche.projet3.mastermind.model.ModelChallenger;
+import fr.yoannroche.projet3.Reglage;
 import fr.yoannroche.projet3.mastermind.model.ModelDefenseur;
-import fr.yoannroche.projet3.mastermind.model.Reglage;
-import fr.yoannroche.projet3.mastermind.view.Challenger.SourisListener;
 
 public class Defenseur extends JFrame {
 
@@ -53,7 +47,6 @@ public class Defenseur extends JFrame {
 	static ImageIcon ordi0 = new ImageIcon("images/ordi0.png");
 	private int nbreCases = 0;
 	private int essaie = 0;
-	private Reglage reglage = new Reglage(nbreCases,essaie );
 	JButton retour = new JButton("Retour");
 
 	public Defenseur() {

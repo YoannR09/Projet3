@@ -1,14 +1,12 @@
 package fr.yoannroche.projet3;
 
-import java.util.ArrayList;
+import java.util.ResourceBundle;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class Generateur {
 	
-	private static String tentative;
 	private static String bloc;
 	private int nombre;
 	private static final Logger logger = LogManager.getLogger();
@@ -17,9 +15,8 @@ public class Generateur {
 	public Generateur() {
 		
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		tentative = reglage.getString("tentatives");
+		reglage.getString("tentatives");
 		bloc = reglage.getString("cases");
-		int tentatives = Integer.parseInt(tentative);
 		int cases = Integer.parseInt(bloc);
 		initNombre(cases);
 		

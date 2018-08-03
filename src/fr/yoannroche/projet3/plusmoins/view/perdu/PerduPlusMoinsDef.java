@@ -17,7 +17,6 @@ import javax.swing.JPanel;
 
 import fr.yoannroche.projet3.Lancement;
 import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins;
-import fr.yoannroche.projet3.plusmoins.view.perdu.PerduPlusMoins.SourisListener;
 
 public class PerduPlusMoinsDef extends JDialog {
 
@@ -35,7 +34,6 @@ public class PerduPlusMoinsDef extends JDialog {
 	public PerduPlusMoinsDef(JFrame parent, String title,int nombreCoup2, JPanel contentPane2){
 
 		super(parent, title);
-
 		this.setSize(400, 110);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
@@ -43,25 +41,27 @@ public class PerduPlusMoinsDef extends JDialog {
 		this.getContentPane().add(contentPane);
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		this.contentPane2 = contentPane2;
-		this.nombreCoup = nombreCoup;
+		this.nombreCoup = nombreCoup2;
 		
 		initText();
 		initCadre();
 	}
 
 	private void initText() {
+		
 		JPanel cadreText = new JPanel();
 		cadreText.setPreferredSize(new Dimension(380,25));
 		cadreText.setBackground(Color.DARK_GRAY);
 		JLabel text = new JLabel();
 		text.setFont(arial);
 		text.setForeground(Color.white);
-		text.setText("Vous avez perdu, l'ordinateur à réussi en "+nombreCoup+" tentatives");
+		text.setText("Vous avez perdu, l'ordinateur à réussi en "+(nombreCoup+1)+" tentatives");
 		cadreText.add(text);
 		contentPane.add(cadreText);
 	}
 
 	private void initCadre() {
+		
 		JPanel cadreBouton = new JPanel();
 		cadreBouton.setPreferredSize(new Dimension(230,35));
 		cadreBouton.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
@@ -71,10 +71,7 @@ public class PerduPlusMoinsDef extends JDialog {
 		relancer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				setVisible(false);
-				((JFrame) contentPane2.getTopLevelAncestor()).dispose(); ;
-
-
-
+				((JFrame) contentPane2.getTopLevelAncestor()).dispose(); 
 			}
 		});
 		relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
@@ -93,7 +90,6 @@ public class PerduPlusMoinsDef extends JDialog {
 		home.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		home.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		home.setForeground(Color.white);
-
 		cadreBouton.add(quitter);
 		quitter.addMouseListener(new SourisListener());
 		quitter.addActionListener(new ActionListener(){
@@ -106,17 +102,12 @@ public class PerduPlusMoinsDef extends JDialog {
 		quitter.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		quitter.setForeground(Color.white);
 		contentPane.add(cadreBouton);
-
 	}
 
 	class SourisListener implements MouseListener {
 
 
 		public void mouseClicked(MouseEvent arg0) {
-
-
-
-
 		}
 
 		public void mouseEntered(MouseEvent arg0) {
@@ -147,9 +138,7 @@ public class PerduPlusMoinsDef extends JDialog {
 		}
 
 		public void mousePressed(MouseEvent arg0) {
-
 		}
-
 		public void mouseReleased(MouseEvent arg0) {
 
 			relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));

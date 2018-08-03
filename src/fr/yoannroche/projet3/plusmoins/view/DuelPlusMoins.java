@@ -14,15 +14,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
 import fr.yoannroche.projet3.plusmoins.model.DuelPlusMoinsModel;
-import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins.SourisListener;
-import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins.SourisListener2;
 
 public class DuelPlusMoins extends JFrame{
 
@@ -32,10 +29,9 @@ public class DuelPlusMoins extends JFrame{
 	private JButton ok = new JButton(" Ok ");
 	private JButton fin = new JButton(" Ok ");
 	private JButton refresh = new JButton("⟲");
-	private static String tentatives;
 	private static String bloc;
 	private JPanel cadreJ = new JPanel();
-	JPanel cadreOrdi = new JPanel();
+	private JPanel cadreOrdi = new JPanel();
 	private JPanel blocProposition = new JPanel();
 	private JPanel blocTest = new JPanel();
 	private JLabel tentative = new JLabel();
@@ -54,7 +50,6 @@ public class DuelPlusMoins extends JFrame{
 	private JLabel infosTentative = new JLabel();
 	private JLabel indiceDev = new JLabel();
 	private int nombreClick = 0;
-	private int nombreCoup = 0;
 	Font impact = new Font ("impact", 17,17);
 	Font arial = new Font ("arial", 12,12);
 	Font arial2 = new Font ("arial", 10,10);
@@ -72,7 +67,7 @@ public class DuelPlusMoins extends JFrame{
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		tentatives = reglage.getString("tentatives");
+		reglage.getString("tentatives");
 		bloc = reglage.getString("cases");
 
 		initRegle();
@@ -87,12 +82,14 @@ public class DuelPlusMoins extends JFrame{
 	}
 
 	private void initCadreDev(boolean modeDev) {
-		if(modeDev==true) {
+		ResourceBundle reglage = ResourceBundle.getBundle("Config");
+		String devStatus = reglage.getString("dev");
+		int devMode = Integer.parseInt(devStatus);
+		if(devMode==1) {
 			JLabel codeSecret = new JLabel();
 			codeSecret.setFont(arial2);
 			codeSecret.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
 			codeSecret.setText("");
-			JPanel cadreDev = new JPanel();
 			JLabel text = new JLabel();
 			text.setText("Code secret de l'ordinateur :");
 			text.setFont(arial2);
@@ -278,7 +275,6 @@ public class DuelPlusMoins extends JFrame{
 		blocRegle.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		blocRegle.setPreferredSize(new Dimension(500,40));
 		JLabel regle = new JLabel();
-		int tentativeInt = Integer.parseInt(tentatives);
 		int casesInt = Integer.parseInt(bloc);
 		regle.setText(" Le plus rapide à trouver le code secret à "+ casesInt +" chiffres de l'autre gagne.");
 		regle.setFont(arial);
@@ -448,10 +444,10 @@ public class DuelPlusMoins extends JFrame{
 
 		}
 		public void mouseEntered(MouseEvent arg0) {
-			((JButton)arg0.getSource()).setBorder(BorderFactory.createMatteBorder(0, 2, 0, 2,Color.orange));
+			((JButton)arg0.getSource()).setBackground(Color.GRAY);
 		}
 		public void mouseExited(MouseEvent arg0) {
-			((JButton)arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.black));
+			((JButton)arg0.getSource()).setBackground(Color.DARK_GRAY);
 
 		}
 		public void mousePressed(MouseEvent arg0) {

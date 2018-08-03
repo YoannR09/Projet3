@@ -29,11 +29,6 @@ public class ModelDuel {
 		ArrayList<Integer> tableau = code.getTableauChiffre();
 		
 		
-		char[] charDuTableau = proposition.toCharArray();
-		
-		
-
-		
 		System.out.println(tableau);
 		System.out.println(tentative);
 		

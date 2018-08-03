@@ -2,7 +2,6 @@ package fr.yoannroche.projet3.plusmoins.model;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -30,7 +29,6 @@ public class DuelPlusMoinsModel {
 	static int nombreErreur =0;
 	static int gagner =0;
 	static int info;
-	private static String bloc;
 	static int cases = 4;
 	static char tabProp[] = new char [cases];
 	static char tabMin [] = new char [cases];
@@ -64,13 +62,11 @@ public class DuelPlusMoinsModel {
 
 	public static void okClick(JTextField proposition, JLabel codeSecret, JLabel tentative, JLabel infosTentative,JPanel contentPane,JTextArea dialog, JLabel indiceDev, JPanel cadreJ, JPanel cadreOrdi, JButton ok, JButton fin) {
 		if(proposition.getText().length()<nombreString.length()) {
-			JOptionPane joperreur = new JOptionPane(); // Si la personne décide de ne pas utiliser le clavier et dépasse la longueur du code secret
-			joperreur.showMessageDialog(null,"Votre code est trop court !!","Erreur",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,"Votre code est trop court !!","Erreur",JOptionPane.ERROR_MESSAGE);
 		
 		}
 		else if(proposition.getText().length()>nombreString.length()) {
-			JOptionPane joperreur = new JOptionPane(); // Si la personne décide de ne pas utiliser le clavier et la longueur du code tapé et inférieur au code secret
-			joperreur.showMessageDialog(null,"Votre code est trop long !!","Erreur",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,"Votre code est trop long !!","Erreur",JOptionPane.ERROR_MESSAGE);
 			
 		}
 		else if(codeSecret.getText().length()==nombreString.length()) {
@@ -93,7 +89,7 @@ public class DuelPlusMoinsModel {
 			ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
 		}
 		if(tentative.getText().equals(nombreString)) {
-			VictoirePlusMoins jop2 = new VictoirePlusMoins(null, "Gagner",nombreString,contentPane);
+			new VictoirePlusMoins(null, "Gagner",nombreString,contentPane);
 		}
 	}
 
@@ -129,7 +125,7 @@ public class DuelPlusMoinsModel {
 
 		if(proposition.equals(codeSecret2)){
 			++gagner;
-			PerduPlusMoinsDef perd = new PerduPlusMoinsDef(null, codeSecret2, cases, null );
+			new PerduPlusMoinsDef(null, codeSecret2, cases, null);
 		}
 	}
 	public static void tour0(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev) {
@@ -273,8 +269,7 @@ public class DuelPlusMoinsModel {
 			++nombreErreur;
 			fin.setEnabled(true);
 			fin.setBackground(Color.getHSBColor(0.154f, 0.85f, 0.94f));
-			JOptionPane joperreur = new JOptionPane(); // Si la personne décide de ne pas utiliser le clavier et la longueur du code tapé et inférieur au code secret
-			joperreur.showMessageDialog(null,"Les indices entrés ne sont pas bons !!","Erreur",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,"Les indices entrés ne sont pas bons !!","Erreur",JOptionPane.ERROR_MESSAGE);
 		}
 		else if(tentativeIA.getText().equals(indiceDev.getText())) {
 			ok.setEnabled(true);
