@@ -416,6 +416,9 @@ public class DuelPlusMoins extends JFrame{
 	class SourisListener2 implements MouseListener {
 
 		public void mouseClicked(MouseEvent arg0) {
+			if(nombreClick==0) {
+				supprimer.doClick();
+			}
 			char entrer = ((JButton)arg0.getSource()).getText().charAt(0);
 			proposition.setText(proposition.getText()+entrer);
 			nombreClick++;
@@ -438,6 +441,9 @@ public class DuelPlusMoins extends JFrame{
 	class SourisListener3 implements MouseListener {
 
 		public void mouseClicked(MouseEvent arg0) {
+			if(nombreClick==0) {
+				refresh.doClick();
+			}
 			char entrer = ((JButton)arg0.getSource()).getText().charAt(0);
 			tentativeIA.setText(tentativeIA.getText()+entrer);
 			nombreClick++;

@@ -63,17 +63,17 @@ public class DefenseurPlusMoinsModel {
 		char tabCode[] = codeCache.toCharArray();
 
 		if(nbreTour2==0) {
-			tour0(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev);
+			tour0(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev,contentPane);
 		}
 		else if(nbreTour2==1) {
-			tour1(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev);
+			tour1(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev,contentPane);
 		}
 
 		else if(nbreTour2==2){
-			tour2(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev);
+			tour2(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev,contentPane);
 		}
 		else if(nbreTour2>=3){
-			tour3etPlus(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev);
+			tour3etPlus(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev,contentPane);
 		}
 	}
 
@@ -100,12 +100,10 @@ public class DefenseurPlusMoinsModel {
 		if(proposition.getText().length()<cases) {
 			JOptionPane.showMessageDialog(null,"Votre code est trop court !!","Erreur",JOptionPane.ERROR_MESSAGE);
 			proposition.setText("");
-			blocProposition.setVisible(true);
 		}
 		else if(proposition.getText().length()>cases) {
 			JOptionPane.showMessageDialog(null,"Votre code est trop long !!","Erreur",JOptionPane.ERROR_MESSAGE);
 			proposition.setText("");
-			blocProposition.setVisible(true);
 		}
 		else if(proposition.getText().length()==cases) {
 			ok.setEnabled(false);
@@ -114,9 +112,9 @@ public class DefenseurPlusMoinsModel {
 			proposition.setText("");
 			ordi.setVisible(true);	
 			image.setIcon(ordi1);
-			DefenseurPlusMoinsModel.tentativeOrdi(tentativeOrdi,codeSecret,nombreCoup,dialog, contentPane, image,nbreTour,indiceDev);
+			DefenseurPlusMoinsModel.tentativeOrdi(tentativeOrdi,codeSecret,nombreCoup,dialog,contentPane,image,nbreTour,indiceDev);
 			fin.setEnabled(true);
-		    fin.setBackground(Color.getHSBColor(0.154f, 0.85f, 0.94f));
+			fin.setBackground(Color.getHSBColor(0.154f, 0.85f, 0.94f));
 		}
 
 	}
@@ -127,27 +125,28 @@ public class DefenseurPlusMoinsModel {
 	 * @param contentPane
 	 * @param codeSecret
 	 */
-	public static void chechTentative(int nombreCoup,JPanel contentPane,String codeSecret, JLabel image) {
+	public static void chechTentative(int nombreCoup,JPanel contentPane,String codeSecret) {
 
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
 		tentative = reglage.getString("tentatives");
 		int tentatives = Integer.parseInt(tentative);
 
-		if(nombreCoup==tentatives) {
-			image.setIcon(ordi8);
-			new VictoirePlusMoinsDef(null,"Gagner", codeSecret, contentPane,nombreCoup);
+		if(gagner==0) {
+			if((nbreTour+1)==tentatives) {
+				new VictoirePlusMoinsDef(null,"Gagner", codeSecret,contentPane,nombreCoup);
+			}
 		}
-
 	}
 	/**
 	 * Compare la proposition de l'ordi au code secret.
 	 * @param codeSecret
 	 * @param codeSecret2
 	 */
-	public static void checkWord(String proposition,String codeSecret2) {
+	public static void checkWord(String proposition,String codeSecret2,JPanel contentPane) {
 
-		if(proposition.equals(codeSecret2)){	
-			new PerduPlusMoinsDef(null, "Perdu", nbreTour, null);
+		if(proposition.equals(codeSecret2)){
+			++gagner;
+			new PerduPlusMoinsDef(null, "Perdu",nbreTour,contentPane);
 		}
 	}
 
@@ -160,7 +159,7 @@ public class DefenseurPlusMoinsModel {
 		String s = ""+i;
 		return s.charAt(0);
 	}
-	public static void tour0(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev) {
+	public static void tour0(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
 		for(int o=0;o<cases;o++) { //Création de tableaux max, min et proposition.
 
 			tabMin[o]=intToChar(0);
@@ -181,11 +180,12 @@ public class DefenseurPlusMoinsModel {
 		resultProp = new String(tabProp);
 		dialog.setFont(arial2);
 		dialog.setText(dialog.getText()+" Je me lance : "+resultProp+" ?!\n");
-		checkWord(resultProp,codeCache);
+		checkWord(resultProp,codeCache,contentPane);
+		chechTentative(nombreCoup,contentPane,codeCache);
 	}
 
 
-	public static void tour1(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev) {
+	public static void tour1(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
 
 		for(int i=0;i<codeCache.length();i++) {
 
@@ -231,10 +231,11 @@ public class DefenseurPlusMoinsModel {
 		}
 
 		dialog.setText(dialog.getText()+" C'est peut être : "+resultProp+"\n");
-		checkWord(resultProp,codeCache);
+		checkWord(resultProp,codeCache,contentPane);
+		chechTentative(nombreCoup,contentPane,codeCache);
 	}
 
-	public static void tour2(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev) {
+	public static void tour2(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
 		for(int i=0; i<codeCache.length();i++) {
 			if(tabProp[i]!=tabCode[i]) {
 				resultMax = Character.getNumericValue(tabMin[i]);
@@ -258,10 +259,11 @@ public class DefenseurPlusMoinsModel {
 		}
 
 		dialog.setText(dialog.getText()+" Ou alors peut être : "+resultProp+"\n");
-		checkWord(resultProp,codeCache);
+		checkWord(resultProp,codeCache,contentPane);
+		chechTentative(nombreCoup,contentPane,codeCache);
 	}
 
-	public static void tour3etPlus(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev) {
+	public static void tour3etPlus(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
 
 		for(int i=0; i<codeCache.length();i++) {
 			if(tabProp[i]>tabCode[i]) {
@@ -293,7 +295,8 @@ public class DefenseurPlusMoinsModel {
 		resultProp = new String(tabProp);
 
 		dialog.setText(dialog.getText()+" Hum : "+resultProp+" ? \n");	
-		checkWord(resultProp,codeCache);
+		checkWord(resultProp,codeCache,contentPane);
+		chechTentative(nombreCoup,contentPane,codeCache);
 	}
 	public static void finClick(JLabel tentativeOrdi, JLabel codeSecret, int nombreCoup, JTextArea dialog,JPanel contentPane,JLabel image, int nbreTour2, JLabel indiceDev,JLabel tentativeIA,JButton fin,JPanel cadreOrdi) {
 		if(!tentativeIA.getText().equals(indiceDev.getText())) {

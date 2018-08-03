@@ -385,6 +385,9 @@ public class DefenseurPlusMoins extends JFrame{
 	class SourisListener3 implements MouseListener {
 
 		public void mouseClicked(MouseEvent arg0) {
+			if(nombreClick==0) {
+				refresh.doClick();
+			}
 			char entrer = ((JButton)arg0.getSource()).getText().charAt(0);
 			tentativeIA.setText(tentativeIA.getText()+entrer);
 			nombreClick++;

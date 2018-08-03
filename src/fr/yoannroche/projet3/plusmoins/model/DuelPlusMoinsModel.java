@@ -63,11 +63,10 @@ public class DuelPlusMoinsModel {
 	public static void okClick(JTextField proposition, JLabel codeSecret, JLabel tentative, JLabel infosTentative,JPanel contentPane,JTextArea dialog, JLabel indiceDev, JPanel cadreJ, JPanel cadreOrdi, JButton ok, JButton fin) {
 		if(proposition.getText().length()<nombreString.length()) {
 			JOptionPane.showMessageDialog(null,"Votre code est trop court !!","Erreur",JOptionPane.ERROR_MESSAGE);
-		
+
 		}
 		else if(proposition.getText().length()>nombreString.length()) {
-			JOptionPane.showMessageDialog(null,"Votre code est trop long !!","Erreur",JOptionPane.ERROR_MESSAGE);
-			
+			JOptionPane.showMessageDialog(null,"Votre code est trop long !!","Erreur",JOptionPane.ERROR_MESSAGE);	
 		}
 		else if(codeSecret.getText().length()==nombreString.length()) {
 			tentativeJoueur(tentative, infosTentative,proposition);
@@ -77,9 +76,7 @@ public class DuelPlusMoinsModel {
 			++nbreTour;
 			proposition.setText("");
 			fin.setEnabled(true);
-			fin.setBackground(Color.getHSBColor(0.154f, 0.85f, 0.94f));
-			
-
+			fin.setBackground(Color.getHSBColor(0.154f, 0.85f, 0.94f));	
 		}
 		else {
 			codeSecret.setText(proposition.getText());
@@ -208,7 +205,7 @@ public class DuelPlusMoinsModel {
 				resultMax = Character.getNumericValue(tabMin[i]);
 				resultMin = Character.getNumericValue(tabMax[i]);
 				tabProp[i]= intToChar((int)(Math.random()*(resultMax - resultMin))+resultMin); 
-				
+
 				if(tabProp[i]>tabCode[i]) {    
 					indiceDev.setText(indiceDev.getText()+"-");
 				}
@@ -253,9 +250,9 @@ public class DuelPlusMoinsModel {
 			else if(tabProp[i]==tabCode[i]){
 				indiceDev.setText(indiceDev.getText()+"=");
 			}
-			
 
-		
+
+
 
 		}
 		resultProp = new String(tabProp);
