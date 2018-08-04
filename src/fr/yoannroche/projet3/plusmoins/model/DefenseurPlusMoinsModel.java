@@ -54,7 +54,6 @@ public class DefenseurPlusMoinsModel {
 	 */
 	public void tentativeOrdi(JLabel tentativeOrdi, JLabel codeSecret2, int nombreCoup, JTextArea dialog,JPanel contentPane,JLabel image, int nbreTour2, JLabel indiceDev) {
 
-
 		String codeCache = codeSecret2.getText();
 		char tabCode[] = codeCache.toCharArray();
 
@@ -72,7 +71,6 @@ public class DefenseurPlusMoinsModel {
 			tour3etPlus(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev,contentPane);
 		}
 	}
-
 
 	/**
 	 * Compare le texte écrit par le joueur si il est de bonne taille.
@@ -221,11 +219,11 @@ public class DefenseurPlusMoinsModel {
 					indiceDev.setText(indiceDev.getText()+"=");
 				}
 			}
-
+			else if(tabProp[i]==tabCode[i]) {
+				indiceDev.setText(indiceDev.getText()+"=");
+			}
 			resultProp = new String(tabProp);
-
 		}
-
 		dialog.setText(dialog.getText()+" C'est peut être : "+resultProp+"\n");
 		checkWord(resultProp,codeCache,contentPane);
 		chechTentative(nombreCoup,contentPane,codeCache);
@@ -319,5 +317,5 @@ public class DefenseurPlusMoinsModel {
 		if(nombreClick==cases) {
 			blocProposition.setVisible(false);
 		}
-}
+	}
 }

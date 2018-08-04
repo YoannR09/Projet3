@@ -264,6 +264,9 @@ public class DuelPlusMoinsModel {
 					indiceDev.setText(indiceDev.getText()+"=");
 				}
 			}
+			else if(tabProp[i]==tabCode[i]) {
+				indiceDev.setText(indiceDev.getText()+"=");
+			}
 
 			resultProp = new String(tabProp);
 
