@@ -1,4 +1,4 @@
-package fr.yoannroche.projet3.plusmoins.view.perdu;
+package fr.yoannroche.projet3.plusmoins.view.gagner;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,25 +16,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fr.yoannroche.projet3.Lancement;
-import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.FenetreMenuPlusMoins;
 
-public class PerduPlusMoinsDef extends JDialog {
-
-	JPanel contentPane = new JPanel();
-	JPanel contentPane2;
-	JButton relancer = new JButton(" Relancer ");
-	JButton home = new JButton(" Menu ");
-	JButton quitter = new JButton(" Quitter ");
-	Font arial = new Font ("arial", 12,12);
-	String proposition;
-	ChallengerPlusMoins chal;
-	JLabel codeSecret;
-	int nombreCoup;
-
-	public PerduPlusMoinsDef(JFrame parent, String title,int nombreCoup2, JPanel contentPane2){
-
+public class VictoirePlusMoinsDuel extends JDialog {
+	
+	private JPanel contentPane = new JPanel();
+	private JPanel contentPane2;
+	private JButton relancer = new JButton(" Relancer ");
+	private JButton home = new JButton(" Menu ");
+	private JButton quitter = new JButton(" Quitter ");
+	private Font arial = new Font ("arial", 12,12);
+	
+	public VictoirePlusMoinsDuel(JFrame parent, String title,String proposition, JPanel contentPane2){
+		
 		super(parent, title);
+		
 		this.setSize(400, 110);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
@@ -42,79 +38,81 @@ public class PerduPlusMoinsDef extends JDialog {
 		this.getContentPane().add(contentPane);
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		this.contentPane2 = contentPane2;
-		this.nombreCoup = nombreCoup2;
-
 		initText();
 		initCadre();
 	}
 
 	private void initText() {
-
-		JPanel cadreText = new JPanel();
-		cadreText.setPreferredSize(new Dimension(380,25));
-		cadreText.setBackground(Color.DARK_GRAY);
-		JLabel text = new JLabel();
-		text.setFont(arial);
-		text.setForeground(Color.white);
-		text.setText("Vous avez perdu, l'ordinateur à réussi en "+(nombreCoup+1)+" tentatives");
-		cadreText.add(text);
-		contentPane.add(cadreText);
+	JPanel cadreText = new JPanel();
+	cadreText.setPreferredSize(new Dimension(380,25));
+	cadreText.setBackground(Color.DARK_GRAY);
+	JLabel text = new JLabel();
+	text.setFont(arial);
+	text.setForeground(Color.white);
+	text.setText("Vous avez gagné, l'ordinateur n'a pas été assez rapide");
+	cadreText.add(text);
+	contentPane.add(cadreText);
 	}
 
 	private void initCadre() {
-
-		JPanel cadreBouton = new JPanel();
-		cadreBouton.setPreferredSize(new Dimension(230,35));
-		cadreBouton.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
-		cadreBouton.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
-		cadreBouton.add(relancer);
-		relancer.addMouseListener(new SourisListener());
-		relancer.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent event){
-				setVisible(false);
-				((JFrame) contentPane2.getTopLevelAncestor()).dispose(); 
-				FenetreMenuPlusMoins fen = new FenetreMenuPlusMoins();
-				fen.setVisible(true);
-			}
-		});
-		relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
-		relancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
-		relancer.setForeground(Color.white);
-		cadreBouton.add(home);
-		home.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent event){
-				setVisible(false);
-				((JFrame) contentPane2.getTopLevelAncestor()).dispose();
-				Lancement menu = new Lancement();	
-				menu.setVisible(true);
-			}
-		});
-		home.addMouseListener(new SourisListener());
-		home.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
-		home.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
-		home.setForeground(Color.white);
-		cadreBouton.add(quitter);
-		quitter.addMouseListener(new SourisListener());
-		quitter.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent event){
-				setVisible(false);
-				((JFrame) contentPane2.getTopLevelAncestor()).dispose();
-			}
-		});
-		quitter.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
-		quitter.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
-		quitter.setForeground(Color.white);
-		contentPane.add(cadreBouton);
+	JPanel cadreBouton = new JPanel();
+	cadreBouton.setPreferredSize(new Dimension(230,35));
+	cadreBouton.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
+	cadreBouton.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
+	cadreBouton.add(relancer);
+	relancer.addMouseListener(new SourisListener());
+	relancer.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent event){
+		    setVisible(false);
+		    ((JFrame) contentPane2.getTopLevelAncestor()).dispose();
+		    FenetreMenuPlusMoins fen = new FenetreMenuPlusMoins();
+            fen.setVisible(true);
+		    
+			
+			
+		}
+	});
+	relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
+	relancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
+	relancer.setForeground(Color.white);
+	cadreBouton.add(home);
+	home.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent event){
+		    setVisible(false);
+		    ((JFrame) contentPane2.getTopLevelAncestor()).dispose();
+			Lancement menu = new Lancement();	
+			menu.setVisible(true);
+		}
+	});
+	home.addMouseListener(new SourisListener());
+	home.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
+	home.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
+	home.setForeground(Color.white);
+	
+	cadreBouton.add(quitter);
+	quitter.addMouseListener(new SourisListener());
+	quitter.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent event){
+			setVisible(false);
+			((JFrame) contentPane2.getTopLevelAncestor()).dispose();
+		}
+	});
+	quitter.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
+	quitter.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
+	quitter.setForeground(Color.white);
+	contentPane.add(cadreBouton);
+		
 	}
-
+	
 	class SourisListener implements MouseListener {
 
 
 		public void mouseClicked(MouseEvent arg0) {
+
 		}
 
 		public void mouseEntered(MouseEvent arg0) {
-
+			
 			if(arg0.getSource()==relancer) {
 				relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.54f));
 				relancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.34f)));
@@ -130,7 +128,7 @@ public class PerduPlusMoinsDef extends JDialog {
 		}
 
 		public void mouseExited(MouseEvent arg0) {
-
+			
 			relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 			relancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 			relancer.setForeground(Color.white);
@@ -141,7 +139,9 @@ public class PerduPlusMoinsDef extends JDialog {
 		}
 
 		public void mousePressed(MouseEvent arg0) {
+
 		}
+
 		public void mouseReleased(MouseEvent arg0) {
 
 			relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));

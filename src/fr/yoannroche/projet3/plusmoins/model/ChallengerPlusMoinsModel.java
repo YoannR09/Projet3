@@ -15,10 +15,10 @@ import fr.yoannroche.projet3.plusmoins.view.perdu.PerduPlusMoins;
 
 public class ChallengerPlusMoinsModel {
 
-	private static Generateur code = new Generateur();
-	private static String nombreString = Integer.toString(code.getNombre());
-	private static String tentative;
-	private static String bloc;
+	private Generateur code = new Generateur();
+	private String nombreString = Integer.toString(code.getNombre());
+	private String tentative;
+	private String bloc;
 	static JOptionPane jop1;
 	static JOptionPane jop2;
 	static Font arial2 = new Font ("arial", 10,10);
@@ -32,7 +32,7 @@ public class ChallengerPlusMoinsModel {
 	 * Dans ce cas le code secret s'affiche.
 	 * @param codeSecret
 	 */
-	public static void dev(JLabel codeSecret){
+	public void dev(JLabel codeSecret){
 		codeSecret.setText(nombreString);
 	}
 
@@ -43,7 +43,7 @@ public class ChallengerPlusMoinsModel {
 	 * @param infosTentative
 	 * @param proposition 
 	 */
-	public static void check(JLabel tentative, JLabel infosTentative) {
+	public void check(JLabel tentative, JLabel infosTentative) {
 		infosTentative.setText("");
 		String test=tentative.getText();
 
@@ -74,7 +74,7 @@ public class ChallengerPlusMoinsModel {
 	 * Méthode qui permet de vérifier si le joueur n'a pas dépassé le nombre de tentative.
 	 * @param nbreTentative
 	 */
-	public static void chechTentative(int nbreTentative,JPanel contentPane) {
+	public void chechTentative(int nbreTentative,JPanel contentPane) {
 
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
 		tentative = reglage.getString("tentatives");
@@ -87,7 +87,7 @@ public class ChallengerPlusMoinsModel {
 	}
 
 
-	public static void RangeWord(JPanel blocProposition, int nombreClick) {
+	public void RangeWord(JPanel blocProposition, int nombreClick) {
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
 		bloc = reglage.getString("cases");
 		int cases = Integer.parseInt(bloc); 
@@ -98,7 +98,7 @@ public class ChallengerPlusMoinsModel {
 
 
 	}
-	public static void okClick(JTextField proposition, JLabel tentative, JLabel infosTentative,JPanel contentPane, JPanel blocProposition,int nbreTentative) {
+	public void okClick(JTextField proposition, JLabel tentative, JLabel infosTentative,JPanel contentPane, JPanel blocProposition,int nbreTentative) {
 		if(proposition.getText().length()<nombreString.length()) {
 			JOptionPane.showMessageDialog(null,"Votre code est trop court !!","Erreur",JOptionPane.ERROR_MESSAGE);
 			proposition.setText("");

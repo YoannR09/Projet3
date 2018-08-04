@@ -19,7 +19,7 @@ import fr.yoannroche.projet3.Lancement;
 import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.FenetreMenuPlusMoins;
 
-public class PerduPlusMoinsDef extends JDialog {
+public class PerduPlusMoinsDuel extends JDialog {
 
 	JPanel contentPane = new JPanel();
 	JPanel contentPane2;
@@ -32,7 +32,7 @@ public class PerduPlusMoinsDef extends JDialog {
 	JLabel codeSecret;
 	int nombreCoup;
 
-	public PerduPlusMoinsDef(JFrame parent, String title,int nombreCoup2, JPanel contentPane2){
+	public PerduPlusMoinsDuel(JFrame parent, String title,String codeSecret, JPanel contentPane2){
 
 		super(parent, title);
 		this.setSize(400, 110);
@@ -42,7 +42,6 @@ public class PerduPlusMoinsDef extends JDialog {
 		this.getContentPane().add(contentPane);
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		this.contentPane2 = contentPane2;
-		this.nombreCoup = nombreCoup2;
 
 		initText();
 		initCadre();
@@ -56,7 +55,7 @@ public class PerduPlusMoinsDef extends JDialog {
 		JLabel text = new JLabel();
 		text.setFont(arial);
 		text.setForeground(Color.white);
-		text.setText("Vous avez perdu, l'ordinateur à réussi en "+(nombreCoup+1)+" tentatives");
+		text.setText("Vous avez perdu, l'ordinateur à trouvé plus rapidement que vous");
 		cadreText.add(text);
 		contentPane.add(cadreText);
 	}

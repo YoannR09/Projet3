@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import fr.yoannroche.projet3.Lancement;
 import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins;
+import fr.yoannroche.projet3.plusmoins.view.FenetreMenuPlusMoins;
 
 
 public class PerduPlusMoins extends JDialog {
@@ -29,7 +30,7 @@ public class PerduPlusMoins extends JDialog {
 	Font arial = new Font ("arial", 12,12);
 	String proposition;
 	ChallengerPlusMoins chal;
-	JLabel codeSecret;
+	private String code;
 
 	public PerduPlusMoins(JFrame parent, String title,String nombreString, JPanel contentPane2){
 
@@ -42,6 +43,7 @@ public class PerduPlusMoins extends JDialog {
 		this.getContentPane().add(contentPane);
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		this.contentPane2 = contentPane2;
+		this.code = nombreString;
 		
 		initText();
 		initCadre();
@@ -54,7 +56,7 @@ public class PerduPlusMoins extends JDialog {
 		JLabel text = new JLabel();
 		text.setFont(arial);
 		text.setForeground(Color.white);
-		text.setText("Vous avez perdu, le code secret était : "+codeSecret.getText());
+		text.setText("Vous avez perdu, le code secret était : "+code);
 		cadreText.add(text);
 		contentPane.add(cadreText);
 	}
@@ -69,9 +71,9 @@ public class PerduPlusMoins extends JDialog {
 		relancer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				setVisible(false);
-				((JFrame) contentPane2.getTopLevelAncestor()).dispose(); ;
-
-
+				((JFrame) contentPane2.getTopLevelAncestor()).dispose();
+                FenetreMenuPlusMoins fen = new FenetreMenuPlusMoins();
+                fen.setVisible(true);
 
 			}
 		});
@@ -82,7 +84,7 @@ public class PerduPlusMoins extends JDialog {
 		home.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				setVisible(false);
-				((JFrame) contentPane2.getTopLevelAncestor()).dispose() ;
+				((JFrame) contentPane2.getTopLevelAncestor()).dispose();
 				Lancement menu = new Lancement();	
 				menu.setVisible(true);
 			}

@@ -3,7 +3,6 @@ package fr.yoannroche.projet3.plusmoins.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -11,7 +10,6 @@ import java.awt.event.MouseListener;
 import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,9 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
 import fr.yoannroche.projet3.plusmoins.model.DefenseurPlusMoinsModel;
-import fr.yoannroche.projet3.plusmoins.model.DuelPlusMoinsModel;
 
 public class DefenseurPlusMoins extends JFrame{
 
@@ -59,7 +55,9 @@ public class DefenseurPlusMoins extends JFrame{
 	Font arial2 = new Font ("arial", 10,10);
 	static ImageIcon ordi0 = new ImageIcon("images/ordi0.png");
 	static int nombreCoup = 0;
+	int click=0;
 	int nombreTour = 0;
+	private DefenseurPlusMoinsModel def = new DefenseurPlusMoinsModel();
 
 
 	public DefenseurPlusMoins() {
@@ -88,16 +86,10 @@ public class DefenseurPlusMoins extends JFrame{
 		String devStatus = reglage.getString("dev");
 		int devMode = Integer.parseInt(devStatus);
 		if(devMode==1) {
-			JLabel codeSecret = new JLabel();
-			codeSecret.setFont(arial2);
-			codeSecret.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
-			codeSecret.setText("");
 			JLabel text2 = new JLabel();
 			text2.setText(" Les indices à indiquer sont :");
 			text2.setFont(arial2);
 			text2.setForeground(Color.WHITE);
-			espaceDev.add(codeSecret);
-			DuelPlusMoinsModel.dev(codeSecret);
 			espaceDev.add(text2);
 			espaceDev.add(indiceDev);
 			indiceDev.setForeground(Color.orange);
@@ -156,7 +148,7 @@ public class DefenseurPlusMoins extends JFrame{
 		contentPane.add(cadreOrdi);
 		this.indi = new JButton[3];
 		int i = 0;
-		for(String c : indice){
+		for(@SuppressWarnings("unused") String c : indice){
 			this.indi[i] = new JButton(indice[i]);
 			indi[i].setPreferredSize(new Dimension(20,20));
 			indi[i].setBackground(Color.DARK_GRAY);
@@ -208,7 +200,7 @@ public class DefenseurPlusMoins extends JFrame{
 		ok.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
 			public void actionPerformed(ActionEvent event){ 
 
-				DefenseurPlusMoinsModel.okClick(proposition,codeSecret,contentPane,ordi,blocProposition,image,tentativeOrdi,dialog, indiceDev,ok,fin);	
+				def.okClick(proposition,codeSecret,contentPane,ordi,blocProposition,image,tentativeOrdi,dialog, indiceDev,ok,fin);	
 				nombreClick = 0;
 			}  
 		});
@@ -230,7 +222,7 @@ public class DefenseurPlusMoins extends JFrame{
 			public void actionPerformed(ActionEvent event){ 
 				
 				
-			DefenseurPlusMoinsModel.finClick(tentativeOrdi,codeSecret,nombreCoup,dialog,contentPane,image,nombreTour,indiceDev,tentativeIA,fin,cadreOrdi);
+			def.finClick(tentativeOrdi,codeSecret,nombreCoup,dialog,contentPane,image,nombreTour,indiceDev,tentativeIA,fin,cadreOrdi);
 			
 			}  
 		});
@@ -363,10 +355,13 @@ public class DefenseurPlusMoins extends JFrame{
 	class SourisListener2 implements MouseListener {
 
 		public void mouseClicked(MouseEvent arg0) {
+			if(click==0) {
+				supprimer.doClick();
+			}
 			char entrer = ((JButton)arg0.getSource()).getText().charAt(0);
 			proposition.setText(proposition.getText()+entrer);
-			nombreClick++;
-			ChallengerPlusMoinsModel.RangeWord(blocProposition,nombreClick);
+			click++;
+			def.RangeWord(blocProposition,nombreClick);
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			((JButton)arg0.getSource()).setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0,Color.white));

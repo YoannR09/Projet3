@@ -3,7 +3,6 @@ package fr.yoannroche.projet3.plusmoins.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -13,9 +12,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,10 +21,6 @@ import javax.swing.JTextArea;
 
 import fr.yoannroche.projet3.Lancement;
 import fr.yoannroche.projet3.Reglage;
-import fr.yoannroche.projet3.mastermind.view.Challenger;
-import fr.yoannroche.projet3.mastermind.view.Defenseur;
-import fr.yoannroche.projet3.mastermind.view.Duel;
-import javafx.scene.control.CheckBox;
 
 
 public class FenetreMenuPlusMoins extends JFrame{
@@ -137,10 +130,6 @@ public class FenetreMenuPlusMoins extends JFrame{
 		lancer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPaneMenu.getTopLevelAncestor()).dispose() ;
-				if(dev.isSelected()==true) {
-					modeDev=true;
-				}
-
 				if(mode1.isSelected()==true) {
 					ChallengerPlusMoins chal = new ChallengerPlusMoins(modeDev);	
 					chal.setVisible(true);

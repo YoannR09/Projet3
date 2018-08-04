@@ -25,6 +25,7 @@ import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
 
 public class ChallengerPlusMoins extends JFrame{
 
+	ChallengerPlusMoinsModel chal = new ChallengerPlusMoinsModel();
 	private static final Logger logger = LogManager.getLogger();
 	private int nombreClick =0;
 	private static String tentatives;
@@ -46,6 +47,7 @@ public class ChallengerPlusMoins extends JFrame{
 	private JButton bouton[];
 	JLabel nbreTen = new JLabel();
 	JPanel espace2 = new JPanel ();
+	Font arial2 = new Font ("arial", 10,10);
 
 	public ChallengerPlusMoins() {}
 
@@ -79,13 +81,13 @@ public class ChallengerPlusMoins extends JFrame{
 		int devMode = Integer.parseInt(devStatus);
 		if(devMode==1) {
 			JLabel codeSecret = new JLabel();
-			codeSecret.setFont(impact);
+			codeSecret.setFont(arial2);
 			codeSecret.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
 			codeSecret.setText("");
 			JPanel cadreDev = new JPanel();
 			JLabel text = new JLabel();
 			text.setText("Code secret : ");
-			text.setFont(arial);
+			text.setFont(arial2);
 			text.setForeground(Color.WHITE);
 			cadreDev.add(codeSecret);
 			cadreDev.setPreferredSize(new Dimension(50,15));
@@ -93,7 +95,7 @@ public class ChallengerPlusMoins extends JFrame{
 			espace2.add(cadreDev);
 			espace2.add(text);
 			espace2.add(codeSecret);
-			ChallengerPlusMoinsModel.dev(codeSecret);
+			chal.dev(codeSecret);
 		}
 
 	}
@@ -198,7 +200,7 @@ public class ChallengerPlusMoins extends JFrame{
 			public void actionPerformed(ActionEvent event){ 
 
 				int cases = Integer.parseInt(bloc);
-				ChallengerPlusMoinsModel.okClick(proposition, tentative, infosTentative,contentPane,blocProposition,nbreTentative);
+				chal.okClick(proposition, tentative, infosTentative,contentPane,blocProposition,nbreTentative);
 				logger.info("Récuperation de la proposition :"+proposition.getText());
 				++nbreTentative;
 				if(tentative.getText().length()!=cases) {
@@ -206,7 +208,7 @@ public class ChallengerPlusMoins extends JFrame{
 					nbreTentative=0;
 				}
 				nbreTen.setText("Nombre de tentatives : "+nbreTentative);
-				ChallengerPlusMoinsModel.chechTentative(nbreTentative,contentPane);
+				chal.chechTentative(nbreTentative,contentPane);
 				nombreClick = 0;
 
 
@@ -300,7 +302,7 @@ public class ChallengerPlusMoins extends JFrame{
 			char entrer = ((JButton)arg0.getSource()).getText().charAt(0);
 			proposition.setText(proposition.getText()+entrer);
 			nombreClick++;
-			ChallengerPlusMoinsModel.RangeWord(blocProposition,nombreClick);
+			chal.RangeWord(blocProposition,nombreClick);
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			((JButton)arg0.getSource()).setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0,Color.white));

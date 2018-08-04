@@ -19,28 +19,24 @@ import fr.yoannroche.projet3.plusmoins.view.perdu.PerduPlusMoinsDef;
 
 public class DefenseurPlusMoinsModel {
 
-	private static String bloc;
-	private static int nombreCoup =0;
+	private String bloc;
+	private int nombreCoup =0;
 
-	private static String tentative;
-	static int resultMax;
-	static int resultMin;
-
-	static Font impact = new Font ("impact", 17,17);
+	private String tentative;
+	private int resultMax;
+	private int resultMin;
 	Font arial = new Font ("arial", 12,12);
-	static Font arial2 = new Font ("arial", 10,10);
-	static ImageIcon ordi1 = new ImageIcon("images/0.png");
-	static ImageIcon ordi8 = new ImageIcon("images/ordi8.png");
-	static int info;
-	static String resultProp;
-	private static int nombreErreur;
-	static int nbreTour =0;
-	static int gagner =0;
-	static int cases = 4;
-	static char tabProp[] = new char [cases];
-	static char tabMin [] = new char [cases];
-	static char tabMax[] = new char [cases];
-	static Icon[] tableauImg = new Icon[7];
+	private Font arial2 = new Font ("arial", 10,10);
+	private ImageIcon ordi1 = new ImageIcon("images/0.png");
+	private int info;
+	private String resultProp;
+	private int nbreTour =0;
+	private int gagner =0;
+	private int cases = 4;
+	private char tabProp[] = new char [cases];
+	private char tabMin [] = new char [cases];
+	private char tabMax[] = new char [cases];
+	private Icon[] tableauImg = new Icon[7];
 
 	public DefenseurPlusMoinsModel() {}
 
@@ -56,7 +52,7 @@ public class DefenseurPlusMoinsModel {
 	 * @param nbreTour2 
 	 * @param indiceDev 
 	 */
-	public static void tentativeOrdi(JLabel tentativeOrdi, JLabel codeSecret2, int nombreCoup, JTextArea dialog,JPanel contentPane,JLabel image, int nbreTour2, JLabel indiceDev) {
+	public void tentativeOrdi(JLabel tentativeOrdi, JLabel codeSecret2, int nombreCoup, JTextArea dialog,JPanel contentPane,JLabel image, int nbreTour2, JLabel indiceDev) {
 
 
 		String codeCache = codeSecret2.getText();
@@ -91,7 +87,7 @@ public class DefenseurPlusMoinsModel {
 	 * @param tentativeOrdi
 	 * @param dialog
 	 */
-	public static void okClick(JTextField proposition, JLabel codeSecret, JPanel contentPane, JPanel ordi,JPanel blocProposition, JLabel image, JLabel tentativeOrdi, JTextArea dialog,JLabel indiceDev,JButton ok,JButton fin) {
+	public void okClick(JTextField proposition, JLabel codeSecret, JPanel contentPane, JPanel ordi,JPanel blocProposition, JLabel image, JLabel tentativeOrdi, JTextArea dialog,JLabel indiceDev,JButton ok,JButton fin) {
 
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
 		bloc = reglage.getString("cases");
@@ -112,7 +108,7 @@ public class DefenseurPlusMoinsModel {
 			proposition.setText("");
 			ordi.setVisible(true);	
 			image.setIcon(ordi1);
-			DefenseurPlusMoinsModel.tentativeOrdi(tentativeOrdi,codeSecret,nombreCoup,dialog,contentPane,image,nbreTour,indiceDev);
+			tentativeOrdi(tentativeOrdi,codeSecret,nombreCoup,dialog,contentPane,image,nbreTour,indiceDev);
 			fin.setEnabled(true);
 			fin.setBackground(Color.getHSBColor(0.154f, 0.85f, 0.94f));
 		}
@@ -125,7 +121,7 @@ public class DefenseurPlusMoinsModel {
 	 * @param contentPane
 	 * @param codeSecret
 	 */
-	public static void chechTentative(int nombreCoup,JPanel contentPane,String codeSecret) {
+	public void chechTentative(int nombreCoup,JPanel contentPane,String codeSecret) {
 
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
 		tentative = reglage.getString("tentatives");
@@ -142,7 +138,7 @@ public class DefenseurPlusMoinsModel {
 	 * @param codeSecret
 	 * @param codeSecret2
 	 */
-	public static void checkWord(String proposition,String codeSecret2,JPanel contentPane) {
+	public void checkWord(String proposition,String codeSecret2,JPanel contentPane) {
 
 		if(proposition.equals(codeSecret2)){
 			++gagner;
@@ -155,11 +151,11 @@ public class DefenseurPlusMoinsModel {
 	 * @param i
 	 * @return
 	 */
-	private static char intToChar(int i) {
+	private char intToChar(int i) {
 		String s = ""+i;
 		return s.charAt(0);
 	}
-	public static void tour0(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
+	public void tour0(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
 		for(int o=0;o<cases;o++) { //Création de tableaux max, min et proposition.
 
 			tabMin[o]=intToChar(0);
@@ -185,7 +181,7 @@ public class DefenseurPlusMoinsModel {
 	}
 
 
-	public static void tour1(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
+	public void tour1(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
 
 		for(int i=0;i<codeCache.length();i++) {
 
@@ -235,7 +231,7 @@ public class DefenseurPlusMoinsModel {
 		chechTentative(nombreCoup,contentPane,codeCache);
 	}
 
-	public static void tour2(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
+	public void tour2(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
 		for(int i=0; i<codeCache.length();i++) {
 			if(tabProp[i]!=tabCode[i]) {
 				resultMax = Character.getNumericValue(tabMin[i]);
@@ -263,7 +259,7 @@ public class DefenseurPlusMoinsModel {
 		chechTentative(nombreCoup,contentPane,codeCache);
 	}
 
-	public static void tour3etPlus(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
+	public void tour3etPlus(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
 
 		for(int i=0; i<codeCache.length();i++) {
 			if(tabProp[i]>tabCode[i]) {
@@ -298,9 +294,8 @@ public class DefenseurPlusMoinsModel {
 		checkWord(resultProp,codeCache,contentPane);
 		chechTentative(nombreCoup,contentPane,codeCache);
 	}
-	public static void finClick(JLabel tentativeOrdi, JLabel codeSecret, int nombreCoup, JTextArea dialog,JPanel contentPane,JLabel image, int nbreTour2, JLabel indiceDev,JLabel tentativeIA,JButton fin,JPanel cadreOrdi) {
+	public void finClick(JLabel tentativeOrdi, JLabel codeSecret, int nombreCoup, JTextArea dialog,JPanel contentPane,JLabel image, int nbreTour2, JLabel indiceDev,JLabel tentativeIA,JButton fin,JPanel cadreOrdi) {
 		if(!tentativeIA.getText().equals(indiceDev.getText())) {
-			++nombreErreur;
 			fin.setEnabled(true);
 			fin.setBackground(Color.getHSBColor(0.154f, 0.85f, 0.94f));
 			JOptionPane.showMessageDialog(null,"Les indices entrés ne sont pas bons !!","Erreur",JOptionPane.ERROR_MESSAGE);
@@ -316,4 +311,13 @@ public class DefenseurPlusMoinsModel {
 			image.setIcon(tableauImg[i]);
 		}
 	}
+	public void RangeWord(JPanel blocProposition, int nombreClick) {
+		ResourceBundle reglage = ResourceBundle.getBundle("Config");
+		bloc = reglage.getString("cases");
+		int cases = Integer.parseInt(bloc); 
+
+		if(nombreClick==cases) {
+			blocProposition.setVisible(false);
+		}
+}
 }

@@ -10,7 +10,6 @@ import java.awt.event.MouseListener;
 import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,7 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
 import fr.yoannroche.projet3.plusmoins.model.DuelPlusMoinsModel;
 
 public class DuelPlusMoins extends JFrame{
@@ -29,7 +27,7 @@ public class DuelPlusMoins extends JFrame{
 	private JButton ok = new JButton(" Ok ");
 	private JButton fin = new JButton(" Ok ");
 	private JButton refresh = new JButton("⟲");
-	private static String bloc;
+	private String bloc;
 	private JPanel cadreJ = new JPanel();
 	private JPanel cadreOrdi = new JPanel();
 	private JPanel blocProposition = new JPanel();
@@ -37,23 +35,21 @@ public class DuelPlusMoins extends JFrame{
 	private JLabel tentative = new JLabel();
 	private JLabel codeSecret = new JLabel();
 	private JLabel tentativeIA =new JLabel();
-	static ImageIcon ordi0 = new ImageIcon("images/ordi0.png");
-	JTextArea dialog = new JTextArea();
-	JLabel image = new JLabel();
-	int  [] clavier = {0,1,2,3,4,5,6,7,8,9};
-	JButton [] button = new JButton[clavier.length];
+	private JTextArea dialog = new JTextArea();
+	private int  [] clavier = {0,1,2,3,4,5,6,7,8,9};
 	private JButton bouton[];
-	String [] indice = {"+","-","="};
-	JButton [] indices = new JButton[indice.length];
+	private String [] indice = {"+","-","="};
 	private JButton indi[];
 	private JTextField proposition = new JTextField();
 	private JLabel infosTentative = new JLabel();
 	private JLabel indiceDev = new JLabel();
 	private int nombreClick = 0;
-	Font impact = new Font ("impact", 17,17);
-	Font arial = new Font ("arial", 12,12);
-	Font arial2 = new Font ("arial", 10,10);
-	JPanel espaceDev = new JPanel ();
+	private int click=0;
+	private Font impact = new Font ("impact", 17,17);
+	private Font arial = new Font ("arial", 12,12);
+	private Font arial2 = new Font ("arial", 10,10);
+	private JPanel espaceDev = new JPanel ();
+	private DuelPlusMoinsModel duel = new DuelPlusMoinsModel();
 
 
 	public DuelPlusMoins(boolean modeDev) {
@@ -65,7 +61,6 @@ public class DuelPlusMoins extends JFrame{
 		this.setContentPane(contentPane);
 		this.setResizable(false);
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
-
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
 		reglage.getString("tentatives");
 		bloc = reglage.getString("cases");
@@ -77,8 +72,6 @@ public class DuelPlusMoins extends JFrame{
 		initBlocProposition();
 		initBlocTest();
 		initCadreDev(modeDev);
-
-
 	}
 
 	private void initCadreDev(boolean modeDev) {
@@ -100,25 +93,23 @@ public class DuelPlusMoins extends JFrame{
 			text2.setForeground(Color.WHITE);
 			espaceDev.add(text);
 			espaceDev.add(codeSecret);
-			DuelPlusMoinsModel.dev(codeSecret);
+			duel.dev(codeSecret);
 			espaceDev.add(text2);
 			espaceDev.add(indiceDev);
 			indiceDev.setForeground(Color.orange);
-			indiceDev.setFont(arial2);
-			
+			indiceDev.setFont(arial2);			
 		}
 	}
 
 	private void initVs() {
+		
 		JLabel vs = new JLabel();
-
 		vs.setText(" V.S " );
 		vs.setOpaque(true);
 		vs.setFont(impact);
 		vs.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		vs.setBackground(Color.getHSBColor(0.143f, 0.84f, 0.86f));
 		contentPane.add(vs);
-
 	}
 
 	private void initCadreOrdi() {
@@ -153,13 +144,11 @@ public class DuelPlusMoins extends JFrame{
 		cadreOrdi.add(ordi);
 		cadreOrdi.add(dialog);
 		cadreOrdi.add(espace2);
-
 		tentativePanel.add(tentativeIA);
-	
 		refresh.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
 		refresh.setBorder(BorderFactory.createLineBorder(Color.black));
 		refresh.setBackground(Color.DARK_GRAY);
-		refresh.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
+		refresh.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){ 
 				tentativeIA.setText("");
 
@@ -170,7 +159,7 @@ public class DuelPlusMoins extends JFrame{
 		contentPane.add(cadreOrdi);
 		this.indi = new JButton[3];
 		int i = 0;
-		for(String c : indice){
+		for(@SuppressWarnings("unused") String c : indice){
 			this.indi[i] = new JButton(indice[i]);
 			indi[i].setPreferredSize(new Dimension(20,20));
 			indi[i].setBackground(Color.DARK_GRAY);
@@ -186,7 +175,6 @@ public class DuelPlusMoins extends JFrame{
 		espaceDev.setPreferredSize(new Dimension(520,25));
 		espaceDev.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		contentPane.add(espaceDev);
-
 	}
 
 	private void initCadreJoueur() {
@@ -252,7 +240,6 @@ public class DuelPlusMoins extends JFrame{
 		cadreJ.add(espace);
 		cadreJ.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.154f, 0.85f, 0.94f)));
 		contentPane.add(cadreJ);
-
 	}
 
 	private void initRegle() {
@@ -286,9 +273,8 @@ public class DuelPlusMoins extends JFrame{
 		espace.setPreferredSize(new Dimension(520,5));
 		espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		contentPane.add(espace);
-
-
 	}
+	
 	private void initBlocTest() {
 
 		JPanel blocBouton = new JPanel();
@@ -313,11 +299,9 @@ public class DuelPlusMoins extends JFrame{
 
 				ok.setEnabled(false);
 				ok.setBackground(Color.getHSBColor(0.345f, 0.38f, 0.58f));
-				DuelPlusMoinsModel.okClick(proposition,codeSecret,tentative,infosTentative,contentPane,dialog,indiceDev,cadreJ,cadreOrdi,ok,fin);
+				duel.okClick(proposition,codeSecret,tentative,infosTentative,contentPane,dialog,indiceDev,cadreJ,cadreOrdi,ok,fin);
 				blocProposition.setVisible(true);
 				nombreClick=0;
-				
-
 			}  
 		});
 		supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
@@ -335,17 +319,15 @@ public class DuelPlusMoins extends JFrame{
 		fin.setBackground(Color.getHSBColor(0.154f, 0.45f, 0.44f));
 		fin.setEnabled(false);
 		fin.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
-			public void actionPerformed(ActionEvent event){ 
-				
-				DuelPlusMoinsModel.finClick(tentativeIA,ok,indiceDev,fin,cadreJ,cadreOrdi);
+			public void actionPerformed(ActionEvent event){ 		
+				duel.finClick(tentativeIA,ok,indiceDev,fin,cadreJ,cadreOrdi);
 				fin.setBackground(Color.getHSBColor(0.154f, 0.45f, 0.44f));
-
 			}  
 		});
 		contentPane.add(supprimer);
 		contentPane.add(ok);
-
 	}
+	
 	private void initBlocProposition() {
 
 		blocProposition.setPreferredSize(new Dimension(160,65));
@@ -422,7 +404,7 @@ public class DuelPlusMoins extends JFrame{
 			char entrer = ((JButton)arg0.getSource()).getText().charAt(0);
 			proposition.setText(proposition.getText()+entrer);
 			nombreClick++;
-			ChallengerPlusMoinsModel.RangeWord(blocProposition,nombreClick);
+			duel.RangeWord(blocProposition,nombreClick);
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			((JButton)arg0.getSource()).setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0,Color.white));
@@ -441,12 +423,12 @@ public class DuelPlusMoins extends JFrame{
 	class SourisListener3 implements MouseListener {
 
 		public void mouseClicked(MouseEvent arg0) {
-			if(nombreClick==0) {
+			if(click==0) {
 				refresh.doClick();
 			}
 			char entrer = ((JButton)arg0.getSource()).getText().charAt(0);
 			tentativeIA.setText(tentativeIA.getText()+entrer);
-			nombreClick++;
+			click++;
 
 		}
 		public void mouseEntered(MouseEvent arg0) {
