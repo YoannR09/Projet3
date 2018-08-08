@@ -15,8 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import fr.yoannroche.projet3.Lancement;
 import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins;
+import fr.yoannroche.projet3.plusmoins.view.DuelPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.FenetreMenuPlusMoins;
 
 public class PerduPlusMoinsDuel extends JDialog {
@@ -83,9 +83,9 @@ public class PerduPlusMoinsDuel extends JDialog {
 		home.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				setVisible(false);
-				((JFrame) contentPane2.getTopLevelAncestor()).dispose();
-				Lancement menu = new Lancement();	
-				menu.setVisible(true);
+				((JFrame) contentPane2.getTopLevelAncestor()).setVisible(false);;
+				DuelPlusMoins duel = new DuelPlusMoins(false);
+				duel.setVisible(true);
 			}
 		});
 		home.addMouseListener(new SourisListener());

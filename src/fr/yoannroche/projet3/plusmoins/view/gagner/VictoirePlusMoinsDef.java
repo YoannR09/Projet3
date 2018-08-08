@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 
 import fr.yoannroche.projet3.Lancement;
 import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins;
-import fr.yoannroche.projet3.plusmoins.view.FenetreMenuPlusMoins;
+import fr.yoannroche.projet3.plusmoins.view.DefenseurPlusMoins;
 
 public class VictoirePlusMoinsDef extends JDialog {
 	
@@ -68,9 +68,9 @@ public class VictoirePlusMoinsDef extends JDialog {
 	relancer.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent event){
 		    setVisible(false);
-		    ((JFrame) contentPane2.getTopLevelAncestor()).dispose();
-		    FenetreMenuPlusMoins fen = new FenetreMenuPlusMoins();
-            fen.setVisible(true);
+		    ((JFrame) contentPane2.getTopLevelAncestor()).setVisible(false);;
+			DefenseurPlusMoins def = new DefenseurPlusMoins();
+			def.setVisible(true);
 		    
 			
 			

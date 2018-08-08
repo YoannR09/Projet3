@@ -23,7 +23,8 @@ public class DuelPlusMoins extends JFrame{
 
 	private JPanel contentPane = new JPanel();
 	private JButton retour = new JButton(" Retour ");
-	private JButton supprimer = new JButton(" Suppr ");
+	private JButton supprimer = new JButton(" Effacer ");
+	private JButton aide = new JButton(" Aide ");
 	private JButton ok = new JButton(" Ok ");
 	private JButton fin = new JButton(" Ok ");
 	private JButton refresh = new JButton("⟲");
@@ -245,7 +246,7 @@ public class DuelPlusMoins extends JFrame{
 	private void initRegle() {
 
 		JPanel espaceRetour = new JPanel ();
-		espaceRetour.setPreferredSize(new Dimension(320,20));
+		espaceRetour.setPreferredSize(new Dimension(250,20));
 		espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
@@ -258,6 +259,17 @@ public class DuelPlusMoins extends JFrame{
 				menu.setVisible(true);
 			}
 		});
+		aide.setBackground(Color.getHSBColor(0.134f, 0.85f, 0.94f));
+		aide.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
+		aide.setForeground(Color.DARK_GRAY);
+		aide.addMouseListener(new SourisListener());
+		aide.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent event){
+				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
+				AideDuelPlusMoins aideMenu = new AideDuelPlusMoins();	
+				aideMenu.setVisible(true);
+			}
+		});
 		JPanel blocRegle = new JPanel();
 		blocRegle.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		blocRegle.setPreferredSize(new Dimension(500,40));
@@ -267,6 +279,7 @@ public class DuelPlusMoins extends JFrame{
 		regle.setFont(arial);
 		contentPane.add(retour);
 		contentPane.add(espaceRetour);
+		contentPane.add(aide);
 		blocRegle.add(regle);
 		contentPane.add(blocRegle);
 		JPanel espace = new JPanel ();
@@ -324,6 +337,7 @@ public class DuelPlusMoins extends JFrame{
 				fin.setBackground(Color.getHSBColor(0.154f, 0.45f, 0.44f));
 			}  
 		});
+		
 		contentPane.add(supprimer);
 		contentPane.add(ok);
 	}
@@ -367,6 +381,10 @@ public class DuelPlusMoins extends JFrame{
 				retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.54f));
 				retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.34f)));
 			}
+			if(arg0.getSource()==aide) {
+				aide.setBackground(Color.getHSBColor(0.134f, 0.95f, 0.99f));
+				aide.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.55f, 0.34f)));
+			}
 		}
 
 		public void mouseExited(MouseEvent arg0) {
@@ -378,6 +396,8 @@ public class DuelPlusMoins extends JFrame{
 			ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 			supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 			supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
+			aide.setBackground(Color.getHSBColor(0.134f, 0.85f, 0.94f));
+			aide.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		}
 
 		public void mousePressed(MouseEvent arg0) {
@@ -392,6 +412,8 @@ public class DuelPlusMoins extends JFrame{
 			ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 			supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 			supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
+			aide.setBackground(Color.getHSBColor(0.134f, 0.85f, 0.94f));
+			aide.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		}
 	}
 
