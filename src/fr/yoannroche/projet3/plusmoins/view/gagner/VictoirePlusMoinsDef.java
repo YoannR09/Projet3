@@ -29,7 +29,6 @@ public class VictoirePlusMoinsDef extends JDialog {
 	Font arial = new Font ("arial", 12,12);
 	String proposition;
 	ChallengerPlusMoins chal;
-	int nombreCoup;
 
 	public VictoirePlusMoinsDef(JFrame parent, String title,String proposition, JPanel contentPane2, int nombreCoup){
 		
@@ -43,7 +42,6 @@ public class VictoirePlusMoinsDef extends JDialog {
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		this.proposition = proposition;
 		this.contentPane2 = contentPane2;
-		this.nombreCoup = nombreCoup;
 		initText();
 		initCadre();
 	}
@@ -55,7 +53,7 @@ public class VictoirePlusMoinsDef extends JDialog {
 	JLabel text = new JLabel();
 	text.setFont(arial);
 	text.setForeground(Color.white);
-	text.setText("Vous avez gagné, l'ordinateur à trouvé le code avec + de "+nombreCoup+" tentatives.");
+	text.setText("Vous avez gagné, l'ordinateur n'a pas trouvé le code");
 	cadreText.add(text);
 	contentPane.add(cadreText);
 	}
