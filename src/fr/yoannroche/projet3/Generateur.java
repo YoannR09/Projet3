@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Generateur {
 	
-	private static String bloc;
+	private String bloc;
 	private int nombre;
 	private static final Logger logger = LogManager.getLogger();
 	

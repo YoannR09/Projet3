@@ -8,6 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
@@ -20,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 public class Reglage extends JFrame{
+	Reglage reglage;
 	private JPanel contentPane= new JPanel();
 	private JPanel cadreCases = new JPanel();
 	private JPanel cadreTentative = new JPanel();
@@ -37,6 +42,26 @@ public class Reglage extends JFrame{
 	int  [] tenta = {4,5,6,7,8};
 	JRadioButton [] buttonTen = new JRadioButton[tenta.length];
 	private JRadioButton boutonTentative[];
+	private String bloc;
+	private String tentatives;
+	int cases;
+	public int getCases() {
+		return cases;
+	}
+
+	public void setCases(int cases) {
+		this.cases = cases;
+	}
+
+	public int getTentative() {
+		return tentative;
+	}
+
+	public void setTentative(int tentative) {
+		this.tentative = tentative;
+	}
+
+	int tentative;
 	
 	public Reglage() {
 
@@ -187,6 +212,7 @@ public class Reglage extends JFrame{
 		contentPane.add(espace);
 
 	}
+	
 	class SourisListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent arg0) {
@@ -224,17 +250,31 @@ public class Reglage extends JFrame{
 		}
 	}
 
+	/**
+	 * Méthode qui gére le changement des variables dans le fichier Config.properties
+	 */
 	public void sauvegardeReglage() {
-		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		reglage.getString("tentatives");
-		reglage.getString("cases");
+		
+		try {
+		Properties prop = new Properties() ;
+		File fProp = new File("ressources/Config.properties") ;
+		FileInputStream stream = new FileInputStream(fProp) ;
+		prop.load(stream) ;
+		
 		if(check.isSelected()==true) {
-			//dev=1;
+			String newDev=Integer.toString(1) ;
+		    prop.setProperty("dev",newDev) ;
+		}
+		else{
+			String newDev=Integer.toString(0) ;
+		    prop.setProperty("dev",newDev) ;
 		}
 
 		for(int i=0;i<clavier.length;i++) {
 			if(bouton[i].isSelected()==true) {
-			
+		     cases=(i+4);
+		     String newCases=Integer.toString(cases) ;
+		     prop.setProperty("cases",newCases) ;
 
 			}
 			
@@ -243,8 +283,15 @@ public class Reglage extends JFrame{
 		for(int i=0;i<tenta.length;i++) {
 
 			if(boutonTentative[i].isSelected()==true) {
-				System.out.println(i+4);
+				tentative=(i+4);
+				String newTenta=Integer.toString(tentative) ;
+			    prop.setProperty("tentatives",newTenta) ;
 			}
+	}
+		FileOutputStream oStream = new FileOutputStream(fProp) ;
+		prop.store(oStream,"Reglage") ;
+	}catch(Exception e) {
+		
 	}
 	}
 }
