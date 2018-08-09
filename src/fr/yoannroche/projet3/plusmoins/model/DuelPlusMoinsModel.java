@@ -370,14 +370,17 @@ public class DuelPlusMoinsModel {
 	 * @param fin
 	 * @param cadreJ
 	 * @param cadreOrdi
+	 * @param tour 
+	 * @param dialog 
 	 */
-	public void finClick(JLabel tentativeIA, JButton ok, JLabel indiceDev, JButton fin, JPanel cadreJ, JPanel cadreOrdi) {
+	public void finClick(JLabel tentativeIA, JButton ok, JLabel indiceDev, JButton fin, JPanel cadreJ, JPanel cadreOrdi, JLabel tour, JTextArea dialog) {
 		if(!tentativeIA.getText().equals(indiceDev.getText())) {
 			fin.setEnabled(true);
 			fin.setBackground(Color.getHSBColor(0.154f, 0.85f, 0.94f));
 			JOptionPane.showMessageDialog(null,"Les indices entrés ne sont pas bons !!","Erreur",JOptionPane.ERROR_MESSAGE);
 		}
 		else if(tentativeIA.getText().equals(indiceDev.getText())) {
+			dialog.setText(dialog.getText()+"  "+indiceDev.getText()+"\n");
 			ok.setEnabled(true);
 			ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
 			tentativeIA.setText("");
@@ -385,6 +388,7 @@ public class DuelPlusMoinsModel {
 			cadreJ.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.154f, 0.85f, 0.94f)));
 			cadreOrdi.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 			indiceDev.setText("");
+			tour.setText(" Nombre de tour : "+nbreTour+" ");
 		}
 
 	}

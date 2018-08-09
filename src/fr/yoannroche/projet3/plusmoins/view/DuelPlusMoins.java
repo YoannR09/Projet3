@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -22,6 +23,7 @@ import fr.yoannroche.projet3.plusmoins.model.DuelPlusMoinsModel;
 public class DuelPlusMoins extends JFrame{
 
 	private JPanel contentPane = new JPanel();
+	private JLabel attention = new JLabel();
 	private JButton retour = new JButton(" Retour ");
 	private JButton supprimer = new JButton(" Effacer ");
 	private JButton aide = new JButton(" Aide ");
@@ -50,13 +52,17 @@ public class DuelPlusMoins extends JFrame{
 	private Font arial = new Font ("arial", 12,12);
 	private Font arial2 = new Font ("arial", 10,10);
 	private JPanel espaceDev = new JPanel ();
+	private int nombreTour=0;
+	private JLabel tour = new JLabel();
+	
+	
 	private DuelPlusMoinsModel duel = new DuelPlusMoinsModel();
 
 
 	public DuelPlusMoins(boolean modeDev) {
 
 		this.setTitle("Duel");
-		this.setSize(450,450);
+		this.setSize(460,470);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
@@ -110,6 +116,7 @@ public class DuelPlusMoins extends JFrame{
 		vs.setFont(impact);
 		vs.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		vs.setBackground(Color.getHSBColor(0.143f, 0.84f, 0.86f));
+	
 		contentPane.add(vs);
 	}
 
@@ -119,9 +126,11 @@ public class DuelPlusMoins extends JFrame{
 		ordi.setOpaque(true);
 		ordi.setFont(arial);
 		ordi.setBorder(BorderFactory.createLineBorder(Color.black));
+		JScrollPane scrollPane =
+			      new JScrollPane(dialog,
+	                      JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+	                      JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		dialog.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
-		dialog.setPreferredSize(new Dimension(150,80));
-		dialog.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		dialog.setEditable(false);
 		dialog.setText(" \n Je suis prêt \n c'est quand vous voulez ! ");
 		JPanel tentativePanel = new JPanel();
@@ -143,7 +152,9 @@ public class DuelPlusMoins extends JFrame{
 		cadreOrdi.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		cadreOrdi.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		cadreOrdi.add(ordi);
-		cadreOrdi.add(dialog);
+		cadreOrdi.add(scrollPane);
+		scrollPane.setPreferredSize(new Dimension(160, 80));
+		scrollPane.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		cadreOrdi.add(espace2);
 		tentativePanel.add(tentativeIA);
 		refresh.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
@@ -272,18 +283,26 @@ public class DuelPlusMoins extends JFrame{
 		});
 		JPanel blocRegle = new JPanel();
 		blocRegle.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
-		blocRegle.setPreferredSize(new Dimension(500,40));
+		blocRegle.setPreferredSize(new Dimension(500,45));
 		JLabel regle = new JLabel();
 		int casesInt = Integer.parseInt(bloc);
 		regle.setText(" Le plus rapide à trouver le code secret à "+ casesInt +" chiffres de l'autre gagne.");
 		regle.setFont(arial);
+		attention.setFont(arial2);
+		attention.setText(" Le cadre jaune indique ou le joueur doit poser son attention ");
 		contentPane.add(retour);
 		contentPane.add(espaceRetour);
 		contentPane.add(aide);
 		blocRegle.add(regle);
+		blocRegle.add(attention);
 		contentPane.add(blocRegle);
 		JPanel espace = new JPanel ();
-		espace.setPreferredSize(new Dimension(520,5));
+		tour.setText(" Nombre de tour : "+" "+0+" ");
+		tour.setOpaque(true);
+		tour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		tour.setBackground(Color.getHSBColor(0.544f, 0.25f, 0.86f));
+		espace.add(tour);
+		espace.setPreferredSize(new Dimension(520,30));
 		espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		contentPane.add(espace);
 	}
@@ -333,7 +352,7 @@ public class DuelPlusMoins extends JFrame{
 		fin.setEnabled(false);
 		fin.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
 			public void actionPerformed(ActionEvent event){ 		
-				duel.finClick(tentativeIA,ok,indiceDev,fin,cadreJ,cadreOrdi);
+				duel.finClick(tentativeIA,ok,indiceDev,fin,cadreJ,cadreOrdi,tour,dialog);
 				fin.setBackground(Color.getHSBColor(0.154f, 0.45f, 0.44f));
 			}  
 		});
