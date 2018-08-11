@@ -59,7 +59,7 @@ public class DuelPlusMoins extends JFrame{
 	private DuelPlusMoinsModel duel = new DuelPlusMoinsModel();
 
 
-	public DuelPlusMoins(boolean modeDev) {
+	public DuelPlusMoins() {
 
 		this.setTitle("Duel");
 		this.setSize(460,470);
@@ -78,10 +78,10 @@ public class DuelPlusMoins extends JFrame{
 		initCadreOrdi();
 		initBlocProposition();
 		initBlocTest();
-		initCadreDev(modeDev);
+		initCadreDev();
 	}
 
-	private void initCadreDev(boolean modeDev) {
+	private void initCadreDev() {
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
 		String devStatus = reglage.getString("dev");
 		int devMode = Integer.parseInt(devStatus);
@@ -300,7 +300,8 @@ public class DuelPlusMoins extends JFrame{
 		tour.setText(" Nombre de tour : "+" "+0+" ");
 		tour.setOpaque(true);
 		tour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
-		tour.setBackground(Color.getHSBColor(0.544f, 0.25f, 0.86f));
+		tour.setBackground(Color.getHSBColor(0.544f, 0.15f, 0.26f));
+		tour.setForeground(Color.WHITE);
 		espace.add(tour);
 		espace.setPreferredSize(new Dimension(520,30));
 		espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
@@ -353,7 +354,6 @@ public class DuelPlusMoins extends JFrame{
 		fin.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
 			public void actionPerformed(ActionEvent event){ 		
 				duel.finClick(tentativeIA,ok,indiceDev,fin,cadreJ,cadreOrdi,tour,dialog);
-				fin.setBackground(Color.getHSBColor(0.154f, 0.45f, 0.44f));
 			}  
 		});
 		

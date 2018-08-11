@@ -35,7 +35,6 @@ public class FenetreMenuPlusMoins extends JFrame{
 	private JButton retour = new JButton(" Retour ");
 	private SourisListener sListener = new SourisListener();
 	private JButton dev = new JButton(" Réglages ");
-	
 	JTextArea regle = new JTextArea();
 	private boolean modeDev = false;
 
@@ -131,7 +130,7 @@ public class FenetreMenuPlusMoins extends JFrame{
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPaneMenu.getTopLevelAncestor()).dispose() ;
 				if(mode1.isSelected()==true) {
-					ChallengerPlusMoins chal = new ChallengerPlusMoins(modeDev);	
+					ChallengerPlusMoins chal = new ChallengerPlusMoins();	
 					chal.setVisible(true);
 				}
 				if(mode2.isSelected()==true) {
@@ -139,7 +138,7 @@ public class FenetreMenuPlusMoins extends JFrame{
 					def.setVisible(true);
 				}
 				if(mode3.isSelected()==true) {
-					DuelPlusMoins duel = new DuelPlusMoins(modeDev);
+					DuelPlusMoins duel = new DuelPlusMoins();
 					duel.setVisible(true);
 				}
 				

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -29,6 +30,8 @@ public class VictoirePlusMoinsDef extends JDialog {
 	Font arial = new Font ("arial", 12,12);
 	String proposition;
 	ChallengerPlusMoins chal;
+	ResourceBundle reglage = ResourceBundle.getBundle("Config");
+    int tentative = Integer.parseInt(reglage.getString("tentatives"));
 
 	public VictoirePlusMoinsDef(JFrame parent, String title,String proposition, JPanel contentPane2, int nombreCoup){
 		
@@ -53,7 +56,7 @@ public class VictoirePlusMoinsDef extends JDialog {
 	JLabel text = new JLabel();
 	text.setFont(arial);
 	text.setForeground(Color.white);
-	text.setText("Vous avez gagné, l'ordinateur n'a pas trouvé le code");
+	text.setText("Vous avez gagné, l'ordinateur n'a pas trouvé le code en "+tentative+" tentatives.");
 	cadreText.add(text);
 	contentPane.add(cadreText);
 	}

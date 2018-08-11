@@ -22,6 +22,8 @@ public class DuelPlusMoinsModel {
 
 	private String bloc;
 	private Generateur code = new Generateur();
+	ResourceBundle reglage = ResourceBundle.getBundle("Config");
+	private int cases = Integer.parseInt(reglage.getString("cases"));
 	private String nombreString = Integer.toString(code.getNombre());
 	private Font arial2 = new Font ("arial", 10,10);
 	private Font impact = new Font ("impact", 17,17);
@@ -29,9 +31,8 @@ public class DuelPlusMoinsModel {
 	private int resultMax;
 	private int resultMin;
 	private int nbreTour =0;
-	private int gagner =0;
+	private boolean gagner = false;
 	private int info;
-	private int cases = 4;
 	private char tabProp[] = new char [cases];
 	private char tabMin [] = new char [cases];
 	private char tabMax[] = new char [cases];
@@ -97,6 +98,12 @@ public class DuelPlusMoinsModel {
 		}
 		else if(codeSecret.getText().length()==nombreString.length()) {
 			tentativeJoueur(tentative, infosTentative,proposition);
+			if(tentative.getText().equals(nombreString)) {
+				if(gagner==false) {
+				new VictoirePlusMoinsDuel(null, "Gagner",nombreString,contentPane);
+				gagner=true;
+				}
+			}
 			cadreJ.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 			cadreOrdi.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.154f, 0.85f, 0.94f)));
 			tentativeOrdi(indiceDev, codeSecret,dialog, contentPane,nbreTour);
@@ -112,12 +119,7 @@ public class DuelPlusMoinsModel {
 			ok.setEnabled(true);
 			ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
 		}
-		if(tentative.getText().equals(nombreString)) {
-			if(gagner==0) {
-			new VictoirePlusMoinsDuel(null, "Gagner",nombreString,contentPane);
-			gagner++;
-			}
-		}
+
 	}
 
 	/**
@@ -173,9 +175,8 @@ public class DuelPlusMoinsModel {
 	public void checkWord(String proposition,String codeSecret2,JPanel contentPane) {
 
 		if(proposition.equals(codeSecret2)){
-			if(gagner==0) {
-			++gagner;
-			new PerduPlusMoinsDuel(null,"Perdu" ,codeSecret2, contentPane);
+			if(gagner==false){
+				new PerduPlusMoinsDuel(null,"Perdu" ,codeSecret2, contentPane);
 			}
 		}
 	}
@@ -213,17 +214,17 @@ public class DuelPlusMoinsModel {
 		checkWord(resultProp,codeCache,contentPane);
 	}
 
-    /**
-     * Lance le deuxième tour de l'ordinateur (La deuxième partie de l'algorithme).
-     * @param dialog
-     * @param tabProp
-     * @param tabCode
-     * @param tabMax
-     * @param tabMin
-     * @param codeCache
-     * @param indiceDev
-     * @param contentPane 
-     */
+	/**
+	 * Lance le deuxième tour de l'ordinateur (La deuxième partie de l'algorithme).
+	 * @param dialog
+	 * @param tabProp
+	 * @param tabCode
+	 * @param tabMax
+	 * @param tabMin
+	 * @param codeCache
+	 * @param indiceDev
+	 * @param contentPane 
+	 */
 	public void tour1(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
 
 		for(int i=0;i<codeCache.length();i++) {

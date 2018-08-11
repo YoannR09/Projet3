@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -105,9 +106,11 @@ public class DefenseurPlusMoins extends JFrame{
 		ordi.setOpaque(true);
 		ordi.setFont(arial);
 		ordi.setBorder(BorderFactory.createLineBorder(Color.black));
+		JScrollPane scrollPane =
+			      new JScrollPane(dialog,
+	                      JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+	                      JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		dialog.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
-		dialog.setPreferredSize(new Dimension(150,80));
-		dialog.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		dialog.setEditable(false);
 		dialog.setText(" \n Je suis prêt \n c'est quand vous voulez ! ");
 		JPanel tentativePanel = new JPanel();
@@ -122,6 +125,8 @@ public class DefenseurPlusMoins extends JFrame{
 		tentativeIA.setFont(arial);
 		tentativeIA.setText("Entrez les indices");
 		JPanel espace2 = new JPanel();
+		scrollPane.setPreferredSize(new Dimension(160, 80));
+		scrollPane.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		espace2.setPreferredSize(new Dimension(65,5));
 		espace2.setBackground(Color.DARK_GRAY);
 		espace2.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
@@ -129,7 +134,7 @@ public class DefenseurPlusMoins extends JFrame{
 		cadreOrdi.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		cadreOrdi.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		cadreOrdi.add(ordi);
-		cadreOrdi.add(dialog);
+		cadreOrdi.add(scrollPane);
 		cadreOrdi.add(espace2);
 
 		tentativePanel.add(tentativeIA);
@@ -361,6 +366,7 @@ public class DefenseurPlusMoins extends JFrame{
 			char entrer = ((JButton)arg0.getSource()).getText().charAt(0);
 			proposition.setText(proposition.getText()+entrer);
 			click++;
+			nombreClick++;
 			def.RangeWord(blocProposition,nombreClick);
 		}
 		public void mouseEntered(MouseEvent arg0) {
@@ -386,6 +392,7 @@ public class DefenseurPlusMoins extends JFrame{
 			char entrer = ((JButton)arg0.getSource()).getText().charAt(0);
 			tentativeIA.setText(tentativeIA.getText()+entrer);
 			nombreClick++;
+			def.RangeWord(blocProposition,nombreClick);
 
 		}
 		public void mouseEntered(MouseEvent arg0) {

@@ -65,7 +65,7 @@ public class VictoirePlusMoinsDuel extends JDialog {
 		public void actionPerformed(ActionEvent event){
 		    setVisible(false);
 		    ((JFrame) contentPane2.getTopLevelAncestor()).setVisible(false);;
-			DuelPlusMoins duel = new DuelPlusMoins(false);
+			DuelPlusMoins duel = new DuelPlusMoins();
 			duel.setVisible(true);
 		    
 			

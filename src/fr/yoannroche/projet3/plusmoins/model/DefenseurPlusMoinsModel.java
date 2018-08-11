@@ -21,7 +21,8 @@ public class DefenseurPlusMoinsModel {
 
 	private String bloc;
 	private int nombreCoup =0;
-
+	ResourceBundle reglage = ResourceBundle.getBundle("Config");
+	private int cases = Integer.parseInt(reglage.getString("cases"));
 	private String tentative;
 	private int resultMax;
 	private int resultMin;
@@ -32,13 +33,18 @@ public class DefenseurPlusMoinsModel {
 	private String resultProp;
 	private int nbreTour =0;
 	private int gagner =0;
-	private int cases = 4;
 	private char tabProp[] = new char [cases];
 	private char tabMin [] = new char [cases];
 	private char tabMax[] = new char [cases];
 	private Icon[] tableauImg = new Icon[7];
 
-	public DefenseurPlusMoinsModel() {}
+	public DefenseurPlusMoinsModel() {
+		ResourceBundle reglage = ResourceBundle.getBundle("Config");
+		reglage.getString("tentatives");
+		bloc = reglage.getString("cases");
+		 cases = Integer.parseInt(bloc);
+		
+	}
 
 	/**
 	 * Méthode qui lance les tantatives de l'ordinateur.
@@ -54,8 +60,10 @@ public class DefenseurPlusMoinsModel {
 	 */
 	public void tentativeOrdi(JLabel tentativeOrdi, JLabel codeSecret2, int nombreCoup, JTextArea dialog,JPanel contentPane,JLabel image, int nbreTour2, JLabel indiceDev) {
 
+System.out.println(cases);
 		String codeCache = codeSecret2.getText();
 		char tabCode[] = codeCache.toCharArray();
+
 
 		if(nbreTour2==0) {
 			tour0(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev,contentPane);
@@ -299,12 +307,13 @@ public class DefenseurPlusMoinsModel {
 			JOptionPane.showMessageDialog(null,"Les indices entrés ne sont pas bons !!","Erreur",JOptionPane.ERROR_MESSAGE);
 		}
 		else if(tentativeIA.getText().equals(indiceDev.getText())) {
+			dialog.setText(dialog.getText()+"  "+indiceDev.getText()+"\n");
 			tentativeIA.setText("");
 			cadreOrdi.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 			indiceDev.setText("");
 			nbreTour++;
 			tentativeOrdi(tentativeOrdi,codeSecret,nombreCoup,dialog, contentPane, image,nbreTour,indiceDev);
-			int i = ((int)(Math.random()*(7 - 0))+0);
+			int i = ((int)(Math.random()*(7 - 1))+1);
 			tableauImg[i] = new ImageIcon("images/"+i+".png");
 			image.setIcon(tableauImg[i]);
 		}

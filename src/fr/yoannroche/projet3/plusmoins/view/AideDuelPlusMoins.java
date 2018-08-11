@@ -236,7 +236,7 @@ public class AideDuelPlusMoins extends JFrame{
 		retourner.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				setVisible(false);
-				DuelPlusMoins duel = new DuelPlusMoins(false);
+				DuelPlusMoins duel = new DuelPlusMoins();
 				duel.setVisible(true);
 			}
 		});

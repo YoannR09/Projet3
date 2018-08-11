@@ -49,11 +49,7 @@ public class ChallengerPlusMoins extends JFrame{
 	JPanel espace2 = new JPanel ();
 	Font arial2 = new Font ("arial", 10,10);
 
-	public ChallengerPlusMoins() {}
-
-	public ChallengerPlusMoins(boolean modeDev) {
-
-
+	public ChallengerPlusMoins() {
 
 		this.setTitle("Challenger");
 		this.setSize(400, 300);
@@ -72,10 +68,10 @@ public class ChallengerPlusMoins extends JFrame{
 		initInfos();
 		initBlocProposition();
 		initBlocTest();
-		initCadreDev(modeDev);
+		initCadreDev();
 	}
 
-	private void initCadreDev(boolean modeDev) {
+	private void initCadreDev() {
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
 		String devStatus = reglage.getString("dev");
 		int devMode = Integer.parseInt(devStatus);

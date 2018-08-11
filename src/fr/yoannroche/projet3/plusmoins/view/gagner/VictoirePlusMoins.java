@@ -27,7 +27,6 @@ public class VictoirePlusMoins extends JDialog {
 	JButton quitter = new JButton(" Quitter ");
 	Font arial = new Font ("arial", 12,12);
 	String proposition;
-	ChallengerPlusMoins chal;
 
 	public VictoirePlusMoins(JFrame parent, String title,String proposition, JPanel contentPane2){
 		
@@ -69,9 +68,7 @@ public class VictoirePlusMoins extends JDialog {
 		    setVisible(false);
 		    ((JFrame) contentPane2.getTopLevelAncestor()).setVisible(false);;
 			ChallengerPlusMoins chal = new ChallengerPlusMoins();
-			chal.setVisible(true);
-		    
-			
+			chal.setVisible(true);	
 			
 		}
 	});
