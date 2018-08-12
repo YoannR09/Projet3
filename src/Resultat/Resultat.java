@@ -1,4 +1,4 @@
-package fr.yoannroche.projet3.plusmoins.view.perdu;
+package Resultat;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,11 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,53 +17,53 @@ import javax.swing.JPanel;
 import fr.yoannroche.projet3.Lancement;
 import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.DefenseurPlusMoins;
+import fr.yoannroche.projet3.plusmoins.view.DuelPlusMoins;
 
-public class PerduPlusMoinsDef extends JDialog {
+public class Resultat extends JFrame {
+	
 
+	
 	JPanel contentPane = new JPanel();
 	JPanel contentPane2;
 	JButton relancer = new JButton(" Relancer ");
 	JButton home = new JButton(" Menu ");
 	JButton quitter = new JButton(" Quitter ");
 	Font arial = new Font ("arial", 12,12);
+	JLabel text = new JLabel();
+	int jeu;
 	String proposition;
 	ChallengerPlusMoins chal;
-	JLabel codeSecret;
-	int nombreCoup;
-	ResourceBundle reglage = ResourceBundle.getBundle("Config");
-    int tentative = Integer.parseInt(reglage.getString("tentatives"));
+	private String code;
 
-	public PerduPlusMoinsDef(JFrame parent, String title,int nombreCoup2, JPanel contentPane2){
+	public Resultat(JFrame parent, String title,String nombreString, JPanel contentPane2, int jeu){
+		
+		super(title);
 
-		super(parent, title);
-		this.setSize(400, 110);
+		this.setSize(270, 110);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setVisible(true);
 		this.getContentPane().add(contentPane);
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		this.contentPane2 = contentPane2;
-		this.nombreCoup = nombreCoup2;
-
+		this.code = nombreString;
+		this.jeu=jeu;
+		
 		initText();
 		initCadre();
 	}
 
 	private void initText() {
-
 		JPanel cadreText = new JPanel();
-		cadreText.setPreferredSize(new Dimension(380,25));
+		cadreText.setPreferredSize(new Dimension(250,25));
 		cadreText.setBackground(Color.DARK_GRAY);
-		JLabel text = new JLabel();
 		text.setFont(arial);
 		text.setForeground(Color.white);
-		text.setText("Vous avez perdu, l'ordinateur à réussi en "+(nombreCoup+1)+" tentatives");
 		cadreText.add(text);
 		contentPane.add(cadreText);
 	}
 
 	private void initCadre() {
-
 		JPanel cadreBouton = new JPanel();
 		cadreBouton.setPreferredSize(new Dimension(230,35));
 		cadreBouton.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
@@ -75,9 +73,19 @@ public class PerduPlusMoinsDef extends JDialog {
 		relancer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				setVisible(false);
-					((JFrame) contentPane2.getTopLevelAncestor()).setVisible(false);;
-				DefenseurPlusMoins def = new DefenseurPlusMoins();
-				def.setVisible(true);
+				 ((JFrame) contentPane2.getTopLevelAncestor()).setVisible(false);
+				 if(jeu==1) {
+					 ChallengerPlusMoins chal = new ChallengerPlusMoins();
+					 chal.setVisible(true);
+				 }
+				 if(jeu==2) {
+					 DefenseurPlusMoins def = new DefenseurPlusMoins();
+					 def.setVisible(true);
+				 }
+				 if(jeu==3) {
+					 DuelPlusMoins duel = new DuelPlusMoins();
+					 duel.setVisible(true);
+				 }
 			}
 		});
 		relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
@@ -96,6 +104,7 @@ public class PerduPlusMoinsDef extends JDialog {
 		home.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		home.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		home.setForeground(Color.white);
+
 		cadreBouton.add(quitter);
 		quitter.addMouseListener(new SourisListener());
 		quitter.addActionListener(new ActionListener(){
@@ -108,12 +117,21 @@ public class PerduPlusMoinsDef extends JDialog {
 		quitter.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		quitter.setForeground(Color.white);
 		contentPane.add(cadreBouton);
-	}
 
+	}
+	
+	public void gagner(){
+		text.setText(" Vous avez gagnés ! ");
+	}
+	public void perdu(){
+		text.setText(" Vous avez perdu ! ");
+	}
+	
 	class SourisListener implements MouseListener {
 
 
 		public void mouseClicked(MouseEvent arg0) {
+
 		}
 
 		public void mouseEntered(MouseEvent arg0) {
@@ -144,7 +162,9 @@ public class PerduPlusMoinsDef extends JDialog {
 		}
 
 		public void mousePressed(MouseEvent arg0) {
+
 		}
+
 		public void mouseReleased(MouseEvent arg0) {
 
 			relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
@@ -157,4 +177,5 @@ public class PerduPlusMoinsDef extends JDialog {
 		}
 
 	}
+
 }

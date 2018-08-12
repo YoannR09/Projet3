@@ -35,7 +35,7 @@ public class Reglage extends JFrame{
 	JCheckBox check = new JCheckBox(" Mode développeur ");
 	JButton retour = new JButton (" Retour ");
 	JButton sauv = new JButton(" Sauvergarder ");
-	Font arial = new Font ("arial", 12,12);
+	Font arial = new Font ("arial", 11,11);
 	int  [] clavier = {4,5,6,7,8,9,10};
 	JRadioButton [] button = new JRadioButton[clavier.length];
 	private JRadioButton bouton[];
@@ -45,21 +45,6 @@ public class Reglage extends JFrame{
 	private String bloc;
 	private String tentatives;
 	int cases;
-	public int getCases() {
-		return cases;
-	}
-
-	public void setCases(int cases) {
-		this.cases = cases;
-	}
-
-	public int getTentative() {
-		return tentative;
-	}
-
-	public void setTentative(int tentative) {
-		this.tentative = tentative;
-	}
 
 	int tentative;
 	
@@ -129,30 +114,30 @@ public class Reglage extends JFrame{
 		dev.setForeground(Color.orange);
 		dev.setFont(arial);
 		dev.setText(" Acive le mode développeur pour voir toutes les solutions ");
-		cadreDev.setPreferredSize(new Dimension(180,38));
+		cadreDev.setPreferredSize(new Dimension(300,60));
 		cadreDev.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		cadreDev.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		check.setForeground(Color.WHITE);
 		check.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
+		cadreDev.add(dev);
 		cadreDev.add(check);
-		contentPane.add(dev);
 		contentPane.add(cadreDev);
 
 	}
 
 	private void initTentative() {
 		JLabel tentative =new JLabel();
-		cadreTentative.setPreferredSize(new Dimension(220,33));
+		cadreTentative.setPreferredSize(new Dimension(280,60));
 		cadreTentative.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		cadreTentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
-		contentPane.add(tentative);
+		cadreTentative.add(tentative);
 		contentPane.add(cadreTentative);
 		tentative.setOpaque(true);
 		tentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		tentative.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		tentative.setForeground(Color.orange);
 		tentative.setFont(arial);
-		tentative.setText(" Nombres de tentative pour trouver le code ");
+		tentative.setText("    Nombres de tentative pour trouver le code    ");
 
 		this.boutonTentative = new JRadioButton[5];
 		int i = 0;
@@ -167,7 +152,6 @@ public class Reglage extends JFrame{
 			i++;
 		}
 
-
 		JPanel espace = new JPanel();
 		espace.setPreferredSize(new Dimension(150,5));
 		espace.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
@@ -179,18 +163,17 @@ public class Reglage extends JFrame{
 	private void initCases() {
 		JLabel cases =new JLabel();
 
-		cadreCases.setPreferredSize(new Dimension(280,33));
+		cadreCases.setPreferredSize(new Dimension(280,60));
 		cadreCases.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		cadreCases.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
-		contentPane.add(cases);
+		cadreCases.add(cases);
 		contentPane.add(cadreCases);
 		cases.setOpaque(true);
 		cases.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		cases.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		cases.setForeground(Color.orange);
 		cases.setFont(arial);
-		cases.setText(" Nombres de chiffres ou couleurs à trouver ");
-
+		cases.setText("    Nombres de chiffres ou couleurs à trouver    ");
 
 		this.bouton = new JRadioButton[10];
 		int i = 0;
@@ -210,7 +193,6 @@ public class Reglage extends JFrame{
 		espace.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		espace.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		contentPane.add(espace);
-
 	}
 	
 	class SourisListener implements MouseListener{

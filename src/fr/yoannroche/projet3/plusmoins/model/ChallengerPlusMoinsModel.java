@@ -8,9 +8,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Resultat.Resultat;
 import fr.yoannroche.projet3.Generateur;
-import fr.yoannroche.projet3.plusmoins.view.gagner.VictoirePlusMoins;
-import fr.yoannroche.projet3.plusmoins.view.perdu.PerduPlusMoins;
 
 
 public class ChallengerPlusMoinsModel {
@@ -23,6 +22,7 @@ public class ChallengerPlusMoinsModel {
 	static JOptionPane jop2;
 	static Font arial2 = new Font ("arial", 10,10);
 	static Font impact = new Font ("impact", 17,17);
+	int jeu = 1;
 
 
 	public ChallengerPlusMoinsModel() {}
@@ -81,7 +81,7 @@ public class ChallengerPlusMoinsModel {
 		int tentatives = Integer.parseInt(tentative);
 
 		if(nbreTentative==tentatives) {
-			new PerduPlusMoins(null, "Perdu",nombreString,contentPane);
+			new Resultat(null, "Perdu",nombreString,contentPane,jeu).perdu();
 		}
 
 	}
@@ -121,7 +121,8 @@ public class ChallengerPlusMoinsModel {
 			blocProposition.setVisible(true);
 		}
 		if(tentative.getText().equals(nombreString)) {
-			new VictoirePlusMoins(null, "Gagner",nombreString,contentPane);
+			new Resultat(null, "Victoire",nombreString,contentPane,jeu).gagner();
+			
 		}
 	}
 }

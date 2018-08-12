@@ -13,9 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-import fr.yoannroche.projet3.plusmoins.view.gagner.VictoirePlusMoinsDef;
-import fr.yoannroche.projet3.plusmoins.view.perdu.PerduPlusMoinsDef;
+import Resultat.Resultat;
 
 public class DefenseurPlusMoinsModel {
 
@@ -37,12 +35,13 @@ public class DefenseurPlusMoinsModel {
 	private char tabMin [] = new char [cases];
 	private char tabMax[] = new char [cases];
 	private Icon[] tableauImg = new Icon[7];
+	int jeu = 2;
 
 	public DefenseurPlusMoinsModel() {
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
 		reglage.getString("tentatives");
 		bloc = reglage.getString("cases");
-		 cases = Integer.parseInt(bloc);
+		cases = Integer.parseInt(bloc);
 		
 	}
 
@@ -135,7 +134,7 @@ System.out.println(cases);
 
 		if(gagner==0) {
 			if((nbreTour+1)==tentatives) {
-				new VictoirePlusMoinsDef(null,"Gagner", codeSecret,contentPane,nombreCoup);
+				new Resultat(null, "Gagner",null,contentPane,jeu).gagner();
 			}
 		}
 	}
@@ -148,7 +147,7 @@ System.out.println(cases);
 
 		if(proposition.equals(codeSecret2)){
 			++gagner;
-			new PerduPlusMoinsDef(null, "Perdu",nbreTour,contentPane);
+			new Resultat(null, "Perdu",null,contentPane,jeu).perdu();
 		}
 	}
 

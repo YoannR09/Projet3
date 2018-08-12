@@ -12,11 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import Resultat.Resultat;
 import fr.yoannroche.projet3.Generateur;
-import fr.yoannroche.projet3.plusmoins.view.gagner.VictoirePlusMoins;
-import fr.yoannroche.projet3.plusmoins.view.gagner.VictoirePlusMoinsDuel;
-import fr.yoannroche.projet3.plusmoins.view.perdu.PerduPlusMoinsDef;
-import fr.yoannroche.projet3.plusmoins.view.perdu.PerduPlusMoinsDuel;
 
 public class DuelPlusMoinsModel {
 
@@ -36,6 +33,7 @@ public class DuelPlusMoinsModel {
 	private char tabProp[] = new char [cases];
 	private char tabMin [] = new char [cases];
 	private char tabMax[] = new char [cases];
+	int jeu = 3;
 
 	/**
 	 * Compare la tentative du joueur au code secret
@@ -100,7 +98,7 @@ public class DuelPlusMoinsModel {
 			tentativeJoueur(tentative, infosTentative,proposition);
 			if(tentative.getText().equals(nombreString)) {
 				if(gagner==false) {
-				new VictoirePlusMoinsDuel(null, "Gagner",nombreString,contentPane);
+				new Resultat(null, "Gagner",nombreString,contentPane,jeu).gagner();
 				gagner=true;
 				}
 			}
@@ -176,7 +174,7 @@ public class DuelPlusMoinsModel {
 
 		if(proposition.equals(codeSecret2)){
 			if(gagner==false){
-				new PerduPlusMoinsDuel(null,"Perdu" ,codeSecret2, contentPane);
+				new Resultat(null,"Perdu" ,codeSecret2, contentPane,jeu).perdu();
 			}
 		}
 	}
