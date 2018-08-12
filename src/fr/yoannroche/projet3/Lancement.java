@@ -36,13 +36,9 @@ public class Lancement extends JFrame{
 	private Dimension dim = new Dimension(400,100);
 	private Dimension dim2 = new Dimension(50,55);
 	private Dimension dim3 = new Dimension(100,30);
-	private Lancement l;
 	Font impact = new Font ("impact", 15,15);
 	Font impact2 = new Font ("impact", 13,13);
-	private int tentative;
-	private int cases;
-
-
+	
 	public Lancement() {
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

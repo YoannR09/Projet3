@@ -13,7 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import Resultat.Resultat;
+
+import fr.yoannroche.projet3.Resultat;
 
 public class DefenseurPlusMoinsModel {
 
@@ -288,10 +289,6 @@ System.out.println(cases);
 			else if(tabProp[i]==tabCode[i]){
 				indiceDev.setText(indiceDev.getText()+"=");
 			}
-
-
-
-
 		}
 		resultProp = new String(tabProp);
 
@@ -312,7 +309,7 @@ System.out.println(cases);
 			indiceDev.setText("");
 			nbreTour++;
 			tentativeOrdi(tentativeOrdi,codeSecret,nombreCoup,dialog, contentPane, image,nbreTour,indiceDev);
-			int i = ((int)(Math.random()*(7 - 1))+1);
+			int i = ((int)(Math.random()*(7 - 0))+0);
 			tableauImg[i] = new ImageIcon("images/"+i+".png");
 			image.setIcon(tableauImg[i]);
 		}

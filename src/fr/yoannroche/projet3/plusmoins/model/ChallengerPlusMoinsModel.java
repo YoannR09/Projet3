@@ -8,8 +8,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Resultat.Resultat;
 import fr.yoannroche.projet3.Generateur;
+import fr.yoannroche.projet3.Resultat;
 
 
 public class ChallengerPlusMoinsModel {

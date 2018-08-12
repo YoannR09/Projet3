@@ -136,16 +136,13 @@ public class DefenseurPlusMoins extends JFrame{
 		cadreOrdi.add(ordi);
 		cadreOrdi.add(scrollPane);
 		cadreOrdi.add(espace2);
-
 		tentativePanel.add(tentativeIA);
-	
 		refresh.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
 		refresh.setBorder(BorderFactory.createLineBorder(Color.black));
 		refresh.setBackground(Color.DARK_GRAY);
 		refresh.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
 			public void actionPerformed(ActionEvent event){ 
 				tentativeIA.setText("");
-
 			}  
 		});
 		refresh.setPreferredSize(new Dimension(20,20));
@@ -223,12 +220,9 @@ public class DefenseurPlusMoins extends JFrame{
 		fin.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.BLACK));
 		fin.setBackground(Color.getHSBColor(0.154f, 0.45f, 0.44f));
 		fin.setEnabled(false);
-		fin.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
+		fin.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){ 
-				
-				
 			def.finClick(tentativeOrdi,codeSecret,nombreCoup,dialog,contentPane,image,nombreTour,indiceDev,tentativeIA,fin,cadreOrdi);
-			
 			}  
 		});
 	}

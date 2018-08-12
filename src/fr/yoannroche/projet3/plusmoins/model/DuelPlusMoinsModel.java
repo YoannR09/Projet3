@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import Resultat.Resultat;
 import fr.yoannroche.projet3.Generateur;
+import fr.yoannroche.projet3.Resultat;
 
 public class DuelPlusMoinsModel {
 

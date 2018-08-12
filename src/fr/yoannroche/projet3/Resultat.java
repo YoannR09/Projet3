@@ -1,4 +1,4 @@
-package Resultat;
+package fr.yoannroche.projet3;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import fr.yoannroche.projet3.Lancement;
 import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.DefenseurPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.DuelPlusMoins;
@@ -175,7 +174,5 @@ public class Resultat extends JFrame {
 			quitter.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 			quitter.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		}
-
 	}
-
 }
