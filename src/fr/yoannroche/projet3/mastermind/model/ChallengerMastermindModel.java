@@ -21,9 +21,9 @@ public class ChallengerMastermindModel{
 	Generateur gen = new Generateur();
 	Control control = new Control();
 	private int [] couleurs = gen.getCouleurs();
+	private int [] propositions = new int [cases];
 	int proposition =0;
-	private int changer = 0;
-	private int placer = 0;
+
 	
 	
 
@@ -36,8 +36,19 @@ public class ChallengerMastermindModel{
 			blocTentative[nombreTentative].add(tabView[i]);	
 			tabView[i].setIcon(propositionIcon[i].getIcon());
 			control.couleurChiffre(propositionIcon[i].getIcon().toString(), null);
-			checkPosi(control.getProposition(),blocIndices,couleurs,nombreTentative);
-			System.out.println(control.getProposition());
+			if(control.getProposition()==couleurs[i]) {
+				++placer;
+				--changer;
+				blocIndices[nombreTentative].setText(" P : "+placer+"  C : "+changer+" ");
+				
+			}
+			for(int o =0;o<cases;o++) {
+			   if(control.getProposition()==couleurs[o]) {
+				   ++changer;
+				   blocIndices[nombreTentative].setText(" P : "+placer+"  C : "+changer+" ");
+				   break;
+			   }
+			}
 			
 		}
 		blocTentative[nombreTentative].revalidate();
@@ -77,23 +88,6 @@ public class ChallengerMastermindModel{
 		}
 		
 		
-	}
-	public void checkPosi(int proposition, JLabel[] blocIndices, int[] couleurs2,int nombreTentative){
-		for(int i = 0;i<cases;i++) {
-			if(proposition==couleurs2[i]) {
-				++changer;
-			}
-		}
-		blocIndices[nombreTentative].setText(" P : "+placer+"  C : "+changer+" ");
-	}
-	public void checkOk(int proposition, JLabel[] blocIndices, int[] couleurs2,int nombreTentative){
-		for(int i = 0;i<cases;i++) {
-			if(proposition==couleurs2[i]) {
-				
-				blocIndices[nombreTentative].setText(" P");
-				
-			}
-		}
 	}
 	
 }
