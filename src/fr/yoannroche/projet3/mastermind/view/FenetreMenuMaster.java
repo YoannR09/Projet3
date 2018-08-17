@@ -114,7 +114,7 @@ public class FenetreMenuMaster extends JFrame{
 			    	  ((JFrame) contentPaneMenu.getTopLevelAncestor()).dispose() ;
 			    	  
 			    	  if(mode1.isSelected()==true) {
-						Challenger chal = new Challenger();	
+						ChallengerMastermind chal = new ChallengerMastermind();
 						chal.setVisible(true);
 			    	  }
 			    	  if(mode2.isSelected()==true) {

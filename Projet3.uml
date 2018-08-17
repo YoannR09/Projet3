@@ -150,7 +150,7 @@
               <ownedAttribute xmi:type="uml:Property" xmi:id="_0QDksJrNEei3Ubk582PCpg" name="arial" visibility="private" type="_0P07MJrNEei3Ubk582PCpg" isUnique="false">
                 <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_0QIdMJrNEei3Ubk582PCpg" name="defaultValue">
                   <language>JAVA</language>
-                  <body>new Font(&quot;arial&quot;, 12, 12)</body>
+                  <body>new Font(&quot;arial&quot;, 11, 11)</body>
                 </defaultValue>
               </ownedAttribute>
               <ownedAttribute xmi:type="uml:Property" xmi:id="_0Q-KsJrNEei3Ubk582PCpg" name="clavier" visibility="private" isUnique="false">
@@ -189,6 +189,15 @@
                 </defaultValue>
               </ownedAttribute>
               <ownedAttribute xmi:type="uml:Property" xmi:id="_0SPWAJrNEei3Ubk582PCpg" name="boutonTentative" visibility="private" type="_0RP3gJrNEei3Ubk582PCpg" isUnique="false"/>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_9_O8UKBKEei6Eq8xHCWuEw" name="reglage" visibility="private" type="_0DxcMJrNEei3Ubk582PCpg" isUnique="false"/>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_9_cXsKBKEei6Eq8xHCWuEw" name="bloc" visibility="private" type="_0VfeUJrNEei3Ubk582PCpg" isUnique="false"/>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_9_c-wKBKEei6Eq8xHCWuEw" name="tentatives" visibility="private" type="_0VfeUJrNEei3Ubk582PCpg" isUnique="false"/>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_9_dl0KBKEei6Eq8xHCWuEw" name="cases" visibility="private" isUnique="false">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+              </ownedAttribute>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_9_eM4KBKEei6Eq8xHCWuEw" name="tentative" visibility="private" isUnique="false">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+              </ownedAttribute>
               <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0TLKIJrNEei3Ubk582PCpg" name="Reglage" specification="_0SXR0JrNEei3Ubk582PCpg">
                 <language>JAVA</language>
                 <body>&#xD;
@@ -260,13 +269,13 @@
     dev.setForeground(Color.orange);&#xD;
     dev.setFont(arial);&#xD;
     dev.setText(&quot; Acive le mode développeur pour voir toutes les solutions &quot;);&#xD;
-    cadreDev.setPreferredSize(new Dimension(180, 38));&#xD;
+    cadreDev.setPreferredSize(new Dimension(300, 60));&#xD;
     cadreDev.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));&#xD;
     cadreDev.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
     check.setForeground(Color.WHITE);&#xD;
     check.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));&#xD;
+    cadreDev.add(dev);&#xD;
     cadreDev.add(check);&#xD;
-    contentPane.add(dev);&#xD;
     contentPane.add(cadreDev);&#xD;
 </body>
               </ownedBehavior>
@@ -274,17 +283,17 @@
                 <language>JAVA</language>
                 <body>&#xD;
     JLabel tentative = new JLabel();&#xD;
-    cadreTentative.setPreferredSize(new Dimension(220, 33));&#xD;
+    cadreTentative.setPreferredSize(new Dimension(280, 60));&#xD;
     cadreTentative.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));&#xD;
     cadreTentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
-    contentPane.add(tentative);&#xD;
+    cadreTentative.add(tentative);&#xD;
     contentPane.add(cadreTentative);&#xD;
     tentative.setOpaque(true);&#xD;
     tentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
     tentative.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));&#xD;
     tentative.setForeground(Color.orange);&#xD;
     tentative.setFont(arial);&#xD;
-    tentative.setText(&quot; Nombres de tentative pour trouver le code &quot;);&#xD;
+    tentative.setText(&quot;    Nombres de tentative pour trouver le code    &quot;);&#xD;
     this.boutonTentative = new JRadioButton[5];&#xD;
     int i = 0;&#xD;
     for (int c : tenta) {&#xD;
@@ -308,17 +317,17 @@
                 <language>JAVA</language>
                 <body>&#xD;
     JLabel cases = new JLabel();&#xD;
-    cadreCases.setPreferredSize(new Dimension(280, 33));&#xD;
+    cadreCases.setPreferredSize(new Dimension(280, 60));&#xD;
     cadreCases.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));&#xD;
     cadreCases.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
-    contentPane.add(cases);&#xD;
+    cadreCases.add(cases);&#xD;
     contentPane.add(cadreCases);&#xD;
     cases.setOpaque(true);&#xD;
     cases.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
     cases.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));&#xD;
     cases.setForeground(Color.orange);&#xD;
     cases.setFont(arial);&#xD;
-    cases.setText(&quot; Nombres de chiffres ou couleurs à trouver &quot;);&#xD;
+    cases.setText(&quot;    Nombres de chiffres ou couleurs à trouver    &quot;);&#xD;
     this.bouton = new JRadioButton[10];&#xD;
     int i = 0;&#xD;
     for (int c : clavier) {&#xD;
@@ -341,20 +350,35 @@
               <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0VIR8JrNEei3Ubk582PCpg" name="sauvegardeReglage" specification="_0VEnkJrNEei3Ubk582PCpg">
                 <language>JAVA</language>
                 <body>&#xD;
-    ResourceBundle reglage = ResourceBundle.getBundle(&quot;Config&quot;);&#xD;
-    reglage.getString(&quot;tentatives&quot;);&#xD;
-    reglage.getString(&quot;cases&quot;);&#xD;
-    if (check.isSelected() == true) {&#xD;
-    //dev=1;&#xD;
-    }&#xD;
-    for (int i = 0; i &lt; clavier.length; i++) {&#xD;
-        if (bouton[i].isSelected() == true) {&#xD;
+    try {&#xD;
+        Properties prop = new Properties();&#xD;
+        File fProp = new File(&quot;ressources/Config.properties&quot;);&#xD;
+        FileInputStream stream = new FileInputStream(fProp);&#xD;
+        prop.load(stream);&#xD;
+        if (check.isSelected() == true) {&#xD;
+            String newDev = Integer.toString(1);&#xD;
+            prop.setProperty(&quot;dev&quot;, newDev);&#xD;
+        } else {&#xD;
+            String newDev = Integer.toString(0);&#xD;
+            prop.setProperty(&quot;dev&quot;, newDev);&#xD;
         }&#xD;
-    }&#xD;
-    for (int i = 0; i &lt; tenta.length; i++) {&#xD;
-        if (boutonTentative[i].isSelected() == true) {&#xD;
-            System.out.println(i + 4);&#xD;
+        for (int i = 0; i &lt; clavier.length; i++) {&#xD;
+            if (bouton[i].isSelected() == true) {&#xD;
+                cases = (i + 4);&#xD;
+                String newCases = Integer.toString(cases);&#xD;
+                prop.setProperty(&quot;cases&quot;, newCases);&#xD;
+            }&#xD;
         }&#xD;
+        for (int i = 0; i &lt; tenta.length; i++) {&#xD;
+            if (boutonTentative[i].isSelected() == true) {&#xD;
+                tentative = (i + 4);&#xD;
+                String newTenta = Integer.toString(tentative);&#xD;
+                prop.setProperty(&quot;tentatives&quot;, newTenta);&#xD;
+            }&#xD;
+        }&#xD;
+        FileOutputStream oStream = new FileOutputStream(fProp);&#xD;
+        prop.store(oStream, &quot;Reglage&quot;);&#xD;
+    } catch (Exception e) {&#xD;
     }&#xD;
 </body>
               </ownedBehavior>
@@ -1876,7 +1900,7 @@
                       <body>new JButton(&quot;Retour&quot;)</body>
                     </defaultValue>
                   </ownedAttribute>
-                  <ownedAttribute xmi:type="uml:Property" xmi:id="_03pwMJrNEei3Ubk582PCpg" name="sListener" visibility="private" type="_03h0YJrNEei3Ubk582PCpg" isUnique="false">
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_03pwMJrNEei3Ubk582PCpg" name="sListener" visibility="private" type="_-CRCMKBKEei6Eq8xHCWuEw" isUnique="false">
                     <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_03szgJrNEei3Ubk582PCpg" name="defaultValue">
                       <language>JAVA</language>
                       <body>new SourisListener()</body>
@@ -2629,6 +2653,7 @@
                     </ownedOperation>
                   </nestedClassifier>
                 </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_-CRCMKBKEei6Eq8xHCWuEw" name="SourisListener"/>
               </packagedElement>
               <packagedElement xmi:type="uml:Package" xmi:id="_0c3RoJrNEei3Ubk582PCpg" name="model">
                 <packagedElement xmi:type="uml:Class" xmi:id="_0c5G0JrNEei3Ubk582PCpg" name="CodeCacher" visibility="public">
@@ -3319,6 +3344,13 @@
                       <body>new Font(&quot;impact&quot;, 17, 17)</body>
                     </defaultValue>
                   </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-C-M0KBKEei6Eq8xHCWuEw" name="jeu" visibility="private" isUnique="false">
+                    <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-C-M0aBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>1</body>
+                    </defaultValue>
+                  </ownedAttribute>
                   <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_08Vb4JrNEei3Ubk582PCpg" name="ChallengerPlusMoinsModel" specification="_08QjYJrNEei3Ubk582PCpg">
                     <language>JAVA</language>
                     <body>&#xD;
@@ -3363,7 +3395,7 @@
     tentative = reglage.getString(&quot;tentatives&quot;);&#xD;
     int tentatives = Integer.parseInt(tentative);&#xD;
     if (nbreTentative == tentatives) {&#xD;
-        new PerduPlusMoins(null, &quot;Perdu&quot;, nombreString, contentPane);&#xD;
+        new Resultat(null, &quot;Perdu&quot;, nombreString, contentPane, jeu).perdu();&#xD;
     }&#xD;
 </body>
                   </ownedBehavior>
@@ -3398,7 +3430,7 @@
         blocProposition.setVisible(true);&#xD;
     }&#xD;
     if (tentative.getText().equals(nombreString)) {&#xD;
-        new VictoirePlusMoins(null, &quot;Gagner&quot;, nombreString, contentPane);&#xD;
+        new Resultat(null, &quot;Victoire&quot;, nombreString, contentPane, jeu).gagner();&#xD;
     }&#xD;
 </body>
                   </ownedBehavior>
@@ -3474,10 +3506,10 @@
                     </defaultValue>
                   </ownedAttribute>
                   <ownedAttribute xmi:type="uml:Property" xmi:id="_0-oh8JrNEei3Ubk582PCpg" name="gagner" visibility="private" isUnique="false">
-                    <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                    <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
                     <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_0-qXIJrNEei3Ubk582PCpg" name="defaultValue">
                       <language>JAVA</language>
-                      <body>0</body>
+                      <body>false</body>
                     </defaultValue>
                   </ownedAttribute>
                   <ownedAttribute xmi:type="uml:Property" xmi:id="_0-szYJrNEei3Ubk582PCpg" name="info" visibility="private" isUnique="false">
@@ -3487,7 +3519,7 @@
                     <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
                     <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_0-xr4JrNEei3Ubk582PCpg" name="defaultValue">
                       <language>JAVA</language>
-                      <body>4</body>
+                      <body>Integer.parseInt(reglage.getString(&quot;cases&quot;))</body>
                     </defaultValue>
                   </ownedAttribute>
                   <ownedAttribute xmi:type="uml:Property" xmi:id="_0-0IIJrNEei3Ubk582PCpg" name="tabProp" visibility="private" isUnique="false">
@@ -3509,6 +3541,19 @@
                     <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_0_CxoJrNEei3Ubk582PCpg" name="defaultValue">
                       <language>JAVA</language>
                       <body>new char[cases]</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-DOrgaBKEei6Eq8xHCWuEw" name="reglage" visibility="private" type="_-DLBIaBKEei6Eq8xHCWuEw" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-DPSkKBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>ResourceBundle.getBundle(&quot;Config&quot;)</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-DRHwKBKEei6Eq8xHCWuEw" name="jeu" visibility="private" isUnique="false">
+                    <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-DRu0KBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>3</body>
                     </defaultValue>
                   </ownedAttribute>
                   <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0_SpQJrNEei3Ubk582PCpg" name="tentativeJoueur" specification="_0_HDEJrNEei3Ubk582PCpg">
@@ -3546,6 +3591,12 @@
         ok.setEnabled(true);&#xD;
     } else if (codeSecret.getText().length() == nombreString.length()) {&#xD;
         tentativeJoueur(tentative, infosTentative, proposition);&#xD;
+        if (tentative.getText().equals(nombreString)) {&#xD;
+            if (gagner == false) {&#xD;
+                new Resultat(null, &quot;Gagner&quot;, nombreString, contentPane, jeu).gagner();&#xD;
+                gagner = true;&#xD;
+            }&#xD;
+        }&#xD;
         cadreJ.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
         cadreOrdi.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.154f, 0.85f, 0.94f)));&#xD;
         tentativeOrdi(indiceDev, codeSecret, dialog, contentPane, nbreTour);&#xD;
@@ -3559,12 +3610,6 @@
         proposition.setFont(impact);&#xD;
         ok.setEnabled(true);&#xD;
         ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));&#xD;
-    }&#xD;
-    if (tentative.getText().equals(nombreString)) {&#xD;
-        if (gagner == 0) {&#xD;
-            new VictoirePlusMoinsDuel(null, &quot;Gagner&quot;, nombreString, contentPane);&#xD;
-            gagner++;&#xD;
-        }&#xD;
     }&#xD;
 </body>
                   </ownedBehavior>
@@ -3601,9 +3646,8 @@
                     <language>JAVA</language>
                     <body>&#xD;
     if (proposition.equals(codeSecret2)) {&#xD;
-        if (gagner == 0) {&#xD;
-            ++gagner;&#xD;
-            new PerduPlusMoinsDuel(null, &quot;Perdu&quot;, codeSecret2, contentPane);&#xD;
+        if (gagner == false) {&#xD;
+            new Resultat(null, &quot;Perdu&quot;, codeSecret2, contentPane, jeu).perdu();&#xD;
         }&#xD;
     }&#xD;
 </body>
@@ -3749,6 +3793,26 @@
     int cases = Integer.parseInt(bloc);&#xD;
     if (nombreClick == cases) {&#xD;
         blocProposition.setVisible(false);&#xD;
+    }&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_-DfKMaBKEei6Eq8xHCWuEw" name="finClick" specification="_-DcG4KBKEei6Eq8xHCWuEw">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    if (!tentativeIA.getText().equals(indiceDev.getText())) {&#xD;
+        fin.setEnabled(true);&#xD;
+        fin.setBackground(Color.getHSBColor(0.154f, 0.85f, 0.94f));&#xD;
+        JOptionPane.showMessageDialog(null, &quot;Les indices entrés ne sont pas bons !!&quot;, &quot;Erreur&quot;, JOptionPane.ERROR_MESSAGE);&#xD;
+    } else if (tentativeIA.getText().equals(indiceDev.getText())) {&#xD;
+        dialog.setText(dialog.getText() + &quot;  &quot; + indiceDev.getText() + &quot;\n&quot;);&#xD;
+        ok.setEnabled(true);&#xD;
+        ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));&#xD;
+        tentativeIA.setText(&quot;&quot;);&#xD;
+        fin.setEnabled(false);&#xD;
+        cadreJ.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.154f, 0.85f, 0.94f)));&#xD;
+        cadreOrdi.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+        indiceDev.setText(&quot;&quot;);&#xD;
+        tour.setText(&quot; Nombre de tour : &quot; + nbreTour + &quot; &quot;);&#xD;
     }&#xD;
 </body>
                   </ownedBehavior>
@@ -3913,6 +3977,16 @@
                       <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
                     </ownedParameter>
                   </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_-DcG4KBKEei6Eq8xHCWuEw" name="finClick" visibility="public" method="_-DfKMaBKEei6Eq8xHCWuEw">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_-Dct8KBKEei6Eq8xHCWuEw" name="tentativeIA" type="_0YnDwJrNEei3Ubk582PCpg"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_-DdVAKBKEei6Eq8xHCWuEw" name="ok" type="_0PPFUJrNEei3Ubk582PCpg"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_-Dd8EKBKEei6Eq8xHCWuEw" name="indiceDev" type="_0YnDwJrNEei3Ubk582PCpg"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_-Dd8EaBKEei6Eq8xHCWuEw" name="fin" type="_0PPFUJrNEei3Ubk582PCpg"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_-DejIKBKEei6Eq8xHCWuEw" name="cadreJ" type="_0MzcYJrNEei3Ubk582PCpg"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_-DejIaBKEei6Eq8xHCWuEw" name="cadreOrdi" type="_0MzcYJrNEei3Ubk582PCpg"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_-DejIqBKEei6Eq8xHCWuEw" name="tour" type="_0YnDwJrNEei3Ubk582PCpg"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_-DfKMKBKEei6Eq8xHCWuEw" name="dialog" type="_0hVh8JrNEei3Ubk582PCpg"/>
+                  </ownedOperation>
                 </packagedElement>
                 <packagedElement xmi:type="uml:Class" xmi:id="_1D3AMJrNEei3Ubk582PCpg" name="DefenseurPlusMoinsModel" visibility="public">
                   <ownedAttribute xmi:type="uml:Property" xmi:id="_1D6DgJrNEei3Ubk582PCpg" name="bloc" visibility="private" type="_0VfeUJrNEei3Ubk582PCpg" isUnique="false"/>
@@ -3970,7 +4044,7 @@
                     <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
                     <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_1E7-QJrNEei3Ubk582PCpg" name="defaultValue">
                       <language>JAVA</language>
-                      <body>4</body>
+                      <body>Integer.parseInt(reglage.getString(&quot;cases&quot;))</body>
                     </defaultValue>
                   </ownedAttribute>
                   <ownedAttribute xmi:type="uml:Property" xmi:id="_1E-agJrNEei3Ubk582PCpg" name="tabProp" visibility="private" isUnique="false">
@@ -4002,14 +4076,32 @@
                       <body>new Icon[7]</body>
                     </defaultValue>
                   </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-Dme8KBKEei6Eq8xHCWuEw" name="reglage" visibility="private" type="_-DLBIaBKEei6Eq8xHCWuEw" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-DnGAKBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>ResourceBundle.getBundle(&quot;Config&quot;)</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-Do7MKBKEei6Eq8xHCWuEw" name="jeu" visibility="private" isUnique="false">
+                    <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-DpiQKBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>2</body>
+                    </defaultValue>
+                  </ownedAttribute>
                   <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1Fpv8JrNEei3Ubk582PCpg" name="DefenseurPlusMoinsModel" specification="_1FgmAJrNEei3Ubk582PCpg">
                     <language>JAVA</language>
                     <body>&#xD;
+    ResourceBundle reglage = ResourceBundle.getBundle(&quot;Config&quot;);&#xD;
+    reglage.getString(&quot;tentatives&quot;);&#xD;
+    bloc = reglage.getString(&quot;cases&quot;);&#xD;
+    cases = Integer.parseInt(bloc);&#xD;
 </body>
                   </ownedBehavior>
                   <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1Fy54JrNEei3Ubk582PCpg" name="tentativeOrdi" specification="_1FrlIJrNEei3Ubk582PCpg">
                     <language>JAVA</language>
                     <body>&#xD;
+    System.out.println(cases);&#xD;
     String codeCache = codeSecret2.getText();&#xD;
     char tabCode[] = codeCache.toCharArray();&#xD;
     if (nbreTour2 == 0) {&#xD;
@@ -4056,7 +4148,7 @@
     int tentatives = Integer.parseInt(tentative);&#xD;
     if (gagner == 0) {&#xD;
         if ((nbreTour + 1) == tentatives) {&#xD;
-            new VictoirePlusMoinsDef(null, &quot;Gagner&quot;, codeSecret, contentPane, nombreCoup);&#xD;
+            new Resultat(null, &quot;Gagner&quot;, null, contentPane, jeu).gagner();&#xD;
         }&#xD;
     }&#xD;
 </body>
@@ -4066,7 +4158,7 @@
                     <body>&#xD;
     if (proposition.equals(codeSecret2)) {&#xD;
         ++gagner;&#xD;
-        new PerduPlusMoinsDef(null, &quot;Perdu&quot;, nbreTour, contentPane);&#xD;
+        new Resultat(null, &quot;Perdu&quot;, null, contentPane, jeu).perdu();&#xD;
     }&#xD;
 </body>
                   </ownedBehavior>
@@ -4204,6 +4296,7 @@
         fin.setBackground(Color.getHSBColor(0.154f, 0.85f, 0.94f));&#xD;
         JOptionPane.showMessageDialog(null, &quot;Les indices entrés ne sont pas bons !!&quot;, &quot;Erreur&quot;, JOptionPane.ERROR_MESSAGE);&#xD;
     } else if (tentativeIA.getText().equals(indiceDev.getText())) {&#xD;
+        dialog.setText(dialog.getText() + &quot;  &quot; + indiceDev.getText() + &quot;\n&quot;);&#xD;
         tentativeIA.setText(&quot;&quot;);&#xD;
         cadreOrdi.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
         indiceDev.setText(&quot;&quot;);&#xD;
@@ -4421,7 +4514,7 @@
                   <ownedAttribute xmi:type="uml:Property" xmi:id="_1K7RgJrNEei3Ubk582PCpg" name="supprimer" visibility="private" type="_0PPFUJrNEei3Ubk582PCpg" isUnique="false">
                     <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_1K-U0JrNEei3Ubk582PCpg" name="defaultValue">
                       <language>JAVA</language>
-                      <body>new JButton(&quot; Suppr &quot;)</body>
+                      <body>new JButton(&quot; Effacer &quot;)</body>
                     </defaultValue>
                   </ownedAttribute>
                   <ownedAttribute xmi:type="uml:Property" xmi:id="_1LB_MJrNEei3Ubk582PCpg" name="ok" visibility="private" type="_0PPFUJrNEei3Ubk582PCpg" isUnique="false">
@@ -4572,6 +4665,31 @@
                       <body>new DuelPlusMoinsModel()</body>
                     </defaultValue>
                   </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-EM74KBKEei6Eq8xHCWuEw" name="attention" visibility="private" type="_0YnDwJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-EM74aBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JLabel()</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-EOxEKBKEei6Eq8xHCWuEw" name="aide" visibility="private" type="_0PPFUJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-EPYIKBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JButton(&quot; Aide &quot;)</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-EX7AKBKEei6Eq8xHCWuEw" name="nombreTour" visibility="private" isUnique="false">
+                    <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-EX7AaBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>0</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-EYiEKBKEei6Eq8xHCWuEw" name="tour" visibility="private" type="_0YnDwJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-EYiEaBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JLabel()</body>
+                    </defaultValue>
+                  </ownedAttribute>
                   <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1M5ncJrNEei3Ubk582PCpg" name="DuelPlusMoins" specification="_1MvPYJrNEei3Ubk582PCpg">
                     <language>JAVA</language>
                     <body>&#xD;
@@ -4643,9 +4761,8 @@
     ordi.setOpaque(true);&#xD;
     ordi.setFont(arial);&#xD;
     ordi.setBorder(BorderFactory.createLineBorder(Color.black));&#xD;
+    JScrollPane scrollPane = new JScrollPane(dialog, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);&#xD;
     dialog.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));&#xD;
-    dialog.setPreferredSize(new Dimension(150, 80));&#xD;
-    dialog.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
     dialog.setEditable(false);&#xD;
     dialog.setText(&quot; \n Je suis prêt \n c'est quand vous voulez ! &quot;);&#xD;
     JPanel tentativePanel = new JPanel();&#xD;
@@ -4667,7 +4784,9 @@
     cadreOrdi.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));&#xD;
     cadreOrdi.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
     cadreOrdi.add(ordi);&#xD;
-    cadreOrdi.add(dialog);&#xD;
+    cadreOrdi.add(scrollPane);&#xD;
+    scrollPane.setPreferredSize(new Dimension(160, 80));&#xD;
+    scrollPane.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
     cadreOrdi.add(espace2);&#xD;
     tentativePanel.add(tentativeIA);&#xD;
     refresh.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));&#xD;
@@ -4773,7 +4892,7 @@
                     <language>JAVA</language>
                     <body>&#xD;
     JPanel espaceRetour = new JPanel();&#xD;
-    espaceRetour.setPreferredSize(new Dimension(320, 20));&#xD;
+    espaceRetour.setPreferredSize(new Dimension(250, 20));&#xD;
     espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));&#xD;
     retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));&#xD;
     retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.24f)));&#xD;
@@ -4787,19 +4906,41 @@
             menu.setVisible(true);&#xD;
         }&#xD;
     });&#xD;
+    aide.setBackground(Color.getHSBColor(0.134f, 0.85f, 0.94f));&#xD;
+    aide.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.24f)));&#xD;
+    aide.setForeground(Color.DARK_GRAY);&#xD;
+    aide.addMouseListener(new SourisListener());&#xD;
+    aide.addActionListener(new ActionListener() {&#xD;
+&#xD;
+        public void actionPerformed(ActionEvent event) {&#xD;
+            ((JFrame) contentPane.getTopLevelAncestor()).dispose();&#xD;
+            AideDuelPlusMoins aideMenu = new AideDuelPlusMoins();&#xD;
+            aideMenu.setVisible(true);&#xD;
+        }&#xD;
+    });&#xD;
     JPanel blocRegle = new JPanel();&#xD;
     blocRegle.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
-    blocRegle.setPreferredSize(new Dimension(500, 40));&#xD;
+    blocRegle.setPreferredSize(new Dimension(500, 45));&#xD;
     JLabel regle = new JLabel();&#xD;
     int casesInt = Integer.parseInt(bloc);&#xD;
     regle.setText(&quot; Le plus rapide à trouver le code secret à &quot; + casesInt + &quot; chiffres de l'autre gagne.&quot;);&#xD;
     regle.setFont(arial);&#xD;
+    attention.setFont(arial2);&#xD;
+    attention.setText(&quot; Le cadre jaune indique ou le joueur doit poser son attention &quot;);&#xD;
     contentPane.add(retour);&#xD;
     contentPane.add(espaceRetour);&#xD;
+    contentPane.add(aide);&#xD;
     blocRegle.add(regle);&#xD;
+    blocRegle.add(attention);&#xD;
     contentPane.add(blocRegle);&#xD;
     JPanel espace = new JPanel();&#xD;
-    espace.setPreferredSize(new Dimension(520, 5));&#xD;
+    tour.setText(&quot; Nombre de tour : &quot; + &quot; &quot; + 0 + &quot; &quot;);&#xD;
+    tour.setOpaque(true);&#xD;
+    tour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    tour.setBackground(Color.getHSBColor(0.544f, 0.15f, 0.26f));&#xD;
+    tour.setForeground(Color.WHITE);&#xD;
+    espace.add(tour);&#xD;
+    espace.setPreferredSize(new Dimension(520, 30));&#xD;
     espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));&#xD;
     contentPane.add(espace);&#xD;
 </body>
@@ -4854,8 +4995,7 @@
     ActionListener() {&#xD;
 &#xD;
         public void actionPerformed(ActionEvent event) {&#xD;
-            duel.finClick(tentativeIA, ok, indiceDev, fin, cadreJ, cadreOrdi);&#xD;
-            fin.setBackground(Color.getHSBColor(0.154f, 0.45f, 0.44f));&#xD;
+            duel.finClick(tentativeIA, ok, indiceDev, fin, cadreJ, cadreOrdi, tour, dialog);&#xD;
         }&#xD;
     });&#xD;
     contentPane.add(supprimer);&#xD;
@@ -4883,6 +5023,57 @@
     contentPane.add(blocProposition);&#xD;
 </body>
                   </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_-EdakKBKEei6Eq8xHCWuEw" name="DuelPlusMoins" specification="_-EZJIKBKEei6Eq8xHCWuEw">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    this.setTitle(&quot;Duel&quot;);&#xD;
+    this.setSize(460, 470);&#xD;
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);&#xD;
+    this.setLocationRelativeTo(null);&#xD;
+    this.setContentPane(contentPane);&#xD;
+    this.setResizable(false);&#xD;
+    contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));&#xD;
+    ResourceBundle reglage = ResourceBundle.getBundle(&quot;Config&quot;);&#xD;
+    reglage.getString(&quot;tentatives&quot;);&#xD;
+    bloc = reglage.getString(&quot;cases&quot;);&#xD;
+    initRegle();&#xD;
+    initCadreJoueur();&#xD;
+    initVs();&#xD;
+    initCadreOrdi();&#xD;
+    initBlocProposition();&#xD;
+    initBlocTest();&#xD;
+    initCadreDev();&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_-EeBoaBKEei6Eq8xHCWuEw" name="initCadreDev" specification="_-EeBoKBKEei6Eq8xHCWuEw">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    ResourceBundle reglage = ResourceBundle.getBundle(&quot;Config&quot;);&#xD;
+    String devStatus = reglage.getString(&quot;dev&quot;);&#xD;
+    int devMode = Integer.parseInt(devStatus);&#xD;
+    if (devMode == 1) {&#xD;
+        JLabel codeSecret = new JLabel();&#xD;
+        codeSecret.setFont(arial2);&#xD;
+        codeSecret.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));&#xD;
+        codeSecret.setText(&quot;&quot;);&#xD;
+        JLabel text = new JLabel();&#xD;
+        text.setText(&quot;Code secret de l'ordinateur :&quot;);&#xD;
+        text.setFont(arial2);&#xD;
+        text.setForeground(Color.WHITE);&#xD;
+        JLabel text2 = new JLabel();&#xD;
+        text2.setText(&quot; Les indices à indiquer sont :&quot;);&#xD;
+        text2.setFont(arial2);&#xD;
+        text2.setForeground(Color.WHITE);&#xD;
+        espaceDev.add(text);&#xD;
+        espaceDev.add(codeSecret);&#xD;
+        duel.dev(codeSecret);&#xD;
+        espaceDev.add(text2);&#xD;
+        espaceDev.add(indiceDev);&#xD;
+        indiceDev.setForeground(Color.orange);&#xD;
+        indiceDev.setFont(arial2);&#xD;
+    }&#xD;
+</body>
+                  </ownedBehavior>
                   <ownedOperation xmi:type="uml:Operation" xmi:id="_1MvPYJrNEei3Ubk582PCpg" name="DuelPlusMoins" visibility="public" method="_1M5ncJrNEei3Ubk582PCpg">
                     <ownedParameter xmi:type="uml:Parameter" xmi:id="_1M3yQJrNEei3Ubk582PCpg" name="modeDev">
                       <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
@@ -4899,6 +5090,8 @@
                   <ownedOperation xmi:type="uml:Operation" xmi:id="_1NYIkJrNEei3Ubk582PCpg" name="initRegle" visibility="private" method="_1Nak0JrNEei3Ubk582PCpg"/>
                   <ownedOperation xmi:type="uml:Operation" xmi:id="_1NdoIJrNEei3Ubk582PCpg" name="initBlocTest" visibility="private" method="_1NfdUJrNEei3Ubk582PCpg"/>
                   <ownedOperation xmi:type="uml:Operation" xmi:id="_1NigoJrNEei3Ubk582PCpg" name="initBlocProposition" visibility="private" method="_1NjuwJrNEei3Ubk582PCpg"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_-EZJIKBKEei6Eq8xHCWuEw" name="DuelPlusMoins" visibility="public" method="_-EdakKBKEei6Eq8xHCWuEw"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_-EeBoKBKEei6Eq8xHCWuEw" name="initCadreDev" visibility="private" method="_-EeBoaBKEei6Eq8xHCWuEw"/>
                   <nestedClassifier xmi:type="uml:Class" xmi:id="_1NnZIJrNEei3Ubk582PCpg" name="SourisListener">
                     <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_1NpOUJrNEei3Ubk582PCpg" name="SourisListener implements MouseListener" client="_1NnZIJrNEei3Ubk582PCpg" supplier="_0TxAAZrNEei3Ubk582PCpg" contract="_0TxAAZrNEei3Ubk582PCpg"/>
                     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1Nv8AJrNEei3Ubk582PCpg" name="mouseClicked" specification="_1NrqkJrNEei3Ubk582PCpg">
@@ -4921,6 +5114,10 @@
         retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.54f));&#xD;
         retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.34f)));&#xD;
     }&#xD;
+    if (arg0.getSource() == aide) {&#xD;
+        aide.setBackground(Color.getHSBColor(0.134f, 0.95f, 0.99f));&#xD;
+        aide.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.55f, 0.34f)));&#xD;
+    }&#xD;
 </body>
                     </ownedBehavior>
                     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1OBo0JrNEei3Ubk582PCpg" name="mouseExited" specification="_1N8wUJrNEei3Ubk582PCpg">
@@ -4933,6 +5130,8 @@
     ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
     supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
     supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));&#xD;
+    aide.setBackground(Color.getHSBColor(0.134f, 0.85f, 0.94f));&#xD;
+    aide.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.24f)));&#xD;
 </body>
                     </ownedBehavior>
                     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1OKywJrNEei3Ubk582PCpg" name="mousePressed" specification="_1OF6QJrNEei3Ubk582PCpg">
@@ -4950,6 +5149,8 @@
     ok.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
     supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
     supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));&#xD;
+    aide.setBackground(Color.getHSBColor(0.134f, 0.85f, 0.94f));&#xD;
+    aide.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.24f)));&#xD;
 </body>
                     </ownedBehavior>
                     <ownedOperation xmi:type="uml:Operation" xmi:id="_1NrqkJrNEei3Ubk582PCpg" name="mouseClicked" visibility="public" method="_1Nv8AJrNEei3Ubk582PCpg">
@@ -5210,6 +5411,22 @@
                   <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1SFCYJrNEei3Ubk582PCpg" name="ChallengerPlusMoins" specification="_1RzVkJrNEei3Ubk582PCpg">
                     <language>JAVA</language>
                     <body>&#xD;
+    this.setTitle(&quot;Challenger&quot;);&#xD;
+    this.setSize(400, 300);&#xD;
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);&#xD;
+    this.setLocationRelativeTo(null);&#xD;
+    this.setContentPane(contentPane);&#xD;
+    this.setResizable(false);&#xD;
+    contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));&#xD;
+    ResourceBundle reglage = ResourceBundle.getBundle(&quot;Config&quot;);&#xD;
+    tentatives = reglage.getString(&quot;tentatives&quot;);&#xD;
+    bloc = reglage.getString(&quot;cases&quot;);&#xD;
+    initRegle();&#xD;
+    initTentative();&#xD;
+    initInfos();&#xD;
+    initBlocProposition();&#xD;
+    initBlocTest();&#xD;
+    initCadreDev();&#xD;
 </body>
                   </ownedBehavior>
                   <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1SUS8JrNEei3Ubk582PCpg" name="ChallengerPlusMoins" specification="_1SJ64JrNEei3Ubk582PCpg">
@@ -5410,6 +5627,32 @@
     contentPane.add(blocProposition);&#xD;
 </body>
                   </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_-Ff8YKBKEei6Eq8xHCWuEw" name="initCadreDev" specification="_-FfVUKBKEei6Eq8xHCWuEw">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    ResourceBundle reglage = ResourceBundle.getBundle(&quot;Config&quot;);&#xD;
+    String devStatus = reglage.getString(&quot;dev&quot;);&#xD;
+    int devMode = Integer.parseInt(devStatus);&#xD;
+    if (devMode == 1) {&#xD;
+        JLabel codeSecret = new JLabel();&#xD;
+        codeSecret.setFont(arial2);&#xD;
+        codeSecret.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));&#xD;
+        codeSecret.setText(&quot;&quot;);&#xD;
+        JPanel cadreDev = new JPanel();&#xD;
+        JLabel text = new JLabel();&#xD;
+        text.setText(&quot;Code secret : &quot;);&#xD;
+        text.setFont(arial2);&#xD;
+        text.setForeground(Color.WHITE);&#xD;
+        cadreDev.add(codeSecret);&#xD;
+        cadreDev.setPreferredSize(new Dimension(50, 15));&#xD;
+        cadreDev.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));&#xD;
+        espace2.add(cadreDev);&#xD;
+        espace2.add(text);&#xD;
+        espace2.add(codeSecret);&#xD;
+        chal.dev(codeSecret);&#xD;
+    }&#xD;
+</body>
+                  </ownedBehavior>
                   <ownedOperation xmi:type="uml:Operation" xmi:id="_1RzVkJrNEei3Ubk582PCpg" name="ChallengerPlusMoins" visibility="public" method="_1SFCYJrNEei3Ubk582PCpg"/>
                   <ownedOperation xmi:type="uml:Operation" xmi:id="_1SJ64JrNEei3Ubk582PCpg" name="ChallengerPlusMoins" visibility="public" method="_1SUS8JrNEei3Ubk582PCpg">
                     <ownedParameter xmi:type="uml:Parameter" xmi:id="_1SRPoJrNEei3Ubk582PCpg" name="modeDev">
@@ -5426,6 +5669,7 @@
                   <ownedOperation xmi:type="uml:Operation" xmi:id="_1TAPcJrNEei3Ubk582PCpg" name="initRegle" visibility="private" method="_1TAPcZrNEei3Ubk582PCpg"/>
                   <ownedOperation xmi:type="uml:Operation" xmi:id="_1TA2gJrNEei3Ubk582PCpg" name="initBlocTest" visibility="private" method="_1TA2gZrNEei3Ubk582PCpg"/>
                   <ownedOperation xmi:type="uml:Operation" xmi:id="_1TDSwJrNEei3Ubk582PCpg" name="initBlocProposition" visibility="private" method="_1TEg4JrNEei3Ubk582PCpg"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_-FfVUKBKEei6Eq8xHCWuEw" name="initCadreDev" visibility="private" method="_-Ff8YKBKEei6Eq8xHCWuEw"/>
                   <nestedClassifier xmi:type="uml:Class" xmi:id="_1TJZYJrNEei3Ubk582PCpg" name="SourisListener">
                     <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_1TLOkJrNEei3Ubk582PCpg" name="SourisListener implements MouseListener" client="_1TJZYJrNEei3Ubk582PCpg" supplier="_0TxAAZrNEei3Ubk582PCpg" contract="_0TxAAZrNEei3Ubk582PCpg"/>
                     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1TUYgJrNEei3Ubk582PCpg" name="mouseClicked" specification="_1TO48JrNEei3Ubk582PCpg">
@@ -5942,9 +6186,8 @@
     ordi.setOpaque(true);&#xD;
     ordi.setFont(arial);&#xD;
     ordi.setBorder(BorderFactory.createLineBorder(Color.black));&#xD;
+    JScrollPane scrollPane = new JScrollPane(dialog, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);&#xD;
     dialog.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));&#xD;
-    dialog.setPreferredSize(new Dimension(150, 80));&#xD;
-    dialog.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
     dialog.setEditable(false);&#xD;
     dialog.setText(&quot; \n Je suis prêt \n c'est quand vous voulez ! &quot;);&#xD;
     JPanel tentativePanel = new JPanel();&#xD;
@@ -5959,6 +6202,8 @@
     tentativeIA.setFont(arial);&#xD;
     tentativeIA.setText(&quot;Entrez les indices&quot;);&#xD;
     JPanel espace2 = new JPanel();&#xD;
+    scrollPane.setPreferredSize(new Dimension(160, 80));&#xD;
+    scrollPane.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
     espace2.setPreferredSize(new Dimension(65, 5));&#xD;
     espace2.setBackground(Color.DARK_GRAY);&#xD;
     espace2.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
@@ -5966,7 +6211,7 @@
     cadreOrdi.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));&#xD;
     cadreOrdi.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
     cadreOrdi.add(ordi);&#xD;
-    cadreOrdi.add(dialog);&#xD;
+    cadreOrdi.add(scrollPane);&#xD;
     cadreOrdi.add(espace2);&#xD;
     tentativePanel.add(tentativeIA);&#xD;
     refresh.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));&#xD;
@@ -6052,8 +6297,7 @@
     fin.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));&#xD;
     fin.setBackground(Color.getHSBColor(0.154f, 0.45f, 0.44f));&#xD;
     fin.setEnabled(false);&#xD;
-    fin.addActionListener(new // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.&#xD;
-    ActionListener() {&#xD;
+    fin.addActionListener(new ActionListener() {&#xD;
 &#xD;
         public void actionPerformed(ActionEvent event) {&#xD;
             def.finClick(tentativeOrdi, codeSecret, nombreCoup, dialog, contentPane, image, nombreTour, indiceDev, tentativeIA, fin, cadreOrdi);&#xD;
@@ -6232,6 +6476,7 @@
     char entrer = ((JButton) arg0.getSource()).getText().charAt(0);&#xD;
     proposition.setText(proposition.getText() + entrer);&#xD;
     click++;&#xD;
+    nombreClick++;&#xD;
     def.RangeWord(blocProposition, nombreClick);&#xD;
 </body>
                     </ownedBehavior>
@@ -6287,6 +6532,7 @@
     char entrer = ((JButton) arg0.getSource()).getText().charAt(0);&#xD;
     tentativeIA.setText(tentativeIA.getText() + entrer);&#xD;
     nombreClick++;&#xD;
+    def.RangeWord(blocProposition, nombreClick);&#xD;
 </body>
                     </ownedBehavior>
                     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1cT8cJrNEei3Ubk582PCpg" name="mouseEntered" specification="_1cPrAJrNEei3Ubk582PCpg">
@@ -6329,6 +6575,7 @@
                   </nestedClassifier>
                 </packagedElement>
                 <packagedElement xmi:type="uml:Class" xmi:id="_1c_R4JrNEei3Ubk582PCpg" name="FenetreMenuPlusMoins" visibility="public">
+                  <generalization xmi:type="uml:Generalization" xmi:id="_-GaiYKBKEei6Eq8xHCWuEw" general="_0D4J4JrNEei3Ubk582PCpg"/>
                   <ownedAttribute xmi:type="uml:Property" xmi:id="_1dOicJrNEei3Ubk582PCpg" name="contentPaneMenu" visibility="private" type="_0MzcYJrNEei3Ubk582PCpg" isUnique="false">
                     <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_1dQ-sJrNEei3Ubk582PCpg" name="defaultValue">
                       <language>JAVA</language>
@@ -6380,7 +6627,7 @@
                       <body>new JButton(&quot; Retour &quot;)</body>
                     </defaultValue>
                   </ownedAttribute>
-                  <ownedAttribute xmi:type="uml:Property" xmi:id="_1eVVsJrNEei3Ubk582PCpg" name="sListener" visibility="private" type="_1eNZ4JrNEei3Ubk582PCpg" isUnique="false">
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_1eVVsJrNEei3Ubk582PCpg" name="sListener" visibility="private" type="_-GeMwKBKEei6Eq8xHCWuEw" isUnique="false">
                     <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_1eXx8JrNEei3Ubk582PCpg" name="defaultValue">
                       <language>JAVA</language>
                       <body>new SourisListener()</body>
@@ -6479,7 +6726,7 @@
         public void actionPerformed(ActionEvent event) {&#xD;
             ((JFrame) contentPaneMenu.getTopLevelAncestor()).dispose();&#xD;
             if (mode1.isSelected() == true) {&#xD;
-                ChallengerPlusMoins chal = new ChallengerPlusMoins(modeDev);&#xD;
+                ChallengerPlusMoins chal = new ChallengerPlusMoins();&#xD;
                 chal.setVisible(true);&#xD;
             }&#xD;
             if (mode2.isSelected() == true) {&#xD;
@@ -6487,7 +6734,7 @@
                 def.setVisible(true);&#xD;
             }&#xD;
             if (mode3.isSelected() == true) {&#xD;
-                DuelPlusMoins duel = new DuelPlusMoins(modeDev);&#xD;
+                DuelPlusMoins duel = new DuelPlusMoins();&#xD;
                 duel.setVisible(true);&#xD;
             }&#xD;
         }&#xD;
@@ -7787,7 +8034,558 @@
                   </packagedElement>
                 </packagedElement>
                 <packagedElement xmi:type="uml:Class" xmi:id="_1gIsgJrNEei3Ubk582PCpg" name="JDialog"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_-EtSMKBKEei6Eq8xHCWuEw" name="AideDuelPlusMoins" visibility="public">
+                  <generalization xmi:type="uml:Generalization" xmi:id="_-Et5QKBKEei6Eq8xHCWuEw" general="_0D4J4JrNEei3Ubk582PCpg"/>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-Et5QaBKEei6Eq8xHCWuEw" name="contentPane" visibility="private" type="_0MzcYJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-EugUKBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JPanel()</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-EugUaBKEei6Eq8xHCWuEw" name="suivant" visibility="private" type="_0PPFUJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-EvHYKBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JButton(&quot; Suivant &quot;)</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-EvHYaBKEei6Eq8xHCWuEw" name="retourner" visibility="private" type="_0PPFUJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-EvucKBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JButton(&quot; Retourner au jeu &quot;)</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-EvucaBKEei6Eq8xHCWuEw" name="tentative" visibility="private" type="_0YnDwJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-EwVgKBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JLabel()</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-Ew8kKBKEei6Eq8xHCWuEw" name="impact" visibility="private" type="_0P07MJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-ExjoKBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new Font(&quot;impact&quot;, 17, 17)</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-ExjoaBKEei6Eq8xHCWuEw" name="infosTentative" visibility="private" type="_0YnDwJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-EyKsKBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JLabel()</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-EyxwKBKEei6Eq8xHCWuEw" name="cadreJ" visibility="private" type="_0MzcYJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-EyxwaBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JPanel()</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-EzY0KBKEei6Eq8xHCWuEw" name="codeSecret" visibility="private" type="_0YnDwJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-Ez_4KBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JLabel()</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-E0m8KBKEei6Eq8xHCWuEw" name="arial" visibility="private" type="_0P07MJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-E1OAKBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new Font(&quot;arial&quot;, 12, 12)</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-E11EKBKEei6Eq8xHCWuEw" name="aideText1" visibility="private" type="_0hVh8JrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-E11EaBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JTextArea()</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-E2cIKBKEei6Eq8xHCWuEw" name="espace" visibility="private" type="_0MzcYJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-E2cIaBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JPanel()</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-E2cIqBKEei6Eq8xHCWuEw" name="nombreClick" visibility="private" isUnique="false">
+                    <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-E3DMKBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>0</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-E3DMaBKEei6Eq8xHCWuEw" name="tentativeIA" visibility="private" type="_0YnDwJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-E3DMqBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JLabel()</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-E3qQKBKEei6Eq8xHCWuEw" name="dialog" visibility="private" type="_0hVh8JrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-E3qQaBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JTextArea()</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-E4RUKBKEei6Eq8xHCWuEw" name="indice" visibility="private" type="_0VfeUJrNEei3Ubk582PCpg" isUnique="false">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-E44YKBKEei6Eq8xHCWuEw"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-E44YaBKEei6Eq8xHCWuEw" value="*"/>
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-E44YqBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>{ &quot;+&quot;, &quot;-&quot;, &quot;=&quot; }</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-E5fcKBKEei6Eq8xHCWuEw" name="indi" visibility="private" type="_0PPFUJrNEei3Ubk582PCpg" isUnique="false"/>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-E5fcaBKEei6Eq8xHCWuEw" name="fin" visibility="private" type="_0PPFUJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-E6GgKBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JButton(&quot; Ok &quot;)</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-E7UoKBKEei6Eq8xHCWuEw" name="refresh" visibility="private" type="_0PPFUJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-E77sKBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JButton(&quot;⟲&quot;)</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-E8iwKBKEei6Eq8xHCWuEw" name="cadreOrdi" visibility="private" type="_0MzcYJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-E9J0KBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JPanel()</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_-E9w4KBKEei6Eq8xHCWuEw" name="tentativePanel" visibility="private" type="_0MzcYJrNEei3Ubk582PCpg" isUnique="false">
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_-E-X8KBKEei6Eq8xHCWuEw" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>new JPanel()</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_-FCCUaBKEei6Eq8xHCWuEw" name="AideDuelPlusMoins" specification="_-E-X8aBKEei6Eq8xHCWuEw">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    this.setTitle(&quot;Duel&quot;);&#xD;
+    this.setSize(460, 280);&#xD;
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);&#xD;
+    this.setLocationRelativeTo(null);&#xD;
+    this.setContentPane(contentPane);&#xD;
+    this.setResizable(false);&#xD;
+    contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));&#xD;
+    initAide1();&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_-FFFoKBKEei6Eq8xHCWuEw" name="initAide1" specification="_-FCpYKBKEei6Eq8xHCWuEw">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    JLabel joueur = new JLabel();&#xD;
+    joueur.setText(&quot; Vous &quot;);&#xD;
+    joueur.setOpaque(true);&#xD;
+    joueur.setFont(arial);&#xD;
+    joueur.setBorder(BorderFactory.createLineBorder(Color.black));&#xD;
+    JPanel tentativePanel = new JPanel();&#xD;
+    tentativePanel.setPreferredSize(new Dimension(150, 53));&#xD;
+    tentativePanel.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));&#xD;
+    tentativePanel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    tentative.setOpaque(true);&#xD;
+    tentative.setBackground(Color.white);&#xD;
+    tentative.setPreferredSize(new Dimension(120, 40));&#xD;
+    tentative.setBorder(BorderFactory.createLineBorder(Color.black));&#xD;
+    tentative.setHorizontalAlignment(JLabel.CENTER);&#xD;
+    tentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    tentative.setFont(impact);&#xD;
+    tentative.setText(&quot; Votre tentative &quot;);&#xD;
+    JPanel espace2 = new JPanel();&#xD;
+    espace2.setPreferredSize(new Dimension(65, 5));&#xD;
+    espace2.setBackground(Color.DARK_GRAY);&#xD;
+    espace2.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    tentativePanel.add(tentative);&#xD;
+    JPanel infosCadre = new JPanel();&#xD;
+    infosCadre.setPreferredSize(new Dimension(150, 53));&#xD;
+    infosCadre.setBackground(Color.getHSBColor(0.134f, 0.15f, 0.94f));&#xD;
+    infosCadre.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    infosTentative.setOpaque(true);&#xD;
+    infosTentative.setBackground(Color.WHITE);&#xD;
+    infosTentative.setBorder(BorderFactory.createLineBorder(Color.black));&#xD;
+    infosTentative.setPreferredSize(new Dimension(120, 40));&#xD;
+    infosTentative.setHorizontalAlignment(JLabel.CENTER);&#xD;
+    infosTentative.setFont(impact);&#xD;
+    infosTentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    infosTentative.setText(&quot; Indices + - ou = &quot;);&#xD;
+    JPanel espaceCode = new JPanel();&#xD;
+    espaceCode.setPreferredSize(new Dimension(160, 5));&#xD;
+    espaceCode.setBackground(Color.DARK_GRAY);&#xD;
+    espaceCode.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    infosCadre.add(infosTentative);&#xD;
+    espace.setPreferredSize(new Dimension(165, 30));&#xD;
+    espace.setBackground(Color.DARK_GRAY);&#xD;
+    espace.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.154f, 0.85f, 0.94f)));&#xD;
+    JLabel codeText = new JLabel();&#xD;
+    codeText.setText(&quot;Votre code secret : &quot;);&#xD;
+    codeText.setFont(arial);&#xD;
+    codeText.setForeground(Color.WHITE);&#xD;
+    codeSecret.setText(&quot;?&quot;);&#xD;
+    codeSecret.setForeground(Color.getHSBColor(0.143f, 0.84f, 0.86f));&#xD;
+    codeSecret.setFont(arial);&#xD;
+    espace.add(codeText);&#xD;
+    espace.add(codeSecret);&#xD;
+    cadreJ.setPreferredSize(new Dimension(180, 205));&#xD;
+    cadreJ.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));&#xD;
+    cadreJ.add(joueur);&#xD;
+    cadreJ.add(tentativePanel);&#xD;
+    cadreJ.add(espace2);&#xD;
+    cadreJ.add(infosCadre);&#xD;
+    cadreJ.add(espaceCode);&#xD;
+    cadreJ.add(espace);&#xD;
+    cadreJ.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    contentPane.add(cadreJ);&#xD;
+    aideText1.setEditable(false);&#xD;
+    aideText1.setFont(arial);&#xD;
+    aideText1.setPreferredSize(new Dimension(240, 150));&#xD;
+    aideText1.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    aideText1.setText(&quot;\n Au début de la partie \n&quot; + &quot; il vous sera demandés \n&quot; + &quot; de donner un code secret. \n&quot; + &quot; Votre code secret s'affichera dans \n&quot; + &quot; le cadre entouré en jaune. \n&quot;);&#xD;
+    contentPane.add(aideText1);&#xD;
+    suivant.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    suivant.setBackground(Color.getHSBColor(0.534f, 0.36f, 0.76f));&#xD;
+    suivant.addActionListener(new ActionListener() {&#xD;
+&#xD;
+        public void actionPerformed(ActionEvent event) {&#xD;
+            if (nombreClick == 0) {&#xD;
+                aide2();&#xD;
+            }&#xD;
+            if (nombreClick == 1) {&#xD;
+                aide3();&#xD;
+            }&#xD;
+            if (nombreClick == 2) {&#xD;
+                aide4();&#xD;
+            }&#xD;
+            ++nombreClick;&#xD;
+        }&#xD;
+    });&#xD;
+    contentPane.add(suivant);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_-FJXEKBKEei6Eq8xHCWuEw" name="aide2" specification="_-FIwAKBKEei6Eq8xHCWuEw">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    espace.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    cadreJ.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.154f, 0.85f, 0.94f)));&#xD;
+    aideText1.setText(&quot;\n Vous allez devoir entrer votre \n&quot; + &quot; proposition. \n&quot; + &quot; Celle-ci s'affichera dans le haut du \n&quot; + &quot; cadre entouré en jaune. \n&quot; + &quot; La partie en-dessous de celle-ci \n&quot; + &quot; affichera les indices donnés par l'ordinateur \n&quot; + &quot; pour vous aidez à trouver le code. \n&quot;);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_-FLMQKBKEei6Eq8xHCWuEw" name="aide3" specification="_-FJ-IKBKEei6Eq8xHCWuEw">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    cadreJ.setVisible(false);&#xD;
+    aideText1.setText(&quot;\n Une fois que vous avez donnés votre \n&quot; + &quot; proposition \n&quot; + &quot; L'ordinateur donnera la sienne \n&quot; + &quot; Celle-ci s'affichera dans le cadre entouré \n&quot; + &quot; en jaune. \n&quot;);&#xD;
+    JLabel ordi = new JLabel();&#xD;
+    ordi.setText(&quot; Ordinateur &quot;);&#xD;
+    ordi.setOpaque(true);&#xD;
+    ordi.setFont(arial);&#xD;
+    ordi.setBorder(BorderFactory.createLineBorder(Color.black));&#xD;
+    dialog.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));&#xD;
+    dialog.setPreferredSize(new Dimension(150, 80));&#xD;
+    dialog.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.154f, 0.85f, 0.94f)));&#xD;
+    dialog.setEditable(false);&#xD;
+    dialog.setText(&quot; \n Je suis prêt \n c'est quand vous voulez ! &quot;);&#xD;
+    tentativePanel.setPreferredSize(new Dimension(150, 70));&#xD;
+    tentativePanel.setBackground(Color.getHSBColor(0.134f, 0.15f, 0.94f));&#xD;
+    tentativePanel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    tentativeIA.setOpaque(true);&#xD;
+    tentativeIA.setBackground(Color.white);&#xD;
+    tentativeIA.setPreferredSize(new Dimension(130, 30));&#xD;
+    tentativeIA.setHorizontalAlignment(JLabel.CENTER);&#xD;
+    tentativeIA.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    tentativeIA.setFont(arial);&#xD;
+    tentativeIA.setText(&quot;Entrez les indices&quot;);&#xD;
+    JPanel espace2 = new JPanel();&#xD;
+    espace2.setPreferredSize(new Dimension(65, 5));&#xD;
+    espace2.setBackground(Color.DARK_GRAY);&#xD;
+    espace2.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    cadreOrdi.setPreferredSize(new Dimension(180, 205));&#xD;
+    cadreOrdi.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));&#xD;
+    cadreOrdi.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    cadreOrdi.add(ordi);&#xD;
+    cadreOrdi.add(dialog);&#xD;
+    cadreOrdi.add(espace2);&#xD;
+    tentativePanel.add(tentativeIA);&#xD;
+    refresh.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));&#xD;
+    refresh.setBorder(BorderFactory.createLineBorder(Color.black));&#xD;
+    refresh.setBackground(Color.DARK_GRAY);&#xD;
+    refresh.setPreferredSize(new Dimension(20, 20));&#xD;
+    fin.setPreferredSize(new Dimension(25, 14));&#xD;
+    fin.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));&#xD;
+    fin.setBackground(Color.getHSBColor(0.154f, 0.45f, 0.44f));&#xD;
+    fin.setEnabled(false);&#xD;
+    cadreOrdi.add(tentativePanel);&#xD;
+    contentPane.add(cadreOrdi);&#xD;
+    this.indi = new JButton[3];&#xD;
+    int i = 0;&#xD;
+    for (@SuppressWarnings(&quot;unused&quot;) String c : indice) {&#xD;
+        this.indi[i] = new JButton(indice[i]);&#xD;
+        indi[i].setPreferredSize(new Dimension(20, 20));&#xD;
+        indi[i].setBackground(Color.DARK_GRAY);&#xD;
+        indi[i].setBorder(BorderFactory.createLineBorder(Color.black));&#xD;
+        indi[i].setForeground(Color.white);&#xD;
+        tentativePanel.add(indi[i]).setEnabled(true);&#xD;
+        i++;&#xD;
+    }&#xD;
+    fin.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));&#xD;
+    tentativePanel.add(fin);&#xD;
+    tentativePanel.add(refresh);&#xD;
+    contentPane.add(aideText1);&#xD;
+    contentPane.add(suivant);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_-FNBcKBKEei6Eq8xHCWuEw" name="aide4" specification="_-FLMQaBKEei6Eq8xHCWuEw">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    aideText1.setText(&quot;\n Vous allez devoir à votre tour \n&quot; + &quot; donner des incides à l'ordinateur \n&quot; + &quot; dans le cadre entouré en jaune. \n&quot; + &quot; Une fois les bons indices indiqués \n&quot; + &quot; quand vous cliquerez sur &lt;ok> \n&quot; + &quot; Le tour sera finit, il vous faudra donc \n&quot; + &quot; entrer votre proposition ainsi de suite... \n&quot;);&#xD;
+    dialog.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    tentativePanel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.154f, 0.85f, 0.94f)));&#xD;
+    suivant.setVisible(false);&#xD;
+    contentPane.add(retourner);&#xD;
+    retourner.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.44f)));&#xD;
+    retourner.setBackground(Color.getHSBColor(0.534f, 0.36f, 0.76f));&#xD;
+    retourner.addActionListener(new ActionListener() {&#xD;
+&#xD;
+        public void actionPerformed(ActionEvent event) {&#xD;
+            setVisible(false);&#xD;
+            DuelPlusMoins duel = new DuelPlusMoins();&#xD;
+            duel.setVisible(true);&#xD;
+        }&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_-E-X8aBKEei6Eq8xHCWuEw" name="AideDuelPlusMoins" visibility="public" method="_-FCCUaBKEei6Eq8xHCWuEw"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_-FCpYKBKEei6Eq8xHCWuEw" name="initAide1" visibility="private" method="_-FFFoKBKEei6Eq8xHCWuEw"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_-FIwAKBKEei6Eq8xHCWuEw" name="aide2" visibility="public" method="_-FJXEKBKEei6Eq8xHCWuEw"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_-FJ-IKBKEei6Eq8xHCWuEw" name="aide3" visibility="public" method="_-FLMQKBKEei6Eq8xHCWuEw"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_-FLMQaBKEei6Eq8xHCWuEw" name="aide4" visibility="public" method="_-FNBcKBKEei6Eq8xHCWuEw"/>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_-GeMwKBKEei6Eq8xHCWuEw" name="SourisListener"/>
               </packagedElement>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_94AS8KBKEei6Eq8xHCWuEw" name="Resultat" visibility="public">
+              <generalization xmi:type="uml:Generalization" xmi:id="_94OVYKBKEei6Eq8xHCWuEw" general="_0D4J4JrNEei3Ubk582PCpg"/>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_94QxoKBKEei6Eq8xHCWuEw" name="contentPane" visibility="private" type="_0MzcYJrNEei3Ubk582PCpg" isUnique="false">
+                <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_94RYsKBKEei6Eq8xHCWuEw" name="defaultValue">
+                  <language>JAVA</language>
+                  <body>new JPanel()</body>
+                </defaultValue>
+              </ownedAttribute>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_94VqIKBKEei6Eq8xHCWuEw" name="contentPane2" visibility="private" type="_0MzcYJrNEei3Ubk582PCpg" isUnique="false"/>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_94WRMKBKEei6Eq8xHCWuEw" name="relancer" visibility="private" type="_0PPFUJrNEei3Ubk582PCpg" isUnique="false">
+                <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_94WRMaBKEei6Eq8xHCWuEw" name="defaultValue">
+                  <language>JAVA</language>
+                  <body>new JButton(&quot; Relancer &quot;)</body>
+                </defaultValue>
+              </ownedAttribute>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_94W4QKBKEei6Eq8xHCWuEw" name="home" visibility="private" type="_0PPFUJrNEei3Ubk582PCpg" isUnique="false">
+                <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_94XfUKBKEei6Eq8xHCWuEw" name="defaultValue">
+                  <language>JAVA</language>
+                  <body>new JButton(&quot; Menu &quot;)</body>
+                </defaultValue>
+              </ownedAttribute>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_94YtcKBKEei6Eq8xHCWuEw" name="quitter" visibility="private" type="_0PPFUJrNEei3Ubk582PCpg" isUnique="false">
+                <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_94YtcaBKEei6Eq8xHCWuEw" name="defaultValue">
+                  <language>JAVA</language>
+                  <body>new JButton(&quot; Quitter &quot;)</body>
+                </defaultValue>
+              </ownedAttribute>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_94ZUgKBKEei6Eq8xHCWuEw" name="arial" visibility="private" type="_0P07MJrNEei3Ubk582PCpg" isUnique="false">
+                <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_94ZUgaBKEei6Eq8xHCWuEw" name="defaultValue">
+                  <language>JAVA</language>
+                  <body>new Font(&quot;arial&quot;, 12, 12)</body>
+                </defaultValue>
+              </ownedAttribute>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_94Z7kKBKEei6Eq8xHCWuEw" name="text" visibility="private" type="_0YnDwJrNEei3Ubk582PCpg" isUnique="false">
+                <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_94Z7kaBKEei6Eq8xHCWuEw" name="defaultValue">
+                  <language>JAVA</language>
+                  <body>new JLabel()</body>
+                </defaultValue>
+              </ownedAttribute>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_94bJsKBKEei6Eq8xHCWuEw" name="jeu" visibility="private" isUnique="false">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+              </ownedAttribute>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_94bwwKBKEei6Eq8xHCWuEw" name="proposition" visibility="private" type="_0VfeUJrNEei3Ubk582PCpg" isUnique="false"/>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_94bwwaBKEei6Eq8xHCWuEw" name="chal" visibility="private" type="_1QE3QJrNEei3Ubk582PCpg" isUnique="false"/>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_94cX0KBKEei6Eq8xHCWuEw" name="code" visibility="private" type="_0VfeUJrNEei3Ubk582PCpg" isUnique="false"/>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_99srQKBKEei6Eq8xHCWuEw" name="Resultat" specification="_94c-4KBKEei6Eq8xHCWuEw">
+                <language>JAVA</language>
+                <body>&#xD;
+    super(title);&#xD;
+    this.setSize(270, 110);&#xD;
+    this.setLocationRelativeTo(null);&#xD;
+    this.setResizable(false);&#xD;
+    this.setVisible(true);&#xD;
+    this.getContentPane().add(contentPane);&#xD;
+    contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));&#xD;
+    this.contentPane2 = contentPane2;&#xD;
+    this.code = nombreString;&#xD;
+    this.jeu = jeu;&#xD;
+    initText();&#xD;
+    initCadre();&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_99zY8KBKEei6Eq8xHCWuEw" name="initText" specification="_99w8sKBKEei6Eq8xHCWuEw">
+                <language>JAVA</language>
+                <body>&#xD;
+    JPanel cadreText = new JPanel();&#xD;
+    cadreText.setPreferredSize(new Dimension(250, 25));&#xD;
+    cadreText.setBackground(Color.DARK_GRAY);&#xD;
+    text.setFont(arial);&#xD;
+    text.setForeground(Color.white);&#xD;
+    cadreText.add(text);&#xD;
+    contentPane.add(cadreText);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_995fkKBKEei6Eq8xHCWuEw" name="initCadre" specification="_992cQKBKEei6Eq8xHCWuEw">
+                <language>JAVA</language>
+                <body>&#xD;
+    JPanel cadreBouton = new JPanel();&#xD;
+    cadreBouton.setPreferredSize(new Dimension(230, 35));&#xD;
+    cadreBouton.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));&#xD;
+    cadreBouton.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.24f)));&#xD;
+    cadreBouton.add(relancer);&#xD;
+    relancer.addMouseListener(new SourisListener());&#xD;
+    relancer.addActionListener(new ActionListener() {&#xD;
+&#xD;
+        public void actionPerformed(ActionEvent event) {&#xD;
+            setVisible(false);&#xD;
+            ((JFrame) contentPane2.getTopLevelAncestor()).setVisible(false);&#xD;
+            if (jeu == 1) {&#xD;
+                ChallengerPlusMoins chal = new ChallengerPlusMoins();&#xD;
+                chal.setVisible(true);&#xD;
+            }&#xD;
+            if (jeu == 2) {&#xD;
+                DefenseurPlusMoins def = new DefenseurPlusMoins();&#xD;
+                def.setVisible(true);&#xD;
+            }&#xD;
+            if (jeu == 3) {&#xD;
+                DuelPlusMoins duel = new DuelPlusMoins();&#xD;
+                duel.setVisible(true);&#xD;
+            }&#xD;
+        }&#xD;
+    });&#xD;
+    relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));&#xD;
+    relancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.24f)));&#xD;
+    relancer.setForeground(Color.white);&#xD;
+    cadreBouton.add(home);&#xD;
+    home.addActionListener(new ActionListener() {&#xD;
+&#xD;
+        public void actionPerformed(ActionEvent event) {&#xD;
+            setVisible(false);&#xD;
+            ((JFrame) contentPane2.getTopLevelAncestor()).dispose();&#xD;
+            Lancement menu = new Lancement();&#xD;
+            menu.setVisible(true);&#xD;
+        }&#xD;
+    });&#xD;
+    home.addMouseListener(new SourisListener());&#xD;
+    home.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));&#xD;
+    home.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.24f)));&#xD;
+    home.setForeground(Color.white);&#xD;
+    cadreBouton.add(quitter);&#xD;
+    quitter.addMouseListener(new SourisListener());&#xD;
+    quitter.addActionListener(new ActionListener() {&#xD;
+&#xD;
+        public void actionPerformed(ActionEvent event) {&#xD;
+            setVisible(false);&#xD;
+            ((JFrame) contentPane2.getTopLevelAncestor()).dispose();&#xD;
+        }&#xD;
+    });&#xD;
+    quitter.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));&#xD;
+    quitter.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.24f)));&#xD;
+    quitter.setForeground(Color.white);&#xD;
+    contentPane.add(cadreBouton);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_9-BbYKBKEei6Eq8xHCWuEw" name="gagner" specification="_99_mMKBKEei6Eq8xHCWuEw">
+                <language>JAVA</language>
+                <body>&#xD;
+    text.setText(&quot; Vous avez gagnés ! &quot;);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_9-FFwKBKEei6Eq8xHCWuEw" name="perdu" specification="_9-D3oKBKEei6Eq8xHCWuEw">
+                <language>JAVA</language>
+                <body>&#xD;
+    text.setText(&quot; Vous avez perdu ! &quot;);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_94c-4KBKEei6Eq8xHCWuEw" name="Resultat" visibility="public" method="_99srQKBKEei6Eq8xHCWuEw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_99ZJQKBKEei6Eq8xHCWuEw" name="parent" type="_0D4J4JrNEei3Ubk582PCpg"/>
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_99dasKBKEei6Eq8xHCWuEw" name="title" type="_0VfeUJrNEei3Ubk582PCpg"/>
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_99geAKBKEei6Eq8xHCWuEw" name="nombreString" type="_0VfeUJrNEei3Ubk582PCpg"/>
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_99lWgKBKEei6Eq8xHCWuEw" name="contentPane2" type="_0MzcYJrNEei3Ubk582PCpg"/>
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_99pA4KBKEei6Eq8xHCWuEw" name="jeu">
+                  <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                </ownedParameter>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_99w8sKBKEei6Eq8xHCWuEw" name="initText" visibility="private" method="_99zY8KBKEei6Eq8xHCWuEw"/>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_992cQKBKEei6Eq8xHCWuEw" name="initCadre" visibility="private" method="_995fkKBKEei6Eq8xHCWuEw"/>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_99_mMKBKEei6Eq8xHCWuEw" name="gagner" visibility="public" method="_9-BbYKBKEei6Eq8xHCWuEw"/>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_9-D3oKBKEei6Eq8xHCWuEw" name="perdu" visibility="public" method="_9-FFwKBKEei6Eq8xHCWuEw"/>
+              <nestedClassifier xmi:type="uml:Class" xmi:id="_9-IJEKBKEei6Eq8xHCWuEw" name="SourisListener">
+                <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_9-J-QKBKEei6Eq8xHCWuEw" name="SourisListener implements MouseListener" client="_9-IJEKBKEei6Eq8xHCWuEw" supplier="_0TxAAZrNEei3Ubk582PCpg" contract="_0TxAAZrNEei3Ubk582PCpg"/>
+                <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_9-ShIKBKEei6Eq8xHCWuEw" name="mouseClicked" specification="_9-LzcKBKEei6Eq8xHCWuEw">
+                  <language>JAVA</language>
+                  <body>&#xD;
+</body>
+                </ownedBehavior>
+                <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_9-YAsKBKEei6Eq8xHCWuEw" name="mouseEntered" specification="_9-WykKBKEei6Eq8xHCWuEw">
+                  <language>JAVA</language>
+                  <body>&#xD;
+    if (arg0.getSource() == relancer) {&#xD;
+        relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.54f));&#xD;
+        relancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.34f)));&#xD;
+    }&#xD;
+    if (arg0.getSource() == home) {&#xD;
+        home.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.34f)));&#xD;
+        home.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.54f));&#xD;
+    }&#xD;
+    if (arg0.getSource() == quitter) {&#xD;
+        quitter.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.54f));&#xD;
+        quitter.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.34f)));&#xD;
+    }&#xD;
+</body>
+                </ownedBehavior>
+                <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_9-bEAKBKEei6Eq8xHCWuEw" name="mouseExited" specification="_9-YnwKBKEei6Eq8xHCWuEw">
+                  <language>JAVA</language>
+                  <body>&#xD;
+    relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));&#xD;
+    relancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.24f)));&#xD;
+    relancer.setForeground(Color.white);&#xD;
+    home.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));&#xD;
+    home.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.24f)));&#xD;
+    quitter.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.24f)));&#xD;
+    quitter.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));&#xD;
+</body>
+                </ownedBehavior>
+                <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_9-kN8KBKEei6Eq8xHCWuEw" name="mousePressed" specification="_9-fVcKBKEei6Eq8xHCWuEw">
+                  <language>JAVA</language>
+                  <body>&#xD;
+</body>
+                </ownedBehavior>
+                <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_9-sJwKBKEei6Eq8xHCWuEw" name="mouseReleased" specification="_9-ofYKBKEei6Eq8xHCWuEw">
+                  <language>JAVA</language>
+                  <body>&#xD;
+    relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));&#xD;
+    relancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.24f)));&#xD;
+    relancer.setForeground(Color.white);&#xD;
+    home.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));&#xD;
+    home.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.24f)));&#xD;
+    quitter.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.getHSBColor(0.534f, 0.45f, 0.24f)));&#xD;
+    quitter.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));&#xD;
+</body>
+                </ownedBehavior>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_9-LzcKBKEei6Eq8xHCWuEw" name="mouseClicked" visibility="public" method="_9-ShIKBKEei6Eq8xHCWuEw">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_9-O2wKBKEei6Eq8xHCWuEw" name="arg0" type="_0UIzcJrNEei3Ubk582PCpg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_9-WykKBKEei6Eq8xHCWuEw" name="mouseEntered" visibility="public" method="_9-YAsKBKEei6Eq8xHCWuEw">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_9-XZoKBKEei6Eq8xHCWuEw" name="arg0" type="_0UIzcJrNEei3Ubk582PCpg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_9-YnwKBKEei6Eq8xHCWuEw" name="mouseExited" visibility="public" method="_9-bEAKBKEei6Eq8xHCWuEw">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_9-ZO0KBKEei6Eq8xHCWuEw" name="arg0" type="_0UIzcJrNEei3Ubk582PCpg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_9-fVcKBKEei6Eq8xHCWuEw" name="mousePressed" visibility="public" method="_9-kN8KBKEei6Eq8xHCWuEw">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_9-iYwKBKEei6Eq8xHCWuEw" name="arg0" type="_0UIzcJrNEei3Ubk582PCpg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_9-ofYKBKEei6Eq8xHCWuEw" name="mouseReleased" visibility="public" method="_9-sJwKBKEei6Eq8xHCWuEw">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_9-qUkKBKEei6Eq8xHCWuEw" name="arg0" type="_0UIzcJrNEei3Ubk582PCpg"/>
+                </ownedOperation>
+              </nestedClassifier>
             </packagedElement>
           </packagedElement>
         </packagedElement>
@@ -7834,6 +8632,9 @@
         </packagedElement>
         <packagedElement xmi:type="uml:Package" xmi:id="_0VeQMJrNEei3Ubk582PCpg" name="lang">
           <packagedElement xmi:type="uml:Class" xmi:id="_0VfeUJrNEei3Ubk582PCpg" name="String"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_-DLBIKBKEei6Eq8xHCWuEw" name="util">
+          <packagedElement xmi:type="uml:Class" xmi:id="_-DLBIaBKEei6Eq8xHCWuEw" name="ResourceBundle"/>
         </packagedElement>
       </packagedElement>
     </packagedElement>
@@ -7906,4 +8707,10 @@
   <standard:Create xmi:id="_1l9AoJrNEei3Ubk582PCpg" base_BehavioralFeature="_1l3hEJrNEei3Ubk582PCpg"/>
   <standard:Create xmi:id="_1nYkAJrNEei3Ubk582PCpg" base_BehavioralFeature="_1nU5oJrNEei3Ubk582PCpg"/>
   <standard:Create xmi:id="_1pyXwJrNEei3Ubk582PCpg" base_BehavioralFeature="_1pe1wJrNEei3Ubk582PCpg"/>
+  <standard:Create xmi:id="_99QmYKBKEei6Eq8xHCWuEw" base_BehavioralFeature="_94c-4KBKEei6Eq8xHCWuEw"/>
+  <PapyrusJava:External xmi:id="_-CUFgKBKEei6Eq8xHCWuEw" name="SourisListener" base_Classifier="_-CRCMKBKEei6Eq8xHCWuEw"/>
+  <PapyrusJava:External xmi:id="_-DOrgKBKEei6Eq8xHCWuEw" name="java.util.ResourceBundle" base_Classifier="_-DLBIaBKEei6Eq8xHCWuEw"/>
+  <standard:Create xmi:id="_-EczgKBKEei6Eq8xHCWuEw" base_BehavioralFeature="_-EZJIKBKEei6Eq8xHCWuEw"/>
+  <standard:Create xmi:id="_-FCCUKBKEei6Eq8xHCWuEw" base_BehavioralFeature="_-E-X8aBKEei6Eq8xHCWuEw"/>
+  <PapyrusJava:External xmi:id="_-GhQEKBKEei6Eq8xHCWuEw" name="SourisListener" base_Classifier="_-GeMwKBKEei6Eq8xHCWuEw"/>
 </xmi:XMI>

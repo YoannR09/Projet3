@@ -21,7 +21,11 @@ import fr.yoannroche.projet3.mastermind.view.FenetreMenuMaster;
 import fr.yoannroche.projet3.mastermind.view.RegleMastermind;
 import fr.yoannroche.projet3.plusmoins.view.FenetreMenuPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.ReglePlusMoins;
-
+/**
+ * 
+ * @author El-ra
+ *
+ */
 public class Lancement extends JFrame{
 
 	private JPanel contentPane = new JPanel();

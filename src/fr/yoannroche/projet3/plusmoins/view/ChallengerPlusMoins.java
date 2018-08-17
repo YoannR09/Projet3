@@ -308,6 +308,7 @@ public class ChallengerPlusMoins extends JFrame{
 			if(((JButton)arg0.getSource()).isEnabled()==false) {
 				((JButton)arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.orange));
 			}
+			
 		}
 		public void mousePressed(MouseEvent arg0) {
 		}

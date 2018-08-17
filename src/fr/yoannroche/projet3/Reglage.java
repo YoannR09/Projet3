@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Properties;
-import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -23,6 +22,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+/**
+ * 
+ * @author El-ra
+ *
+ */
 public class Reglage extends JFrame{
 	Reglage reglage;
 	private JPanel contentPane= new JPanel();
@@ -36,7 +40,7 @@ public class Reglage extends JFrame{
 	JButton retour = new JButton (" Retour ");
 	JButton sauv = new JButton(" Sauvergarder ");
 	Font arial = new Font ("arial", 11,11);
-	int  [] clavier = {4,5,6,7,8,9,10};
+	int  [] clavier = {4,5,6,7,8};
 	JRadioButton [] button = new JRadioButton[clavier.length];
 	private JRadioButton bouton[];
 	int  [] tenta = {4,5,6,7,8};
@@ -75,6 +79,8 @@ public class Reglage extends JFrame{
 			public void actionPerformed(ActionEvent event){
 				sauvegardeReglage();
 				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
+				Lancement menu = new Lancement();
+				menu.setVisible(true);
 				
 			}
 		});
@@ -175,7 +181,7 @@ public class Reglage extends JFrame{
 		cases.setFont(arial);
 		cases.setText("    Nombres de chiffres ou couleurs à trouver    ");
 
-		this.bouton = new JRadioButton[10];
+		this.bouton = new JRadioButton[8];
 		int i = 0;
 		for(int c : clavier){
 			this.bouton[i] = new JRadioButton(String.valueOf(c).toUpperCase());

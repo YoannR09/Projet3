@@ -10,18 +10,39 @@ public class Generateur {
 	private String bloc;
 	private int nombre;
 	private static final Logger logger = LogManager.getLogger();
-	
+	ResourceBundle reglage = ResourceBundle.getBundle("Config");
+	private int cases = Integer.parseInt(reglage.getString("cases"));
+	private int couleur = Integer.parseInt(reglage.getString("couleur"));
+	private int [] couleurs = new int[cases];
 	
 	public Generateur() {
 		
-		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		reglage.getString("tentatives");
-		bloc = reglage.getString("cases");
-		int cases = Integer.parseInt(bloc);
 		initNombre(cases);
+		initCouleur(cases);
 		
 	}
 	
+	public int[] initCouleur(int cases) {
+		
+		for(int o=4;o<10;o++) {
+			if(cases==o) {
+				for(int i =0;i<cases;i++) {
+					couleurs[i] = 0 +(int)(Math.random()*(couleur - 0));
+				}
+			}
+		}
+		logger.trace("Generateur crée une couleur en fonction du nombre de cases selectionnéS :" + cases);
+		return couleurs;	
+	}
+	
+	public int[] getCouleurs() {
+		return couleurs;
+	}
+
+	public void setCouleurs(int[] couleurs) {
+		this.couleurs = couleurs;
+	}
+
 	/**
 	 * Genere un nombre cases en fontion des réglages définit dans le fichier Config.properties.
 	 * @param cases
@@ -39,15 +60,18 @@ public class Generateur {
 			nombre = min +(int)(Math.random()*(100000 - min));
 		}
 		if(cases==6) {
-			nombre = (int)(Math.random()*(1000000));
+			int min = 111111;
+			nombre = min +(int)(Math.random()*(1000000 - min));
 		}
 		if(cases==7) {
-			nombre = (int)(Math.random()*(10000000));
+			int min = 1111111;
+			nombre = min +(int)(Math.random()*(10000000 - min));
 		}
 		if(cases==8) {
-			nombre = (int)(Math.random()*(100000000));
+			int min = 11111111;
+			nombre = min +(int)(Math.random()*(100000000 - min));
 		}
-		logger.trace("Generateur crée un nombre en fonction du nombre de cases selectionné :" + cases);
+		logger.trace("Generateur crée un nombre en fonction du nombre de cases selectionnéS :" + cases);
 		return nombre;
 	
 	}
