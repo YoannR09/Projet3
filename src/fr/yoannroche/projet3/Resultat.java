@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import fr.yoannroche.projet3.mastermind.view.ChallengerMastermind;
 import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.DefenseurPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.DuelPlusMoins;
@@ -84,6 +85,10 @@ public class Resultat extends JFrame {
 				 if(jeu==3) {
 					 DuelPlusMoins duel = new DuelPlusMoins();
 					 duel.setVisible(true);
+				 }
+				 if(jeu==4) {
+					 ChallengerMastermind chal = new ChallengerMastermind();
+					 chal.setVisible(true);
 				 }
 			}
 		});

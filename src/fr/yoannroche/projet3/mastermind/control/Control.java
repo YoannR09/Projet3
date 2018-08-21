@@ -10,7 +10,7 @@ public class Control {
 
 	ResourceBundle reglage = ResourceBundle.getBundle("Config");
 	private int cases = Integer.parseInt(reglage.getString("cases"));
-	int proposition=0;
+	int proposition= 0;
 	
 	
 	

@@ -118,7 +118,7 @@ public class FenetreMenuMaster extends JFrame{
 						chal.setVisible(true);
 			    	  }
 			    	  if(mode2.isSelected()==true) {
-			    		  Defenseur def = new Defenseur();
+			    		  DefenseurMastermind def = new DefenseurMastermind();
 			    		  def.setVisible(true);
 			    	  }
 			    	  if(mode3.isSelected()==true) {
