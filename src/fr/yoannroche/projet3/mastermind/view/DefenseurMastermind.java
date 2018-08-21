@@ -31,6 +31,7 @@ public class DefenseurMastermind extends JFrame{
 	private int modeDev = Integer.parseInt(reglage.getString("dev"));
 	private JPanel contentPane = new JPanel();
 	private int nombreTour=0;
+	JLabel vosTentative = new JLabel();
 	JPanel blocIndice = new JPanel();
 	JPanel espace2 = new JPanel();
 	JPanel votreProp = new JPanel();
@@ -101,7 +102,7 @@ public class DefenseurMastermind extends JFrame{
 		fin.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
 		fin.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
-			  model.finClick(propositionIcon,blocTentative);
+			  model.finClick(propositionIcon,blocTentative,blocIndices);
 			}
 		});
 		blocIndice.add(refresh);
@@ -151,7 +152,7 @@ public class DefenseurMastermind extends JFrame{
 	         tenta.setFont(arial);
 			 blocTentative[i].add(tenta);
 			 blocIndices[i]= model.createJLabel();// on crée les JLabel et on met dans tab
-	         blocIndices[i].setText(" Ok : 0   Pl : 0 ");
+	         blocIndices[i].setText(" Ok : ?   Pl : ? ");
 	         blocIndices[i].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 	         blocIndices[i].setOpaque(true);
 	         blocIndices[i].setPreferredSize(new Dimension(118,25));
@@ -205,7 +206,7 @@ public class DefenseurMastermind extends JFrame{
 		ok.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				blocIndice.setVisible(true);
-				model.okClick(propositionIcon, blocTentative);
+				model.okClick(propositionIcon,blocTentative,vosTentative,blocIndices);
 				blocTenta.setVisible(false);
 			}
 		});
@@ -260,13 +261,12 @@ public class DefenseurMastermind extends JFrame{
 		JPanel espace = new JPanel ();
 		espace.setPreferredSize(new Dimension(320,25));
 		espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
-		JLabel vosTentative = new JLabel();
-		vosTentative.setText("  Entrez votre code secret, ensuite les indices  ");
+		vosTentative.setText("  Entrez votre code secret  ");
 		vosTentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.65f, 0.64f)));
 		vosTentative.setOpaque(true);
-		vosTentative.setBackground(Color.DARK_GRAY);
-		vosTentative.setForeground(Color.white);
-		vosTentative.setFont(arial);
+		vosTentative.setBackground(Color.getHSBColor(0.134f, 0.05f, 0.95f));
+		vosTentative.setForeground(Color.BLACK);
+		vosTentative.setFont(arial2);
 		espace.add(vosTentative);
 		contentPane.add(espace);
 	}
