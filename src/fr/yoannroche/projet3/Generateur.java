@@ -24,12 +24,9 @@ public class Generateur {
 	
 	public int[] initCouleur(int cases) {
 		
-		
-	
-				for(int i =0;i<cases;i++) {
+				for(int i=0;i<cases;i++) {
 					couleurs[i] = 0 +(int)(Math.random()*(couleur - 0));
-				}
-			
+				}	
 		
 		logger.trace("Generateur crée une couleur en fonction du nombre de cases selectionnéS :" + cases);
 		return couleurs;	

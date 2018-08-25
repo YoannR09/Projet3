@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.swing.BorderFactory;
@@ -47,11 +48,14 @@ public class Reglage extends JFrame{
 	JRadioButton [] buttonTen = new JRadioButton[tenta.length];
 	private JRadioButton boutonTentative[];
 	private String bloc;
-	private String tentatives;
-	int cases;
+	private int cases;
+
+	private int tentatives;
+	private int dev;
+	private int couleurs;
 
 	int tentative;
-	
+
 	public Reglage() {
 
 		this.setTitle(" Reglages ");
@@ -81,7 +85,7 @@ public class Reglage extends JFrame{
 				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
 				Lancement menu = new Lancement();
 				menu.setVisible(true);
-				
+
 			}
 		});
 		JPanel espace2 = new JPanel();
@@ -200,7 +204,7 @@ public class Reglage extends JFrame{
 		espace.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		contentPane.add(espace);
 	}
-	
+
 	class SourisListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent arg0) {
@@ -242,45 +246,85 @@ public class Reglage extends JFrame{
 	 * Méthode qui gére le changement des variables dans le fichier Config.properties
 	 */
 	public void sauvegardeReglage() {
-		
+		FileInputStream stream = null;
 		try {
-		Properties prop = new Properties() ;
-		File fProp = new File("ressources/Config.properties") ;
-		FileInputStream stream = new FileInputStream(fProp) ;
-		prop.load(stream) ;
-		
-		if(check.isSelected()==true) {
-			String newDev=Integer.toString(1) ;
-		    prop.setProperty("dev",newDev) ;
-		}
-		else{
-			String newDev=Integer.toString(0) ;
-		    prop.setProperty("dev",newDev) ;
-		}
+			Properties prop = new Properties() ;
+			File fProp = new File("ressources/Config.properties") ;
+			stream = new FileInputStream(fProp) ;
+			prop.load(stream) ;
 
-		for(int i=0;i<clavier.length;i++) {
-			if(bouton[i].isSelected()==true) {
-		     cases=(i+4);
-		     String newCases=Integer.toString(cases) ;
-		     prop.setProperty("cases",newCases) ;
+			if(check.isSelected()==true) {
+				String newDev=Integer.toString(1) ;
+				prop.setProperty("dev",newDev);
+				setDev(1);
+			}
+			else{
+				String newDev=Integer.toString(0) ;
+				prop.setProperty("dev",newDev) ;
+				setDev(0);
+			}
 
+			for(int i=0;i<clavier.length;i++) {
+				if(bouton[i].isSelected()==true) {
+					cases=(i+4);
+					String newCases=Integer.toString(cases) ;
+					prop.setProperty("cases",newCases) ;
+					setCases(cases);
+
+				}
+
+			}
+
+			for(int i=0;i<tenta.length;i++) {
+
+				if(boutonTentative[i].isSelected()==true) {
+					tentative=(i+4);
+					String newTenta=Integer.toString(tentative) ;
+					prop.setProperty("tentatives",newTenta) ;
+					setTentatives(tentative);
+				}
 			}
 			
+			
+			FileOutputStream oStream = new FileOutputStream(fProp) ;
+			prop.store(oStream,"Reglage") ;
+			stream.close();
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		
-		for(int i=0;i<tenta.length;i++) {
+	}
+	
+	public int getCases() {
+		return cases;
+	}
 
-			if(boutonTentative[i].isSelected()==true) {
-				tentative=(i+4);
-				String newTenta=Integer.toString(tentative) ;
-			    prop.setProperty("tentatives",newTenta) ;
-			}
+	public void setCases(int cases) {
+		this.cases = cases;
 	}
-		FileOutputStream oStream = new FileOutputStream(fProp) ;
-		prop.store(oStream,"Reglage") ;
-	}catch(Exception e) {
-		
+
+	public int getTentatives() {
+		return tentatives;
 	}
+
+	public void setTentatives(int tentatives) {
+		this.tentatives = tentatives;
+	}
+
+	public int getDev() {
+		return dev;
+	}
+
+	public void setDev(int dev) {
+		this.dev = dev;
+	}
+
+	public int getCouleurs() {
+		return couleurs;
+	}
+
+	public void setCouleurs(int couleurs) {
+		this.couleurs = couleurs;
 	}
 }
 

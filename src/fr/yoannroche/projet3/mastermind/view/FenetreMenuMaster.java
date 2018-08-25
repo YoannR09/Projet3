@@ -20,9 +20,12 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
 import fr.yoannroche.projet3.Lancement;
+import fr.yoannroche.projet3.mastermind.MastermindMode;
+import fr.yoannroche.projet3.mastermind.model.ChallengerMastermindModel;
 
 
 public class FenetreMenuMaster extends JFrame{
+	
 	private JPanel contentPaneMenu = new JPanel();
 	private JRadioButton mode1,mode2,mode3;
 	private JPanel blocMode = new JPanel();
@@ -114,16 +117,15 @@ public class FenetreMenuMaster extends JFrame{
 			    	  ((JFrame) contentPaneMenu.getTopLevelAncestor()).dispose() ;
 			    	  
 			    	  if(mode1.isSelected()==true) {
-						ChallengerMastermind chal = new ChallengerMastermind();
+						Mastermind chal = new Mastermind(MastermindMode.Challenger);
 						chal.setVisible(true);
 			    	  }
 			    	  if(mode2.isSelected()==true) {
-			    		  DefenseurMastermind def = new DefenseurMastermind();
+			    		  Mastermind def = new Mastermind(MastermindMode.Defenseur);
 			    		  def.setVisible(true);
 			    	  }
 			    	  if(mode3.isSelected()==true) {
-			    		  Duel du = new Duel();
-			    		  du.setVisible(true);
+			    		  
 			    	  }
 				      }
 				    });

@@ -14,15 +14,11 @@ public class Control {
 	
 	
 	
-	public void chiffreCouleur(int chiffre,JPanel content) {
-	 JLabel [] indice = new JLabel[cases];
-	 for(int i = 0;i<cases;i++) {
-		if(chiffre==i) {
-			indice[i]= createJLabel();		
-			indice[i].setIcon(new ImageIcon("images/couleur/"+i+".png"));
-			content.add(indice[i]);		
-		}
-	 }
+	public void chiffreCouleur(int couleurs,JPanel content, JLabel indice) {
+	 
+			indice=createJLabel();		
+			indice.setIcon(new ImageIcon("images/couleur/"+couleurs+".png"));	
+			content.add(indice);
 	}
 	public void couleurChiffre(String couleur,JPanel content) {
 		
