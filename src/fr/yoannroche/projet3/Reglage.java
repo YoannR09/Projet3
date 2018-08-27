@@ -12,7 +12,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -28,8 +30,10 @@ import javax.swing.JRadioButton;
  * @author El-ra
  *
  */
-public class Reglage extends JFrame{
-	Reglage reglage;
+public class Reglage extends JFrame {
+	
+
+	ResourceBundle reglage = ResourceBundle.getBundle("Config");
 	private JPanel contentPane= new JPanel();
 	private JPanel cadreCases = new JPanel();
 	private JPanel cadreTentative = new JPanel();
@@ -47,13 +51,7 @@ public class Reglage extends JFrame{
 	int  [] tenta = {4,5,6,7,8};
 	JRadioButton [] buttonTen = new JRadioButton[tenta.length];
 	private JRadioButton boutonTentative[];
-	private String bloc;
-	private int cases;
-
-	private int tentatives;
-	private int dev;
-	private int couleurs;
-
+	
 	int tentative;
 
 	public Reglage() {
@@ -256,20 +254,20 @@ public class Reglage extends JFrame{
 			if(check.isSelected()==true) {
 				String newDev=Integer.toString(1) ;
 				prop.setProperty("dev",newDev);
-				setDev(1);
+			
 			}
 			else{
 				String newDev=Integer.toString(0) ;
 				prop.setProperty("dev",newDev) ;
-				setDev(0);
+			
 			}
 
 			for(int i=0;i<clavier.length;i++) {
 				if(bouton[i].isSelected()==true) {
-					cases=(i+4);
+					int cases=(i+4);
 					String newCases=Integer.toString(cases) ;
 					prop.setProperty("cases",newCases) ;
-					setCases(cases);
+				
 
 				}
 
@@ -278,53 +276,30 @@ public class Reglage extends JFrame{
 			for(int i=0;i<tenta.length;i++) {
 
 				if(boutonTentative[i].isSelected()==true) {
-					tentative=(i+4);
+					int tentative=(i+4);
 					String newTenta=Integer.toString(tentative) ;
 					prop.setProperty("tentatives",newTenta) ;
-					setTentatives(tentative);
+				
 				}
 			}
 			
 			
 			FileOutputStream oStream = new FileOutputStream(fProp) ;
 			prop.store(oStream,"Reglage") ;
-			stream.close();
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+		finally {
+			try {
+				stream.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
-	public int getCases() {
-		return cases;
-	}
-
-	public void setCases(int cases) {
-		this.cases = cases;
-	}
-
-	public int getTentatives() {
-		return tentatives;
-	}
-
-	public void setTentatives(int tentatives) {
-		this.tentatives = tentatives;
-	}
-
-	public int getDev() {
-		return dev;
-	}
-
-	public void setDev(int dev) {
-		this.dev = dev;
-	}
-
-	public int getCouleurs() {
-		return couleurs;
-	}
-
-	public void setCouleurs(int couleurs) {
-		this.couleurs = couleurs;
-	}
+	
 }
 

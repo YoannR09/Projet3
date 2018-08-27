@@ -13,6 +13,7 @@ import fr.yoannroche.projet3.mastermind.control.Control;
 
 public class DefenseurMastermindModel {
 
+
 	int jeu = 5;
 	Reglage reg = new Reglage();
 	ResourceBundle reglage = ResourceBundle.getBundle("Config");
@@ -25,6 +26,8 @@ public class DefenseurMastermindModel {
 	Control control = new Control();
 	private int[] couleurs = gen.getCouleurs();
 	private boolean [] verif = new boolean [cases];
+	private boolean debutDecal = true;
+	private int decal =0;
 	private int[] codeSecret = new int[cases];
 	private int proposition =0;
 	private int nombreTour=0;
@@ -44,99 +47,161 @@ public class DefenseurMastermindModel {
 
 	public void finClick(JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices) {
 
+		blocTentative[nombreTour].removeAll();
+		if(nombreTour==0) {		
+			premierTour(propositionIcon,blocTentative,blocIndices);
+			placer=0;
+			changer=0;
+			check(propositionIcon, blocTentative, blocIndices);
+		}
 
-		if(nombreTour==1) {		
+		if(nombreTour>=1) {
+			tour(propositionIcon,blocTentative,blocIndices);
+			placer=0;
+			changer=0;
+			check(propositionIcon, blocTentative, blocIndices);
 		}
-		
-		if(nombreTour==2) {
-		}
+
+		blocTentative[nombreTour].revalidate();
+		blocIndices[nombreTour].setText(" ♦ :  "+placer+"   ♢  : "+changer+" ");
 		++nombreTour;
+
 	}
 
 
-	public void tour1(JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices) {
+	public void premierTour(JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices) {
+		for(int i =0;i<cases;i++) {
+			propositionTab[i]=model.createJLabel();
+			propositionTab[i].setIcon(tentative1);
+			blocTentative[nombreTour].add(propositionTab[i]);
+			control.couleurChiffre(propositionTab[i].getIcon().toString(), null);
+			propositionOrdi[i]=control.getProposition();
+		}
+
+	}
+
+
+
+	public void tour(JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices) {
 
 		blocTentative[nombreTour].removeAll();
-		
 
 
-
-		if(changer==0 & placer>=1) {
+		if(nombreTour==1 & changer==0 & placer>=1) {
 			for(int i = 0;i<placer;i++) {
 				propositionTab[i]=model.createJLabel();
 				propositionTab[i].setIcon(tentative1);
 				blocTentative[nombreTour].add(propositionTab[i]);
-
 			}
-			for(int i =0; i<(cases-placer);i++) {
+			for(int i =placer; i<cases;i++) {
+				propositionTab[i]=model.createJLabel();
+				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
+				blocTentative[nombreTour].add(propositionTab[i]);
+			}
+		}
+		else if(nombreTour>=2 & changer>=1 & placer==0 & debutDecal==true) {
+
+			for(int i =0; i<changer;i++) {
 				propositionTab[i]=model.createJLabel();
 				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
 				blocTentative[nombreTour].add(propositionTab[i]);
 			}
 
+			for(int i = changer;i<(changer+changer);i++) {
+				propositionTab[i]=model.createJLabel();
+				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+propositionOrdi[(i-changer)]+".png"));
+				blocTentative[nombreTour].add(propositionTab[i]);
+			}
+			for(int i = (changer+changer);i<cases;i++) {
+				propositionTab[i]=model.createJLabel();
+				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
+				blocTentative[nombreTour].add(propositionTab[i]);
+			}
+			decal=changer+changer;
+			debutDecal=false;
+		}
+		
+		else if(nombreTour>2 & changer>=1 & placer==0 & !debutDecal) {
+
+			for(int i =0; i<decal;i++) {
+				propositionTab[i]=model.createJLabel();
+				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
+				blocTentative[nombreTour].add(propositionTab[i]);
+			}
+
+			for(int i = decal;i<decal+changer;i++) {
+				propositionTab[i]=model.createJLabel();
+				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+propositionOrdi[decal-changer]+".png"));
+				blocTentative[nombreTour].add(propositionTab[i]);
+			}
+			for(int i = decal+changer;i<cases;i++) {
+				propositionTab[i]=model.createJLabel();
+				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
+				blocTentative[nombreTour].add(propositionTab[i]);
+			}
+           decal=decal+changer;
 		}
 
-		if(changer==0 & placer==0) {
+
+
+		else if(nombreTour>1 & changer==0 & placer>=1) {
+			for(int i = 0;i<placer;i++) {
+				propositionTab[i]=model.createJLabel();
+				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+propositionOrdi[i]+".png"));
+				blocTentative[nombreTour].add(propositionTab[i]);
+			}
+			for(int i =placer; i<cases;i++) {
+				propositionTab[i]=model.createJLabel();
+				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
+				blocTentative[nombreTour].add(propositionTab[i]);
+			}
+		}
+
+
+
+
+		else if(changer==0 & placer==0) {
 			for(int i = 0;i<cases;i++) {
 				propositionTab[i]=model.createJLabel();// on crée les JLabel et on met dans tab
 				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
 				blocTentative[nombreTour].add(propositionTab[i]);
 			}
-
 		}
 		for(int a =0;a<cases;a++) {
 
 			control.couleurChiffre(propositionTab[a].getIcon().toString(), null);
-			propositionOrdi[a]=control.getProposition();
-			
+			propositionOrdi[a]=control.getProposition();		
 		}
 		blocTentative[nombreTour].revalidate();
 	}
 
 
-
-	public void tour2(JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices) {
-
-		blocTentative[nombreTour].removeAll();
-		
-		if(changer==0 & placer>=1) {
-			for(int i = 0;i<placer;i++) {
-				propositionTab[i]=model.createJLabel();
-				propositionTab[i].setIcon(tentative1);
-				blocTentative[nombreTour].add(propositionTab[i]);
-
-			}
-			for(int i =0; i<(cases-placer);i++) {
-				propositionTab[i]=model.createJLabel();
-				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
-				blocTentative[nombreTour].add(propositionTab[i]);
-			}
-
-		}
-		if(changer==0 & placer==0) {
-			for(int i = 0;i<cases;i++) {
-				propositionTab[i]=model.createJLabel();// on crée les JLabel et on met dans tab
-				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
-				blocTentative[nombreTour].add(propositionTab[i]);
+	public void check(JLabel [] propositionIcon,JPanel[] blocTentative,JLabel [] blocIndices) {
+		/**
+		 * Boucle qui cherche si la couleur est bien placée
+		 */
+		for(int i=0;i<cases;i++) {
+			verif[i]=false;
+			control.couleurChiffre(propositionIcon[i].getIcon().toString(), null);
+			if(propositionOrdi[i]==control.getProposition()) {
+				++placer;
+				verif[i]=true;
 			}
 		}
-		for(int a =cases;a>0;a++) {
 
-			control.couleurChiffre(propositionTab[a].getIcon().toString(), null);
-			propositionOrdi[a]=control.getProposition();
-			System.out.println(propositionOrdi[a]);
+		/**
+		 * Boucle qui cherche si la couleur se trouve autre part dans le code secret
+		 */
+		for(int i=0;i<cases;i++) {
+			if(!verif[i]){
+				for(int w =0;w<cases;w++) {
+					control.couleurChiffre(propositionIcon[w].getIcon().toString(), null);
+					if(propositionOrdi[i]==control.getProposition() & verif[w]!=true) {
+						++changer;
+						break;
+					}
+				}
+			}
 		}
-		blocTentative[nombreTour].revalidate();
-
-	}
-
-	public void check(JLabel [] blocIndices,JLabel [] propositionIcon) {
-	}
-
-
-
-	public void okClick(int nombreClick, JPanel[] blocTentative, JLabel[] propositionIcon, JLabel[] blocIndices,
-			int changer2, int placer2, JPanel contentPane) {
-		
 	}
 }

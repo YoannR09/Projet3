@@ -41,7 +41,6 @@ public class Mastermind extends JFrame{
 	private JButton refresh = new JButton(" ⟲ ");
 	private int placer=0;
 	private int changer=0;
-	private int nombreTentative=0;
 	private JPanel blocIndice = new JPanel();
 	private JPanel espace2 = new JPanel();
 	private JPanel votreProp = new JPanel();
@@ -49,7 +48,7 @@ public class Mastermind extends JFrame{
 	private JButton supprimer = new JButton(" ❌ ");
 	private JButton retour = new JButton(" Retour ");
 	Font arial = new Font ("arial", 14,14);
-	Font impact = new Font ("impact", 15,15);
+	Font impact = new Font ("impact", 12,12);
 	Font arial2 = new Font ("arial", 10,10);
 	JPanel prop = new JPanel();
 	JButton [] button = new JButton[couleur];
@@ -68,28 +67,27 @@ public class Mastermind extends JFrame{
 
 	public Mastermind(MastermindMode mode) {
 
-		if(mode.equals(MastermindMode.Challenger)) {
-			this.setTitle("Challenger");
-			this.setSize(400, 500);
-			initRegle(mode);
-			initHisto(mode);
-			initBlocTenta(mode);
-			initCadreDev(mode);
-		}
-		else if(mode.equals(MastermindMode.Defenseur)) {
-			this.setTitle("Defenseur");
-			this.setSize(400, 500);
-			initRegle(mode);
-			initHisto(mode);
-			initBlocTenta(mode);
-			initCadreDev(mode);
-			initBlocIndices(mode);
-		}
+		this.setSize(400, 500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
 		this.setResizable(false);
-		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
+		
+		initRegle(mode);
+		initHisto(mode);
+		initBlocTenta(mode);
+		initCadreDev(mode);
+		
+		if(mode.equals(MastermindMode.Challenger)) {
+			this.setTitle("Challenger");
+			
+			
+		}
+		else if(mode.equals(MastermindMode.Defenseur)) {
+			this.setTitle("Defenseur");
+			initBlocIndices(mode);
+		}
+		contentPane.setBackground(Color.getHSBColor(0.104f, 0.54f, 0.65f));
 
 	}
 
@@ -108,12 +106,11 @@ public class Mastermind extends JFrame{
 			espace2.add(codeSecret);
 
 			if(mode.equals(MastermindMode.Challenger)) {
-				ChallengerMastermindModel model = new ChallengerMastermindModel();
+
 				text.setText("Code secret : ");
-				model.dev(espace2);
+				modelChal.dev(espace2);
 			}
 			else if(mode.equals(MastermindMode.Defenseur)) {
-				DefenseurMastermindModel model = new DefenseurMastermindModel();
 				text.setText("Code secret : ");
 			}
 		}
@@ -126,7 +123,7 @@ public class Mastermind extends JFrame{
 		scrollPane.setPreferredSize(new Dimension(350,205));
 		scrollPane.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		model.blocJeuSize(blocJeu);
-		blocJeu.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
+		blocJeu.setBackground(Color.getHSBColor(0.104f, 0.34f, 0.95f));
 		for(int i=0;i<tentative;i++) {
 			blocTentative[i]= model.createJPanel();// on crée les JLabel et on met dans tab
 			blocTentative[i].setBackground(Color.DARK_GRAY);
@@ -196,13 +193,16 @@ public class Mastermind extends JFrame{
 			public void actionPerformed(ActionEvent event){
 				if(mode.equals(MastermindMode.Challenger)) {
 					modelChal.okClick(blocTentative,propositionIcon,blocIndices,changer,placer,contentPane);
+					for(int i =0;i<cases;i++) {
+						propositionIcon[i].setIcon(vide);
+					}
 				}
 				else if(mode.equals(MastermindMode.Defenseur)) {
-					modelDef.okClick(nombreClick,blocTentative,propositionIcon,blocIndices,changer,placer,contentPane);
+				    blocTenta.setVisible(false);
+				    blocIndice.setVisible(true);
+				    fin.doClick();
 				}
-				for(int i =0;i<cases;i++) {
-					propositionIcon[i].setIcon(vide);
-				}
+				ok.setEnabled(false);
 				nombreClick=0;
 			}
 		});
@@ -216,7 +216,13 @@ public class Mastermind extends JFrame{
 		InterfaceModel model = new InterfaceModel();
 
 		JLabel textProp = new JLabel();
-		textProp.setText("Votre proposition : ");
+		if(mode.equals(MastermindMode.Challenger)) {
+			textProp.setText("Votre proposition : ");
+		}
+		else if(mode.equals(MastermindMode.Defenseur)) {
+			textProp.setText("Votre code secret : ");
+		}
+		
 		votreProp.add(textProp);
 		votreProp.setBackground(Color.getHSBColor(0.134f, 0.15f, 0.94f));
 		votreProp.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
@@ -228,12 +234,11 @@ public class Mastermind extends JFrame{
 
 		contentPane.add(scrollPane);
 		espace2.setPreferredSize(new Dimension(400,25));
-		espace2.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
+		espace2.setBackground(Color.getHSBColor(0.104f, 0.54f, 0.65f));
 
 	}
 	
 	private void initBlocIndices(MastermindMode mode) {
-		DefenseurMastermindModel model = new DefenseurMastermindModel();
 		JLabel indice = new JLabel();
 		indice.setOpaque(true);
 		indice.setBackground(Color.WHITE);
@@ -258,7 +263,7 @@ public class Mastermind extends JFrame{
 		fin.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
 		fin.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
-			  model.finClick(propositionIcon,blocTentative,blocIndices);
+			  modelDef.finClick(propositionIcon,blocTentative,blocIndices);
 			}
 		});
 		blocIndice.add(refresh);
@@ -274,7 +279,7 @@ public class Mastermind extends JFrame{
 
 		JPanel espaceRetour = new JPanel ();
 		espaceRetour.setPreferredSize(new Dimension(320,20));
-		espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
+		espaceRetour.setBackground(Color.getHSBColor(0.104f, 0.54f, 0.65f));
 		retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		retour.setForeground(Color.white);
@@ -291,14 +296,14 @@ public class Mastermind extends JFrame{
 		blocRegle.setPreferredSize(new Dimension(500,40));
 		JLabel regle = new JLabel();
 		regle.setText("Vous avez "+tentative+" tentatives pour trouver le code secret à "+cases+" couleurs.");
-		regle.setFont(arial2);
+		regle.setFont(impact);
 		contentPane.add(retour);
 		contentPane.add(espaceRetour);
 		blocRegle.add(regle);
 		contentPane.add(blocRegle);
 		JPanel espace = new JPanel ();
 		espace.setPreferredSize(new Dimension(320,25));
-		espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
+		espace.setBackground(Color.getHSBColor(0.104f, 0.54f, 0.65f));
 		JLabel vosTentative = new JLabel();
 		vosTentative.setText("  Entrez vos propositions  ");
 		vosTentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.65f, 0.64f)));
