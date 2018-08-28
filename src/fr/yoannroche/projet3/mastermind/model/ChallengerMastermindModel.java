@@ -23,6 +23,7 @@ public class ChallengerMastermindModel{
 	Control control = new Control();
 	private int [] couleurs = gen.getCouleurs();
 	private int nombreTentative =0;
+	private int couleurSwitch;
 	private boolean [] verif = new boolean [cases];
 	public void okClick(JPanel[] blocTentative, JLabel[] propositionIcon, JLabel[] blocIndices, int changer, int placer,JPanel contentPane) {
 
@@ -30,6 +31,7 @@ public class ChallengerMastermindModel{
 		placer=0;
 		changer=0;
 		blocTentative[nombreTentative].removeAll();
+		
 		/**
 		 * Boucle qui cherche si la couleur est bien placée
 		 */
@@ -44,6 +46,24 @@ public class ChallengerMastermindModel{
 				verif[i]=true;
 			}
 		}
+		/**
+		 * Boucle qui cherche si il y a un switch de deux couleurs a faire.
+		 */
+		for(int i=0;i<cases;i++) {
+			control.couleurChiffre(propositionIcon[i].getIcon().toString(), null);
+			couleurSwitch=control.getProposition();
+			if(!verif[i]) {
+				for(int w =0;w<cases;w++) {
+					control.couleurChiffre(propositionIcon[w].getIcon().toString(), null);
+					if(!verif[w] & couleurSwitch!=control.getProposition() & couleurSwitch==couleurs[w] & control.getProposition()==couleurs[i]) {
+						verif[w]=true;
+							++changer;
+							++changer;
+							break;
+					}
+				}
+			}
+		}
 
 		/**
 		 * Boucle qui cherche si la couleur se trouve autre part dans le code secret
@@ -52,13 +72,16 @@ public class ChallengerMastermindModel{
 			control.couleurChiffre(propositionIcon[i].getIcon().toString(), null);
 			if(!verif[i]){
 				for(int w =0;w<cases;w++) {
-					if(control.getProposition()==couleurs[w]) {
+					if(!verif[w] & control.getProposition()==couleurs[w]) {
+						verif[w]=true;
 							++changer;
 							break;
 					}
 				}
 			}
 		}
+		
+		
 		if(placer==cases) {
 			new Resultat(null, "Victoire", null,contentPane, jeu).gagner();
 		}
