@@ -29,10 +29,12 @@ public class DefenseurMastermindModel {
 	private boolean debutDecal = true;
 	private int decal =0;
 	private int[] codeSecret = new int[cases];
+	private int[] couleurOk = new int[cases];
 	private int proposition =0;
 	private int nombreTour=0;
 	private int placer=0;
 	private int changer=0;
+	private int couleurSwitch;
 	ImageIcon tentative1 = new ImageIcon("images/couleur/0.png");
 	InterfaceModel model = new InterfaceModel();
 
@@ -99,7 +101,7 @@ public class DefenseurMastermindModel {
 				blocTentative[nombreTour].add(propositionTab[i]);
 			}
 		}
-		else if(nombreTour>=2 & changer>=1 & placer==0 & debutDecal==true) {
+		else if(nombreTour>=2 & changer<=2 & placer==0 & debutDecal==true) {
 
 			for(int i =0; i<changer;i++) {
 				propositionTab[i]=model.createJLabel();
@@ -108,7 +110,7 @@ public class DefenseurMastermindModel {
 			}
 
 			for(int i = changer;i<(changer+changer);i++) {
-				propositionTab[i]=model.createJLabel();
+				propositionTab[i]=model.createJLabel(); // Problème si il y a un chiffre imper.
 				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+propositionOrdi[(i-changer)]+".png"));
 				blocTentative[nombreTour].add(propositionTab[i]);
 			}
@@ -141,6 +143,14 @@ public class DefenseurMastermindModel {
 			}
            decal=decal+changer;
 		}
+		
+		else if(changer+placer==cases) {
+			for(int i=cases;i>0;i--) {
+				propositionTab[i]=model.createJLabel();
+				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+propositionOrdi[i]+".png"));
+				blocTentative[nombreTour].add(propositionTab[i]);
+			}
+		}
 
 
 
@@ -151,6 +161,19 @@ public class DefenseurMastermindModel {
 				blocTentative[nombreTour].add(propositionTab[i]);
 			}
 			for(int i =placer; i<cases;i++) {
+				propositionTab[i]=model.createJLabel();
+				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
+				blocTentative[nombreTour].add(propositionTab[i]);
+			}
+		}
+		
+		else if(changer>=1 & placer>=1) {
+			for(int i =0;i<changer+placer;i++) {
+				propositionTab[i]=model.createJLabel();
+				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+propositionOrdi[i]+".png"));
+				blocTentative[nombreTour].add(propositionTab[i]);
+			}
+			for(int i =placer+changer; i<cases;i++) {
 				propositionTab[i]=model.createJLabel();
 				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
 				blocTentative[nombreTour].add(propositionTab[i]);
@@ -186,6 +209,23 @@ public class DefenseurMastermindModel {
 			if(propositionOrdi[i]==control.getProposition()) {
 				++placer;
 				verif[i]=true;
+				couleurOk[i]=propositionOrdi[i];
+			}
+		}
+		for(int i=0;i<cases;i++) {
+			control.couleurChiffre(propositionIcon[i].getIcon().toString(), null);
+			couleurSwitch=control.getProposition();
+			if(!verif[i]) {
+				for(int w =0;w<cases;w++) {
+					control.couleurChiffre(propositionIcon[w].getIcon().toString(), null);
+					if(!verif[w] & propositionOrdi[i]!=propositionOrdi[w] & propositionOrdi[i]==control.getProposition() & propositionOrdi[w]==couleurSwitch) {
+						verif[w]=true;
+						verif[i]=true;
+							++changer;
+							++changer;
+							break;
+					}
+				}
 			}
 		}
 
@@ -196,7 +236,8 @@ public class DefenseurMastermindModel {
 			if(!verif[i]){
 				for(int w =0;w<cases;w++) {
 					control.couleurChiffre(propositionIcon[w].getIcon().toString(), null);
-					if(propositionOrdi[i]==control.getProposition() & verif[w]!=true) {
+					if(propositionOrdi[i]==control.getProposition() & !verif[w]) {
+						verif[w]=true;
 						++changer;
 						break;
 					}

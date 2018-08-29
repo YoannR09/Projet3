@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -31,8 +33,9 @@ import javax.swing.JRadioButton;
  *
  */
 public class Reglage extends JFrame {
-	
 
+
+	BeanReglage bean = new BeanReglage();
 	ResourceBundle reglage = ResourceBundle.getBundle("Config");
 	private JPanel contentPane= new JPanel();
 	private JPanel cadreCases = new JPanel();
@@ -51,7 +54,7 @@ public class Reglage extends JFrame {
 	int  [] tenta = {4,5,6,7,8};
 	JRadioButton [] buttonTen = new JRadioButton[tenta.length];
 	private JRadioButton boutonTentative[];
-	
+
 	int tentative;
 
 	public Reglage() {
@@ -244,62 +247,42 @@ public class Reglage extends JFrame {
 	 * Méthode qui gére le changement des variables dans le fichier Config.properties
 	 */
 	public void sauvegardeReglage() {
-		FileInputStream stream = null;
-		try {
-			Properties prop = new Properties() ;
-			File fProp = new File("ressources/Config.properties") ;
-			stream = new FileInputStream(fProp) ;
-			prop.load(stream) ;
 
-			if(check.isSelected()==true) {
-				String newDev=Integer.toString(1) ;
-				prop.setProperty("dev",newDev);
-			
+		bean.addPropertyChangeListener( new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent event) {
+				System.out.println("propertyChange : valeur = "+ event.getNewValue());
 			}
-			else{
-				String newDev=Integer.toString(0) ;
-				prop.setProperty("dev",newDev) ;
-			
-			}
+		} );
 
-			for(int i=0;i<clavier.length;i++) {
-				if(bouton[i].isSelected()==true) {
-					int cases=(i+4);
-					String newCases=Integer.toString(cases) ;
-					prop.setProperty("cases",newCases) ;
-				
 
-				}
-
-			}
-
-			for(int i=0;i<tenta.length;i++) {
-
-				if(boutonTentative[i].isSelected()==true) {
-					int tentative=(i+4);
-					String newTenta=Integer.toString(tentative) ;
-					prop.setProperty("tentatives",newTenta) ;
-				
-				}
-			}
-			
-			
-			FileOutputStream oStream = new FileOutputStream(fProp) ;
-			prop.store(oStream,"Reglage") ;
-			
-		}catch(Exception e) {
-			e.printStackTrace();
+		if(check.isSelected()==true) {			
+			bean.setDev(1);
 		}
-		finally {
-			try {
-				stream.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		else{
+			bean.setDev(0);
+
+		}
+
+		for(int i=0;i<clavier.length;i++) {
+			if(bouton[i].isSelected()==true) {
+				int cases=(i+4);
+				bean.setCases(cases);
+
+
+			}
+
+		}
+
+		for(int i=0;i<tenta.length;i++) {
+
+			if(boutonTentative[i].isSelected()==true) {
+				int tentative=(i+4);
+				bean.setTentatives(tentative);
+
 			}
 		}
 	}
-	
-	
+
 }
+
 

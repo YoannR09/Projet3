@@ -12,26 +12,42 @@ import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.Resultat;
 import fr.yoannroche.projet3.mastermind.control.Control;
 
-public class ChallengerMastermindModel{
+/**
+ * Class qui permet de controler la proposition et d'exposer les indications.
+ * Elle tient également compte du mode développeur.
+ * 
+ * @author El-ra
+ */
+public class ChallengerMastermindModel {
 
-	int jeu = 4;
-	InterfaceModel model = new InterfaceModel();
-	ResourceBundle reglage = ResourceBundle.getBundle("Config");
-	private int cases = Integer.parseInt(reglage.getString("cases"));
-	private JLabel tabView [] = new JLabel[cases];
-	Generateur gen = new Generateur();
-	Control control = new Control();
-	private int [] couleurs = gen.getCouleurs();
-	private int nombreTentative =0;
-	private int couleurSwitch;
-	private boolean [] verif = new boolean [cases];
+	private int				jeu				= 4;
+	private InterfaceModel	model			= new InterfaceModel();
+	private ResourceBundle	reglage			= ResourceBundle.getBundle("Config");
+	private int				cases			= Integer.parseInt(reglage.getString("cases"));
+	private JLabel			tabView[]		= new JLabel[cases];
+	private Generateur		gen				= new Generateur();
+	private Control			control			= new Control();
+	private int[]			couleurs		= gen.getCouleurs();
+	private int				nombreTentative = 0;
+	private int				couleurSwitch	= 0;
+	private boolean[]		verif			= new boolean [cases];
+
+	/**
+	 * Class appelée lors du click du bouton ok pour envoyer votre proposition
+	 * @param blocTentative
+	 * @param propositionIcon
+	 * @param blocIndices
+	 * @param changer
+	 * @param placer
+	 * @param contentPane
+	 */
 	public void okClick(JPanel[] blocTentative, JLabel[] propositionIcon, JLabel[] blocIndices, int changer, int placer,JPanel contentPane) {
 
 
 		placer=0;
 		changer=0;
 		blocTentative[nombreTentative].removeAll();
-		
+
 		/**
 		 * Boucle qui cherche si la couleur est bien placée
 		 */
@@ -57,9 +73,10 @@ public class ChallengerMastermindModel{
 					control.couleurChiffre(propositionIcon[w].getIcon().toString(), null);
 					if(!verif[w] & couleurSwitch!=control.getProposition() & couleurSwitch==couleurs[w] & control.getProposition()==couleurs[i]) {
 						verif[w]=true;
-							++changer;
-							++changer;
-							break;
+						verif[i]=true;
+						++changer;
+						++changer;
+						break;
 					}
 				}
 			}
@@ -74,14 +91,14 @@ public class ChallengerMastermindModel{
 				for(int w =0;w<cases;w++) {
 					if(!verif[w] & control.getProposition()==couleurs[w]) {
 						verif[w]=true;
-							++changer;
-							break;
+						++changer;
+						break;
 					}
 				}
 			}
 		}
-		
-		
+
+
 		if(placer==cases) {
 			new Resultat(null, "Victoire", null,contentPane, jeu).gagner();
 		}
@@ -95,10 +112,10 @@ public class ChallengerMastermindModel{
 		for(int i=0;i<cases;i++) {
 
 			control.chiffreCouleur(couleurs[i],content,indice[i]);
-				
+
 		}
 	}
 
-	
+
 
 }

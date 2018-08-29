@@ -47,6 +47,10 @@ public class Generateur {
 	
 	
 	 public int initNombre(int cases){
+		 
+		// for(int i = 0;i<cases;i++) {
+		//	 nombre[i]= 0+(int)(Math.random()*(9-0));     Changer un tableau de int en un seul int.
+		// }
 		if(cases==4) {
 			int min = 1111;
 			nombre = min +(int)(Math.random()*(10000 - min));

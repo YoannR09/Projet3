@@ -89,6 +89,7 @@ public class Resultat extends JFrame {
 				 }
 				 if(jeu==4) {
 					Mastermind master = new Mastermind(MastermindMode.Challenger);
+					master.setVisible(true);
 				 }
 			}
 		});

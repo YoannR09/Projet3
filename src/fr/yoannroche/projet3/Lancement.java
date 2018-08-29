@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -27,7 +28,9 @@ import fr.yoannroche.projet3.plusmoins.view.ReglePlusMoins;
  *
  */
 public class Lancement extends JFrame{
-
+	
+	ResourceBundle reglage = ResourceBundle.getBundle("Config");
+	BeanReglage bean = new BeanReglage();
 	private JPanel contentPane = new JPanel();
 	private JPanel blocJeu = new JPanel();
 	private JToolBar menuBar = new JToolBar();
@@ -155,8 +158,11 @@ public class Lancement extends JFrame{
 	}
 
 	public static void main(String[] args) {
+		
 		Lancement l = new Lancement();
 		l.setVisible(true);
+		
+		
 
 	}
 
