@@ -87,13 +87,11 @@ public class ChallengerMastermindModel {
 		 */
 		for(int i=0;i<cases;i++) {
 			control.couleurChiffre(propositionIcon[i].getIcon().toString(), null);
-			if(!verif[i]){
-				for(int w =0;w<cases;w++) {
-					if(!verif[w] & control.getProposition()==couleurs[w]) {
-						verif[w]=true;
-						++changer;
-						break;
-					}
+			for(int w =0;w<cases;w++) {
+				if(!verif[w] & control.getProposition()==couleurs[w]) {
+					verif[w]=true;
+					++changer;
+					break;
 				}
 			}
 		}

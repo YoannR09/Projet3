@@ -28,34 +28,31 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 /**
- * 
+ * Class qui gère le réglage du fichier properties
+ * Les réglages sont modifiable dans l'application.
  * @author El-ra
  *
  */
 public class Reglage extends JFrame {
 
 
-	BeanReglage bean = new BeanReglage();
-	ResourceBundle reglage = ResourceBundle.getBundle("Config");
-	private JPanel contentPane= new JPanel();
-	private JPanel cadreCases = new JPanel();
-	private JPanel cadreTentative = new JPanel();
-	private JPanel cadreDev = new JPanel();
-	private JPanel espace1 = new JPanel();
-	ButtonGroup groupCase = new ButtonGroup();
-	ButtonGroup groupTenta = new ButtonGroup();
-	JCheckBox check = new JCheckBox(" Mode développeur ");
-	JButton retour = new JButton (" Retour ");
-	JButton sauv = new JButton(" Sauvergarder ");
-	Font arial = new Font ("arial", 11,11);
-	int  [] clavier = {4,5,6,7,8};
-	JRadioButton [] button = new JRadioButton[clavier.length];
-	private JRadioButton bouton[];
-	int  [] tenta = {4,5,6,7,8};
-	JRadioButton [] buttonTen = new JRadioButton[tenta.length];
-	private JRadioButton boutonTentative[];
+	private BeanReglage			bean			= new BeanReglage();
+	private JPanel				contentPane		= new JPanel();
+	private JPanel				cadreCases		= new JPanel();
+	private JPanel				cadreTentative	= new JPanel();
+	private JPanel				cadreDev		= new JPanel();
+	private JPanel				espace1			= new JPanel();
+	private ButtonGroup			groupCase		= new ButtonGroup();
+	private ButtonGroup			groupTenta		= new ButtonGroup();
+	private JCheckBox			check			= new JCheckBox(" Mode développeur ");
+	private JButton				retour			= new JButton (" Retour ");
+	private JButton				sauv			= new JButton(" Sauvergarder ");
+	private Font				arial			= new Font ("arial", 11,11);
+	private int[]				clavier			= {4,5,6,7,8};
+	private JRadioButton[]		bouton;
+	private int[]				tenta			= {4,5,6,7,8};
+	private JRadioButton[]		boutonTentative;
 
-	int tentative;
 
 	public Reglage() {
 
@@ -74,6 +71,9 @@ public class Reglage extends JFrame {
 		initSauv();
 	}
 
+	/**
+	 * Méthode qui gère le bouton sauvergarde.
+	 */
 	private void initSauv() {
 		sauv.setBackground(Color.getHSBColor(0.434f, 0.55f, 0.64f));
 		sauv.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
@@ -96,7 +96,9 @@ public class Reglage extends JFrame {
 		espace2.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 
 	}
-
+	/**
+	 * Méthode qui gère le bouton retour.
+	 */
 	private void initRetour() {
 		retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
@@ -116,7 +118,9 @@ public class Reglage extends JFrame {
 		espace1.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 
 	}
-
+	/**
+	 * Méthode qui gère le bouton développeur, si il est coché alors le mode développeur sera actif.
+	 */
 	private void initDev() {
 		JLabel dev =new JLabel();
 		dev.setOpaque(true);
@@ -135,7 +139,9 @@ public class Reglage extends JFrame {
 		contentPane.add(cadreDev);
 
 	}
-
+	/**
+	 * Méthode qui gère le nombre de tentatives que vous vouelz avoir.
+	 */
 	private void initTentative() {
 		JLabel tentative =new JLabel();
 		cadreTentative.setPreferredSize(new Dimension(280,60));
@@ -170,7 +176,9 @@ public class Reglage extends JFrame {
 		contentPane.add(espace);
 
 	}
-
+	/**
+	 * Méthode qui gère le nombre de cases que vous voulez avoir.
+	 */
 	private void initCases() {
 		JLabel cases =new JLabel();
 
@@ -248,11 +256,6 @@ public class Reglage extends JFrame {
 	 */
 	public void sauvegardeReglage() {
 
-		bean.addPropertyChangeListener( new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent event) {
-				System.out.println("propertyChange : valeur = "+ event.getNewValue());
-			}
-		} );
 
 
 		if(check.isSelected()==true) {			

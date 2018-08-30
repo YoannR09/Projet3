@@ -8,8 +8,8 @@ import javax.swing.JPanel;
 
 public class InterfaceModel {
 	
-	ResourceBundle reglage = ResourceBundle.getBundle("Config");
-	private int tentative = Integer.parseInt(reglage.getString("tentatives"));
+	private ResourceBundle		reglage			= ResourceBundle.getBundle("Config");
+	private int					tentative		= Integer.parseInt(reglage.getString("tentatives"));
 	
 	public JLabel createJLabel(){
 		JLabel jl = new JLabel();

@@ -36,9 +36,6 @@ public class FenetreMenuPlusMoins extends JFrame{
 	private SourisListener sListener = new SourisListener();
 	private JButton dev = new JButton(" Réglages ");
 	JTextArea regle = new JTextArea();
-	private boolean modeDev = false;
-
-
 	public FenetreMenuPlusMoins() {
 		this.setTitle("Menu du Plus ou Moins");
 		this.setSize(550, 340);
@@ -46,7 +43,7 @@ public class FenetreMenuPlusMoins extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPaneMenu);
 		this.setResizable(false);
-		contentPaneMenu.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
+		contentPaneMenu.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 
 		initMenu();
 
@@ -164,7 +161,7 @@ public class FenetreMenuPlusMoins extends JFrame{
 		contentPaneMenu.add(retour);
 		contentPaneMenu.add(espace1);
 		espace1.setPreferredSize(new Dimension(150,20));
-		espace1.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
+		espace1.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		JLabel mastermind = new JLabel();
 		contentPaneMenu.add(mastermind);
 		mastermind.setText("Plus ou Moins");
@@ -175,13 +172,13 @@ public class FenetreMenuPlusMoins extends JFrame{
 		mastermind.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		JPanel espaceMaster = new JPanel();
 		espaceMaster.setPreferredSize(new Dimension(200,20));
-		espaceMaster.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
+		espaceMaster.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		contentPaneMenu.add(espaceMaster);
 		contentPaneMenu.add(regle);
 		contentPaneMenu.add(blocMode);
 		contentPaneMenu.add(dev);
 		contentPaneMenu.add(espace2);
-		espace2.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
+		espace2.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		contentPaneMenu.add(lancer,BorderLayout.SOUTH);
 
 

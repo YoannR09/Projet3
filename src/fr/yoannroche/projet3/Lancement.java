@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -29,22 +28,20 @@ import fr.yoannroche.projet3.plusmoins.view.ReglePlusMoins;
  */
 public class Lancement extends JFrame{
 	
-	ResourceBundle reglage = ResourceBundle.getBundle("Config");
-	BeanReglage bean = new BeanReglage();
-	private JPanel contentPane = new JPanel();
-	private JPanel blocJeu = new JPanel();
-	private JToolBar menuBar = new JToolBar();
-	private JButton jeu1 = new JButton(new ImageIcon("images/master.png"));
-	private JButton jeu2 = new JButton(new ImageIcon("images/plusmoins.png"));
-	private JButton infos = new JButton(" ? ");
-	JLabel infosJeu = new JLabel();
-	JButton masterMind = new JButton("  MasterMind  ");
-	JButton plusMoins = new JButton ("  Plus ou Moins  ");
-	private Dimension dim = new Dimension(400,100);
-	private Dimension dim2 = new Dimension(50,55);
-	private Dimension dim3 = new Dimension(100,30);
-	Font impact = new Font ("impact", 15,15);
-	Font impact2 = new Font ("impact", 13,13);
+	private JPanel				contentPane		= new JPanel();
+	private JPanel				blocJeu			= new JPanel();
+	private JToolBar			menuBar			= new JToolBar();
+	private JButton				jeu1			= new JButton(new ImageIcon("images/master.png"));
+	private JButton				jeu2			= new JButton(new ImageIcon("images/plusmoins.png"));
+	private JButton				infos			= new JButton(" ? ");
+	private JLabel				infosJeu		= new JLabel();
+	private JButton				masterMind		= new JButton("  MasterMind  ");
+	private JButton				plusMoins		= new JButton("  Plus ou Moins  ");
+	private Dimension			dim				= new Dimension(400,100);
+	private Dimension			dim2			= new Dimension(50,55);
+	private Dimension			dim3			= new Dimension(100,30);
+	private Font				impact			= new Font("impact", 15,15);
+	
 	
 	public Lancement() {
 

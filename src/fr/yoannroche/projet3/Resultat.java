@@ -24,18 +24,16 @@ public class Resultat extends JFrame {
 	
 
 	
-	JPanel contentPane = new JPanel();
-	JPanel contentPane2;
-	JButton relancer = new JButton(" Relancer ");
-	JButton home = new JButton(" Menu ");
-	JButton quitter = new JButton(" Quitter ");
-	Font arial = new Font ("arial", 12,12);
-	JLabel text = new JLabel();
-	int jeu;
-	String proposition;
-	ChallengerPlusMoins chal;
-	private String code;
-
+	private JPanel		contentPane		= new JPanel();
+	private JPanel		contentPane2;
+	private JButton		relancer		= new JButton(" Relancer ");
+	private JButton		home			= new JButton(" Menu ");
+	private JButton		quitter			= new JButton(" Quitter ");
+	private Font		arial			= new Font ("arial", 12,12);
+	private JLabel		text			= new JLabel();
+	private int			jeu;
+	
+	
 	public Resultat(JFrame parent, String title,String nombreString, JPanel contentPane2, int jeu){
 		
 		super(title);
@@ -47,7 +45,6 @@ public class Resultat extends JFrame {
 		this.getContentPane().add(contentPane);
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		this.contentPane2 = contentPane2;
-		this.code = nombreString;
 		this.jeu=jeu;
 		
 		initText();

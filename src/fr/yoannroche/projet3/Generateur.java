@@ -6,31 +6,31 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Generateur {
-	
-	private int nombre;
-	private static final Logger logger = LogManager.getLogger();
-	ResourceBundle reglage = ResourceBundle.getBundle("Config");
-	private int cases = Integer.parseInt(reglage.getString("cases"));
-	private int couleur = Integer.parseInt(reglage.getString("couleur"));
-	private int [] couleurs = new int[cases];
-	
+
+	private int						nombre			= 0;
+	private static final Logger		logger			= LogManager.getLogger();
+	private ResourceBundle			reglage			= ResourceBundle.getBundle("Config");
+	private int						cases			= Integer.parseInt(reglage.getString("cases"));
+	private int						couleur			= Integer.parseInt(reglage.getString("couleur"));
+	private int[]					couleurs		= new int[cases];
+
 	public Generateur() {
-		
+
 		initNombre(cases);
 		initCouleur(cases);
-		
+
 	}
-	
+
 	public int[] initCouleur(int cases) {
-		
-				for(int i=0;i<cases;i++) {
-					couleurs[i] = 0 +(int)(Math.random()*(couleur - 0));
-				}	
-		
+
+		for(int i=0;i<cases;i++) {
+			couleurs[i] = 0 +(int)(Math.random()*(couleur - 0));
+		}	
+
 		logger.trace("Generateur crée une couleur en fonction du nombre de cases selectionnéS :" + cases);
 		return couleurs;	
 	}
-	
+
 	public int[] getCouleurs() {
 		return couleurs;
 	}
@@ -44,10 +44,10 @@ public class Generateur {
 	 * @param cases
 	 * @return
 	 */
-	
-	
-	 public int initNombre(int cases){
-		 
+
+
+	public int initNombre(int cases){
+
 		// for(int i = 0;i<cases;i++) {
 		//	 nombre[i]= 0+(int)(Math.random()*(9-0));     Changer un tableau de int en un seul int.
 		// }
@@ -73,18 +73,18 @@ public class Generateur {
 		}
 		logger.trace("Generateur crée un nombre en fonction du nombre de cases selectionnéS :" + cases);
 		return nombre;
-	
+
 	}
-	 /**
-	  * Le setter et getter de la variable nombre.
-	  * le nombre est définit par la méthode initNombre.
-	  * @param nombre
-	  */
-	 public void setNombre(int nombre) {
-			this.nombre = nombre;
-		}
-		public int getNombre() {
-			return this.nombre;
-		}
+	/**
+	 * Le setter et getter de la variable nombre.
+	 * le nombre est définit par la méthode initNombre.
+	 * @param nombre
+	 */
+	public void setNombre(int nombre) {
+		this.nombre = nombre;
+	}
+	public int getNombre() {
+		return this.nombre;
+	}
 
 }

@@ -21,10 +21,10 @@ import fr.yoannroche.projet3.Lancement;
 
 public class RegleMastermind extends JFrame {
 
-	private JPanel contentPane = new JPanel();
-	Font arial = new Font ("arial", 12,12);
-	Font impact2 = new Font ("impact", 20,20);
-	private JButton retour = new JButton("Retour");
+	private JPanel		contentPane			= new JPanel();
+	private Font		arial				= new Font ("arial", 12,12);
+	private Font		impact2				= new Font ("impact", 20,20);
+	private JButton		retour				= new JButton("Retour");
 	
 	
 	public RegleMastermind() {
@@ -95,32 +95,25 @@ public class RegleMastermind extends JFrame {
 		cadreRegle.add(jeu);
 		cadreRegle.add(espace2);
 		cadreRegle.add(regle);
-		contentPane.add(cadreRegle);
-		
+		contentPane.add(cadreRegle);	
 	}
 	
 	class SourisListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent arg0) {
-
 		}
-
 		public void mouseEntered(MouseEvent arg0) {
 			if(arg0.getSource()==retour) {
 				retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.54f));
 				retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.34f)));
 			}
 		}
-
 		public void mouseExited(MouseEvent arg0) {
 			retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 			retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		}
-
 		public void mousePressed(MouseEvent arg0) {
-
 		}
-
 		public void mouseReleased(MouseEvent arg0) {
 			retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 			retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
