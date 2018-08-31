@@ -24,6 +24,7 @@ public class ChallengerMastermindModel {
 	private InterfaceModel	model			= new InterfaceModel();
 	private ResourceBundle	reglage			= ResourceBundle.getBundle("Config");
 	private int				cases			= Integer.parseInt(reglage.getString("cases"));
+	private int				tentative		= Integer.parseInt(reglage.getString("tentatives"));
 	private JLabel			tabView[]		= new JLabel[cases];
 	private Generateur		gen				= new Generateur();
 	private Control			control			= new Control();
@@ -31,6 +32,7 @@ public class ChallengerMastermindModel {
 	private int				nombreTentative = 0;
 	private int				couleurSwitch	= 0;
 	private boolean[]		verif			= new boolean [cases];
+	private boolean			partiFini		= false;
 
 	/**
 	 * Class appelée lors du click du bouton ok pour envoyer votre proposition
@@ -97,12 +99,17 @@ public class ChallengerMastermindModel {
 		}
 
 
-		if(placer==cases) {
+		if(placer==cases & !partiFini) {
 			new Resultat(null, "Victoire", null,contentPane, jeu).gagner();
+			partiFini=true;
 		}
 		blocIndices[nombreTentative].setText(" ♦ :  "+placer+"   ♢  : "+changer+" ");
 		blocTentative[nombreTentative].revalidate();
 		++nombreTentative;
+		if(nombreTentative==tentative & !partiFini) {
+			new Resultat(null, "Victoire", null,contentPane, jeu).perdu();
+			partiFini=true;
+		}
 	}
 
 	public void dev(JPanel content){

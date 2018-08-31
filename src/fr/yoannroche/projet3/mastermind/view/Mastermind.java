@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -189,7 +190,7 @@ public class Mastermind extends JFrame{
 						}
 					}
 					else {
-						System.out.println("trop long");
+						JOptionPane.showMessageDialog(null, "Vous êtes au maximum de cases possible", "Erreur", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			});
@@ -284,7 +285,7 @@ public class Mastermind extends JFrame{
 		fin.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
 		fin.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
-				modelDef.finClick(propositionIcon,blocTentative,blocIndices, changerClick, placerClick);
+				modelDef.finClick(propositionIcon,blocTentative,blocIndices, changerClick, placerClick,contentPane,indice);
 			}
 		});
 		blocIndice.add(refresh);

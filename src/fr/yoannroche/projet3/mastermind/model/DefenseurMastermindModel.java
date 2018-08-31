@@ -4,9 +4,11 @@ import java.util.ResourceBundle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import fr.yoannroche.projet3.Generateur;
+import fr.yoannroche.projet3.Resultat;
 import fr.yoannroche.projet3.mastermind.control.Control;
 
 public class DefenseurMastermindModel {
@@ -43,7 +45,7 @@ public class DefenseurMastermindModel {
 
 
 
-	public void finClick(JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices,int changerClick, int placerClick) {
+	public void finClick(JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices,int changerClick, int placerClick,JPanel contentPane, JLabel indice) {
 		
 		
 		
@@ -62,13 +64,7 @@ public class DefenseurMastermindModel {
 			if(changerClick==changer & placerClick==placer ) {
 			blocTentative[nombreTour].removeAll();
 			blocIndices[nombreTour-1].setText(" ♦ :  "+placer+"   ♢  : "+changer+" ");
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			tour(propositionIcon,blocTentative,blocIndices);
+			tour(propositionIcon,blocTentative,blocIndices,contentPane);
 			placer=0;
 			changer=0;
 			check(propositionIcon, blocTentative, blocIndices);
@@ -76,13 +72,13 @@ public class DefenseurMastermindModel {
 			++nombreTour;
 			}
 			else {
-				System.out.println("wrong infos");
+				JOptionPane.showMessageDialog(null, "Donnez les bons indices !", "Attention", JOptionPane.WARNING_MESSAGE);
 			}	
 			
 		}
 		
 		if(nombreTour==tentative & !partiFini) {
-			System.out.println("gagner");
+			new Resultat(null, "Gagner",null,contentPane,jeu).gagner();
 			partiFini=true;
 		}
 	}
@@ -98,7 +94,7 @@ public class DefenseurMastermindModel {
 		}
 	}
 
-	public void tour(JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices) {
+	public void tour(JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices,JPanel contentPane) {
 
 		blocTentative[nombreTour].removeAll();
 
@@ -250,7 +246,7 @@ public class DefenseurMastermindModel {
 			}
 		}
 		if(couleurOk==cases) {
-			System.out.println("perdu");
+			new Resultat(null, "Gagner",null,contentPane,jeu).perdu();
 			partiFini=true;
 		}
 		else {
