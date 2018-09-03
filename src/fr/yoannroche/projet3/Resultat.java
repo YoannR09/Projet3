@@ -21,9 +21,9 @@ import fr.yoannroche.projet3.plusmoins.view.DefenseurPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.DuelPlusMoins;
 
 public class Resultat extends JFrame {
-	
 
-	
+
+
 	private JPanel		contentPane		= new JPanel();
 	private JPanel		contentPane2;
 	private JButton		relancer		= new JButton(" Relancer ");
@@ -32,10 +32,10 @@ public class Resultat extends JFrame {
 	private Font		arial			= new Font ("arial", 12,12);
 	private JLabel		text			= new JLabel();
 	private int			jeu;
-	
-	
+
+
 	public Resultat(JFrame parent, String title,String nombreString, JPanel contentPane2, int jeu){
-		
+
 		super(title);
 
 		this.setSize(270, 110);
@@ -46,7 +46,8 @@ public class Resultat extends JFrame {
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		this.contentPane2 = contentPane2;
 		this.jeu=jeu;
-		
+		this.setTitle(" Resultat ");
+
 		initText();
 		initCadre();
 	}
@@ -71,23 +72,31 @@ public class Resultat extends JFrame {
 		relancer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				setVisible(false);
-				 ((JFrame) contentPane2.getTopLevelAncestor()).setVisible(false);
-				 if(jeu==1) {
-					 ChallengerPlusMoins chal = new ChallengerPlusMoins();
-					 chal.setVisible(true);
-				 }
-				 if(jeu==2) {
-					 DefenseurPlusMoins def = new DefenseurPlusMoins();
-					 def.setVisible(true);
-				 }
-				 if(jeu==3) {
-					 DuelPlusMoins duel = new DuelPlusMoins();
-					 duel.setVisible(true);
-				 }
-				 if(jeu==4) {
+				((JFrame) contentPane2.getTopLevelAncestor()).setVisible(false);
+				if(jeu==1) {
+					ChallengerPlusMoins chal = new ChallengerPlusMoins();
+					chal.setVisible(true);
+				}
+				if(jeu==2) {
+					DefenseurPlusMoins def = new DefenseurPlusMoins();
+					def.setVisible(true);
+				}
+				if(jeu==3) {
+					DuelPlusMoins duel = new DuelPlusMoins();
+					duel.setVisible(true);
+				}
+				if(jeu==4) {
 					Mastermind master = new Mastermind(MastermindMode.Challenger);
 					master.setVisible(true);
-				 }
+				}
+				if(jeu==5) {
+					Mastermind master = new Mastermind(MastermindMode.Defenseur);
+					master.setVisible(true);
+				}
+				if(jeu==6) {
+					Mastermind master = new Mastermind(MastermindMode.Duel);
+					master.setVisible(true);
+				}
 			}
 		});
 		relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
@@ -121,14 +130,14 @@ public class Resultat extends JFrame {
 		contentPane.add(cadreBouton);
 
 	}
-	
+
 	public void gagner(){
 		text.setText(" Vous avez gagnés ! ");
 	}
 	public void perdu(){
 		text.setText(" Vous avez perdu ! ");
 	}
-	
+
 	class SourisListener implements MouseListener {
 
 

@@ -29,6 +29,7 @@ import fr.yoannroche.projet3.mastermind.model.InterfaceModel;
  */
 public class Mastermind extends JFrame{
 
+	private InterfaceModel				model				= new InterfaceModel();
 	private DefenseurMastermindModel	modelDef			= new DefenseurMastermindModel();
 	private ChallengerMastermindModel	modelChal			= new ChallengerMastermindModel();
 	private ResourceBundle				reglage				= ResourceBundle.getBundle("Config");
@@ -39,14 +40,13 @@ public class Mastermind extends JFrame{
 	private JPanel						contentPane			= new JPanel();
 	private JButton						p					= new JButton( " ♢ ");
 	private JButton						o					= new JButton(" ♦ ");
-	private JButton						r					= new JButton(" R ");
 	private JButton						fin					= new JButton(" Ok ");
 	private JButton						refresh				= new JButton(" ⟲ ");
-	private int							placer				= 0;
-	private int							changer				= 0;
+	private int							placer,changer,nombreClick,placerClick,changerClick									
+															= 0;
 	private JPanel						blocIndice			= new JPanel();
-	private JPanel						espace2				= new JPanel();
-	private JPanel						votreProp			= new JPanel();
+    private JPanel						espace2				= new JPanel();
+    private JPanel						votreProp			= new JPanel();
 	private JButton						ok					= new JButton(" OK ");
 	private JButton						supprimer			= new JButton(" ❌ ");
 	private JButton						retour				= new JButton(" Retour ");
@@ -59,11 +59,9 @@ public class Mastermind extends JFrame{
 	private JPanel						blocTentative[]		= new JPanel[tentative]; // Affiche vos tentatives.
 	private JLabel						blocIndices[]		= new JLabel[tentative]; // Affiche les indices
 	private ImageIcon					vide				= new ImageIcon("images/couleur/vide.png");
-	private int							nombreClick			= 0;
 	private IndiceListener				IndicesListener     = new IndiceListener();
-	private int							placerClick			= 0;
-	private int							changerClick		= 0;
 	private JLabel						indice				= new JLabel();
+	private JLabel						textProp			= new JLabel();
 	private JScrollPane					scrollPane 			=
 			new JScrollPane(blocJeu,
 					JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -77,23 +75,22 @@ public class Mastermind extends JFrame{
 
 		this.setSize(400, 500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.setContentPane(contentPane);
-		this.setResizable(false);
-
+		
 		initRegle(mode);
 		initHisto(mode);
 		initBlocTenta(mode);
 		initCadreDev(mode);
 
 		if(mode.equals(MastermindMode.Challenger)) {
-			this.setTitle("Challenger");		
+			modeChallenger();
 		}
 		else if(mode.equals(MastermindMode.Defenseur)) {
-			this.setTitle("Defenseur");
-			initBlocIndices(mode);
+		    modeDefenseur(mode);
 		}
-		contentPane.setBackground(Color.getHSBColor(0.504f, 0.54f, 0.55f));
+		this.setLocationRelativeTo(null);
+		this.setContentPane(contentPane);
+		this.setResizable(false);
+		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 	}
 	/**
 	 * Affiche les aides si le mode développeur est actif.
@@ -118,6 +115,9 @@ public class Mastermind extends JFrame{
 			else if(mode.equals(MastermindMode.Defenseur)) {
 				text.setText("Code secret : ");
 			}
+			else if(mode.equals(MastermindMode.Duel)) {
+				
+			}
 		}
 	}
 
@@ -131,7 +131,6 @@ public class Mastermind extends JFrame{
 		InterfaceModel model = new InterfaceModel();
 		scrollPane.setPreferredSize(new Dimension(350,205));
 		scrollPane.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
-		model.blocJeuSize(blocJeu);
 		blocJeu.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		for(int i=0;i<tentative;i++) {
 			blocTentative[i]= model.createJPanel();// on crée les JLabel et on met dans tab
@@ -143,6 +142,9 @@ public class Mastermind extends JFrame{
 			}
 			else if(mode.equals(MastermindMode.Defenseur)) {
 				tenta.setText(" Tentative de l'IA : "+(i+1));
+			}
+			else if(mode.equals(MastermindMode.Duel)) {
+				tenta.setText(" Votre tentative : "+(i+1));
 			}
 			tenta.setForeground(Color.WHITE);
 			tenta.setFont(arial);
@@ -238,14 +240,6 @@ public class Mastermind extends JFrame{
 	 */
 	private void initHisto(MastermindMode mode) {
 
-		InterfaceModel model = new InterfaceModel();
-		JLabel textProp = new JLabel();
-		if(mode.equals(MastermindMode.Challenger)) {
-			textProp.setText("Votre proposition : ");
-		}
-		else if(mode.equals(MastermindMode.Defenseur)) {
-			textProp.setText("Votre code secret : ");
-		}	
 		votreProp.add(textProp);
 		votreProp.setBackground(Color.getHSBColor(0.134f, 0.15f, 0.94f));
 		votreProp.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
@@ -256,7 +250,7 @@ public class Mastermind extends JFrame{
 		}
 		contentPane.add(scrollPane);
 		espace2.setPreferredSize(new Dimension(400,25));
-		espace2.setBackground(Color.getHSBColor(0.504f, 0.54f, 0.55f));
+		espace2.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 	}
 	/**
 	 * Affiche le clavier pour donner des indices en mode Defenseur.
@@ -307,7 +301,7 @@ public class Mastermind extends JFrame{
 
 		JPanel espaceRetour = new JPanel ();
 		espaceRetour.setPreferredSize(new Dimension(320,20));
-		espaceRetour.setBackground(Color.getHSBColor(0.504f, 0.54f, 0.55f));
+		espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		retour.setForeground(Color.white);
@@ -331,7 +325,7 @@ public class Mastermind extends JFrame{
 		contentPane.add(blocRegle);
 		JPanel espace = new JPanel ();
 		espace.setPreferredSize(new Dimension(320,25));
-		espace.setBackground(Color.getHSBColor(0.504f, 0.54f, 0.55f));
+		espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		JLabel vosTentative = new JLabel();
 		vosTentative.setText("  Entrez vos propositions  ");
 		vosTentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.65f, 0.64f)));
@@ -342,6 +336,18 @@ public class Mastermind extends JFrame{
 		vosTentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		espace.add(vosTentative);
 		contentPane.add(espace);
+	}
+	
+	public void modeChallenger() {
+		this.setTitle("Challenger");
+		textProp.setText("Votre proposition : ");
+		model.blocJeuSize(blocJeu,contentPane);
+	}
+	public void modeDefenseur(MastermindMode mode) {
+		this.setTitle("Defenseur");
+		initBlocIndices(mode);
+		textProp.setText("Votre code secret : ");
+		model.blocJeuSize(blocJeu,contentPane);
 	}
 
 	class SourisListener implements MouseListener {

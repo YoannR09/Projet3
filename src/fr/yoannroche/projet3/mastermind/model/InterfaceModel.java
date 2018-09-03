@@ -20,7 +20,7 @@ public class InterfaceModel {
 		return jp;
 	}
 
-	public void blocJeuSize(JPanel blocJeu) {
+	public void blocJeuSize(JPanel blocJeu, JPanel contentPane) {
 		if(tentative==4) {
 			blocJeu.setPreferredSize(new Dimension(350,190));
 		}

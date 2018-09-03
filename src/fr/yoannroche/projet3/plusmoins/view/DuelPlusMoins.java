@@ -163,7 +163,6 @@ public class DuelPlusMoins extends JFrame{
 		refresh.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){ 
 				tentativeIA.setText("");
-
 			}  
 		});
 		refresh.setPreferredSize(new Dimension(20,20));

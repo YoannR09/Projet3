@@ -1,10 +1,7 @@
 package fr.yoannroche.projet3.mastermind.model;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.util.ResourceBundle;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -97,8 +94,6 @@ public class ChallengerMastermindModel {
 				}
 			}
 		}
-
-
 		if(placer==cases & !partiFini) {
 			new Resultat(null, "Victoire", null,contentPane, jeu).gagner();
 			partiFini=true;
@@ -115,12 +110,7 @@ public class ChallengerMastermindModel {
 	public void dev(JPanel content){
 		JLabel [] indice = new JLabel[cases];
 		for(int i=0;i<cases;i++) {
-
 			control.chiffreCouleur(couleurs[i],content,indice[i]);
-
 		}
 	}
-
-
-
 }
