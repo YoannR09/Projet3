@@ -22,32 +22,36 @@ import org.apache.logging.log4j.Logger;
 import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
 
 
-
+/**
+ * Class qui gère l'affichage du mode Challenger du Plus ou Moins.
+ * @author yoann
+ *
+ */
 public class ChallengerPlusMoins extends JFrame{
 
-	ChallengerPlusMoinsModel chal = new ChallengerPlusMoinsModel();
-	private static final Logger logger = LogManager.getLogger();
-	private int nombreClick =0;
-	private static String tentatives;
-	private static String bloc;
-	private JPanel contentPane = new JPanel();
-	private JTextField proposition = new JTextField(); // Votre proposition ( problème, un espace ce met devant le nombre à chaque deuxième coup)
-	private JPanel blocProposition = new JPanel();
-	private JPanel blocTest = new JPanel();
-	private JLabel infosTentative = new JLabel(); // La ou sera écrit + - = 
-	private JLabel tentative = new JLabel(); // Le texte généré de votre proposition quand vous cliquez sur Ok .
-	JButton ok = new JButton(" OK ");
-	JButton supprimer = new JButton(" Suppr ");
-	JButton retour = new JButton(" Retour ");
-	Font impact = new Font ("impact", 17,17);
-	Font arial = new Font ("arial", 12,12);
-	int  [] clavier = {0,1,2,3,4,5,6,7,8,9};
-	JButton [] button = new JButton[clavier.length];
-	private int nbreTentative =0;
-	private JButton bouton[];
-	JLabel nbreTen = new JLabel();
-	JPanel espace2 = new JPanel ();
-	Font arial2 = new Font ("arial", 10,10);
+	private ResourceBundle				reglage				= ResourceBundle.getBundle("Config");
+	private ChallengerPlusMoinsModel	chal				= new ChallengerPlusMoinsModel();
+	private static final Logger			logger				= LogManager.getLogger();
+	private int							nombreClick			= 0;
+	private String						tentatives			= reglage.getString("tentatives");
+	private String						bloc				= reglage.getString("cases");
+	private JPanel						contentPane			= new JPanel();
+	private JTextField					proposition			= new JTextField();
+	private JPanel						blocProposition		= new JPanel();
+	private JPanel						blocTest			= new JPanel();
+	private JLabel						infosTentative		= new JLabel(); // La ou sera écrit + - = 
+	private JLabel						tentative			= new JLabel(); // Le texte généré de votre proposition quand vous cliquez sur Ok .
+	private JButton						ok					= new JButton(" OK ");
+	private JButton						supprimer			= new JButton(" Suppr ");
+	private JButton						retour				= new JButton(" Retour ");
+	private Font						impact				= new Font ("impact", 17,17);
+	private Font						arial				= new Font ("arial", 12,12);
+	private Font						arial2				= new Font ("arial", 10,10);
+	private int[]						clavier				= {0,1,2,3,4,5,6,7,8,9};
+	private int							nbreTentative		= 0;
+	private JLabel						nbreTen				= new JLabel();
+	private JPanel						espace2				= new JPanel ();
+	private JButton						bouton[];
 
 	public ChallengerPlusMoins() {
 
@@ -59,10 +63,6 @@ public class ChallengerPlusMoins extends JFrame{
 		this.setResizable(false);
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 
-		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		tentatives = reglage.getString("tentatives");
-		bloc = reglage.getString("cases");
-
 		initRegle();
 		initTentative();
 		initInfos();
@@ -71,8 +71,11 @@ public class ChallengerPlusMoins extends JFrame{
 		initCadreDev();
 	}
 
+	/**
+	 * Méthode qui affiche l'aide du développeur si le mdoe développeur est actif.
+	 */
 	private void initCadreDev() {
-		ResourceBundle reglage = ResourceBundle.getBundle("Config");
+
 		String devStatus = reglage.getString("dev");
 		int devMode = Integer.parseInt(devStatus);
 		if(devMode==1) {
@@ -96,6 +99,9 @@ public class ChallengerPlusMoins extends JFrame{
 
 	}
 
+	/**
+	 * Méthode qui gère l'affichage des indices après avori donné une proposition.
+	 */
 	private void initInfos() {
 		JPanel infosCadre = new JPanel();
 		infosCadre.setPreferredSize(new Dimension(150,50));
@@ -119,8 +125,11 @@ public class ChallengerPlusMoins extends JFrame{
 		contentPane.add(espace2);
 
 	}
-
+	/**
+	 * Méthode qui affiche votre proposition.
+	 */
 	private void initTentative() {
+
 		JPanel tentativePanel = new JPanel();
 		tentativePanel.setPreferredSize(new Dimension(150,50));
 		tentativePanel.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
@@ -143,6 +152,9 @@ public class ChallengerPlusMoins extends JFrame{
 		contentPane.add(espace3);
 	}
 
+	/**
+	 * Méthode qui gère l'affichage des règles dans la barre du haut.
+	 */
 	private void initRegle() {
 
 		JPanel espaceRetour = new JPanel ();
@@ -178,6 +190,9 @@ public class ChallengerPlusMoins extends JFrame{
 
 	}
 
+	/**
+	 * Méthode qui gère les boutons ok et supprimer et affiche la proposition que vous êtes en train de faire.
+	 */
 	private void initBlocTest() {
 
 		blocTest.add(proposition);
@@ -224,6 +239,10 @@ public class ChallengerPlusMoins extends JFrame{
 		contentPane.add(ok);
 
 	}
+
+	/**
+	 * Méthode qui gère les boutons des chiffres.
+	 */
 	private void initBlocProposition() {
 
 		blocProposition.setPreferredSize(new Dimension(160,65));
@@ -248,7 +267,6 @@ public class ChallengerPlusMoins extends JFrame{
 
 		public void mouseClicked(MouseEvent arg0) {
 		}
-
 		public void mouseEntered(MouseEvent arg0) {
 
 			if(arg0.getSource()==ok) {
@@ -264,7 +282,6 @@ public class ChallengerPlusMoins extends JFrame{
 				retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.34f)));
 			}
 		}
-
 		public void mouseExited(MouseEvent arg0) {
 
 			retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
@@ -275,10 +292,8 @@ public class ChallengerPlusMoins extends JFrame{
 			supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 			supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
 		}
-
 		public void mousePressed(MouseEvent arg0) {
 		}
-
 		public void mouseReleased(MouseEvent arg0) {
 
 			retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
@@ -290,7 +305,6 @@ public class ChallengerPlusMoins extends JFrame{
 			supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
 		}
 	}
-
 
 	class SourisListener2 implements MouseListener {
 
@@ -307,8 +321,7 @@ public class ChallengerPlusMoins extends JFrame{
 			((JButton)arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.black));
 			if(((JButton)arg0.getSource()).isEnabled()==false) {
 				((JButton)arg0.getSource()).setBorder(BorderFactory.createLineBorder(Color.orange));
-			}
-			
+			}		
 		}
 		public void mousePressed(MouseEvent arg0) {
 		}

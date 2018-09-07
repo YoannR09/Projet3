@@ -21,44 +21,48 @@ import javax.swing.JTextField;
 
 import fr.yoannroche.projet3.plusmoins.model.DefenseurPlusMoinsModel;
 
+/**
+ * Class qui gère l'afficahge du mode Défenseur du Plus ou Moins.
+ * @author yoann
+ *
+ */
 public class DefenseurPlusMoins extends JFrame{
 
-	private JLabel codeSecret = new JLabel();
-	private JPanel contentPane = new JPanel();
-	private JButton retour = new JButton(" Retour ");
-	private JButton ok = new JButton(" Ok ");
-	private JButton fin = new JButton(" Ok ");
-	private JButton refresh = new JButton("⟲");
-	private JButton supprimer = new JButton(" Suppr ");
-	String [] indice = {"+","-","="};
-	JButton [] indices = new JButton[indice.length];
-	private JButton indi[];
-	private JPanel blocProposition = new JPanel();
-	private JPanel blocTest = new JPanel();
-	private JPanel ordi = new JPanel();
-	private JLabel tentativeOrdi = new JLabel();
-	JPanel boiteDialog = new JPanel();
-	private JTextField proposition = new JTextField(); 
-	int  [] clavier = {0,1,2,3,4,5,6,7,8,9};
-	JButton [] button = new JButton[clavier.length];
-	private JButton bouton[];
-	private static String tentatives;
-	private static String bloc;
-	private JLabel tentativeIA =new JLabel();
-	private JPanel cadreOrdi = new JPanel();
-	private JTextArea dialog = new JTextArea();
-	private int nombreClick;
-	private JPanel espaceDev = new JPanel();
-	private JLabel indiceDev = new JLabel();
-	JLabel image = new JLabel();
-	Font impact = new Font ("impact", 17,17);
-	Font arial = new Font ("arial", 12,12);
-	Font arial2 = new Font ("arial", 10,10);
-	static ImageIcon ordi0 = new ImageIcon("images/ordi0.png");
-	static int nombreCoup = 0;
-	int click=0;
-	int nombreTour = 0;
-	private DefenseurPlusMoinsModel def = new DefenseurPlusMoinsModel();
+	private ResourceBundle				reglage				= ResourceBundle.getBundle("Config");
+	private DefenseurPlusMoinsModel		def					= new DefenseurPlusMoinsModel();
+	private JLabel						codeSecret			= new JLabel();
+	private JPanel						contentPane			= new JPanel();
+	private JButton						retour				= new JButton(" Retour ");
+	private JButton						ok					= new JButton(" Ok ");
+	private JButton						fin					= new JButton(" Ok ");
+	private JButton						refresh				= new JButton("⟲");
+	private JButton						supprimer			= new JButton(" Suppr ");
+	private String[]					indice				= {"+","-","="};
+	private JPanel						blocProposition 	= new JPanel();
+	private JPanel						blocTest			= new JPanel();
+	private JPanel						ordi				= new JPanel();
+	private JLabel						tentativeOrdi		= new JLabel();
+	private JPanel						boiteDialog			= new JPanel();
+	private JTextField					proposition			= new JTextField(); 
+	private int[]						clavier				= {0,1,2,3,4,5,6,7,8,9};
+	private String						tentatives			= reglage.getString("tentatives");
+	private String						bloc				= reglage.getString("cases");
+	private JLabel						tentativeIA			= new JLabel();
+	private JPanel						cadreOrdi			= new JPanel();
+	private JTextArea					dialog				= new JTextArea();
+	private int							nombreClick			= 0;
+	private JPanel						espaceDev			= new JPanel();
+	private JLabel						indiceDev			= new JLabel();
+	private JLabel						image				= new JLabel();
+	private Font						arial				= new Font ("arial", 12,12);
+	private Font						arial2				= new Font ("arial", 10,10);
+	private ImageIcon					ordi0				= new ImageIcon("images/ordi0.png");
+	private int							nombreCoup			= 0;
+	private int							click				= 0;
+	private int							nombreTour			= 0;
+	private JButton						indi[];
+	private JButton						bouton[];
+
 
 
 	public DefenseurPlusMoins() {
@@ -71,9 +75,6 @@ public class DefenseurPlusMoins extends JFrame{
 		this.setResizable(false);
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 
-		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		tentatives = reglage.getString("tentatives");
-		bloc = reglage.getString("cases");
 		initCadreDev();
 		initBar();
 		initCadreOrdi();
@@ -83,6 +84,7 @@ public class DefenseurPlusMoins extends JFrame{
 	}
 
 	private void initCadreDev() {
+
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
 		String devStatus = reglage.getString("dev");
 		int devMode = Integer.parseInt(devStatus);
@@ -94,11 +96,9 @@ public class DefenseurPlusMoins extends JFrame{
 			espaceDev.add(text2);
 			espaceDev.add(indiceDev);
 			indiceDev.setForeground(Color.orange);
-			indiceDev.setFont(arial2);
-			
+			indiceDev.setFont(arial2);		
 		}
 	}
-
 
 	private void initCadreDialogOrdi() {
 		JLabel ordi = new JLabel();
@@ -107,9 +107,9 @@ public class DefenseurPlusMoins extends JFrame{
 		ordi.setFont(arial);
 		ordi.setBorder(BorderFactory.createLineBorder(Color.black));
 		JScrollPane scrollPane =
-			      new JScrollPane(dialog,
-	                      JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-	                      JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+				new JScrollPane(dialog,
+						JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+						JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		dialog.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
 		dialog.setEditable(false);
 		dialog.setText(" \n Je suis prêt \n c'est quand vous voulez ! ");
@@ -162,11 +162,8 @@ public class DefenseurPlusMoins extends JFrame{
 		}
 		fin.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		tentativePanel.add(fin);
-		tentativePanel.add(refresh);
-		
-
+		tentativePanel.add(refresh);		
 	}
-	
 
 	private void initCode() {
 
@@ -175,8 +172,7 @@ public class DefenseurPlusMoins extends JFrame{
 		blocProposition.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		this.bouton = new JButton[10];
 		int i = 0;
-		for(int c : clavier){
-			
+		for(int c : clavier){		
 			this.bouton[i] = new JButton(String.valueOf(c).toUpperCase());
 			bouton[i].setPreferredSize(new Dimension(23,23));
 			bouton[i].setBackground(Color.DARK_GRAY);
@@ -186,7 +182,6 @@ public class DefenseurPlusMoins extends JFrame{
 			blocProposition.add(bouton[i]).setEnabled(true);
 			i++;
 		}
-
 		blocTest.add(proposition);
 		blocTest.setPreferredSize(new Dimension(130,40));
 		blocTest.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
@@ -201,7 +196,6 @@ public class DefenseurPlusMoins extends JFrame{
 		ok.addMouseListener(new SourisListener());
 		ok.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
 			public void actionPerformed(ActionEvent event){ 
-
 				def.okClick(proposition,codeSecret,contentPane,ordi,blocProposition,image,tentativeOrdi,dialog, indiceDev,ok,fin);	
 				nombreClick = 0;
 			}  
@@ -222,7 +216,7 @@ public class DefenseurPlusMoins extends JFrame{
 		fin.setEnabled(false);
 		fin.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){ 
-			def.finClick(tentativeOrdi,codeSecret,nombreCoup,dialog,contentPane,image,nombreTour,indiceDev,tentativeIA,fin,cadreOrdi);
+				def.finClick(tentativeOrdi,codeSecret,nombreCoup,dialog,contentPane,image,nombreTour,indiceDev,tentativeIA,fin,cadreOrdi);
 			}  
 		});
 	}
@@ -242,7 +236,7 @@ public class DefenseurPlusMoins extends JFrame{
 	}
 
 	private void initCadreOrdi() {
-		
+
 		JPanel ordinateur = new JPanel();
 		ordinateur.setPreferredSize(new Dimension (180,205));
 		ordinateur.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
@@ -260,7 +254,7 @@ public class DefenseurPlusMoins extends JFrame{
 		JPanel cadreCode = new JPanel();
 		cadreCode.setPreferredSize(new Dimension(165,30));
 		cadreCode.setBackground(Color.DARK_GRAY);
-	    cadreCode.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
+		cadreCode.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		JLabel codeText = new JLabel();
 		codeText.setText("Votre code secret : ");
 		codeText.setFont(arial);
@@ -274,7 +268,7 @@ public class DefenseurPlusMoins extends JFrame{
 	}
 
 	private void initBar() {
-		
+
 		JPanel espaceRetour = new JPanel ();
 		espaceRetour.setPreferredSize(new Dimension(320,20));
 		espaceRetour.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
@@ -337,11 +331,9 @@ public class DefenseurPlusMoins extends JFrame{
 			supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 			supprimer.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
 		}
-
 		public void mousePressed(MouseEvent arg0) {
 		}
 		public void mouseReleased(MouseEvent arg0) {
-
 			retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 			retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 			retour.setForeground(Color.white);
@@ -401,9 +393,5 @@ public class DefenseurPlusMoins extends JFrame{
 		public void mouseReleased(MouseEvent arg0) {
 		}
 	}
+
 }
-
-
-
-
-

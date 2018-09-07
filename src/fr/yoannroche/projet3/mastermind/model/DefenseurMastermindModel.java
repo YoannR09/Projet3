@@ -14,27 +14,27 @@ import fr.yoannroche.projet3.mastermind.control.Control;
 public class DefenseurMastermindModel {
 
 
-	private int 			jeu					= 5;
-	private ResourceBundle	reglage				= ResourceBundle.getBundle("Config");
-	private int				cases				= Integer.parseInt(reglage.getString("cases"));
-	private int				tentative			= Integer.parseInt(reglage.getString("tentatives"));
-	private JLabel			propositionTab[]	= new JLabel[cases];
-	private int				propositionOrdi[]	= new int [cases];
-	private Generateur		gen					= new Generateur();
-	private Control			control				= new Control();
-	private int[]			couleurs			= gen.getCouleurs();
-	private boolean[]		verif				= new boolean [cases];
-	private boolean			debutDecal			= true;
-	private int				couleurOk			= 0;
-	private int				decal				= 0;
-	private int				nombreTour			= 0;
-	private int				placer				= 0;
-	private int				changer				= 0;
-	private int				couleurSwitch		= 0;
-	private ImageIcon		tentative1			= new ImageIcon("images/couleur/0.png");
-	private InterfaceModel	model				= new InterfaceModel();
-	private boolean			switchCouleur		= false;
-	private boolean			partiFini			= false;
+	private int 				jeu					= 5;
+	private ResourceBundle		reglage				= ResourceBundle.getBundle("Config");
+	private int					cases				= Integer.parseInt(reglage.getString("cases"));
+	private int					tentative			= Integer.parseInt(reglage.getString("tentatives"));
+	private JLabel				propositionTab[]	= new JLabel[cases];
+	private int					propositionOrdi[]	= new int [cases];
+	private Generateur			gen					= new Generateur();
+	private Control				control				= new Control();
+	private int[]				couleurs			= gen.getCouleurs();
+	private boolean[]			verif				= new boolean [cases];
+	private boolean				debutDecal			= true;
+	private int					couleurOk			= 0;
+	private int					decal				= 0;
+	private int					nombreTour			= 0;
+	private int					placer				= 0;
+	private int					changer				= 0;
+	private int					couleurSwitch		= 0;
+	private ImageIcon			tentative1			= new ImageIcon("images/couleur/0.png");
+	private InterfaceModel		model				= new InterfaceModel();
+	private boolean				switchCouleur		= false;
+	private boolean				partiFini			= false;
 
 
 	public void dev(JPanel content){
@@ -43,12 +43,19 @@ public class DefenseurMastermindModel {
 		}
 	}
 
-
-
+	/**
+	 * Méthode appelée à la fin du tour lors du click du bouton "ok" dans le cadre d'indices.
+	 * En focntion du tour , lance un méthode diffèrente.
+	 * @param propositionIcon
+	 * @param blocTentative
+	 * @param blocIndices
+	 * @param changerClick
+	 * @param placerClick
+	 * @param contentPane
+	 * @param indice
+	 */
 	public void finClick(JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices,int changerClick, int placerClick,JPanel contentPane, JLabel indice) {
-		
-		
-		
+			
 		if(nombreTour==0) {		
 			blocTentative[nombreTour].removeAll();
 			premierTour(propositionIcon,blocTentative,blocIndices);
@@ -58,9 +65,7 @@ public class DefenseurMastermindModel {
 			blocTentative[nombreTour].revalidate();
 			++nombreTour;
 		}
-
-		else if(nombreTour>=1) {
-			
+		else if(nombreTour>=1) {		
 			if(changerClick==changer & placerClick==placer ) {
 			blocTentative[nombreTour].removeAll();
 			blocIndices[nombreTour-1].setText(" ♦ :  "+placer+"   ♢  : "+changer+" ");
@@ -73,17 +78,20 @@ public class DefenseurMastermindModel {
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Donnez les bons indices !", "Attention", JOptionPane.WARNING_MESSAGE);
-			}	
-			
-		}
-		
+			}			
+		}	
 		if(nombreTour==tentative & !partiFini) {
 			new Resultat(null, "Gagner",null,contentPane,jeu).gagner();
 			partiFini=true;
 		}
 	}
 
-
+	/**
+	 * Méthode qui appelée lors du premier tour pour créer la proposition de l'ordinateur.
+	 * @param propositionIcon
+	 * @param blocTentative
+	 * @param blocIndices
+	 */
 	public void premierTour(JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices) {
 		for(int i =0;i<cases;i++) {
 			propositionTab[i]=model.createJLabel();
@@ -94,10 +102,18 @@ public class DefenseurMastermindModel {
 		}
 	}
 
+/**
+ * Méthode appelée à chaque tour.
+ * Donne une proposition en fonction des indices donnés.
+ * @param propositionIcon
+ * @param blocTentative
+ * @param blocIndices
+ * @param contentPane
+ */
 	public void tour(JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices,JPanel contentPane) {
 
 		blocTentative[nombreTour].removeAll();
-
+		
 		if(nombreTour==1 & changer==0 & placer>=1 & (placer+changer)<cases) {
 			for(int i = 0;i<placer;i++) {
 				propositionTab[i]=model.createJLabel();
@@ -110,7 +126,6 @@ public class DefenseurMastermindModel {
 				blocTentative[nombreTour].add(propositionTab[i]);
 			}
 		}
-
 
 		/**
 		 * L'ordinateur inverse le placement des couleurs.
@@ -218,7 +233,6 @@ public class DefenseurMastermindModel {
 			}
 		}
 
-
 		else if(changer==0 & placer==0) {
 			for(int i = 0;i<cases;i++) {
 				propositionTab[i]=model.createJLabel();// on crée les JLabel et on met dans tab
@@ -256,7 +270,12 @@ public class DefenseurMastermindModel {
 		blocTentative[nombreTour].revalidate();
 	}
 
-
+	/**
+	 * Méthode pour regarder le nombre de couleur bien placés ou mal placés.
+	 * @param propositionIcon
+	 * @param blocTentative
+	 * @param blocIndices
+	 */
 	public void check(JLabel [] propositionIcon,JPanel[] blocTentative,JLabel [] blocIndices) {
 		/**
 		 * Boucle qui cherche si la couleur est bien placée
@@ -269,8 +288,7 @@ public class DefenseurMastermindModel {
 				verif[i]=true;
 			}
 		}
-
-
+		
 		for(int i=0;i<cases;i++) {
 			control.couleurChiffre(propositionIcon[i].getIcon().toString(), null);
 			couleurSwitch=control.getProposition();

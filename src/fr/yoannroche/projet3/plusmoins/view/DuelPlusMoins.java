@@ -20,40 +20,44 @@ import javax.swing.JTextField;
 
 import fr.yoannroche.projet3.plusmoins.model.DuelPlusMoinsModel;
 
+/**
+ * Class qui gère l'affichage du mode Duel du Plus ou Moins.
+ * @author yoann
+ *
+ */
 public class DuelPlusMoins extends JFrame{
 
-	private JPanel contentPane = new JPanel();
-	private JLabel attention = new JLabel();
-	private JButton retour = new JButton(" Retour ");
-	private JButton supprimer = new JButton(" Effacer ");
-	private JButton aide = new JButton(" Aide ");
-	private JButton ok = new JButton(" Ok ");
-	private JButton fin = new JButton(" Ok ");
-	private JButton refresh = new JButton("⟲");
-	private String bloc;
-	private JPanel cadreJ = new JPanel();
-	private JPanel cadreOrdi = new JPanel();
-	private JPanel blocProposition = new JPanel();
-	private JPanel blocTest = new JPanel();
-	private JLabel tentative = new JLabel();
-	private JLabel codeSecret = new JLabel();
-	private JLabel tentativeIA =new JLabel();
-	private JTextArea dialog = new JTextArea();
-	private int  [] clavier = {0,1,2,3,4,5,6,7,8,9};
-	private JButton bouton[];
-	private String [] indice = {"+","-","="};
-	private JButton indi[];
-	private JTextField proposition = new JTextField();
-	private JLabel infosTentative = new JLabel();
-	private JLabel indiceDev = new JLabel();
-	private int nombreClick = 0;
-	private int click=0;
-	private Font impact = new Font ("impact", 17,17);
-	private Font arial = new Font ("arial", 12,12);
-	private Font arial2 = new Font ("arial", 10,10);
-	private JPanel espaceDev = new JPanel ();
-	private int nombreTour=0;
-	private JLabel tour = new JLabel();
+	private JPanel			contentPane			= new JPanel();
+	private JLabel			attention			= new JLabel();
+	private JButton			retour				= new JButton(" Retour ");
+	private JButton			supprimer			= new JButton(" Effacer ");
+	private JButton			aide				= new JButton(" Aide ");
+	private JButton			ok					= new JButton(" Ok ");
+	private JButton			fin					= new JButton(" Ok ");
+	private JButton			refresh				= new JButton("⟲");
+	private String			bloc				= null;
+	private JPanel			cadreJ				= new JPanel();
+	private JPanel			cadreOrdi			= new JPanel();
+	private JPanel			blocProposition		= new JPanel();
+	private JPanel			blocTest			= new JPanel();
+	private JLabel			tentative			= new JLabel();
+	private JLabel			codeSecret			= new JLabel();
+	private JLabel			tentativeIA			= new JLabel();
+	private JTextArea		dialog				= new JTextArea();
+	private int[]			clavier				= {0,1,2,3,4,5,6,7,8,9};
+	private String[]		indice 				= {"+","-","="};
+	private JTextField		proposition			= new JTextField();
+	private JLabel			infosTentative		= new JLabel();
+	private JLabel			indiceDev			= new JLabel();
+	private int				nombreClick			= 0;
+	private int				click				= 0;
+	private Font			impact				= new Font ("impact", 17,17);
+	private Font			arial				= new Font ("arial", 12,12);
+	private Font			arial2				= new Font ("arial", 10,10);
+	private JPanel			espaceDev			= new JPanel ();
+	private JLabel			tour				= new JLabel();
+	private JButton			indi[];
+	private JButton			bouton[];
 	
 	
 	private DuelPlusMoinsModel duel = new DuelPlusMoinsModel();
@@ -116,7 +120,6 @@ public class DuelPlusMoins extends JFrame{
 		vs.setFont(impact);
 		vs.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		vs.setBackground(Color.getHSBColor(0.143f, 0.84f, 0.86f));
-	
 		contentPane.add(vs);
 	}
 

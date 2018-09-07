@@ -16,34 +16,37 @@ import javax.swing.JTextField;
 
 import fr.yoannroche.projet3.Resultat;
 
+/**
+ * Class qui gère la partie fonctionnement du mode défenseur du Plus ou Moins.
+ * @author yoann
+ *
+ */
 public class DefenseurPlusMoinsModel {
 
-	private String bloc;
-	private int nombreCoup =0;
-	ResourceBundle reglage = ResourceBundle.getBundle("Config");
-	private int cases = Integer.parseInt(reglage.getString("cases"));
-	private String tentative;
-	private int resultMax;
-	private int resultMin;
-	Font arial = new Font ("arial", 12,12);
-	private Font arial2 = new Font ("arial", 10,10);
-	private ImageIcon ordi1 = new ImageIcon("images/0.png");
-	private int info;
-	private String resultProp;
-	private int nbreTour =0;
-	private int gagner =0;
-	private char tabProp[] = new char [cases];
-	private char tabMin [] = new char [cases];
-	private char tabMax[] = new char [cases];
-	private Icon[] tableauImg = new Icon[7];
-	int jeu = 2;
+	private String						bloc;
+	private int							nombreCoup			= 0;
+	private ResourceBundle				reglage				= ResourceBundle.getBundle("Config");
+	private int							cases				= Integer.parseInt(reglage.getString("cases"));
+	private String						tentative			= null;
+	private int							resultMax			= 0;
+	private int							resultMin			= 0;
+	private Font						arial2				= new Font ("arial", 10,10);
+	private ImageIcon					ordi1				= new ImageIcon("images/0.png");
+	private int							info				= 0;
+	private String						resultProp			= null;
+	private int							nbreTour			= 0;
+	private int							gagner				= 0;
+	private char						tabProp[]			= new char [cases];
+	private char						tabMin[]			= new char [cases];
+	private char						tabMax[]			= new char [cases];
+	private Icon[]						tableauImg			= new Icon[7];
+	private int							jeu					= 2;
 
 	public DefenseurPlusMoinsModel() {
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
 		reglage.getString("tentatives");
 		bloc = reglage.getString("cases");
 		cases = Integer.parseInt(bloc);
-		
 	}
 
 	/**
@@ -60,10 +63,8 @@ public class DefenseurPlusMoinsModel {
 	 */
 	public void tentativeOrdi(JLabel tentativeOrdi, JLabel codeSecret2, int nombreCoup, JTextArea dialog,JPanel contentPane,JLabel image, int nbreTour2, JLabel indiceDev) {
 
-System.out.println(cases);
 		String codeCache = codeSecret2.getText();
 		char tabCode[] = codeCache.toCharArray();
-
 
 		if(nbreTour2==0) {
 			tour0(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev,contentPane);
@@ -71,7 +72,6 @@ System.out.println(cases);
 		else if(nbreTour2==1) {
 			tour1(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev,contentPane);
 		}
-
 		else if(nbreTour2==2){
 			tour2(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev,contentPane);
 		}
@@ -118,7 +118,6 @@ System.out.println(cases);
 			fin.setEnabled(true);
 			fin.setBackground(Color.getHSBColor(0.154f, 0.85f, 0.94f));
 		}
-
 	}
 	/**
 	 * Regarde le nombre de tentatives.
@@ -161,6 +160,19 @@ System.out.println(cases);
 		String s = ""+i;
 		return s.charAt(0);
 	}
+	
+	/**
+	 * Cette méthode est appelée au commencement après que le joueur est donné son code secret.
+	 * Elle donne la première proposition de l'ordinateur.
+	 * @param dialog
+	 * @param tabProp
+	 * @param tabCode
+	 * @param tabMax
+	 * @param tabMin
+	 * @param codeCache
+	 * @param indiceDev
+	 * @param contentPane
+	 */
 	public void tour0(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
 		for(int o=0;o<cases;o++) { //Création de tableaux max, min et proposition.
 
@@ -186,12 +198,20 @@ System.out.println(cases);
 		chechTentative(nombreCoup,contentPane,codeCache);
 	}
 
-
+	/**
+	 * Cette méthode est appelée pour la deuxième proposition de l'ordinateur.
+	 * @param dialog
+	 * @param tabProp
+	 * @param tabCode
+	 * @param tabMax
+	 * @param tabMin
+	 * @param codeCache
+	 * @param indiceDev
+	 * @param contentPane
+	 */
 	public void tour1(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
 
 		for(int i=0;i<codeCache.length();i++) {
-
-
 			if(tabProp[i]>tabCode[i]) {
 				tabMax[i] = tabProp[i] ;
 				info = Character.getNumericValue(tabProp[i]); 
@@ -208,7 +228,6 @@ System.out.println(cases);
 				else if(tabProp[i]==tabCode[i]) {
 					indiceDev.setText(indiceDev.getText()+"=");
 				}
-
 			}
 			else if(tabProp[i]<tabCode[i]) {
 				tabMin[i] =  tabProp[i];
@@ -237,6 +256,17 @@ System.out.println(cases);
 		chechTentative(nombreCoup,contentPane,codeCache);
 	}
 
+	/**
+	 * Cette méthode est appelée pour la troisème proposition de l'ordinateur.
+	 * @param dialog
+	 * @param tabProp
+	 * @param tabCode
+	 * @param tabMax
+	 * @param tabMin
+	 * @param codeCache
+	 * @param indiceDev
+	 * @param contentPane
+	 */
 	public void tour2(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
 		for(int i=0; i<codeCache.length();i++) {
 			if(tabProp[i]!=tabCode[i]) {
@@ -259,12 +289,23 @@ System.out.println(cases);
 			}
 			resultProp = new String(tabProp);
 		}
-
 		dialog.setText(dialog.getText()+" Ou alors peut être : "+resultProp+"\n");
 		checkWord(resultProp,codeCache,contentPane);
 		chechTentative(nombreCoup,contentPane,codeCache);
 	}
 
+	/**
+	 * Cette méthode est appelée pour les dernière proposition de l'ordinateur.
+	 * Il exécutera une boucle avec des + ou - pour trouver les derniers chiffres.
+	 * @param dialog
+	 * @param tabProp
+	 * @param tabCode
+	 * @param tabMax
+	 * @param tabMin
+	 * @param codeCache
+	 * @param indiceDev
+	 * @param contentPane
+	 */
 	public void tour3etPlus(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
 
 		for(int i=0; i<codeCache.length();i++) {
@@ -296,6 +337,22 @@ System.out.println(cases);
 		checkWord(resultProp,codeCache,contentPane);
 		chechTentative(nombreCoup,contentPane,codeCache);
 	}
+
+	/**
+	 * Méthode appelée lors du click sur bouton "ok" des indices
+	 * Il vérifie si les indices donnés sont bons.
+	 * @param tentativeOrdi
+	 * @param codeSecret
+	 * @param nombreCoup
+	 * @param dialog
+	 * @param contentPane
+	 * @param image
+	 * @param nbreTour2
+	 * @param indiceDev
+	 * @param tentativeIA
+	 * @param fin
+	 * @param cadreOrdi
+	 */
 	public void finClick(JLabel tentativeOrdi, JLabel codeSecret, int nombreCoup, JTextArea dialog,JPanel contentPane,JLabel image, int nbreTour2, JLabel indiceDev,JLabel tentativeIA,JButton fin,JPanel cadreOrdi) {
 		if(!tentativeIA.getText().equals(indiceDev.getText())) {
 			fin.setEnabled(true);
@@ -314,6 +371,12 @@ System.out.println(cases);
 			image.setIcon(tableauImg[i]);
 		}
 	}
+
+	/**
+	 * Cette méthode vérifie la longueur de la proposition.
+	 * @param blocProposition
+	 * @param nombreClick
+	 */
 	public void RangeWord(JPanel blocProposition, int nombreClick) {
 		ResourceBundle reglage = ResourceBundle.getBundle("Config");
 		bloc = reglage.getString("cases");

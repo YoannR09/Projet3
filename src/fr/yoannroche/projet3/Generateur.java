@@ -21,6 +21,11 @@ public class Generateur {
 
 	}
 
+	/**
+	 * Génère une couleur et la place retourne couleurs.
+	 * @param cases
+	 * @return
+	 */
 	public int[] initCouleur(int cases) {
 
 		for(int i=0;i<cases;i++) {
@@ -80,6 +85,7 @@ public class Generateur {
 	 * le nombre est définit par la méthode initNombre.
 	 * @param nombre
 	 */
+
 	public void setNombre(int nombre) {
 		this.nombre = nombre;
 	}

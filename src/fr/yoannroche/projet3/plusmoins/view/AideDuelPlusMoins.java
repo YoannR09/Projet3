@@ -12,28 +12,34 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+/**
+ * Cette class gère l'aide du mode Duel du Plus ou Moins.
+ * @author yoann
+ *
+ */
 public class AideDuelPlusMoins extends JFrame{
 	
-	private JPanel contentPane = new JPanel();
-	private JButton suivant = new JButton(" Suivant ");
-	private JButton retourner = new JButton(" Retourner au jeu ");
-	private JLabel tentative = new JLabel();
-	private Font impact = new Font ("impact", 17,17);
-	private JLabel infosTentative = new JLabel();
-	private JPanel cadreJ = new JPanel();
-	private JLabel codeSecret = new JLabel();
-	private Font arial = new Font ("arial", 12,12);
-	private JTextArea aideText1 = new JTextArea();
-	private JPanel espace = new JPanel();
-	private int nombreClick = 0;
-	private JLabel tentativeIA =new JLabel();
-	private JTextArea dialog = new JTextArea();
-	private String [] indice = {"+","-","="};
-	private JButton indi[];
-	private JButton fin = new JButton(" Ok ");
-	private JButton refresh = new JButton("⟲");
-	private JPanel cadreOrdi = new JPanel();
-	private JPanel tentativePanel = new JPanel();
+	private JPanel				contentPane				= new JPanel();
+	private JButton				suivant					= new JButton(" Suivant ");
+	private JButton				retourner				= new JButton(" Retourner au jeu ");
+	private JLabel				tentative				= new JLabel();
+	private Font				impact					= new Font ("impact", 17,17);
+	private JLabel				infosTentative			= new JLabel();
+	private JPanel				cadreJ					= new JPanel();
+	private JLabel				codeSecret				= new JLabel();
+	private Font				arial					= new Font ("arial", 12,12);
+	private JTextArea			aideText1				= new JTextArea();
+	private JPanel				espace					= new JPanel();
+	private int					nombreClick				= 0;
+	private JLabel				tentativeIA				= new JLabel();
+	private JTextArea			dialog					= new JTextArea();
+	private String[]			indice					= {"+","-","="};
+	private JButton				fin						= new JButton(" Ok ");
+	private JButton				refresh					= new JButton("⟲");
+	private JPanel				cadreOrdi				= new JPanel();
+	private JPanel				tentativePanel			= new JPanel();
+	private JButton[]			indi;
+	
 	public AideDuelPlusMoins() {
 		
 		this.setTitle("Duel");
@@ -45,11 +51,13 @@ public class AideDuelPlusMoins extends JFrame{
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		
 		initAide1();
-		
 	}
 
-
+/**
+ * Cette méthode affiche la partie gauche du mode duel et explique en détail les parties.
+ */
 	private void initAide1() {
+		
 		JLabel joueur = new JLabel();
 		joueur.setText(" Vous ");
 		joueur.setOpaque(true);
@@ -88,8 +96,7 @@ public class AideDuelPlusMoins extends JFrame{
 		espaceCode.setPreferredSize(new Dimension(160,5));
 		espaceCode.setBackground(Color.DARK_GRAY);
 		espaceCode.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
-		infosCadre.add(infosTentative);
-		
+		infosCadre.add(infosTentative);	
 		espace.setPreferredSize(new Dimension(165,30));
 		espace.setBackground(Color.DARK_GRAY);
 		espace.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.154f, 0.85f, 0.94f)));
@@ -138,10 +145,12 @@ public class AideDuelPlusMoins extends JFrame{
 				++nombreClick;
 			}
 		});
-		contentPane.add(suivant);
-		
+		contentPane.add(suivant);		
 	}
 
+	/**
+	 * Cette méthode affiche la partie gauche du mode duel et explique en détail les parties.
+	 */
 	public void aide2() {
 		espace.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		cadreJ.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.154f, 0.85f, 0.94f)));
@@ -153,14 +162,18 @@ public class AideDuelPlusMoins extends JFrame{
 				+ " affichera les indices donnés par l'ordinateur \n"
 				+ " pour vous aidez à trouver le code. \n");
 	}
+	
+/**
+ * Cette méthode affiche la partie droite du mode duel et explique en détail les parties.
+ */
 	public void aide3() {
+		
 		cadreJ.setVisible(false);
 		aideText1.setText("\n Une fois que vous avez donnés votre \n"
 				+ " proposition \n"
 				+ " L'ordinateur donnera la sienne \n"
 				+ " Celle-ci s'affichera dans le cadre entouré \n"
 				+ " en jaune. \n");
-		
 		JLabel ordi = new JLabel();
 		ordi.setText(" Ordinateur ");
 		ordi.setOpaque(true);
@@ -219,7 +232,12 @@ public class AideDuelPlusMoins extends JFrame{
 		contentPane.add(aideText1);
 		contentPane.add(suivant);
 	}
+	
+	/**
+	 * Cette méthode affiche la partie gauche du mode duel et explique en détail les parties.
+	 */
 	public void aide4() {
+		
 		aideText1.setText("\n Vous allez devoir à votre tour \n"
 				+ " donner des incides à l'ordinateur \n"
 				+ " dans le cadre entouré en jaune. \n"
@@ -240,6 +258,5 @@ public class AideDuelPlusMoins extends JFrame{
 				duel.setVisible(true);
 			}
 		});
-	}
-	
+	}	
 }

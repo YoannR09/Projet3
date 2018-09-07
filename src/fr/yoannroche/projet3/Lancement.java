@@ -22,12 +22,12 @@ import fr.yoannroche.projet3.mastermind.view.RegleMastermind;
 import fr.yoannroche.projet3.plusmoins.view.FenetreMenuPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.ReglePlusMoins;
 /**
- * 
+ * Class qui gère l'affichage du lance
  * @author El-ra
  *
  */
 public class Lancement extends JFrame{
-	
+
 	private JPanel				contentPane		= new JPanel();
 	private JPanel				blocJeu			= new JPanel();
 	private JToolBar			menuBar			= new JToolBar();
@@ -41,8 +41,8 @@ public class Lancement extends JFrame{
 	private Dimension			dim2			= new Dimension(50,55);
 	private Dimension			dim3			= new Dimension(100,30);
 	private Font				impact			= new Font("impact", 15,15);
-	
-	
+
+
 	public Lancement() {
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,15 +52,15 @@ public class Lancement extends JFrame{
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
-		
-		
+
 		initEcran();
 		initMenuBar();
 	}
-
-
+	/**
+	 * Méthode qui gère les barres d'infos.
+	 */
 	private void initMenuBar() {
-		
+
 		menuBar.addSeparator();
 		JPanel espace = new JPanel();
 		espace.setPreferredSize(dim2);
@@ -70,27 +70,27 @@ public class Lancement extends JFrame{
 		masterMind.setPreferredSize(dim3);
 		masterMind.addMouseListener(new SourisListener2());
 		masterMind.addActionListener(new ActionListener(){
-		      public void actionPerformed(ActionEvent event){
-		    	  ((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-					RegleMastermind regle = new RegleMastermind();	
-					regle.setVisible(true);
-			      }
-			    });
-		
-		
-		
+			public void actionPerformed(ActionEvent event){
+				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
+				RegleMastermind regle = new RegleMastermind();	
+				regle.setVisible(true);
+			}
+		});
+
+
+
 		plusMoins.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		plusMoins.setBorder(BorderFactory.createLineBorder(Color.black));
 		plusMoins.setPreferredSize(dim3);
 		plusMoins.addMouseListener(new SourisListener2());
 		plusMoins.addActionListener(new ActionListener(){
-		      public void actionPerformed(ActionEvent event){
-		    	  ((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-					ReglePlusMoins regle = new ReglePlusMoins();	
-					regle.setVisible(true);
-			      }
-			    });
-		
+			public void actionPerformed(ActionEvent event){
+				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
+				ReglePlusMoins regle = new ReglePlusMoins();	
+				regle.setVisible(true);
+			}
+		});
+
 		JPanel espaceInfosJeu = new JPanel();
 		espaceInfosJeu.setPreferredSize(new Dimension(10,30));
 		espaceInfosJeu.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
@@ -101,7 +101,7 @@ public class Lancement extends JFrame{
 		menuBar.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		menuBar.setBorder(BorderFactory.createLineBorder(Color.black));
 		menuBar.add(infosJeu);
-		
+
 		menuBar.add(espaceInfosJeu);
 		menuBar.add(masterMind);
 		menuBar.add(plusMoins);
@@ -113,9 +113,9 @@ public class Lancement extends JFrame{
 		infos.addMouseListener(new SourisListener2());
 		contentPane.add(menuBar);
 	}
-
-
-
+	/**
+	 * Méthode qui gère l'affichage du menu pour choisir les jeux
+	 */
 	private void initEcran() {
 		blocJeu.setPreferredSize(new Dimension(420,218));
 		blocJeu.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
@@ -126,12 +126,12 @@ public class Lancement extends JFrame{
 		jeu1.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 		jeu1.addMouseListener(new SourisListener());
 		jeu1.addActionListener(new ActionListener(){
-		      public void actionPerformed(ActionEvent event){
-		    	  ((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-					FenetreMenuMaster menu = new FenetreMenuMaster();	
-					menu.setVisible(true);
-			      }
-			    });
+			public void actionPerformed(ActionEvent event){
+				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
+				FenetreMenuMaster menu = new FenetreMenuMaster();	
+				menu.setVisible(true);
+			}
+		});
 
 
 
@@ -140,12 +140,12 @@ public class Lancement extends JFrame{
 		jeu2.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 		jeu2.addMouseListener(new SourisListener());
 		jeu2.addActionListener(new ActionListener(){
-		      public void actionPerformed(ActionEvent event){
-		    	  ((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-					FenetreMenuPlusMoins menu = new FenetreMenuPlusMoins();	
-					menu.setVisible(true);
-			      }
-			    });
+			public void actionPerformed(ActionEvent event){
+				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
+				FenetreMenuPlusMoins menu = new FenetreMenuPlusMoins();	
+				menu.setVisible(true);
+			}
+		});
 
 
 
@@ -153,13 +153,16 @@ public class Lancement extends JFrame{
 		contentPane.add(blocJeu);
 
 	}
-
+	/**
+	 * Méthode qui désigne cette class comme la Main.
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		
+
 		Lancement l = new Lancement();
 		l.setVisible(true);
-		
-		
+
+
 
 	}
 
@@ -168,12 +171,12 @@ public class Lancement extends JFrame{
 
 		public void mouseEntered(MouseEvent arg0) {
 			if(arg0.getSource()==jeu1) {
-			jeu1.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0,Color.getHSBColor(0.534f, 0.45f, 0.94f)));
-			jeu2.setBorder(BorderFactory.createMatteBorder(10,0,10,0 ,Color.getHSBColor(0.534f, 0.35f, 0.34f)));
+				jeu1.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0,Color.getHSBColor(0.534f, 0.45f, 0.94f)));
+				jeu2.setBorder(BorderFactory.createMatteBorder(10,0,10,0 ,Color.getHSBColor(0.534f, 0.35f, 0.34f)));
 			}
 			if(arg0.getSource()==jeu2) {
-			jeu2.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0,Color.getHSBColor(0.534f, 0.45f, 0.94f)));
-			jeu1.setBorder(BorderFactory.createMatteBorder(10,0,10,0 ,Color.getHSBColor(0.534f, 0.35f, 0.34f)));
+				jeu2.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 0,Color.getHSBColor(0.534f, 0.45f, 0.94f)));
+				jeu1.setBorder(BorderFactory.createMatteBorder(10,0,10,0 ,Color.getHSBColor(0.534f, 0.35f, 0.34f)));
 			}
 
 
@@ -201,7 +204,7 @@ public class Lancement extends JFrame{
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		public void mouseEntered(MouseEvent arg0) {
@@ -217,29 +220,29 @@ public class Lancement extends JFrame{
 				infos.setBackground(Color.getHSBColor(0.112f, 076f, 0.84f));
 				infos.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 066f, 0.74f)));
 			}
-			
-			
+
+
 		}
 		public void mouseExited(MouseEvent arg0) {
 			masterMind.setBorder(BorderFactory.createLineBorder(Color.black));
 			masterMind.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 			plusMoins.setBorder(BorderFactory.createLineBorder(Color.black));
 			plusMoins.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
-		    infos.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));
+			infos.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));
 			infos.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 056f, 0.64f)));
-			
+
 		}
 
 		@Override
 		public void mousePressed(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
 	}
 }

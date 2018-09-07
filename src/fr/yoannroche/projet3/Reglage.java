@@ -137,7 +137,6 @@ public class Reglage extends JFrame {
 		cadreDev.add(dev);
 		cadreDev.add(check);
 		contentPane.add(cadreDev);
-
 	}
 	/**
 	 * Méthode qui gère le nombre de tentatives que vous vouelz avoir.
@@ -174,7 +173,6 @@ public class Reglage extends JFrame {
 		espace.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		espace.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		contentPane.add(espace);
-
 	}
 	/**
 	 * Méthode qui gère le nombre de cases que vous voulez avoir.
@@ -193,7 +191,6 @@ public class Reglage extends JFrame {
 		cases.setForeground(Color.orange);
 		cases.setFont(arial);
 		cases.setText("    Nombres de chiffres ou couleurs à trouver    ");
-
 		this.bouton = new JRadioButton[8];
 		int i = 0;
 		for(int c : clavier){
@@ -206,7 +203,6 @@ public class Reglage extends JFrame {
 			cadreCases.add(bouton[i]).setEnabled(true);
 			i++;
 		}
-
 		JPanel espace = new JPanel();
 		espace.setPreferredSize(new Dimension(150,5));
 		espace.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
@@ -217,7 +213,6 @@ public class Reglage extends JFrame {
 	class SourisListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent arg0) {
-
 		}
 
 		public void mouseEntered(MouseEvent arg0) {
@@ -229,7 +224,6 @@ public class Reglage extends JFrame {
 				sauv.setBackground(Color.getHSBColor(0.434f, 0.65f, 0.74f));
 				sauv.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.34f)));
 			}
-
 		}
 
 		public void mouseExited(MouseEvent arg0) {
@@ -240,7 +234,6 @@ public class Reglage extends JFrame {
 		}
 
 		public void mousePressed(MouseEvent arg0) {
-
 		}
 
 		public void mouseReleased(MouseEvent arg0) {
@@ -256,36 +249,27 @@ public class Reglage extends JFrame {
 	 */
 	public void sauvegardeReglage() {
 
-
-
 		if(check.isSelected()==true) {			
 			bean.setDev(1);
 		}
 		else{
 			bean.setDev(0);
-
 		}
 
 		for(int i=0;i<clavier.length;i++) {
 			if(bouton[i].isSelected()==true) {
 				int cases=(i+4);
 				bean.setCases(cases);
-
-
 			}
-
 		}
 
 		for(int i=0;i<tenta.length;i++) {
-
 			if(boutonTentative[i].isSelected()==true) {
 				int tentative=(i+4);
 				bean.setTentatives(tentative);
-
 			}
 		}
 	}
-
 }
 
 

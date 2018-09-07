@@ -20,18 +20,21 @@ import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.DefenseurPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.DuelPlusMoins;
 
+/**
+ * Cette class affiche le résultat en cas de défaite ou victoire.
+ * @author yoann
+ *
+ */
 public class Resultat extends JFrame {
 
-
-
 	private JPanel		contentPane		= new JPanel();
-	private JPanel		contentPane2;
+	private JPanel		contentPane2    = new JPanel();
 	private JButton		relancer		= new JButton(" Relancer ");
 	private JButton		home			= new JButton(" Menu ");
 	private JButton		quitter			= new JButton(" Quitter ");
 	private Font		arial			= new Font ("arial", 12,12);
 	private JLabel		text			= new JLabel();
-	private int			jeu;
+	private int			jeu				= 0;
 
 
 	public Resultat(JFrame parent, String title,String nombreString, JPanel contentPane2, int jeu){
@@ -52,6 +55,9 @@ public class Resultat extends JFrame {
 		initCadre();
 	}
 
+	/**
+	 * Affiche le text en victoire/défaite.
+	 */
 	private void initText() {
 		JPanel cadreText = new JPanel();
 		cadreText.setPreferredSize(new Dimension(250,25));
@@ -62,6 +68,10 @@ public class Resultat extends JFrame {
 		contentPane.add(cadreText);
 	}
 
+	/**
+	 * Méthode qui gère l'affichage du cadre.
+	 * Gère aussi les boutons et leurs actions.
+	 */
 	private void initCadre() {
 		JPanel cadreBouton = new JPanel();
 		cadreBouton.setPreferredSize(new Dimension(230,35));
@@ -128,25 +138,26 @@ public class Resultat extends JFrame {
 		quitter.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		quitter.setForeground(Color.white);
 		contentPane.add(cadreBouton);
-
 	}
-
+	/**
+	 * Méthode appelée en cas de victoire.
+	 */
 	public void gagner(){
 		text.setText(" Vous avez gagnés ! ");
 	}
+
+	/**
+	 * Méthode appelée en cas de défaite.
+	 */
 	public void perdu(){
 		text.setText(" Vous avez perdu ! ");
 	}
 
 	class SourisListener implements MouseListener {
 
-
 		public void mouseClicked(MouseEvent arg0) {
-
 		}
-
 		public void mouseEntered(MouseEvent arg0) {
-
 			if(arg0.getSource()==relancer) {
 				relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.54f));
 				relancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.34f)));
@@ -160,9 +171,7 @@ public class Resultat extends JFrame {
 				quitter.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.34f)));
 			}
 		}
-
 		public void mouseExited(MouseEvent arg0) {
-
 			relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 			relancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 			relancer.setForeground(Color.white);
@@ -171,13 +180,9 @@ public class Resultat extends JFrame {
 			quitter.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 			quitter.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		}
-
 		public void mousePressed(MouseEvent arg0) {
-
 		}
-
 		public void mouseReleased(MouseEvent arg0) {
-
 			relancer.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 			relancer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 			relancer.setForeground(Color.white);

@@ -15,25 +15,30 @@ import javax.swing.JTextField;
 import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.Resultat;
 
+/**
+ * Cette class gère la partie fonctionnement du mode Duel du Plus ou Moins.
+ * @author yoann
+ *
+ */
 public class DuelPlusMoinsModel {
 
-	private String bloc;
-	private Generateur code = new Generateur();
-	ResourceBundle reglage = ResourceBundle.getBundle("Config");
-	private int cases = Integer.parseInt(reglage.getString("cases"));
-	private String nombreString = Integer.toString(code.getNombre());
-	private Font arial2 = new Font ("arial", 10,10);
-	private Font impact = new Font ("impact", 17,17);
-	private String resultProp;
-	private int resultMax;
-	private int resultMin;
-	private int nbreTour =0;
-	private boolean gagner = false;
-	private int info;
-	private char tabProp[] = new char [cases];
-	private char tabMin [] = new char [cases];
-	private char tabMax[] = new char [cases];
-	int jeu = 3;
+	private String				bloc				= null;
+	private Generateur			code				= new Generateur();
+	private ResourceBundle		reglage				= ResourceBundle.getBundle("Config");
+	private int					cases				= Integer.parseInt(reglage.getString("cases"));
+	private String				nombreString		= Integer.toString(code.getNombre());
+	private Font				arial2				= new Font ("arial", 10,10);
+	private Font				impact				= new Font ("impact", 17,17);
+	private String				resultProp			= null;
+	private int					resultMax			= 0;
+	private int					resultMin			= 0;
+	private int					nbreTour			= 0;
+	private boolean				gagner				= false;
+	private int					info				= 0;
+	private char				tabProp[]			= new char [cases];
+	private char				tabMin []			= new char [cases];
+	private char				tabMax[]			= new char [cases];
+	private int					jeu					= 3;
 
 	/**
 	 * Compare la tentative du joueur au code secret
@@ -47,14 +52,12 @@ public class DuelPlusMoinsModel {
 		infosTentative.setText("");
 		String test=tentative.getText();
 
-
 		/**
 		 * Boucle qui test le code écrit pour le comparer au code caché
 		 * Affiche + - = dans le JLabel infosTentative
 		 * En fonction des conditions
 		 */
 		for(int i =0;i<test.length();i++){
-
 
 			if(test.charAt(i)==nombreString.charAt(i)) {
 				infosTentative.setText(infosTentative.getText()+"=");
@@ -117,7 +120,6 @@ public class DuelPlusMoinsModel {
 			ok.setEnabled(true);
 			ok.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
 		}
-
 	}
 
 	/**
@@ -203,7 +205,6 @@ public class DuelPlusMoinsModel {
 			else {
 				indiceDev.setText(indiceDev.getText()+"=");
 			}
-
 		}
 		dialog.setText("");
 		resultProp = new String(tabProp);
@@ -227,7 +228,6 @@ public class DuelPlusMoinsModel {
 
 		for(int i=0;i<codeCache.length();i++) {
 
-
 			if(tabProp[i]>tabCode[i]) {
 				tabMax[i] = tabProp[i] ;
 				info = Character.getNumericValue(tabProp[i]); 
@@ -244,7 +244,6 @@ public class DuelPlusMoinsModel {
 				else if(tabProp[i]==tabCode[i]) {
 					indiceDev.setText(indiceDev.getText()+"=");
 				}
-
 			}
 			else if(tabProp[i]<tabCode[i]) {
 				tabMin[i] =  tabProp[i];
@@ -266,11 +265,8 @@ public class DuelPlusMoinsModel {
 			else if(tabProp[i]==tabCode[i]) {
 				indiceDev.setText(indiceDev.getText()+"=");
 			}
-
 			resultProp = new String(tabProp);
-
 		}
-
 		dialog.setText(dialog.getText()+" C'est peut être : "+resultProp+"\n");
 		checkWord(resultProp,codeCache,contentPane);
 	}
