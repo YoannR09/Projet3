@@ -22,7 +22,7 @@ import fr.yoannroche.projet3.mastermind.view.RegleMastermind;
 import fr.yoannroche.projet3.plusmoins.view.FenetreMenuPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.ReglePlusMoins;
 /**
- * Class qui gère l'affichage du lance
+ * Class qui gère l'affichage du lancement du jeu.
  * @author El-ra
  *
  */
