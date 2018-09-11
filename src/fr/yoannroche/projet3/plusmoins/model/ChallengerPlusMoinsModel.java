@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.Resultat;
 
@@ -18,12 +19,17 @@ import fr.yoannroche.projet3.Resultat;
  */
 public class ChallengerPlusMoinsModel {
 
+	private BeanReglage				bean			;
 	private Generateur				code			= new Generateur();
 	private String					nombreString	= Integer.toString(code.getNombre());
 	private String					tentative		= null;
 	private String					bloc			= null;
 	private Font					impact			= new Font ("impact", 12,12);
 	private int						jeu				= 1;
+
+	public ChallengerPlusMoinsModel(BeanReglage bean) {
+		this.bean = bean;
+	}
 
 	/**
 	 * Méthode qui s'execute si le mode développeur est actif.
@@ -75,7 +81,7 @@ public class ChallengerPlusMoinsModel {
 		tentative = reglage.getString("tentatives");
 		int tentatives = Integer.parseInt(tentative);
 		if(nbreTentative==tentatives) {
-			new Resultat(null, "Perdu",nombreString,contentPane,jeu).perdu();
+			new Resultat(null, "Perdu",nombreString,contentPane,jeu,bean).perdu();
 		}
 	}
 
@@ -125,7 +131,7 @@ public class ChallengerPlusMoinsModel {
 			blocProposition.setVisible(true);
 		}
 		if(tentative.getText().equals(nombreString)) {
-			new Resultat(null, "Victoire",nombreString,contentPane,jeu).gagner();			
+			new Resultat(null, "Victoire",nombreString,contentPane,jeu,bean).gagner();			
 		}
 	}
 }

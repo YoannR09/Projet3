@@ -18,19 +18,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.mastermind.model.DuelMastermindModel;
 import fr.yoannroche.projet3.mastermind.model.InterfaceModel;
 
 public class MastermindDuel extends JFrame{
 
-	private DuelMastermindModel			model						= new DuelMastermindModel();
+	private BeanReglage					bean						;
 	private InterfaceModel				modelInterface				= new InterfaceModel();
 	private IndiceListener				IndicesListener     		= new IndiceListener();
-	private ResourceBundle				reglage						= ResourceBundle.getBundle("Config");
-	private int							cases						= Integer.parseInt(reglage.getString("cases"));
-	private int							tentative					= Integer.parseInt(reglage.getString("tentatives"));
-	private int							couleur						= Integer.parseInt(reglage.getString("couleur"));
-	private int							modeDev						= Integer.parseInt(reglage.getString("dev"));
 	private JPanel                      contentPane					= new JPanel();
 	private JButton						ok							= new JButton(" OK ");
 	private JButton						supprimer					= new JButton(" ❌ ");
@@ -46,15 +42,8 @@ public class MastermindDuel extends JFrame{
 	private JPanel						blocOrdi					= new JPanel();
 	private JPanel						cadreTentative				= new JPanel();
 	private JPanel						cadreTentativeOrdi			= new JPanel();
-	private JPanel						blocTentative[]				= new JPanel[tentative]; // Affiche vos tentatives.
-	private JLabel						blocIndices[]				= new JLabel[tentative]; 
-	private JPanel						blocTentativeOrdi[]			= new JPanel[tentative]; // Affiche vos tentatives.
-	private JLabel						blocIndicesOrdi[]			= new JLabel[tentative]; 
-	private JLabel						propositionIcon[]			= new JLabel[cases]; // Cadre qui affiche les entrées clavier.
-	private JLabel						propositionIconOrdi[]		= new JLabel[cases];
 	private JLabel						indice						= new JLabel();
 	private JButton						bouton[];
-	private JButton						boutonOrdi[];
 	private ImageIcon					vide						= new ImageIcon("images/couleur/vide.png");
 	private JPanel						votreProp					= new JPanel();
 	private JPanel						ordiProp					= new JPanel();
@@ -68,26 +57,34 @@ public class MastermindDuel extends JFrame{
 			new JScrollPane(cadreTentative,
 					JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 					JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-	private int							placer,changer,nombreClick,placerClick,changerClick,changerOrdi,placerOrdi								
-	= 0;
+	private int							placer,changer,nombreClick,placerClick,changerClick;
 
-	public MastermindDuel() {
+	public MastermindDuel(BeanReglage bean) {
+		
 		this.setSize(800,580);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
 		this.setResizable(false);
 		this.setTitle(" Duel ");
-		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
-
+		this.bean = bean;
+		JPanel	blocTentative[]				= new JPanel[bean.getTentatives()]; // Affiche vos tentatives.
+		JLabel	blocIndices[]				= new JLabel[bean.getTentatives()]; 
+		JLabel	propositionIcon[]			= new JLabel[bean.getCases()]; // Cadre qui affiche les entrées clavier.
+		JLabel	propositionIconOrdi[]		= new JLabel[bean.getCases()];
+		JPanel	blocTentativeOrdi[]			= new JPanel[bean.getTentatives()]; // Affiche vos tentatives.
+		JLabel	blocIndicesOrdi[]			= new JLabel[bean.getTentatives()];
+		DuelMastermindModel	model = new DuelMastermindModel(bean);
+		
 		initRegle();
-		initBlocJoueur();
-		initBlocOrdi();
+		initBlocJoueur(blocTentative,blocIndices,propositionIcon,propositionIconOrdi,blocTentativeOrdi,blocIndicesOrdi,model);
+		initBlocOrdi(blocTentative,blocIndices,propositionIcon,propositionIconOrdi,blocTentativeOrdi,blocIndicesOrdi,model);
+		initBlocIndices(blocIndicesOrdi,model);
 		contentPane.add(clavierBouton);
-		initBlocIndices();
+		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 	}
 
-	private void initBlocOrdi() {
+	private void initBlocOrdi(JPanel[] blocTentative, JLabel[] blocIndices, JLabel[] propositionIcon, JLabel[] propositionIconOrdi, JPanel[] blocTentativeOrdi, JLabel[] blocIndicesOrdi, DuelMastermindModel model) {
 		JScrollPane	scrollPaneOrdi=
 				new JScrollPane(cadreTentativeOrdi,
 						JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -103,7 +100,7 @@ public class MastermindDuel extends JFrame{
 		scrollPaneOrdi.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		cadreTentativeOrdi.setBackground(Color.getHSBColor(0.134f, 0.05f, 0.95f));
 		cadreTentativeOrdi.setPreferredSize(new Dimension(375,305));
-		for(int i=0;i<tentative;i++) {
+		for(int i=0;i<bean.getTentatives();i++) {
 			blocTentativeOrdi[i]= modelInterface.createJPanel();// on crée les JLabel et on met dans tab
 			blocTentativeOrdi[i].setBackground(Color.DARK_GRAY);
 			blocTentativeOrdi[i].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
@@ -125,7 +122,7 @@ public class MastermindDuel extends JFrame{
 		textProp.setText(" Votre code secret : ");
 		ordiProp.setBackground(Color.getHSBColor(0.134f, 0.15f, 0.94f));
 		ordiProp.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
-		for(int i=0;i<cases;i++) {
+		for(int i=0;i<bean.getCases();i++) {
 			propositionIconOrdi[i]= modelInterface.createJLabel();// on crée les JLabel et on met dans tab
 			propositionIconOrdi[i].setIcon(vide);
 			ordiProp.add(propositionIconOrdi[i]);
@@ -139,7 +136,7 @@ public class MastermindDuel extends JFrame{
 		contentPane.add(blocOrdi);
 	}
 
-	private void initBlocJoueur() {
+	private void initBlocJoueur(JPanel[] blocTentative, JLabel[] blocIndices, JLabel[] propositionIcon, JLabel[] propositionIconOrdi, JPanel[] blocTentativeOrdi, JLabel[] blocIndicesOrdi, DuelMastermindModel model) {
 		JLabel joueur = new JLabel();
 		joueur.setText(" Joueur ");
 		joueur.setBackground(Color.DARK_GRAY);
@@ -153,7 +150,7 @@ public class MastermindDuel extends JFrame{
 		blocJoueur.setPreferredSize(new Dimension(375,280));
 		blocJoueur.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		blocJoueur.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.154f, 0.85f, 0.94f)));
-		for(int i=0;i<tentative;i++) {
+		for(int i=0;i<bean.getTentatives();i++) {
 			blocTentative[i]= modelInterface.createJPanel();// on crée les JLabel et on met dans tab
 			blocTentative[i].setBackground(Color.DARK_GRAY);
 			blocTentative[i].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
@@ -176,7 +173,7 @@ public class MastermindDuel extends JFrame{
 		supprimer.addMouseListener(new SourisListener());
 		supprimer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
-				for(int i =0;i<cases;i++) {
+				for(int i =0;i<bean.getCases();i++) {
 					propositionIcon[i].setIcon(vide);
 				}
 				nombreClick=0;
@@ -184,8 +181,8 @@ public class MastermindDuel extends JFrame{
 		});
 		JPanel clavier = new JPanel();
 		clavier.setBackground(Color.DARK_GRAY);
-		this.bouton = new JButton[couleur];
-		for(int i=0;i<couleur;i++){
+		this.bouton = new JButton[bean.getCouleurs()];
+		for(int i=0;i<bean.getCouleurs();i++){
 			this.bouton[i] = new JButton();
 			bouton[i].setPreferredSize(new Dimension(20,20));
 			bouton[i].setBackground(Color.DARK_GRAY);
@@ -195,19 +192,19 @@ public class MastermindDuel extends JFrame{
 			bouton[i].setIcon(new ImageIcon("images/couleur/"+i+".png"));
 			bouton[i].addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent event){
-					if(nombreClick<cases & codeSecretOk==true) {
+					if(nombreClick<bean.getCases() & codeSecretOk==true) {
 						propositionIcon[nombreClick].setIcon(((JButton)event.getSource()).getIcon());
 						propositionIcon[nombreClick].setText("");
 						++nombreClick;
-						if(nombreClick==cases) {
+						if(nombreClick==bean.getCases()) {
 							ok.setEnabled(true);
 						}
 					}
-					else if(nombreClick<cases & !codeSecretOk) {
+					else if(nombreClick<bean.getCases() & !codeSecretOk) {
 						propositionIconOrdi[nombreClick].setIcon(((JButton)event.getSource()).getIcon());
 						propositionIconOrdi[nombreClick].setText("");
 						++nombreClick;
-						if(nombreClick==cases) {
+						if(nombreClick==bean.getCases()) {
 							ok.setEnabled(true);
 						}
 					}
@@ -232,8 +229,8 @@ public class MastermindDuel extends JFrame{
 			public void actionPerformed(ActionEvent event){
 					if(codeSecretOk==true) {
 						model.status(entrerProp,vosTentative,entrerIndi,codeSecretOk);
-						model.okClick(blocTentative,propositionIcon,blocIndices,changer,placer,contentPane);
-						model.finClick(propositionIconOrdi, blocTentativeOrdi, blocIndicesOrdi, changerClick, placerClick, boutonCadre, textProp,indiceOk);
+						model.okClick(blocTentative,propositionIcon,blocIndices,changer,placer,contentPane,bean);
+						model.finClick(propositionIconOrdi, blocTentativeOrdi, blocIndicesOrdi, changerClick, placerClick, boutonCadre, textProp,indiceOk,bean);
 						fin.setEnabled(true);
 						
 					}
@@ -243,7 +240,7 @@ public class MastermindDuel extends JFrame{
 					}
 					ok.setEnabled(false);
 					nombreClick=0;
-					for(int i =0;i<cases;i++) {
+					for(int i =0;i<bean.getCases();i++) {
 						propositionIcon[i].setIcon(vide);
 					}
 			}
@@ -252,7 +249,7 @@ public class MastermindDuel extends JFrame{
 		textProp.setText(" Votre proposition : ");
 		votreProp.setBackground(Color.getHSBColor(0.134f, 0.15f, 0.94f));
 		votreProp.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
-		for(int i=0;i<cases;i++) {
+		for(int i=0;i<bean.getCases();i++) {
 			propositionIcon[i]= modelInterface.createJLabel();// on crée les JLabel et on met dans tab
 			propositionIcon[i].setIcon(vide);
 			votreProp.add(propositionIcon[i]);
@@ -280,7 +277,7 @@ public class MastermindDuel extends JFrame{
 		retour.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-				FenetreMenuMaster menu = new FenetreMenuMaster();	
+				FenetreMenuMaster menu = new FenetreMenuMaster(bean);	
 				menu.setVisible(true);
 			}
 		});
@@ -288,7 +285,7 @@ public class MastermindDuel extends JFrame{
 		blocRegle.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		blocRegle.setPreferredSize(new Dimension(800,50));
 		JLabel regle = new JLabel();
-		regle.setText("Vous jouez contre l'ordinateur, le plus rapide à trouver le code secret à "+couleur+" couleurs gagne la partie.");
+		regle.setText("Vous jouez contre l'ordinateur, le plus rapide à trouver le code secret à "+bean.getCouleurs()+" couleurs gagne la partie.");
 		regle.setFont(impact);
 		JLabel infos = new JLabel();
 		infos.setText("♦ : signifie le nombre de couleur bien placé.    ♢ : signifie le nombre de couleur qui si trouve à un emplacement différent.");
@@ -328,7 +325,7 @@ public class MastermindDuel extends JFrame{
 		espace.add(entrerIndi);
 		contentPane.add(espace);
 	}
-	private void initBlocIndices() {
+	private void initBlocIndices(JLabel[] blocIndicesOrdi, DuelMastermindModel model) {
 
 		JPanel	blocIndice	= new JPanel();
 		indice.setOpaque(true);
@@ -433,6 +430,5 @@ public class MastermindDuel extends JFrame{
 			}
 			indice.setText(" ♦ : "+placerClick+"    ♢ : "+changerClick);
 		}
-
 	}
 }

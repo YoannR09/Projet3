@@ -17,23 +17,26 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Lancement;
 
 public class RegleMastermind extends JFrame {
 
-	private JPanel		contentPane			= new JPanel();
-	private Font		arial				= new Font ("arial", 12,12);
-	private Font		impact2				= new Font ("impact", 20,20);
-	private JButton		retour				= new JButton("Retour");
+	private BeanReglage		bean				;
+	private JPanel			contentPane			= new JPanel();
+	private Font			arial				= new Font ("arial", 12,12);
+	private Font			impact2				= new Font ("impact", 20,20);
+	private JButton			retour				= new JButton("Retour");
 	
 	
-	public RegleMastermind() {
+	public RegleMastermind(BeanReglage bean) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(" Regle du MasterMind ");
 		this.setSize(355, 410);
 		this.setContentPane(contentPane);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
+		this.bean = bean;
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		initCadre();
 	}
@@ -49,7 +52,7 @@ public class RegleMastermind extends JFrame {
 		retour.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-				Lancement menu = new Lancement();	
+				Lancement menu = new Lancement(bean);	
 				menu.setVisible(true);
 			}
 		});

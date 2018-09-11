@@ -36,7 +36,7 @@ import javax.swing.JRadioButton;
 public class Reglage extends JFrame {
 
 
-	private BeanReglage			bean			= new BeanReglage();
+	private BeanReglage			bean			;
 	private JPanel				contentPane		= new JPanel();
 	private JPanel				cadreCases		= new JPanel();
 	private JPanel				cadreTentative	= new JPanel();
@@ -54,7 +54,7 @@ public class Reglage extends JFrame {
 	private JRadioButton[]		boutonTentative;
 
 
-	public Reglage() {
+	public Reglage(BeanReglage bean) {
 
 		this.setTitle(" Reglages ");
 		this.setSize(330, 310);
@@ -62,6 +62,7 @@ public class Reglage extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
 		this.setResizable(false);
+		this.bean = bean;
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 
 		initRetour();
@@ -84,7 +85,7 @@ public class Reglage extends JFrame {
 			public void actionPerformed(ActionEvent event){
 				sauvegardeReglage();
 				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-				Lancement menu = new Lancement();
+				Lancement menu = new Lancement(bean);
 				menu.setVisible(true);
 
 			}
@@ -108,7 +109,7 @@ public class Reglage extends JFrame {
 		retour.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-				Lancement menu = new Lancement();	
+				Lancement menu = new Lancement(bean);	
 				menu.setVisible(true);
 			}
 		});

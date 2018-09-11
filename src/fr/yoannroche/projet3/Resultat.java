@@ -27,17 +27,18 @@ import fr.yoannroche.projet3.plusmoins.view.DuelPlusMoins;
  */
 public class Resultat extends JFrame {
 
-	private JPanel		contentPane		= new JPanel();
-	private JPanel		contentPane2    = new JPanel();
-	private JButton		relancer		= new JButton(" Relancer ");
-	private JButton		home			= new JButton(" Menu ");
-	private JButton		quitter			= new JButton(" Quitter ");
-	private Font		arial			= new Font ("arial", 12,12);
-	private JLabel		text			= new JLabel();
-	private int			jeu				= 0;
+	private BeanReglage		bean			;
+	private JPanel			contentPane		= new JPanel();
+	private JPanel			contentPane2    = new JPanel();
+	private JButton			relancer		= new JButton(" Relancer ");
+	private JButton			home			= new JButton(" Menu ");
+	private JButton			quitter			= new JButton(" Quitter ");
+	private Font			arial			= new Font ("arial", 12,12);
+	private JLabel			text			= new JLabel();
+	private int				jeu				= 0;
 
 
-	public Resultat(JFrame parent, String title,String nombreString, JPanel contentPane2, int jeu){
+	public Resultat(JFrame parent, String title,String nombreString, JPanel contentPane2, int jeu, BeanReglage bean){
 
 		super(title);
 
@@ -49,6 +50,7 @@ public class Resultat extends JFrame {
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		this.contentPane2 = contentPane2;
 		this.jeu=jeu;
+		this.bean = bean;
 		this.setTitle(" Resultat ");
 
 		initText();
@@ -84,27 +86,27 @@ public class Resultat extends JFrame {
 				setVisible(false);
 				((JFrame) contentPane2.getTopLevelAncestor()).setVisible(false);
 				if(jeu==1) {
-					ChallengerPlusMoins chal = new ChallengerPlusMoins();
+					ChallengerPlusMoins chal = new ChallengerPlusMoins(bean);
 					chal.setVisible(true);
 				}
 				if(jeu==2) {
-					DefenseurPlusMoins def = new DefenseurPlusMoins();
+					DefenseurPlusMoins def = new DefenseurPlusMoins(bean);
 					def.setVisible(true);
 				}
 				if(jeu==3) {
-					DuelPlusMoins duel = new DuelPlusMoins();
+					DuelPlusMoins duel = new DuelPlusMoins(bean);
 					duel.setVisible(true);
 				}
 				if(jeu==4) {
-					Mastermind master = new Mastermind(MastermindMode.Challenger);
+					Mastermind master = new Mastermind(MastermindMode.Challenger,bean);
 					master.setVisible(true);
 				}
 				if(jeu==5) {
-					Mastermind master = new Mastermind(MastermindMode.Defenseur);
+					Mastermind master = new Mastermind(MastermindMode.Defenseur,bean);
 					master.setVisible(true);
 				}
 				if(jeu==6) {
-					Mastermind master = new Mastermind(MastermindMode.Duel);
+					Mastermind master = new Mastermind(MastermindMode.Duel,bean);
 					master.setVisible(true);
 				}
 			}
@@ -117,7 +119,7 @@ public class Resultat extends JFrame {
 			public void actionPerformed(ActionEvent event){
 				setVisible(false);
 				((JFrame) contentPane2.getTopLevelAncestor()).dispose();
-				Lancement menu = new Lancement();	
+				Lancement menu = new Lancement(bean);	
 				menu.setVisible(true);
 			}
 		});

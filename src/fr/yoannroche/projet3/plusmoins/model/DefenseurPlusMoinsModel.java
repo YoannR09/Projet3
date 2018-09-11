@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Resultat;
 
 /**
@@ -23,11 +24,8 @@ import fr.yoannroche.projet3.Resultat;
  */
 public class DefenseurPlusMoinsModel {
 
-	private String						bloc;
+	private BeanReglage					bean				;
 	private int							nombreCoup			= 0;
-	private ResourceBundle				reglage				= ResourceBundle.getBundle("Config");
-	private int							cases				= Integer.parseInt(reglage.getString("cases"));
-	private String						tentative			= null;
 	private int							resultMax			= 0;
 	private int							resultMin			= 0;
 	private Font						arial2				= new Font ("arial", 10,10);
@@ -36,17 +34,14 @@ public class DefenseurPlusMoinsModel {
 	private String						resultProp			= null;
 	private int							nbreTour			= 0;
 	private int							gagner				= 0;
-	private char						tabProp[]			= new char [cases];
-	private char						tabMin[]			= new char [cases];
-	private char						tabMax[]			= new char [cases];
+	private char						tabProp[]			= new char [Integer.parseInt(ResourceBundle.getBundle("Config").getString("cases"))];
+	private char						tabMin[]			= new char [Integer.parseInt(ResourceBundle.getBundle("Config").getString("cases"))];
+	private char						tabMax[]			= new char [Integer.parseInt(ResourceBundle.getBundle("Config").getString("cases"))];
 	private Icon[]						tableauImg			= new Icon[7];
 	private int							jeu					= 2;
 
-	public DefenseurPlusMoinsModel() {
-		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		reglage.getString("tentatives");
-		bloc = reglage.getString("cases");
-		cases = Integer.parseInt(bloc);
+	public DefenseurPlusMoinsModel(BeanReglage bean) {
+		this.bean = bean;
 	}
 
 	/**
@@ -95,19 +90,16 @@ public class DefenseurPlusMoinsModel {
 	 */
 	public void okClick(JTextField proposition, JLabel codeSecret, JPanel contentPane, JPanel ordi,JPanel blocProposition, JLabel image, JLabel tentativeOrdi, JTextArea dialog,JLabel indiceDev,JButton ok,JButton fin) {
 
-		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		bloc = reglage.getString("cases");
-		int cases = Integer.parseInt(bloc);
 
-		if(proposition.getText().length()<cases) {
+		if(proposition.getText().length()<bean.getCases()) {
 			JOptionPane.showMessageDialog(null,"Votre code est trop court !!","Erreur",JOptionPane.ERROR_MESSAGE);
 			proposition.setText("");
 		}
-		else if(proposition.getText().length()>cases) {
+		else if(proposition.getText().length()>bean.getCases()) {
 			JOptionPane.showMessageDialog(null,"Votre code est trop long !!","Erreur",JOptionPane.ERROR_MESSAGE);
 			proposition.setText("");
 		}
-		else if(proposition.getText().length()==cases) {
+		else if(proposition.getText().length()==bean.getCases()) {
 			ok.setEnabled(false);
 			codeSecret.setText(proposition.getText());
 			dialog.setText("");
@@ -126,15 +118,11 @@ public class DefenseurPlusMoinsModel {
 	 * @param contentPane
 	 * @param codeSecret
 	 */
-	public void chechTentative(int nombreCoup,JPanel contentPane,String codeSecret) {
-
-		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		tentative = reglage.getString("tentatives");
-		int tentatives = Integer.parseInt(tentative);
+	public void chechTentative(int nombreCoup,JPanel contentPane,String codeSecret) {	
 
 		if(gagner==0) {
-			if((nbreTour+1)==tentatives) {
-				new Resultat(null, "Gagner",null,contentPane,jeu).gagner();
+			if((nbreTour+1)==bean.getTentatives()) {
+				new Resultat(null, "Gagner",null,contentPane,jeu,bean).gagner();
 			}
 		}
 	}
@@ -147,7 +135,7 @@ public class DefenseurPlusMoinsModel {
 
 		if(proposition.equals(codeSecret2)){
 			++gagner;
-			new Resultat(null, "Perdu",null,contentPane,jeu).perdu();
+			new Resultat(null, "Perdu",null,contentPane,jeu,bean).perdu();
 		}
 	}
 
@@ -174,7 +162,7 @@ public class DefenseurPlusMoinsModel {
 	 * @param contentPane
 	 */
 	public void tour0(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
-		for(int o=0;o<cases;o++) { //Création de tableaux max, min et proposition.
+		for(int o=0;o<bean.getCases();o++) { //Création de tableaux max, min et proposition.
 
 			tabMin[o]=intToChar(0);
 			tabProp[o]=intToChar(5);
@@ -378,11 +366,8 @@ public class DefenseurPlusMoinsModel {
 	 * @param nombreClick
 	 */
 	public void RangeWord(JPanel blocProposition, int nombreClick) {
-		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		bloc = reglage.getString("cases");
-		int cases = Integer.parseInt(bloc); 
-
-		if(nombreClick==cases) {
+		
+		if(nombreClick==bean.getCases()) {
 			blocProposition.setVisible(false);
 		}
 	}

@@ -1,15 +1,23 @@
 package fr.yoannroche.projet3;
 
 import java.io.Serializable;
+import java.util.ResourceBundle;
 
 public class BeanReglage implements Serializable{
 
-	private 	int 	cases;
-	private 	int 	tentatives;
-	private	 	int 	couleurs;
-	private 	int 	dev;
+	private 	int 			cases;
+	private 	int 			tentatives;
+	private	 	int 			couleurs;
+	private 	int 			dev;
+	private		ResourceBundle 	reglage;
 	
 	
+	public ResourceBundle getReglage() {
+		return reglage;
+	}
+	public void setReglage(ResourceBundle reglage) {
+		this.reglage = reglage;
+	}
 	public int getCases() {
 		return cases;
 	}

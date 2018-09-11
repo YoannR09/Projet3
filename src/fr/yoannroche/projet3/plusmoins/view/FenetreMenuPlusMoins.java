@@ -19,11 +19,14 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
+import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Lancement;
 import fr.yoannroche.projet3.Reglage;
 
 
 public class FenetreMenuPlusMoins extends JFrame{
+	
+	private BeanReglage				bean			;
 	private JPanel contentPaneMenu = new JPanel();
 	private JRadioButton mode1,mode2,mode3;
 	private JPanel blocMode = new JPanel();
@@ -36,13 +39,15 @@ public class FenetreMenuPlusMoins extends JFrame{
 	private SourisListener sListener = new SourisListener();
 	private JButton dev = new JButton(" Réglages ");
 	JTextArea regle = new JTextArea();
-	public FenetreMenuPlusMoins() {
+	
+	public FenetreMenuPlusMoins(BeanReglage bean) {
 		this.setTitle("Menu du Plus ou Moins");
 		this.setSize(550, 340);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPaneMenu);
 		this.setResizable(false);
+		this.bean = bean;
 		contentPaneMenu.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 
 		initMenu();
@@ -51,12 +56,8 @@ public class FenetreMenuPlusMoins extends JFrame{
 
 	private void initMenu() {
 
-
 		JPanel espace1 = new JPanel();
 		JPanel espace2 = new JPanel();
-
-
-
 		espace2.setPreferredSize(new Dimension(210,10));
 		dev.setBackground(Color.getHSBColor(0.141f, 0.74f, 0.87f));
 		dev.setPreferredSize(new Dimension(70,30));
@@ -65,7 +66,7 @@ public class FenetreMenuPlusMoins extends JFrame{
 		dev.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPaneMenu.getTopLevelAncestor()).dispose() ;
-				Reglage reglage = new Reglage();
+				Reglage reglage = new Reglage(bean);
 				reglage.setVisible(true);
 			}
 
@@ -127,15 +128,15 @@ public class FenetreMenuPlusMoins extends JFrame{
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPaneMenu.getTopLevelAncestor()).dispose() ;
 				if(mode1.isSelected()==true) {
-					ChallengerPlusMoins chal = new ChallengerPlusMoins();	
+					ChallengerPlusMoins chal = new ChallengerPlusMoins(bean);	
 					chal.setVisible(true);
 				}
 				if(mode2.isSelected()==true) {
-					DefenseurPlusMoins def = new DefenseurPlusMoins();	
+					DefenseurPlusMoins def = new DefenseurPlusMoins(bean);	
 					def.setVisible(true);
 				}
 				if(mode3.isSelected()==true) {
-					DuelPlusMoins duel = new DuelPlusMoins();
+					DuelPlusMoins duel = new DuelPlusMoins(bean);
 					duel.setVisible(true);
 				}
 				
@@ -151,7 +152,7 @@ public class FenetreMenuPlusMoins extends JFrame{
 		retour.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPaneMenu.getTopLevelAncestor()).dispose() ;
-				Lancement menu = new Lancement();	
+				Lancement menu = new Lancement(bean);	
 				menu.setVisible(true);
 			}
 		});

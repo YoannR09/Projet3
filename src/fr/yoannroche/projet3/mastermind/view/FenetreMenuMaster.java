@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
+import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Lancement;
 import fr.yoannroche.projet3.mastermind.MastermindMode;
 import fr.yoannroche.projet3.mastermind.model.ChallengerMastermindModel;
@@ -26,26 +27,28 @@ import fr.yoannroche.projet3.mastermind.model.ChallengerMastermindModel;
 
 public class FenetreMenuMaster extends JFrame{
 
-	private JPanel			contentPaneMenu		= new JPanel();
-	private JRadioButton	mode1,mode2,mode3;
-	private JPanel			blocMode			= new JPanel();
-	private Font			police				= new Font ("arial black", 12,12);
-	private Font			impact				= new Font ("impact", 17,17);
-	private Font			impact2				= new Font ("impact", 20,20);
-	private Dimension		dim					= new Dimension(150,50);
-	private JButton			lancer				= new JButton("Lancer");
-	private JButton			retour				= new JButton("Retour");
-	private SourisListener	sListener			= new SourisListener();
-	private JTextArea		regle				= new JTextArea();
+	private		BeanReglage		bean				;
+	private		JPanel			contentPaneMenu		= new JPanel();
+	private		JRadioButton	mode1,mode2,mode3	;
+	private		JPanel			blocMode			= new JPanel();
+	private		Font			police				= new Font ("arial black", 12,12);
+	private		Font			impact				= new Font ("impact", 17,17);
+	private		Font			impact2				= new Font ("impact", 20,20);
+	private		Dimension		dim					= new Dimension(150,50);
+	private		JButton			lancer				= new JButton("Lancer");
+	private		JButton			retour				= new JButton("Retour");
+	private		SourisListener	sListener			= new SourisListener();
+	private		JTextArea		regle				= new JTextArea();
 
 
-	public FenetreMenuMaster() {
+	public FenetreMenuMaster(BeanReglage bean) {
 		this.setTitle("Menu du MasterMind");
 		this.setSize(550, 340);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPaneMenu);
 		this.setResizable(false);
+		this.bean = bean;
 		contentPaneMenu.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 
 		initMenu();
@@ -113,15 +116,15 @@ public class FenetreMenuMaster extends JFrame{
 				((JFrame) contentPaneMenu.getTopLevelAncestor()).dispose() ;
 
 				if(mode1.isSelected()==true) {
-					Mastermind chal = new Mastermind(MastermindMode.Challenger);
+					Mastermind chal = new Mastermind(MastermindMode.Challenger,bean);
 					chal.setVisible(true);
 				}
 				if(mode2.isSelected()==true) {
-					Mastermind def = new Mastermind(MastermindMode.Defenseur);
+					Mastermind def = new Mastermind(MastermindMode.Defenseur,bean);
 					def.setVisible(true);
 				}
 				if(mode3.isSelected()==true) {
-					MastermindDuel duel = new MastermindDuel( );
+					MastermindDuel duel = new MastermindDuel(bean);
 					duel.setVisible(true);
 				}
 			}
@@ -134,7 +137,7 @@ public class FenetreMenuMaster extends JFrame{
 		retour.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPaneMenu.getTopLevelAncestor()).dispose() ;
-				Lancement menu = new Lancement();	
+				Lancement menu = new Lancement(bean);	
 				menu.setVisible(true);
 			}
 		});

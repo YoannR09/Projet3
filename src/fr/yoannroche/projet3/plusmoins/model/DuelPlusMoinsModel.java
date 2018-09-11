@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.Resultat;
 
@@ -22,10 +23,8 @@ import fr.yoannroche.projet3.Resultat;
  */
 public class DuelPlusMoinsModel {
 
-	private String				bloc				= null;
+	private BeanReglage			bean				;
 	private Generateur			code				= new Generateur();
-	private ResourceBundle		reglage				= ResourceBundle.getBundle("Config");
-	private int					cases				= Integer.parseInt(reglage.getString("cases"));
 	private String				nombreString		= Integer.toString(code.getNombre());
 	private Font				arial2				= new Font ("arial", 10,10);
 	private Font				impact				= new Font ("impact", 17,17);
@@ -35,11 +34,15 @@ public class DuelPlusMoinsModel {
 	private int					nbreTour			= 0;
 	private boolean				gagner				= false;
 	private int					info				= 0;
-	private char				tabProp[]			= new char [cases];
-	private char				tabMin []			= new char [cases];
-	private char				tabMax[]			= new char [cases];
+	private char				tabProp[]			= new char [Integer.parseInt(ResourceBundle.getBundle("Config").getString("cases"))];
+	private char				tabMin []			= new char [Integer.parseInt(ResourceBundle.getBundle("Config").getString("cases"))];
+	private char				tabMax[]			= new char [Integer.parseInt(ResourceBundle.getBundle("Config").getString("cases"))];
 	private int					jeu					= 3;
 
+	
+	public DuelPlusMoinsModel(BeanReglage bean) {
+		this.bean = bean;
+	}
 	/**
 	 * Compare la tentative du joueur au code secret
 	 * Des indices sont donnés pour le joueur.
@@ -101,7 +104,7 @@ public class DuelPlusMoinsModel {
 			tentativeJoueur(tentative, infosTentative,proposition);
 			if(tentative.getText().equals(nombreString)) {
 				if(gagner==false) {
-				new Resultat(null, "Gagner",nombreString,contentPane,jeu).gagner();
+				new Resultat(null, "Gagner",nombreString,contentPane,jeu,bean).gagner();
 				gagner=true;
 				}
 			}
@@ -176,7 +179,7 @@ public class DuelPlusMoinsModel {
 
 		if(proposition.equals(codeSecret2)){
 			if(gagner==false){
-				new Resultat(null,"Perdu" ,codeSecret2, contentPane,jeu).perdu();
+				new Resultat(null,"Perdu" ,codeSecret2, contentPane,jeu,bean).perdu();
 			}
 		}
 	}
@@ -191,7 +194,7 @@ public class DuelPlusMoinsModel {
 	 * @param indiceDev
 	 */
 	public void tour0(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev,JPanel contentPane) {
-		for(int o=0;o<cases;o++) { //Création de tableaux max, min et proposition.
+		for(int o=0;o<bean.getCases();o++) { //Création de tableaux max, min et proposition.
 
 			tabMin[o]=intToChar(0);
 			tabProp[o]=intToChar(5);
@@ -393,11 +396,8 @@ public class DuelPlusMoinsModel {
 	 * @param nombreClick
 	 */
 	public void RangeWord(JPanel blocProposition, int nombreClick) {
-		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		bloc = reglage.getString("cases");
-		int cases = Integer.parseInt(bloc); 
 
-		if(nombreClick==cases) {
+		if(nombreClick==bean.getCases()) {
 			blocProposition.setVisible(false);
 		}
 

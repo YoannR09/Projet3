@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -18,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.plusmoins.model.DuelPlusMoinsModel;
 
 /**
@@ -27,6 +27,7 @@ import fr.yoannroche.projet3.plusmoins.model.DuelPlusMoinsModel;
  */
 public class DuelPlusMoins extends JFrame{
 
+	private BeanReglage		bean				;
 	private JPanel			contentPane			= new JPanel();
 	private JLabel			attention			= new JLabel();
 	private JButton			retour				= new JButton(" Retour ");
@@ -58,12 +59,8 @@ public class DuelPlusMoins extends JFrame{
 	private JLabel			tour				= new JLabel();
 	private JButton			indi[];
 	private JButton			bouton[];
-	
-	
-	private DuelPlusMoinsModel duel = new DuelPlusMoinsModel();
 
-
-	public DuelPlusMoins() {
+	public DuelPlusMoins(BeanReglage bean) {
 
 		this.setTitle("Duel");
 		this.setSize(460,470);
@@ -71,25 +68,23 @@ public class DuelPlusMoins extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
 		this.setResizable(false);
+		this.bean = bean;
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
-		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		reglage.getString("tentatives");
-		bloc = reglage.getString("cases");
+		
+		DuelPlusMoinsModel duel = new DuelPlusMoinsModel(bean);
 
 		initRegle();
 		initCadreJoueur();
 		initVs();
 		initCadreOrdi();
 		initBlocProposition();
-		initBlocTest();
-		initCadreDev();
+		initBlocTest(duel);
+		initCadreDev(duel);
 	}
 
-	private void initCadreDev() {
-		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		String devStatus = reglage.getString("dev");
-		int devMode = Integer.parseInt(devStatus);
-		if(devMode==1) {
+	private void initCadreDev(DuelPlusMoinsModel duel) {
+		
+		if(bean.getDev()==1) {
 			JLabel codeSecret = new JLabel();
 			codeSecret.setFont(arial2);
 			codeSecret.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
@@ -268,7 +263,7 @@ public class DuelPlusMoins extends JFrame{
 		retour.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-				FenetreMenuPlusMoins menu = new FenetreMenuPlusMoins();	
+				FenetreMenuPlusMoins menu = new FenetreMenuPlusMoins(bean);	
 				menu.setVisible(true);
 			}
 		});
@@ -279,7 +274,7 @@ public class DuelPlusMoins extends JFrame{
 		aide.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-				AideDuelPlusMoins aideMenu = new AideDuelPlusMoins();	
+				AideDuelPlusMoins aideMenu = new AideDuelPlusMoins(bean);	
 				aideMenu.setVisible(true);
 			}
 		});
@@ -310,7 +305,7 @@ public class DuelPlusMoins extends JFrame{
 		contentPane.add(espace);
 	}
 	
-	private void initBlocTest() {
+	private void initBlocTest(DuelPlusMoinsModel duel) {
 
 		JPanel blocBouton = new JPanel();
 		blocBouton.setPreferredSize(new Dimension(100,58));
@@ -439,6 +434,8 @@ public class DuelPlusMoins extends JFrame{
 	}
 
 	class SourisListener2 implements MouseListener {
+		
+		DuelPlusMoinsModel duel = new DuelPlusMoinsModel(bean);
 
 		public void mouseClicked(MouseEvent arg0) {
 			if(nombreClick==0) {

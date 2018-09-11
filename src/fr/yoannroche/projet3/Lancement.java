@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -41,9 +42,10 @@ public class Lancement extends JFrame{
 	private Dimension			dim2			= new Dimension(50,55);
 	private Dimension			dim3			= new Dimension(100,30);
 	private Font				impact			= new Font("impact", 15,15);
+	private BeanReglage			bean			;
 
 
-	public Lancement() {
+	public Lancement(BeanReglage bean) {
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(" Projet 3 ");
@@ -52,6 +54,7 @@ public class Lancement extends JFrame{
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
+		this.bean = bean;
 
 		initEcran();
 		initMenuBar();
@@ -72,7 +75,7 @@ public class Lancement extends JFrame{
 		masterMind.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-				RegleMastermind regle = new RegleMastermind();	
+				RegleMastermind regle = new RegleMastermind(bean);	
 				regle.setVisible(true);
 			}
 		});
@@ -86,7 +89,7 @@ public class Lancement extends JFrame{
 		plusMoins.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-				ReglePlusMoins regle = new ReglePlusMoins();	
+				ReglePlusMoins regle = new ReglePlusMoins(bean);	
 				regle.setVisible(true);
 			}
 		});
@@ -128,7 +131,7 @@ public class Lancement extends JFrame{
 		jeu1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-				FenetreMenuMaster menu = new FenetreMenuMaster();	
+				FenetreMenuMaster menu = new FenetreMenuMaster(bean);	
 				menu.setVisible(true);
 			}
 		});
@@ -142,7 +145,7 @@ public class Lancement extends JFrame{
 		jeu2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-				FenetreMenuPlusMoins menu = new FenetreMenuPlusMoins();	
+				FenetreMenuPlusMoins menu = new FenetreMenuPlusMoins(bean);	
 				menu.setVisible(true);
 			}
 		});
@@ -159,10 +162,14 @@ public class Lancement extends JFrame{
 	 */
 	public static void main(String[] args) {
 
-		Lancement l = new Lancement();
+		BeanReglage bean = new BeanReglage();
+		Lancement l = new Lancement(bean);
 		l.setVisible(true);
-
-
+		bean.setReglage(ResourceBundle.getBundle("Config"));
+		bean.setCases(Integer.parseInt(bean.getReglage().getString("cases")));
+		bean.setTentatives(Integer.parseInt(bean.getReglage().getString("tentatives")));
+		bean.setCouleurs(Integer.parseInt(bean.getReglage().getString("couleur")));
+		bean.setDev(Integer.parseInt(bean.getReglage().getString("dev")));
 
 	}
 

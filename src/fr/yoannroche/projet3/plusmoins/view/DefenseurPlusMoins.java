@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.plusmoins.model.DefenseurPlusMoinsModel;
 
 /**
@@ -28,8 +29,7 @@ import fr.yoannroche.projet3.plusmoins.model.DefenseurPlusMoinsModel;
  */
 public class DefenseurPlusMoins extends JFrame{
 
-	private ResourceBundle				reglage				= ResourceBundle.getBundle("Config");
-	private DefenseurPlusMoinsModel		def					= new DefenseurPlusMoinsModel();
+	private BeanReglage					bean				;
 	private JLabel						codeSecret			= new JLabel();
 	private JPanel						contentPane			= new JPanel();
 	private JButton						retour				= new JButton(" Retour ");
@@ -45,8 +45,6 @@ public class DefenseurPlusMoins extends JFrame{
 	private JPanel						boiteDialog			= new JPanel();
 	private JTextField					proposition			= new JTextField(); 
 	private int[]						clavier				= {0,1,2,3,4,5,6,7,8,9};
-	private String						tentatives			= reglage.getString("tentatives");
-	private String						bloc				= reglage.getString("cases");
 	private JLabel						tentativeIA			= new JLabel();
 	private JPanel						cadreOrdi			= new JPanel();
 	private JTextArea					dialog				= new JTextArea();
@@ -65,7 +63,7 @@ public class DefenseurPlusMoins extends JFrame{
 
 
 
-	public DefenseurPlusMoins() {
+	public DefenseurPlusMoins(BeanReglage bean) {
 
 		this.setTitle(" Défenseur ");
 		this.setSize(400, 450);
@@ -73,14 +71,17 @@ public class DefenseurPlusMoins extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
 		this.setResizable(false);
+		this.bean = bean;
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 
+		DefenseurPlusMoinsModel	def	= new DefenseurPlusMoinsModel(bean);
+		
 		initCadreDev();
 		initBar();
 		initCadreOrdi();
 		initCadreDialogOrdi();
 		initDialog();
-		initCode();
+		initCode(def);
 	}
 
 	private void initCadreDev() {
@@ -165,7 +166,7 @@ public class DefenseurPlusMoins extends JFrame{
 		tentativePanel.add(refresh);		
 	}
 
-	private void initCode() {
+	private void initCode(DefenseurPlusMoinsModel def) {
 
 		blocProposition.setPreferredSize(new Dimension(160,65));
 		blocProposition.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
@@ -279,7 +280,7 @@ public class DefenseurPlusMoins extends JFrame{
 		retour.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-				FenetreMenuPlusMoins menu = new FenetreMenuPlusMoins();	
+				FenetreMenuPlusMoins menu = new FenetreMenuPlusMoins(bean);	
 				menu.setVisible(true);
 			}
 		});
@@ -287,9 +288,8 @@ public class DefenseurPlusMoins extends JFrame{
 		blocRegle.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		blocRegle.setPreferredSize(new Dimension(500,40));
 		JLabel regle = new JLabel();
-		int tentativeInt = Integer.parseInt(tentatives);
-		int casesInt = Integer.parseInt(bloc);
-		regle.setText("L'ordinateur a "+ tentativeInt +" tentative pour trouver le code secret à "+ casesInt +" chiffres.");
+	
+		regle.setText("L'ordinateur a "+ bean.getTentatives() +" tentative pour trouver le code secret à "+ bean.getCases() +" chiffres.");
 		regle.setFont(arial);
 		contentPane.add(retour);
 		contentPane.add(espaceRetour);
@@ -345,6 +345,8 @@ public class DefenseurPlusMoins extends JFrame{
 	}
 	class SourisListener2 implements MouseListener {
 
+		DefenseurPlusMoinsModel	def	= new DefenseurPlusMoinsModel(bean);
+		
 		public void mouseClicked(MouseEvent arg0) {
 			if(click==0) {
 				supprimer.doClick();
@@ -370,6 +372,8 @@ public class DefenseurPlusMoins extends JFrame{
 		}
 	}
 	class SourisListener3 implements MouseListener {
+		
+		DefenseurPlusMoinsModel	def	= new DefenseurPlusMoinsModel(bean);
 
 		public void mouseClicked(MouseEvent arg0) {
 			if(nombreClick==0) {

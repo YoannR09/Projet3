@@ -1,10 +1,9 @@
 package fr.yoannroche.projet3.mastermind.model;
 
-import java.util.ResourceBundle;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.Resultat;
 import fr.yoannroche.projet3.mastermind.control.Control;
@@ -17,19 +16,20 @@ import fr.yoannroche.projet3.mastermind.control.Control;
  */
 public class ChallengerMastermindModel {
 
+	private BeanReglage		bean			;
 	private int				jeu				= 4;
 	private InterfaceModel	model			= new InterfaceModel();
-	private ResourceBundle	reglage			= ResourceBundle.getBundle("Config");
-	private int				cases			= Integer.parseInt(reglage.getString("cases"));
-	private int				tentative		= Integer.parseInt(reglage.getString("tentatives"));
-	private JLabel			tabView[]		= new JLabel[cases];
-	private Generateur		gen				= new Generateur();
 	private Control			control			= new Control();
-	private int[]			couleurs		= gen.getCouleurs();
 	private int				nombreTentative = 0;
 	private int				couleurSwitch	= 0;
-	private boolean[]		verif			= new boolean [cases];
+	private Generateur		gen				= new Generateur();
+	private int[]			couleurs		= gen.getCouleurs();
 	private boolean			partiFini		= false;
+
+	public ChallengerMastermindModel(BeanReglage bean) {
+		
+		this.bean = bean;
+	}
 
 	/**
 	 * Class appelée lors du click du bouton ok pour envoyer votre proposition
@@ -40,9 +40,10 @@ public class ChallengerMastermindModel {
 	 * @param placer
 	 * @param contentPane
 	 */
-	public void okClick(JPanel[] blocTentative, JLabel[] propositionIcon, JLabel[] blocIndices, int changer, int placer,JPanel contentPane) {
+	public void okClick(JPanel[] blocTentative, JLabel[] propositionIcon, JLabel[] blocIndices, int changer, int placer,JPanel contentPane,BeanReglage bean) {
 
-
+		boolean[] verif	= new boolean [bean.getCases()];
+		JLabel	tabView[] = new JLabel[bean.getCases()];
 		placer=0;
 		changer=0;
 		blocTentative[nombreTentative].removeAll();
@@ -50,7 +51,7 @@ public class ChallengerMastermindModel {
 		/**
 		 * Boucle qui cherche si la couleur est bien placée
 		 */
-		for(int i=0;i<cases;i++) {
+		for(int i=0;i<bean.getCases();i++) {
 			verif[i]=false;
 			tabView[i]= model.createJLabel();	
 			blocTentative[nombreTentative].add(tabView[i]);	
@@ -64,11 +65,11 @@ public class ChallengerMastermindModel {
 		/**
 		 * Boucle qui cherche si il y a un switch de deux couleurs a faire.
 		 */
-		for(int i=0;i<cases;i++) {
+		for(int i=0;i<bean.getCases();i++) {
 			control.couleurChiffre(propositionIcon[i].getIcon().toString(), null);
 			couleurSwitch=control.getProposition();
 			if(!verif[i]) {
-				for(int w =0;w<cases;w++) {
+				for(int w =0;w<bean.getCases();w++) {
 					control.couleurChiffre(propositionIcon[w].getIcon().toString(), null);
 					if(!verif[w] & couleurSwitch!=control.getProposition() & couleurSwitch==couleurs[w] & control.getProposition()==couleurs[i]) {
 						verif[w]=true;
@@ -84,9 +85,9 @@ public class ChallengerMastermindModel {
 		/**
 		 * Boucle qui cherche si la couleur se trouve autre part dans le code secret
 		 */
-		for(int i=0;i<cases;i++) {
+		for(int i=0;i<bean.getCases();i++) {
 			control.couleurChiffre(propositionIcon[i].getIcon().toString(), null);
-			for(int w =0;w<cases;w++) {
+			for(int w =0;w<bean.getCases();w++) {
 				if(!verif[w] & control.getProposition()==couleurs[w]) {
 					verif[w]=true;
 					++changer;
@@ -94,22 +95,22 @@ public class ChallengerMastermindModel {
 				}
 			}
 		}
-		if(placer==cases & !partiFini) {
-			new Resultat(null, "Victoire", null,contentPane, jeu).gagner();
+		if(placer==bean.getCases() & !partiFini) {
+			new Resultat(null, "Victoire", null,contentPane, jeu,bean).gagner();
 			partiFini=true;
 		}
 		blocIndices[nombreTentative].setText(" ♦ :  "+placer+"   ♢  : "+changer+" ");
 		blocTentative[nombreTentative].revalidate();
 		++nombreTentative;
-		if(nombreTentative==tentative & !partiFini) {
-			new Resultat(null, "Victoire", null,contentPane, jeu).perdu();
+		if(nombreTentative==bean.getTentatives() & !partiFini) {
+			new Resultat(null, "Victoire", null,contentPane, jeu,bean).perdu();
 			partiFini=true;
 		}
 	}
 
 	public void dev(JPanel content){
-		JLabel [] indice = new JLabel[cases];
-		for(int i=0;i<cases;i++) {
+		JLabel [] indice = new JLabel[bean.getCases()];
+		for(int i=0;i<bean.getCases();i++) {
 			control.chiffreCouleur(couleurs[i],content,indice[i]);
 		}
 	}

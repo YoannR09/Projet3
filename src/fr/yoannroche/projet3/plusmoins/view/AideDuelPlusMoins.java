@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import fr.yoannroche.projet3.BeanReglage;
+
 /**
  * Cette class gère l'aide du mode Duel du Plus ou Moins.
  * @author yoann
@@ -19,6 +21,7 @@ import javax.swing.JTextArea;
  */
 public class AideDuelPlusMoins extends JFrame{
 	
+	private BeanReglage			bean					;
 	private JPanel				contentPane				= new JPanel();
 	private JButton				suivant					= new JButton(" Suivant ");
 	private JButton				retourner				= new JButton(" Retourner au jeu ");
@@ -40,7 +43,7 @@ public class AideDuelPlusMoins extends JFrame{
 	private JPanel				tentativePanel			= new JPanel();
 	private JButton[]			indi;
 	
-	public AideDuelPlusMoins() {
+	public AideDuelPlusMoins(BeanReglage bean) {
 		
 		this.setTitle("Duel");
 		this.setSize(460,280);
@@ -48,6 +51,7 @@ public class AideDuelPlusMoins extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
 		this.setResizable(false);
+		this.bean = bean;
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		
 		initAide1();
@@ -254,7 +258,7 @@ public class AideDuelPlusMoins extends JFrame{
 		retourner.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				setVisible(false);
-				DuelPlusMoins duel = new DuelPlusMoins();
+				DuelPlusMoins duel = new DuelPlusMoins(bean);
 				duel.setVisible(true);
 			}
 		});

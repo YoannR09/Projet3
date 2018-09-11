@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -18,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.mastermind.MastermindMode;
 import fr.yoannroche.projet3.mastermind.model.ChallengerMastermindModel;
 import fr.yoannroche.projet3.mastermind.model.DefenseurMastermindModel;
@@ -29,14 +29,9 @@ import fr.yoannroche.projet3.mastermind.model.InterfaceModel;
  */
 public class Mastermind extends JFrame{
 
+	private BeanReglage					bean				;
 	private InterfaceModel				model				= new InterfaceModel();
-	private DefenseurMastermindModel	modelDef			= new DefenseurMastermindModel();
-	private ChallengerMastermindModel	modelChal			= new ChallengerMastermindModel();
-	private ResourceBundle				reglage				= ResourceBundle.getBundle("Config");
-	private int							cases				= Integer.parseInt(reglage.getString("cases"));
-	private int							tentative			= Integer.parseInt(reglage.getString("tentatives"));
-	private int							couleur				= Integer.parseInt(reglage.getString("couleur"));
-	private int							modeDev				= Integer.parseInt(reglage.getString("dev"));
+	
 	private JPanel						contentPane			= new JPanel();
 	private JButton						p					= new JButton( " ♢ ");
 	private JButton						o					= new JButton(" ♦ ");
@@ -55,9 +50,6 @@ public class Mastermind extends JFrame{
 	private Font						arial2				= new Font ("arial", 10,10);
 	private JButton						bouton[];
 	private JPanel						blocJeu				= new JPanel();
-	private JLabel						propositionIcon[]	= new JLabel[cases]; // Cadre qui affiche les entrées clavier.
-	private JPanel						blocTentative[]		= new JPanel[tentative]; // Affiche vos tentatives.
-	private JLabel						blocIndices[]		= new JLabel[tentative]; // Affiche les indices
 	private ImageIcon					vide				= new ImageIcon("images/couleur/vide.png");
 	private IndiceListener				IndicesListener     = new IndiceListener();
 	private JLabel						indice				= new JLabel();
@@ -70,22 +62,30 @@ public class Mastermind extends JFrame{
 	/**
 	 * Gère l'interface du jeu Mastermind.
 	 * @param mode
+	 * @param bean 
 	 */
-	public Mastermind(MastermindMode mode) {
+	public Mastermind(MastermindMode mode, BeanReglage bean) {
 
 		this.setSize(400, 500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.bean = bean;
+		
+		DefenseurMastermindModel	modelDef			= new DefenseurMastermindModel(bean);
+		ChallengerMastermindModel	modelChal			= new ChallengerMastermindModel(bean);
+		JLabel	propositionIcon[]	= new JLabel[bean.getCases()]; // Cadre qui affiche les entrées clavier.
+		JPanel	blocTentative[]		= new JPanel[bean.getTentatives()]; // Affiche vos tentatives.
+		JLabel	blocIndices[]		= new JLabel[bean.getTentatives()]; // Affiche les indices
 		
 		initRegle(mode);
-		initHisto(mode);
-		initBlocTenta(mode);
-		initCadreDev(mode);
+		initHisto(mode,propositionIcon,blocTentative,blocIndices);
+		initBlocTenta(mode,propositionIcon,blocTentative,blocIndices,modelChal);
+		initCadreDev(mode,propositionIcon,blocTentative,blocIndices,modelChal);
 
 		if(mode.equals(MastermindMode.Challenger)) {
 			modeChallenger();
 		}
 		else if(mode.equals(MastermindMode.Defenseur)) {
-		    modeDefenseur(mode);
+		    modeDefenseur(mode,propositionIcon,blocTentative,blocIndices,modelDef);
 		}
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
@@ -95,10 +95,14 @@ public class Mastermind extends JFrame{
 	/**
 	 * Affiche les aides si le mode développeur est actif.
 	 * @param mode
+	 * @param blocIndices 
+	 * @param blocTentative 
+	 * @param propositionIcon 
+	 * @param modelChal 
 	 */
-	private void initCadreDev(MastermindMode mode) {
+	private void initCadreDev(MastermindMode mode, JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices, ChallengerMastermindModel modelChal) {
 
-		if(modeDev==1) {
+		if(bean.getDev()==1) {
 			JLabel codeSecret = new JLabel();
 			codeSecret.setFont(arial2);
 			codeSecret.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
@@ -125,14 +129,18 @@ public class Mastermind extends JFrame{
 	 * Ecran du jeu qui affiche les tentatives/indices du joueur qui cherche le code secret.
 	 * Affiche le clavier pour entrer les propositions.
 	 * @param mode
+	 * @param blocIndices 
+	 * @param blocTentative 
+	 * @param propositionIcon 
+	 * @param modelChal 
 	 */
-	private void initBlocTenta(MastermindMode mode) {
+	private void initBlocTenta(MastermindMode mode, JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices, ChallengerMastermindModel modelChal) {
 
 		InterfaceModel model = new InterfaceModel();
 		scrollPane.setPreferredSize(new Dimension(350,205));
 		scrollPane.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		blocJeu.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
-		for(int i=0;i<tentative;i++) {
+		for(int i=0;i<bean.getTentatives();i++) {
 			blocTentative[i]= model.createJPanel();// on crée les JLabel et on met dans tab
 			blocTentative[i].setBackground(Color.DARK_GRAY);
 			blocTentative[i].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
@@ -164,7 +172,7 @@ public class Mastermind extends JFrame{
 		supprimer.addMouseListener(new SourisListener());
 		supprimer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
-				for(int i =0;i<cases;i++) {
+				for(int i =0;i<bean.getCases();i++) {
 					propositionIcon[i].setIcon(vide);
 				}
 				nombreClick=0;
@@ -172,8 +180,8 @@ public class Mastermind extends JFrame{
 		});
 		JPanel clavier = new JPanel();
 		clavier.setBackground(Color.DARK_GRAY);
-		this.bouton = new JButton[couleur];
-		for(int i=0;i<couleur;i++){
+		this.bouton = new JButton[bean.getCouleurs()];
+		for(int i=0;i<bean.getCouleurs();i++){
 			this.bouton[i] = new JButton();
 			bouton[i].setPreferredSize(new Dimension(20,20));
 			bouton[i].setBackground(Color.DARK_GRAY);
@@ -183,11 +191,11 @@ public class Mastermind extends JFrame{
 			bouton[i].setIcon(new ImageIcon("images/couleur/"+i+".png"));
 			bouton[i].addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent event){
-					if(nombreClick<cases) {
+					if(nombreClick<bean.getCases()) {
 						propositionIcon[nombreClick].setIcon(((JButton)event.getSource()).getIcon());
 						propositionIcon[nombreClick].setText("");
 						++nombreClick;
-						if(nombreClick==cases) {
+						if(nombreClick==bean.getCases()) {
 							ok.setEnabled(true);
 						}
 					}
@@ -214,8 +222,8 @@ public class Mastermind extends JFrame{
 		ok.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				if(mode.equals(MastermindMode.Challenger)) {
-					modelChal.okClick(blocTentative,propositionIcon,blocIndices,changer,placer,contentPane);
-					for(int i =0;i<cases;i++) {
+					modelChal.okClick(blocTentative,propositionIcon,blocIndices,changer,placer,contentPane,bean);
+					for(int i =0;i<bean.getCases();i++) {
 						propositionIcon[i].setIcon(vide);
 					}
 				}
@@ -237,13 +245,16 @@ public class Mastermind extends JFrame{
 	/**
 	 * Affiche votre proposition.
 	 * @param mode
+	 * @param blocIndices 
+	 * @param blocTentative 
+	 * @param propositionIcon 
 	 */
-	private void initHisto(MastermindMode mode) {
+	private void initHisto(MastermindMode mode, JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices) {
 
 		votreProp.add(textProp);
 		votreProp.setBackground(Color.getHSBColor(0.134f, 0.15f, 0.94f));
 		votreProp.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
-		for(int i=0;i<cases;i++) {
+		for(int i=0;i<bean.getCases();i++) {
 			propositionIcon[i]= model.createJLabel();// on crée les JLabel et on met dans tab
 			propositionIcon[i].setIcon(vide);
 			votreProp.add(propositionIcon[i]);
@@ -255,8 +266,12 @@ public class Mastermind extends JFrame{
 	/**
 	 * Affiche le clavier pour donner des indices en mode Defenseur.
 	 * @param mode
+	 * @param blocIndices 
+	 * @param blocTentative 
+	 * @param propositionIcon 
+	 * @param modelDef 
 	 */
-	private void initBlocIndices(MastermindMode mode) {
+	private void initBlocIndices(MastermindMode mode, JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices, DefenseurMastermindModel modelDef) {
 		indice.setOpaque(true);
 		indice.setBackground(Color.WHITE);
 		indice.setPreferredSize(new Dimension(150,20));
@@ -279,7 +294,7 @@ public class Mastermind extends JFrame{
 		fin.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
 		fin.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
-				modelDef.finClick(propositionIcon,blocTentative,blocIndices, changerClick, placerClick,contentPane,indice);
+				modelDef.finClick(propositionIcon,blocTentative,blocIndices, changerClick, placerClick,contentPane,indice,bean);
 			}
 		});
 		blocIndice.add(refresh);
@@ -309,7 +324,7 @@ public class Mastermind extends JFrame{
 		retour.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-				FenetreMenuMaster menu = new FenetreMenuMaster();	
+				FenetreMenuMaster menu = new FenetreMenuMaster(bean);	
 				menu.setVisible(true);
 			}
 		});
@@ -317,7 +332,7 @@ public class Mastermind extends JFrame{
 		blocRegle.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		blocRegle.setPreferredSize(new Dimension(500,40));
 		JLabel regle = new JLabel();
-		regle.setText("Vous avez "+tentative+" tentatives pour trouver le code secret à "+cases+" couleurs.");
+		regle.setText("Vous avez "+bean.getTentatives()+" tentatives pour trouver le code secret à "+bean.getCases()+" couleurs.");
 		regle.setFont(impact);
 		contentPane.add(retour);
 		contentPane.add(espaceRetour);
@@ -343,9 +358,9 @@ public class Mastermind extends JFrame{
 		textProp.setText("Votre proposition : ");
 		model.blocJeuSize(blocJeu,contentPane);
 	}
-	public void modeDefenseur(MastermindMode mode) {
+	public void modeDefenseur(MastermindMode mode, JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices, DefenseurMastermindModel modelDef) {
 		this.setTitle("Defenseur");
-		initBlocIndices(mode);
+		initBlocIndices(mode,propositionIcon,blocTentative,blocIndices,modelDef);
 		textProp.setText("Votre code secret : ");
 		model.blocJeuSize(blocJeu,contentPane);
 	}

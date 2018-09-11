@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
 
 
@@ -29,12 +30,9 @@ import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
  */
 public class ChallengerPlusMoins extends JFrame{
 
-	private ResourceBundle				reglage				= ResourceBundle.getBundle("Config");
-	private ChallengerPlusMoinsModel	chal				= new ChallengerPlusMoinsModel();
+	private BeanReglage					bean				;
 	private static final Logger			logger				= LogManager.getLogger();
 	private int							nombreClick			= 0;
-	private String						tentatives			= reglage.getString("tentatives");
-	private String						bloc				= reglage.getString("cases");
 	private JPanel						contentPane			= new JPanel();
 	private JTextField					proposition			= new JTextField();
 	private JPanel						blocProposition		= new JPanel();
@@ -53,7 +51,7 @@ public class ChallengerPlusMoins extends JFrame{
 	private JPanel						espace2				= new JPanel ();
 	private JButton						bouton[];
 
-	public ChallengerPlusMoins() {
+	public ChallengerPlusMoins(BeanReglage bean) {
 
 		this.setTitle("Challenger");
 		this.setSize(400, 300);
@@ -61,24 +59,26 @@ public class ChallengerPlusMoins extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
 		this.setResizable(false);
+		this.bean = bean;
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 
+		ChallengerPlusMoinsModel chal = new ChallengerPlusMoinsModel(bean);
 		initRegle();
 		initTentative();
 		initInfos();
 		initBlocProposition();
-		initBlocTest();
-		initCadreDev();
+		initBlocTest(chal);
+		initCadreDev(chal);
 	}
 
 	/**
 	 * Méthode qui affiche l'aide du développeur si le mdoe développeur est actif.
+	 * @param chal 
 	 */
-	private void initCadreDev() {
+	private void initCadreDev(ChallengerPlusMoinsModel chal) {
 
-		String devStatus = reglage.getString("dev");
-		int devMode = Integer.parseInt(devStatus);
-		if(devMode==1) {
+	
+		if(bean.getDev()==1) {
 			JLabel codeSecret = new JLabel();
 			codeSecret.setFont(arial2);
 			codeSecret.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
@@ -167,7 +167,7 @@ public class ChallengerPlusMoins extends JFrame{
 		retour.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
 				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-				FenetreMenuPlusMoins menu = new FenetreMenuPlusMoins();	
+				FenetreMenuPlusMoins menu = new FenetreMenuPlusMoins(bean);	
 				menu.setVisible(true);
 			}
 		});
@@ -175,9 +175,7 @@ public class ChallengerPlusMoins extends JFrame{
 		blocRegle.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		blocRegle.setPreferredSize(new Dimension(500,40));
 		JLabel regle = new JLabel();
-		int tentativeInt = Integer.parseInt(tentatives);
-		int casesInt = Integer.parseInt(bloc);
-		regle.setText("Vous avez "+ tentativeInt +" tentative pour trouver le code secret à "+ casesInt +" chiffres.");
+		regle.setText("Vous avez "+ bean.getTentatives() +" tentative pour trouver le code secret à "+ bean.getCases() +" chiffres.");
 		regle.setFont(arial);
 		contentPane.add(retour);
 		contentPane.add(espaceRetour);
@@ -192,8 +190,9 @@ public class ChallengerPlusMoins extends JFrame{
 
 	/**
 	 * Méthode qui gère les boutons ok et supprimer et affiche la proposition que vous êtes en train de faire.
+	 * @param chal 
 	 */
-	private void initBlocTest() {
+	private void initBlocTest(ChallengerPlusMoinsModel chal) {
 
 		blocTest.add(proposition);
 		blocTest.setPreferredSize(new Dimension(130,40));
@@ -210,11 +209,10 @@ public class ChallengerPlusMoins extends JFrame{
 		ok.addActionListener(new ActionListener(){ // Probleme au deuxieme ajouts , un espace ce place devant le nombre generé.
 			public void actionPerformed(ActionEvent event){ 
 
-				int cases = Integer.parseInt(bloc);
 				chal.okClick(proposition, tentative, infosTentative,contentPane,blocProposition,nbreTentative);
 				logger.info("Récuperation de la proposition :"+proposition.getText());
 				++nbreTentative;
-				if(tentative.getText().length()!=cases) {
+				if(tentative.getText().length()!=bean.getCases()) {
 
 					nbreTentative=0;
 				}
@@ -307,6 +305,8 @@ public class ChallengerPlusMoins extends JFrame{
 	}
 
 	class SourisListener2 implements MouseListener {
+		
+		ChallengerPlusMoinsModel chal = new ChallengerPlusMoinsModel(bean);
 
 		public void mouseClicked(MouseEvent arg0) {
 			char entrer = ((JButton)arg0.getSource()).getText().charAt(0);
