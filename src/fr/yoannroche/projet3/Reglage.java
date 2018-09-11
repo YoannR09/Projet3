@@ -63,6 +63,7 @@ public class Reglage extends JFrame {
 		this.setContentPane(contentPane);
 		this.setResizable(false);
 		this.bean = bean;
+
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 
 		initRetour();
@@ -74,6 +75,7 @@ public class Reglage extends JFrame {
 
 	/**
 	 * Méthode qui gère le bouton sauvergarde.
+	 * @param temp 
 	 */
 	private void initSauv() {
 		sauv.setBackground(Color.getHSBColor(0.434f, 0.55f, 0.64f));
@@ -247,28 +249,45 @@ public class Reglage extends JFrame {
 
 	/**
 	 * Méthode qui gére le changement des variables dans le fichier Config.properties
+	 * @param temp 
 	 */
 	public void sauvegardeReglage() {
 
-		if(check.isSelected()==true) {			
-			bean.setDev(1);
-		}
-		else{
-			bean.setDev(0);
-		}
+		try {
+			Properties prop = new Properties() ;
+			File fProp = new File("ressources/Config.properties") ;
+			FileInputStream stream = new FileInputStream(fProp) ;
+			prop.load(stream) ;
 
-		for(int i=0;i<clavier.length;i++) {
-			if(bouton[i].isSelected()==true) {
-				int cases=(i+4);
-				bean.setCases(cases);
+			if(check.isSelected()==true) {	
+				prop.setProperty("dev", "1");
+				bean.setDev(1);
 			}
-		}
+			else{
+				prop.setProperty("dev", "0");
+				bean.setDev(0);
+			}
 
-		for(int i=0;i<tenta.length;i++) {
-			if(boutonTentative[i].isSelected()==true) {
-				int tentative=(i+4);
-				bean.setTentatives(tentative);
+			for(int i=0;i<clavier.length;i++) {
+				if(bouton[i].isSelected()==true) {
+					int cases=(i+4);
+					bean.setCases(cases);
+					prop.setProperty("cases",Integer.toString(cases));
+				}
 			}
+
+			for(int i=0;i<tenta.length;i++) {
+				if(boutonTentative[i].isSelected()==true) {
+					int tentative=(i+4);
+					bean.setTentatives(tentative);
+					prop.setProperty("tentatives",Integer.toString(tentative));
+				}
+			}
+
+			FileOutputStream oStream = new FileOutputStream(fProp) ;
+			prop.store(oStream,"Reglage") ;
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

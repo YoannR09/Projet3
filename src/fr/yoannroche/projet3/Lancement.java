@@ -18,6 +18,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import fr.yoannroche.projet3.mastermind.view.FenetreMenuMaster;
 import fr.yoannroche.projet3.mastermind.view.RegleMastermind;
 import fr.yoannroche.projet3.plusmoins.view.FenetreMenuPlusMoins;
@@ -162,6 +165,7 @@ public class Lancement extends JFrame{
 	 */
 	public static void main(String[] args) {
 
+		final Logger logger	= LogManager.getLogger();
 		BeanReglage bean = new BeanReglage();
 		Lancement l = new Lancement(bean);
 		l.setVisible(true);
@@ -170,7 +174,7 @@ public class Lancement extends JFrame{
 		bean.setTentatives(Integer.parseInt(bean.getReglage().getString("tentatives")));
 		bean.setCouleurs(Integer.parseInt(bean.getReglage().getString("couleur")));
 		bean.setDev(Integer.parseInt(bean.getReglage().getString("dev")));
-
+		logger.info(bean.getReglage().getString("main"));
 	}
 
 	class SourisListener implements MouseListener{

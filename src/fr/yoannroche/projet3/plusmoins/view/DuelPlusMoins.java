@@ -36,7 +36,6 @@ public class DuelPlusMoins extends JFrame{
 	private JButton			ok					= new JButton(" Ok ");
 	private JButton			fin					= new JButton(" Ok ");
 	private JButton			refresh				= new JButton("⟲");
-	private String			bloc				= null;
 	private JPanel			cadreJ				= new JPanel();
 	private JPanel			cadreOrdi			= new JPanel();
 	private JPanel			blocProposition		= new JPanel();
@@ -282,8 +281,7 @@ public class DuelPlusMoins extends JFrame{
 		blocRegle.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		blocRegle.setPreferredSize(new Dimension(500,45));
 		JLabel regle = new JLabel();
-		int casesInt = Integer.parseInt(bloc);
-		regle.setText(" Le plus rapide à trouver le code secret à "+ casesInt +" chiffres de l'autre gagne.");
+		regle.setText(" Le plus rapide à trouver le code secret à "+ bean.getCases() +" chiffres de l'autre gagne.");
 		regle.setFont(arial);
 		attention.setFont(arial2);
 		attention.setText(" Le cadre jaune indique ou le joueur doit poser son attention ");
