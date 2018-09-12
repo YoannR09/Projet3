@@ -21,24 +21,27 @@ import javax.swing.JTextArea;
 
 import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Lancement;
-import fr.yoannroche.projet3.Reglage;
 
-
+/**
+ * Class qui gère le menu du Plus ou Moins
+ * Donne accés à tout les modes.
+ * @author Pierrosan
+ *
+ */
 public class FenetreMenuPlusMoins extends JFrame{
 	
-	private BeanReglage				bean			;
-	private JPanel contentPaneMenu = new JPanel();
-	private JRadioButton mode1,mode2,mode3;
-	private JPanel blocMode = new JPanel();
-	Font police = new Font ("arial black", 12,12);
-	Font impact = new Font ("impact", 17,17);
-	Font impact2 = new Font ("impact", 20,20);
-	private Dimension dim = new Dimension(150,50);
-	private JButton lancer = new JButton("Lancer");
-	private JButton retour = new JButton(" Retour ");
-	private SourisListener sListener = new SourisListener();
-	private JButton dev = new JButton(" Réglages ");
-	JTextArea regle = new JTextArea();
+	private BeanReglage				bean				;
+	private JPanel					contentPaneMenu		= new JPanel();
+	private JRadioButton 			mode1,mode2,mode3	;
+	private JPanel					blocMode			= new JPanel();
+	private Font					police				= new Font ("arial black", 12,12);
+	private Font					impact				= new Font ("impact", 17,17);
+	private Font					impact2				= new Font ("impact", 20,20);
+	private Dimension				dim					= new Dimension(150,50);
+	private JButton					lancer				= new JButton("Lancer");
+	private JButton					retour				= new JButton(" Retour ");
+	private SourisListener			sListener			= new SourisListener();
+	private JTextArea				regle				= new JTextArea();
 	
 	public FenetreMenuPlusMoins(BeanReglage bean) {
 		this.setTitle("Menu du Plus ou Moins");
@@ -51,7 +54,6 @@ public class FenetreMenuPlusMoins extends JFrame{
 		contentPaneMenu.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 
 		initMenu();
-
 	}
 
 	private void initMenu() {
@@ -59,18 +61,6 @@ public class FenetreMenuPlusMoins extends JFrame{
 		JPanel espace1 = new JPanel();
 		JPanel espace2 = new JPanel();
 		espace2.setPreferredSize(new Dimension(210,10));
-		dev.setBackground(Color.getHSBColor(0.141f, 0.74f, 0.87f));
-		dev.setPreferredSize(new Dimension(70,30));
-		dev.addMouseListener(new SourisListener());
-		dev.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
-		dev.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent event){
-				((JFrame) contentPaneMenu.getTopLevelAncestor()).dispose() ;
-				Reglage reglage = new Reglage(bean);
-				reglage.setVisible(true);
-			}
-
-		});
 
 		mode1 = new JRadioButton("Mode Challenger");
 		mode1.setSelected(true);
@@ -82,14 +72,12 @@ public class FenetreMenuPlusMoins extends JFrame{
 		bg.add(mode2);
 		bg.add(mode3);
 
-
 		blocMode.add(mode1);
 		mode1.setFont(impact);
 		mode1.setPreferredSize(dim);
 		mode1.setForeground((Color.DARK_GRAY));
 		mode1.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
 		mode1.addMouseListener(new SourisListener());
-
 
 		blocMode.add(mode2);
 		mode2.setFont(impact);
@@ -98,15 +86,12 @@ public class FenetreMenuPlusMoins extends JFrame{
 		mode2.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
 		mode2.addMouseListener(new SourisListener());
 
-
 		blocMode.add(mode3);
 		mode3.setFont(impact);
 		mode3.setPreferredSize(dim);
 		mode3.setForeground((Color.DARK_GRAY));
 		mode3.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
 		mode3.addMouseListener(new SourisListener());
-
-
 
 		blocMode.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.44f));
 		blocMode.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
@@ -143,7 +128,6 @@ public class FenetreMenuPlusMoins extends JFrame{
 			}
 
 		});
-
 		retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 		retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		retour.setForeground(Color.white);
@@ -156,8 +140,6 @@ public class FenetreMenuPlusMoins extends JFrame{
 				menu.setVisible(true);
 			}
 		});
-
-
 
 		contentPaneMenu.add(retour);
 		contentPaneMenu.add(espace1);
@@ -177,12 +159,9 @@ public class FenetreMenuPlusMoins extends JFrame{
 		contentPaneMenu.add(espaceMaster);
 		contentPaneMenu.add(regle);
 		contentPaneMenu.add(blocMode);
-		contentPaneMenu.add(dev);
 		contentPaneMenu.add(espace2);
 		espace2.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		contentPaneMenu.add(lancer,BorderLayout.SOUTH);
-
-
 	}
 
 	class SourisListener implements MouseListener{
@@ -209,9 +188,7 @@ public class FenetreMenuPlusMoins extends JFrame{
 			if(arg0.getSource()==mode3) {
 				mode3.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.84f));
 			}
-			if(arg0.getSource()==dev) {
-				dev.setBackground(Color.getHSBColor(0.141f, 0.84f, 0.97f));
-			}
+		
 		}
 
 		public void mouseExited(MouseEvent arg0) {
@@ -222,13 +199,10 @@ public class FenetreMenuPlusMoins extends JFrame{
 			mode1.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
 			mode2.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
 			mode3.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
-			dev.setBackground(Color.getHSBColor(0.141f, 0.74f, 0.87f));
 		}
-
 		public void mousePressed(MouseEvent arg0) {
 
 		}
-
 		public void mouseReleased(MouseEvent arg0) {
 			retour.setBackground(Color.getHSBColor(0.534f, 0.45f, 0.44f));
 			retour.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
@@ -237,7 +211,6 @@ public class FenetreMenuPlusMoins extends JFrame{
 			mode1.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
 			mode2.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
 			mode3.setBackground(Color.getHSBColor(0.534f, 0.25f, 0.74f));
-			dev.setBackground(Color.getHSBColor(0.141f, 0.74f, 0.87f));
 		}
 	}
 }

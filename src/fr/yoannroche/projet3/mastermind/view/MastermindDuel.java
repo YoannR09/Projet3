@@ -68,6 +68,7 @@ public class MastermindDuel extends JFrame{
 		this.setResizable(false);
 		this.setTitle(" Duel ");
 		this.bean = bean;
+		
 		JPanel	blocTentative[]				= new JPanel[bean.getTentatives()]; // Affiche vos tentatives.
 		JLabel	blocIndices[]				= new JLabel[bean.getTentatives()]; 
 		JLabel	propositionIcon[]			= new JLabel[bean.getCases()]; // Cadre qui affiche les entrées clavier.
@@ -79,8 +80,9 @@ public class MastermindDuel extends JFrame{
 		initRegle();
 		initBlocJoueur(blocTentative,blocIndices,propositionIcon,propositionIconOrdi,blocTentativeOrdi,blocIndicesOrdi,model);
 		initBlocOrdi(blocTentative,blocIndices,propositionIcon,propositionIconOrdi,blocTentativeOrdi,blocIndicesOrdi,model);
-		initBlocIndices(blocIndicesOrdi,model);
 		contentPane.add(clavierBouton);
+		initBlocIndices(blocIndicesOrdi,model);
+		
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 	}
 

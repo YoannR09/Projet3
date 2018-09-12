@@ -31,7 +31,7 @@ public class Mastermind extends JFrame{
 
 	private BeanReglage					bean				;
 	private InterfaceModel				model				= new InterfaceModel();
-	
+	private JLabel						regle				= new JLabel();
 	private JPanel						contentPane			= new JPanel();
 	private JButton						p					= new JButton( " ♢ ");
 	private JButton						o					= new JButton(" ♦ ");
@@ -331,8 +331,6 @@ public class Mastermind extends JFrame{
 		JPanel blocRegle = new JPanel();
 		blocRegle.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		blocRegle.setPreferredSize(new Dimension(500,40));
-		JLabel regle = new JLabel();
-		regle.setText("Vous avez "+bean.getTentatives()+" tentatives pour trouver le code secret à "+bean.getCases()+" couleurs.");
 		regle.setFont(impact);
 		contentPane.add(retour);
 		contentPane.add(espaceRetour);
@@ -356,12 +354,14 @@ public class Mastermind extends JFrame{
 	public void modeChallenger() {
 		this.setTitle("Challenger");
 		textProp.setText("Votre proposition : ");
+		regle.setText("Vous avez "+bean.getTentatives()+" tentatives pour trouver le code secret à "+bean.getCases()+" couleurs.");
 		model.blocJeuSize(blocJeu,contentPane);
 	}
 	public void modeDefenseur(MastermindMode mode, JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices, DefenseurMastermindModel modelDef) {
 		this.setTitle("Defenseur");
 		initBlocIndices(mode,propositionIcon,blocTentative,blocIndices,modelDef);
 		textProp.setText("Votre code secret : ");
+		regle.setText(" L'ordinateur à "+bean.getTentatives()+" tentatives pour trouver le code secret à "+bean.getCases()+" couleurs.");
 		model.blocJeuSize(blocJeu,contentPane);
 	}
 
