@@ -3,6 +3,11 @@ package fr.yoannroche.projet3;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 
+/**
+ * Class qui permet de récupèrer via des getters et de transmettre dans l'application via des setters
+ * @author Pierrosan
+ *
+ */
 public class BeanReglage implements Serializable{
 
 	private 	int 			cases;

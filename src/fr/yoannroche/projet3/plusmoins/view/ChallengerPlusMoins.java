@@ -20,6 +20,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import fr.yoannroche.projet3.BeanReglage;
+import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
 
 
@@ -60,9 +61,12 @@ public class ChallengerPlusMoins extends JFrame{
 		this.setContentPane(contentPane);
 		this.setResizable(false);
 		this.bean = bean;
+		
+		Generateur			gen					= new Generateur(bean);
+		int 				nombreString		= gen.getNombre();
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 
-		ChallengerPlusMoinsModel chal = new ChallengerPlusMoinsModel(bean);
+		ChallengerPlusMoinsModel chal = new ChallengerPlusMoinsModel(bean,nombreString);
 		initRegle();
 		initTentative();
 		initInfos();
@@ -306,7 +310,7 @@ public class ChallengerPlusMoins extends JFrame{
 
 	class SourisListener2 implements MouseListener {
 		
-		ChallengerPlusMoinsModel chal = new ChallengerPlusMoinsModel(bean);
+		ChallengerPlusMoinsModel chal = new ChallengerPlusMoinsModel(bean,0);
 
 		public void mouseClicked(MouseEvent arg0) {
 			char entrer = ((JButton)arg0.getSource()).getText().charAt(0);

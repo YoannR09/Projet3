@@ -1,7 +1,6 @@
 package fr.yoannroche.projet3.mastermind.model;
 
 import java.awt.Color;
-import java.util.ResourceBundle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,7 +9,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import fr.yoannroche.projet3.BeanReglage;
-import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.Resultat;
 import fr.yoannroche.projet3.mastermind.control.Control;
 
@@ -18,7 +16,7 @@ public class DuelMastermindModel {
 
 	private BeanReglage		bean					;
 	private int				jeu						= 4;
-	private InterfaceModel	model					= new InterfaceModel();
+	private InterfaceModel	model					;
 	private Control			control					;
 	private int[]			couleurs				;
 	private int				nombreTentative 		= 0;
@@ -38,12 +36,13 @@ public class DuelMastermindModel {
 
 
 	public DuelMastermindModel(BeanReglage bean, JLabel propositionTab[],int propositionOrdi[],Control control,int[]
-			couleurs) {
+			couleurs,InterfaceModel modelInterface) {
 		this.bean = bean;
 		this.couleurs = couleurs;
 		this.control = control;
 		this.propositionTab = propositionTab;
 		this.propositionOrdi = propositionOrdi;
+		this.model = modelInterface;
 	}
 
 	/**

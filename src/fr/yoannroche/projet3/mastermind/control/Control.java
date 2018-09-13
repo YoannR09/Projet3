@@ -1,7 +1,5 @@
 package fr.yoannroche.projet3.mastermind.control;
 
-import java.util.ResourceBundle;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;

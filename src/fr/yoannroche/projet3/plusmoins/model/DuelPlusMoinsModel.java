@@ -2,7 +2,6 @@ package fr.yoannroche.projet3.plusmoins.model;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -13,7 +12,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import fr.yoannroche.projet3.BeanReglage;
-import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.Resultat;
 
 /**
@@ -24,8 +22,7 @@ import fr.yoannroche.projet3.Resultat;
 public class DuelPlusMoinsModel {
 
 	private BeanReglage			bean				;
-	private Generateur			code				= new Generateur();
-	private String				nombreString		= Integer.toString(code.getNombre());
+	private String				nombreString		;
 	private Font				arial2				= new Font ("arial", 10,10);
 	private Font				impact				= new Font ("impact", 17,17);
 	private String				resultProp			= null;
@@ -34,14 +31,19 @@ public class DuelPlusMoinsModel {
 	private int					nbreTour			= 0;
 	private boolean				gagner				= false;
 	private int					info				= 0;
-	private char				tabProp[]			= new char [Integer.parseInt(ResourceBundle.getBundle("Config").getString("cases"))];
-	private char				tabMin []			= new char [Integer.parseInt(ResourceBundle.getBundle("Config").getString("cases"))];
-	private char				tabMax[]			= new char [Integer.parseInt(ResourceBundle.getBundle("Config").getString("cases"))];
+	private char				tabProp[]			;
+	private char				tabMin[]			;
+	private char				tabMax[] 			;
 	private int					jeu					= 3;
 
-	
-	public DuelPlusMoinsModel(BeanReglage bean) {
+
+	public DuelPlusMoinsModel(BeanReglage bean,int nombreString2, char[] tabProp, char[] tabMin, char[] tabMax) {
+		
 		this.bean = bean;
+		this.tabProp = tabProp;
+		this.tabMin = tabMin;
+		this.tabMax = tabMax;
+		this.nombreString = Integer.toString(nombreString2);
 	}
 	/**
 	 * Compare la tentative du joueur au code secret
@@ -104,8 +106,8 @@ public class DuelPlusMoinsModel {
 			tentativeJoueur(tentative, infosTentative,proposition);
 			if(tentative.getText().equals(nombreString)) {
 				if(gagner==false) {
-				new Resultat(null, "Gagner",nombreString,contentPane,jeu,bean).gagner();
-				gagner=true;
+					new Resultat(null, "Gagner",nombreString,contentPane,jeu,bean).gagner();
+					gagner=true;
 				}
 			}
 			cadreJ.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
@@ -400,9 +402,5 @@ public class DuelPlusMoinsModel {
 		if(nombreClick==bean.getCases()) {
 			blocProposition.setVisible(false);
 		}
-
-
 	}
 }	
-
-

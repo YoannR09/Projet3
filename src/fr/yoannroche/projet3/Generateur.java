@@ -1,7 +1,5 @@
 package fr.yoannroche.projet3;
 
-import java.util.ResourceBundle;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

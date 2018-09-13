@@ -18,6 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import fr.yoannroche.projet3.BeanReglage;
+import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.plusmoins.model.DuelPlusMoinsModel;
 
 /**
@@ -70,7 +71,13 @@ public class DuelPlusMoins extends JFrame{
 		this.bean = bean;
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		
-		DuelPlusMoinsModel duel = new DuelPlusMoinsModel(bean);
+		Generateur code = new Generateur(bean);
+		int nombreString = code.getNombre();
+		char tabProp[]	 = new char [bean.getCases()];
+		char tabMin[]	 = new char [bean.getCases()];
+		char tabMax[] 	 = new char [bean.getCases()];
+		DuelPlusMoinsModel duel = new DuelPlusMoinsModel(bean,nombreString,tabProp,tabMin,tabMax);
+		
 
 		initRegle();
 		initCadreJoueur();
@@ -433,7 +440,7 @@ public class DuelPlusMoins extends JFrame{
 
 	class SourisListener2 implements MouseListener {
 		
-		DuelPlusMoinsModel duel = new DuelPlusMoinsModel(bean);
+		DuelPlusMoinsModel duel = new DuelPlusMoinsModel(bean,0,null,null,null);
 
 		public void mouseClicked(MouseEvent arg0) {
 			if(nombreClick==0) {

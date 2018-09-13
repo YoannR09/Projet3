@@ -33,15 +33,12 @@ import fr.yoannroche.projet3.mastermind.model.InterfaceModel;
 public class Mastermind extends JFrame{
 
 	private BeanReglage					bean				;
-	private InterfaceModel				model				= new InterfaceModel();
 	private JLabel						regle				= new JLabel();
 	private JPanel						contentPane			= new JPanel();
 	private JButton						p					= new JButton( " ♢ ");
 	private JButton						o					= new JButton(" ♦ ");
 	private JButton						fin					= new JButton(" Ok ");
 	private JButton						refresh				= new JButton(" ⟲ ");
-	private int							placer,changer,nombreClick,placerClick,changerClick									
-															= 0;
 	private JPanel						blocIndice			= new JPanel();
     private JPanel						espace2				= new JPanel();
     private JPanel						votreProp			= new JPanel();
@@ -61,6 +58,8 @@ public class Mastermind extends JFrame{
 			new JScrollPane(blocJeu,
 					JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 					JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+	private int							placer,changer,nombreClick,placerClick,changerClick									
+	= 0;
 
 	/**
 	 * Gère l'interface du jeu Mastermind.
@@ -73,27 +72,28 @@ public class Mastermind extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.bean = bean;
 		
-		Generateur			gen					= new Generateur(bean);
-		int couleurs[] = gen.getCouleurs();
-		Control				control				= new Control(bean);
-		JLabel				propositionTab[]	= new JLabel[bean.getCases()];
-		int					propositionOrdi[]	= new int [bean.getCases()];
-		DefenseurMastermindModel	modelDef			= new DefenseurMastermindModel(bean,propositionTab,propositionOrdi,control);
-		ChallengerMastermindModel	modelChal			= new ChallengerMastermindModel(bean,control,couleurs);
-		JLabel	propositionIcon[]	= new JLabel[bean.getCases()]; // Cadre qui affiche les entrées clavier.
-		JPanel	blocTentative[]		= new JPanel[bean.getTentatives()]; // Affiche vos tentatives.
-		JLabel	blocIndices[]		= new JLabel[bean.getTentatives()]; // Affiche les indices
+		Generateur					gen					= new Generateur(bean);
+		int 						couleurs[]			= gen.getCouleurs();
+		Control						control				= new Control(bean);
+		JLabel						propositionTab[]	= new JLabel[bean.getCases()];
+		int							propositionOrdi[]	= new int [bean.getCases()];
+		InterfaceModel				model				= new InterfaceModel(bean);
+		DefenseurMastermindModel	modelDef			= new DefenseurMastermindModel(bean,propositionTab,propositionOrdi,control,model);
+		ChallengerMastermindModel	modelChal			= new ChallengerMastermindModel(bean,control,couleurs,model);
+		JLabel						propositionIcon[]	= new JLabel[bean.getCases()]; // Cadre qui affiche les entrées clavier.
+		JPanel						blocTentative[]		= new JPanel[bean.getTentatives()]; // Affiche vos tentatives.
+		JLabel						blocIndices[]		= new JLabel[bean.getTentatives()]; // Affiche les indices
 		
 		initRegle(mode);
-		initHisto(mode,propositionIcon,blocTentative,blocIndices);
-		initBlocTenta(mode,propositionIcon,blocTentative,blocIndices,modelChal);
+		initHisto(mode,propositionIcon,blocTentative,blocIndices,model);
+		initBlocTenta(mode,propositionIcon,blocTentative,blocIndices,modelChal,model);
 		initCadreDev(mode,propositionIcon,blocTentative,blocIndices,modelChal);
 
 		if(mode.equals(MastermindMode.Challenger)) {
-			modeChallenger();
+			modeChallenger(model);
 		}
 		else if(mode.equals(MastermindMode.Defenseur)) {
-		    modeDefenseur(mode,propositionIcon,blocTentative,blocIndices,modelDef);
+		    modeDefenseur(mode,propositionIcon,blocTentative,blocIndices,modelDef,model);
 		}
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
@@ -138,10 +138,10 @@ public class Mastermind extends JFrame{
 	 * @param blocTentative 
 	 * @param propositionIcon 
 	 * @param modelChal 
+	 * @param model 
 	 */
-	private void initBlocTenta(MastermindMode mode, JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices, ChallengerMastermindModel modelChal) {
+	private void initBlocTenta(MastermindMode mode, JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices, ChallengerMastermindModel modelChal, InterfaceModel model) {
 
-		InterfaceModel model = new InterfaceModel();
 		scrollPane.setPreferredSize(new Dimension(350,205));
 		scrollPane.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		blocJeu.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
@@ -250,8 +250,9 @@ public class Mastermind extends JFrame{
 	 * @param blocIndices 
 	 * @param blocTentative 
 	 * @param propositionIcon 
+	 * @param model 
 	 */
-	private void initHisto(MastermindMode mode, JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices) {
+	private void initHisto(MastermindMode mode, JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices, InterfaceModel model) {
 
 		votreProp.add(textProp);
 		votreProp.setBackground(Color.getHSBColor(0.134f, 0.15f, 0.94f));
@@ -358,13 +359,13 @@ public class Mastermind extends JFrame{
 		contentPane.add(espace);
 	}
 	
-	public void modeChallenger() {
+	public void modeChallenger(InterfaceModel model) {
 		this.setTitle("Challenger");
 		textProp.setText("Votre proposition : ");
 		regle.setText("Vous avez "+bean.getTentatives()+" tentatives pour trouver le code secret à "+bean.getCases()+" couleurs.");
 		model.blocJeuSize(blocJeu,contentPane);
 	}
-	public void modeDefenseur(MastermindMode mode, JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices, DefenseurMastermindModel modelDef) {
+	public void modeDefenseur(MastermindMode mode, JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices, DefenseurMastermindModel modelDef, InterfaceModel model) {
 		this.setTitle("Defenseur");
 		initBlocIndices(mode,propositionIcon,blocTentative,blocIndices,modelDef);
 		textProp.setText("Votre code secret : ");

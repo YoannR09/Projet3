@@ -1,14 +1,11 @@
 package fr.yoannroche.projet3.mastermind.model;
 
-import java.util.ResourceBundle;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import fr.yoannroche.projet3.BeanReglage;
-import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.Resultat;
 import fr.yoannroche.projet3.mastermind.control.Control;
 
@@ -26,7 +23,7 @@ public class DefenseurMastermindModel {
 	private int					changer				= 0;
 	private int					couleurSwitch		= 0;
 	private ImageIcon			tentative1			= new ImageIcon("images/couleur/0.png");
-	private InterfaceModel		model				= new InterfaceModel();
+	private InterfaceModel		model				;
 	private boolean				switchCouleur		= false;
 	private boolean				partiFini			= false;
 	private JLabel				propositionTab[]	;
@@ -34,11 +31,12 @@ public class DefenseurMastermindModel {
 
 
 
-	public DefenseurMastermindModel(BeanReglage bean, JLabel propositionTab[], int propositionOrdi[],Control control) {
+	public DefenseurMastermindModel(BeanReglage bean, JLabel propositionTab[], int propositionOrdi[],Control control,InterfaceModel modelInterface) {
 		this.bean = bean;
 		this.control = control;
 		this.propositionTab = propositionTab;
 		this.propositionOrdi = propositionOrdi;
+		this.model = modelInterface;
 	}
 
 	public void dev(JPanel content){

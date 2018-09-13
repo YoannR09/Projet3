@@ -1,7 +1,6 @@
 package fr.yoannroche.projet3.plusmoins.model;
 
 import java.awt.Font;
-import java.util.ResourceBundle;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -9,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import fr.yoannroche.projet3.BeanReglage;
-import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.Resultat;
 
 /**
@@ -20,15 +18,15 @@ import fr.yoannroche.projet3.Resultat;
 public class ChallengerPlusMoinsModel {
 
 	private BeanReglage				bean			;
-	private Generateur				code			= new Generateur();
-	private String					nombreString	= Integer.toString(code.getNombre());
-	private String					tentative		= null;
-	private String					bloc			= null;
+	private String					nombreString	;
 	private Font					impact			= new Font ("impact", 12,12);
 	private int						jeu				= 1;
 
-	public ChallengerPlusMoinsModel(BeanReglage bean) {
+	public ChallengerPlusMoinsModel(BeanReglage bean,int nombreString2) {
+		
 		this.bean = bean;
+		this.nombreString = Integer.toString(nombreString2);
+		
 	}
 
 	/**
@@ -77,10 +75,7 @@ public class ChallengerPlusMoinsModel {
 	 */
 	public void chechTentative(int nbreTentative,JPanel contentPane) {
 
-		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		tentative = reglage.getString("tentatives");
-		int tentatives = Integer.parseInt(tentative);
-		if(nbreTentative==tentatives) {
+		if(nbreTentative==bean.getTentatives()) {
 			new Resultat(null, "Perdu",nombreString,contentPane,jeu,bean).perdu();
 		}
 	}
@@ -91,11 +86,8 @@ public class ChallengerPlusMoinsModel {
 	 * @param nombreClick
 	 */
 	public void RangeWord(JPanel blocProposition, int nombreClick) {
-		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		bloc = reglage.getString("cases");
-		int cases = Integer.parseInt(bloc); 
 
-		if(nombreClick==cases) {
+		if(nombreClick==bean.getCases()) {
 			blocProposition.setVisible(false);
 		}
 	}

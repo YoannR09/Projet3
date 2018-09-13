@@ -1,15 +1,19 @@
 package fr.yoannroche.projet3.mastermind.model;
 
 import java.awt.Dimension;
-import java.util.ResourceBundle;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import fr.yoannroche.projet3.BeanReglage;
+
 public class InterfaceModel {
 	
-	private ResourceBundle		reglage			= ResourceBundle.getBundle("Config");
-	private int					tentative		= Integer.parseInt(reglage.getString("tentatives"));
+	private BeanReglage			bean			;
+	
+	public InterfaceModel(BeanReglage bean) {
+		this.bean = bean;
+	}
 	
 	public JLabel createJLabel(){
 		JLabel jl = new JLabel();
@@ -21,19 +25,19 @@ public class InterfaceModel {
 	}
 
 	public void blocJeuSize(JPanel blocJeu, JPanel contentPane) {
-		if(tentative==4) {
+		if(bean.getTentatives()==4) {
 			blocJeu.setPreferredSize(new Dimension(350,190));
 		}
-		if(tentative==5) {
+		if(bean.getTentatives()==5) {
 			blocJeu.setPreferredSize(new Dimension(350,190));
 		}
-		if(tentative==6) {
+		if(bean.getTentatives()==6) {
 			blocJeu.setPreferredSize(new Dimension(350,235));
 		}
-		if(tentative==7) {
+		if(bean.getTentatives()==7) {
 			blocJeu.setPreferredSize(new Dimension(350,275));
 		}
-		if(tentative==8) {
+		if(bean.getTentatives()==8) {
 			blocJeu.setPreferredSize(new Dimension(350,315));
 		}
 
