@@ -19,10 +19,8 @@ public class DuelMastermindModel {
 	private BeanReglage		bean					;
 	private int				jeu						= 4;
 	private InterfaceModel	model					= new InterfaceModel();
-	private Control			control					= new Control();
-	private Generateur	gen	= new Generateur();
-	private int[] couleurs	= gen.getCouleurs();
-	
+	private Control			control					;
+	private int[]			couleurs				;
 	private int				nombreTentative 		= 0;
 	private int				couleurSwitch			= 0;
 	private int				nombreTour				= 0;
@@ -35,12 +33,17 @@ public class DuelMastermindModel {
 	private boolean			partiFini				= false;
 	private boolean			indiceOk				= false;
 	private ImageIcon		tentative1				= new ImageIcon("images/couleur/0.png");
-	private JLabel			propositionTab[]		= new JLabel[Integer.parseInt(ResourceBundle.getBundle("Config").getString("cases"))];
-	private int				propositionOrdi[]		= new int [Integer.parseInt(ResourceBundle.getBundle("Config").getString("cases"))];
+	private JLabel			propositionTab[]	    ;
+	private int				propositionOrdi[]	    ;
 
 
-	public DuelMastermindModel(BeanReglage bean) {
+	public DuelMastermindModel(BeanReglage bean, JLabel propositionTab[],int propositionOrdi[],Control control,int[]
+			couleurs) {
 		this.bean = bean;
+		this.couleurs = couleurs;
+		this.control = control;
+		this.propositionTab = propositionTab;
+		this.propositionOrdi = propositionOrdi;
 	}
 
 	/**

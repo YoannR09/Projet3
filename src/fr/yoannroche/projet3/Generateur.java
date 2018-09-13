@@ -7,32 +7,33 @@ import org.apache.logging.log4j.Logger;
 
 public class Generateur {
 
+	private BeanReglage				bean			;
 	private int						nombre			= 0;
 	private static final Logger		logger			= LogManager.getLogger();
-	private ResourceBundle			reglage			= ResourceBundle.getBundle("Config");
-	private int						cases			= Integer.parseInt(reglage.getString("cases"));
-	private int						couleur			= Integer.parseInt(reglage.getString("couleur"));
-	private int[]					couleurs		= new int[cases];
+	private int[] couleurs	;
 
-	public Generateur() {
+	public Generateur(BeanReglage bean) {
 
-		initNombre(cases);
-		initCouleur(cases);
+		this.bean = bean;
+		 int[] couleurs = new int[bean.getCases()];
+		 this.couleurs = couleurs;
+		initNombre(couleurs);
+		initCouleur(couleurs);
 
 	}
 
 	/**
 	 * Génère une couleur et la place retourne couleurs.
-	 * @param cases
+	 * @param couleurs 
 	 * @return
 	 */
-	public int[] initCouleur(int cases) {
+	public int[] initCouleur(int[] couleurs) {
 
-		for(int i=0;i<cases;i++) {
-			couleurs[i] = 0 +(int)(Math.random()*(couleur - 0));
+		for(int i=0;i<bean.getCases();i++) {
+			couleurs[i] = 0 +(int)(Math.random()*(bean.getCouleurs() - 0));
 		}	
 
-		logger.trace("Generateur crée une couleur en fonction du nombre de cases selectionnéS :" + cases);
+		logger.trace("Generateur crée une couleur en fonction du nombre de cases selectionnéS :" + bean.getCases());
 		return couleurs;	
 	}
 
@@ -46,37 +47,37 @@ public class Generateur {
 
 	/**
 	 * Genere un nombre cases en fontion des réglages définit dans le fichier Config.properties.
-	 * @param cases
+	 * @param couleurs 
 	 * @return
 	 */
 
 
-	public int initNombre(int cases){
+	public int initNombre(int[] couleurs){
 
 		// for(int i = 0;i<cases;i++) {
 		//	 nombre[i]= 0+(int)(Math.random()*(9-0));     Changer un tableau de int en un seul int.
 		// }
-		if(cases==4) {
+		if(bean.getCases()==4) {
 			int min = 1111;
 			nombre = min +(int)(Math.random()*(10000 - min));
 		}
-		if(cases==5) {
+		if(bean.getCases()==5) {
 			int min = 11111;
 			nombre = min +(int)(Math.random()*(100000 - min));
 		}
-		if(cases==6) {
+		if(bean.getCases()==6) {
 			int min = 111111;
 			nombre = min +(int)(Math.random()*(1000000 - min));
 		}
-		if(cases==7) {
+		if(bean.getCases()==7) {
 			int min = 1111111;
 			nombre = min +(int)(Math.random()*(10000000 - min));
 		}
-		if(cases==8) {
+		if(bean.getCases()==8) {
 			int min = 11111111;
 			nombre = min +(int)(Math.random()*(100000000 - min));
 		}
-		logger.trace("Generateur crée un nombre en fonction du nombre de cases selectionnéS :" + cases);
+		logger.trace("Generateur crée un nombre en fonction du nombre de cases selectionnéS :" + bean.getCases());
 		return nombre;
 
 	}

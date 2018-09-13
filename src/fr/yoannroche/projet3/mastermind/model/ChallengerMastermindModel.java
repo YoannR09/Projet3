@@ -19,16 +19,17 @@ public class ChallengerMastermindModel {
 	private BeanReglage		bean			;
 	private int				jeu				= 4;
 	private InterfaceModel	model			= new InterfaceModel();
-	private Control			control			= new Control();
 	private int				nombreTentative = 0;
 	private int				couleurSwitch	= 0;
-	private Generateur		gen				= new Generateur();
-	private int[]			couleurs		= gen.getCouleurs();
+	private int[]			couleurs		;
 	private boolean			partiFini		= false;
+	private Control			control			;
 
-	public ChallengerMastermindModel(BeanReglage bean) {
+	public ChallengerMastermindModel(BeanReglage bean,Control control,int[] couleurs) {
 		
 		this.bean = bean;
+		this.control = control;
+		this.couleurs = couleurs;
 	}
 
 	/**

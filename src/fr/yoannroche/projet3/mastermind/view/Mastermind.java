@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -18,7 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import fr.yoannroche.projet3.BeanReglage;
+import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.mastermind.MastermindMode;
+import fr.yoannroche.projet3.mastermind.control.Control;
 import fr.yoannroche.projet3.mastermind.model.ChallengerMastermindModel;
 import fr.yoannroche.projet3.mastermind.model.DefenseurMastermindModel;
 import fr.yoannroche.projet3.mastermind.model.InterfaceModel;
@@ -66,12 +69,17 @@ public class Mastermind extends JFrame{
 	 */
 	public Mastermind(MastermindMode mode, BeanReglage bean) {
 
-		this.setSize(400, 500);
+		this.setSize(400, 520);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.bean = bean;
 		
-		DefenseurMastermindModel	modelDef			= new DefenseurMastermindModel(bean);
-		ChallengerMastermindModel	modelChal			= new ChallengerMastermindModel(bean);
+		Generateur			gen					= new Generateur(bean);
+		int couleurs[] = gen.getCouleurs();
+		Control				control				= new Control(bean);
+		JLabel				propositionTab[]	= new JLabel[bean.getCases()];
+		int					propositionOrdi[]	= new int [bean.getCases()];
+		DefenseurMastermindModel	modelDef			= new DefenseurMastermindModel(bean,propositionTab,propositionOrdi,control);
+		ChallengerMastermindModel	modelChal			= new ChallengerMastermindModel(bean,control,couleurs);
 		JLabel	propositionIcon[]	= new JLabel[bean.getCases()]; // Cadre qui affiche les entrées clavier.
 		JPanel	blocTentative[]		= new JPanel[bean.getTentatives()]; // Affiche vos tentatives.
 		JLabel	blocIndices[]		= new JLabel[bean.getTentatives()]; // Affiche les indices
@@ -119,9 +127,6 @@ public class Mastermind extends JFrame{
 			else if(mode.equals(MastermindMode.Defenseur)) {
 				text.setText("Code secret : ");
 			}
-			else if(mode.equals(MastermindMode.Duel)) {
-				
-			}
 		}
 	}
 
@@ -150,9 +155,6 @@ public class Mastermind extends JFrame{
 			}
 			else if(mode.equals(MastermindMode.Defenseur)) {
 				tenta.setText(" Tentative de l'IA : "+(i+1));
-			}
-			else if(mode.equals(MastermindMode.Duel)) {
-				tenta.setText(" Votre tentative : "+(i+1));
 			}
 			tenta.setForeground(Color.WHITE);
 			tenta.setFont(arial);
@@ -330,11 +332,16 @@ public class Mastermind extends JFrame{
 		});
 		JPanel blocRegle = new JPanel();
 		blocRegle.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
-		blocRegle.setPreferredSize(new Dimension(500,40));
+		blocRegle.setPreferredSize(new Dimension(500,50));
 		regle.setFont(impact);
+		JLabel infos = new JLabel();
+		infos.setText("♦ : nombre de couleur bien placée.    ♢ : nombre de couleur mal placée.");
+		Font comic = new Font("New York",10,10);
+		infos.setFont(comic);
 		contentPane.add(retour);
 		contentPane.add(espaceRetour);
 		blocRegle.add(regle);
+		blocRegle.add(infos);
 		contentPane.add(blocRegle);
 		JPanel espace = new JPanel ();
 		espace.setPreferredSize(new Dimension(320,25));

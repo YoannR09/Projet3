@@ -17,9 +17,7 @@ public class DefenseurMastermindModel {
 
 	private BeanReglage			bean				;
 	private int 				jeu					= 5;
-	private Generateur			gen					= new Generateur();
-	private Control				control				= new Control();
-	private int[]				couleurs			= gen.getCouleurs();
+	private Control				control				;
 	private boolean				debutDecal			= true;
 	private int					couleurOk			= 0;
 	private int					decal				= 0;
@@ -31,18 +29,20 @@ public class DefenseurMastermindModel {
 	private InterfaceModel		model				= new InterfaceModel();
 	private boolean				switchCouleur		= false;
 	private boolean				partiFini			= false;
-	private JLabel				propositionTab[]	= new JLabel[Integer.parseInt(ResourceBundle.getBundle("Config").getString("cases"))];
-	private int					propositionOrdi[]	= new int [Integer.parseInt(ResourceBundle.getBundle("Config").getString("cases"))];
+	private JLabel				propositionTab[]	;
+	private int					propositionOrdi[]	;
 
 
 
-	public DefenseurMastermindModel(BeanReglage bean) {
-		this.bean = bean ;
+	public DefenseurMastermindModel(BeanReglage bean, JLabel propositionTab[], int propositionOrdi[],Control control) {
+		this.bean = bean;
+		this.control = control;
+		this.propositionTab = propositionTab;
+		this.propositionOrdi = propositionOrdi;
 	}
 
 	public void dev(JPanel content){
 		for(int i=0;i<bean.getCases();i++) {
-			control.chiffreCouleur(couleurs[i], content, null);
 		}
 	}
 

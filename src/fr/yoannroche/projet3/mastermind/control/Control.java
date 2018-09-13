@@ -6,6 +6,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import fr.yoannroche.projet3.BeanReglage;
+
 /**
  * Class qui fère le changement des couleurs en chiffre et inversement des chiffres en couleurs.
  * @author El-ra
@@ -13,11 +15,14 @@ import javax.swing.JPanel;
  */
 public class Control {
 
-	private ResourceBundle		reglage			= ResourceBundle.getBundle("Config");
-	private int					cases			= Integer.parseInt(reglage.getString("cases"));
+	private BeanReglage			bean			;
 	private int					proposition		= 0;
 
 
+	
+	public Control(BeanReglage bean) {
+		this.bean = bean;
+	}
 /**
  * Changement des chiffres en couleurs.
  * @param couleurs
@@ -38,11 +43,10 @@ public class Control {
  */
 	public void couleurChiffre(String couleur,JPanel content) {
 
-		for(int i = 0;i<cases;i++) {
+		for(int i = 0;i<bean.getCouleurs();i++) {
 			if(couleur.equals("images/couleur/"+i+".png")) {
 				setProposition(i);
 			}
-
 		}
 	}
 

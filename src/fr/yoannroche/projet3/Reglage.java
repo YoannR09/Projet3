@@ -96,7 +96,6 @@ public class Reglage extends JFrame {
 		couleur.setForeground(Color.white);
 		couleur.setFont(arial);
 		couleur.setText("  Nombres de couleurs utilisables ");
-
 		this.boutonCouleur = new JRadioButton[7];
 		int i = 0;
 		for(int c : coul){
@@ -326,12 +325,18 @@ public class Reglage extends JFrame {
 					prop.setProperty("cases",Integer.toString(cases));
 				}
 			}
-
 			for(int i=0;i<tenta.length;i++) {
 				if(boutonTentative[i].isSelected()==true) {
 					int tentative=(i+4);
 					bean.setTentatives(tentative);
 					prop.setProperty("tentatives",Integer.toString(tentative));
+				}
+			}
+			for(int i=0;i<coul.length;i++) {
+				if(boutonCouleur[i].isSelected()==true) {
+					int couleur=(i+4);
+					bean.setCouleurs(couleur);
+					prop.setProperty("couleur",Integer.toString(couleur));
 				}
 			}
 
