@@ -9,6 +9,11 @@ import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Resultat;
 import fr.yoannroche.projet3.mastermind.control.Control;
 
+/**
+ * Class qui gère l'algorithme de l'IA et le fonctionnement du mode Défenseur.
+ * @author Pierrosan
+ *
+ */
 public class DefenseurMastermindModel {
 
 
@@ -58,7 +63,7 @@ public class DefenseurMastermindModel {
 	public void finClick(JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices,int changerClick, int placerClick,JPanel contentPane, JLabel indice,BeanReglage bean) {
 
 
-		boolean[]			verif				= new boolean [bean.getCases()]; 
+		boolean[] verif = new boolean [bean.getCases()]; 
 
 		if(nombreTour==0) {		
 			blocTentative[nombreTour].removeAll();

@@ -34,13 +34,13 @@ public class DefenseurPlusMoinsModel {
 	private String						resultProp			= null;
 	private int							nbreTour			= 0;
 	private int							gagner				= 0;
-	private char						tabProp[]			= new char [Integer.parseInt(ResourceBundle.getBundle("Config").getString("cases"))];
-	private char						tabMin[]			= new char [Integer.parseInt(ResourceBundle.getBundle("Config").getString("cases"))];
-	private char						tabMax[]			= new char [Integer.parseInt(ResourceBundle.getBundle("Config").getString("cases"))];
+	private char						tabProp[]			;
+	private char						tabMin[]			;
+	private char						tabMax[]			;
 	private Icon[]						tableauImg			= new Icon[7];
 	private int							jeu					= 2;
 
-	public DefenseurPlusMoinsModel(BeanReglage bean) {
+	public DefenseurPlusMoinsModel(BeanReglage bean, char[] tabProp, char[] tabMin, char[] tabMax) {
 		this.bean = bean;
 	}
 
@@ -53,24 +53,23 @@ public class DefenseurPlusMoinsModel {
 	 * @param nombreCoup
 	 * @param dialog
 	 * @param contentPane
-	 * @param nbreTour2 
 	 * @param indiceDev 
 	 */
-	public void tentativeOrdi(JLabel tentativeOrdi, JLabel codeSecret2, int nombreCoup, JTextArea dialog,JPanel contentPane,JLabel image, int nbreTour2, JLabel indiceDev) {
+	public void tentativeOrdi(JLabel tentativeOrdi, JLabel codeSecret2, int nombreCoup, JTextArea dialog,JPanel contentPane,JLabel image, JLabel indiceDev) {
 
 		String codeCache = codeSecret2.getText();
 		char tabCode[] = codeCache.toCharArray();
 
-		if(nbreTour2==0) {
+		if(nbreTour==0) {
 			tour0(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev,contentPane);
 		}
-		else if(nbreTour2==1) {
+		else if(nbreTour==1) {
 			tour1(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev,contentPane);
 		}
-		else if(nbreTour2==2){
+		else if(nbreTour==2){
 			tour2(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev,contentPane);
 		}
-		else if(nbreTour2>=3){
+		else if(nbreTour>=3){
 			tour3etPlus(dialog,tabProp,tabCode,tabMax,tabMin,codeCache,indiceDev,contentPane);
 		}
 	}
@@ -106,7 +105,7 @@ public class DefenseurPlusMoinsModel {
 			proposition.setText("");
 			ordi.setVisible(true);	
 			image.setIcon(ordi1);
-			tentativeOrdi(tentativeOrdi,codeSecret,nombreCoup,dialog,contentPane,image,nbreTour,indiceDev);
+			tentativeOrdi(tentativeOrdi,codeSecret,nombreCoup,dialog,contentPane,image,indiceDev);
 			fin.setEnabled(true);
 			fin.setBackground(Color.getHSBColor(0.154f, 0.85f, 0.94f));
 		}
@@ -353,7 +352,7 @@ public class DefenseurPlusMoinsModel {
 			cadreOrdi.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 			indiceDev.setText("");
 			nbreTour++;
-			tentativeOrdi(tentativeOrdi,codeSecret,nombreCoup,dialog, contentPane, image,nbreTour,indiceDev);
+			tentativeOrdi(tentativeOrdi,codeSecret,nombreCoup,dialog, contentPane, image,indiceDev);
 			int i = ((int)(Math.random()*(7 - 0))+0);
 			tableauImg[i] = new ImageIcon("images/"+i+".png");
 			image.setIcon(tableauImg[i]);

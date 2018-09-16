@@ -84,8 +84,6 @@ public class Lancement extends JFrame{
 			}
 		});
 
-
-
 		plusMoins.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		plusMoins.setBorder(BorderFactory.createLineBorder(Color.black));
 		plusMoins.setPreferredSize(dim3);
@@ -101,7 +99,7 @@ public class Lancement extends JFrame{
 		JPanel espaceInfosJeu = new JPanel();
 		espaceInfosJeu.setPreferredSize(new Dimension(10,30));
 		espaceInfosJeu.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
-		infosJeu.setText(" Informations des jeux");
+		infosJeu.setText(" Règles ");
 		infosJeu.setForeground(Color.WHITE);
 		infosJeu.setFont(impact);
 		menuBar.setPreferredSize(new Dimension(545,51));

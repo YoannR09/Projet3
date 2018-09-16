@@ -4,7 +4,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fr.yoannroche.projet3.BeanReglage;
-import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.Resultat;
 import fr.yoannroche.projet3.mastermind.control.Control;
 

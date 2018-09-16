@@ -73,8 +73,12 @@ public class DefenseurPlusMoins extends JFrame{
 		this.setResizable(false);
 		this.bean = bean;
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
+		
+	    char tabProp[] = new char [bean.getCases()];
+		char tabMin[] = new char [bean.getCases()];
+	    char tabMax[] = new char [bean.getCases()];
 
-		DefenseurPlusMoinsModel	def	= new DefenseurPlusMoinsModel(bean);
+		DefenseurPlusMoinsModel	def	= new DefenseurPlusMoinsModel(bean,tabProp,tabMin,tabMax);
 		
 		initCadreDev();
 		initBar();
@@ -345,7 +349,7 @@ public class DefenseurPlusMoins extends JFrame{
 	}
 	class SourisListener2 implements MouseListener {
 
-		DefenseurPlusMoinsModel	def	= new DefenseurPlusMoinsModel(bean);
+		DefenseurPlusMoinsModel	def	= new DefenseurPlusMoinsModel(bean,null,null,null);
 		
 		public void mouseClicked(MouseEvent arg0) {
 			if(click==0) {
@@ -373,7 +377,7 @@ public class DefenseurPlusMoins extends JFrame{
 	}
 	class SourisListener3 implements MouseListener {
 		
-		DefenseurPlusMoinsModel	def	= new DefenseurPlusMoinsModel(bean);
+		DefenseurPlusMoinsModel	def	= new DefenseurPlusMoinsModel(bean,null,null,null);
 
 		public void mouseClicked(MouseEvent arg0) {
 			if(nombreClick==0) {
