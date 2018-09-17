@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 
 import fr.yoannroche.projet3.mastermind.MastermindMode;
 import fr.yoannroche.projet3.mastermind.view.Mastermind;
+import fr.yoannroche.projet3.mastermind.view.MastermindDuel;
 import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.DefenseurPlusMoins;
 import fr.yoannroche.projet3.plusmoins.view.DuelPlusMoins;
@@ -106,7 +107,7 @@ public class Resultat extends JFrame {
 					master.setVisible(true);
 				}
 				if(jeu==6) {
-					Mastermind master = new Mastermind(MastermindMode.Duel,bean);
+					MastermindDuel master = new MastermindDuel(bean);
 					master.setVisible(true);
 				}
 			}
