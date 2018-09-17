@@ -45,7 +45,7 @@ public class Lancement extends JFrame{
 	private Dimension			dim2			= new Dimension(50,55);
 	private Dimension			dim3			= new Dimension(100,30);
 	private Font				impact			= new Font("impact", 15,15);
-	private JButton dev = new JButton(" Réglage ");
+	private JButton				dev				= new JButton(" Réglage ");
 	private BeanReglage			bean			;
 
 
@@ -83,7 +83,6 @@ public class Lancement extends JFrame{
 				regle.setVisible(true);
 			}
 		});
-
 		plusMoins.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		plusMoins.setBorder(BorderFactory.createLineBorder(Color.black));
 		plusMoins.setPreferredSize(dim3);
@@ -95,7 +94,6 @@ public class Lancement extends JFrame{
 				regle.setVisible(true);
 			}
 		});
-
 		JPanel espaceInfosJeu = new JPanel();
 		espaceInfosJeu.setPreferredSize(new Dimension(10,30));
 		espaceInfosJeu.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
@@ -106,7 +104,6 @@ public class Lancement extends JFrame{
 		menuBar.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		menuBar.setBorder(BorderFactory.createLineBorder(Color.black));
 		menuBar.add(infosJeu);
-
 		menuBar.add(espaceInfosJeu);
 		menuBar.add(masterMind);
 		menuBar.add(plusMoins);
@@ -120,7 +117,6 @@ public class Lancement extends JFrame{
 		infos.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 056f, 0.64f)));
 		infos.addMouseListener(new SourisListener2());
 		contentPane.add(menuBar);
-
 		dev.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));
 		dev.addMouseListener(new SourisListener2());
 		dev.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 056f, 0.64f)));
@@ -140,7 +136,6 @@ public class Lancement extends JFrame{
 		blocJeu.setPreferredSize(new Dimension(420,218));
 		blocJeu.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		blocJeu.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.black));
-
 		blocJeu.add(jeu1,BorderLayout.CENTER);
 		jeu1.setPreferredSize(dim);
 		jeu1.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
@@ -152,9 +147,7 @@ public class Lancement extends JFrame{
 				menu.setVisible(true);
 			}
 		});
-
-
-
+		
 		blocJeu.add(jeu2,BorderLayout.CENTER);
 		jeu2.setPreferredSize(dim);
 		jeu2.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
@@ -166,15 +159,12 @@ public class Lancement extends JFrame{
 				menu.setVisible(true);
 			}
 		});
-
-
-
-
 		contentPane.add(blocJeu);
-
 	}
+	
 	/**
 	 * Méthode qui désigne cette class comme la Main.
+	 * Définit les vauleurs dans le BeanReglage.
 	 * @param args
 	 */
 	public static void main(String[] args) {
