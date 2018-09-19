@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -54,6 +53,7 @@ public class Mastermind extends JFrame{
 	private IndiceListener				IndicesListener     = new IndiceListener();
 	private JLabel						indice				= new JLabel();
 	private JLabel						textProp			= new JLabel();
+	private JLabel						vosTentative		= new JLabel();
 	private JScrollPane					scrollPane 			=
 			new JScrollPane(blocJeu,
 					JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -68,7 +68,7 @@ public class Mastermind extends JFrame{
 	 */
 	public Mastermind(MastermindMode mode, BeanReglage bean) {
 
-		this.setSize(400, 520);
+		this.setSize(400, 505);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.bean = bean;
 		
@@ -87,7 +87,7 @@ public class Mastermind extends JFrame{
 		initRegle(mode);
 		initHisto(mode,propositionIcon,blocTentative,blocIndices,model);
 		initBlocTenta(mode,propositionIcon,blocTentative,blocIndices,modelChal,model);
-		initCadreDev(mode,propositionIcon,blocTentative,blocIndices,modelChal);
+		initCadreDev(mode,modelChal,modelDef);
 
 		if(mode.equals(MastermindMode.Challenger)) {
 			modeChallenger(model);
@@ -103,12 +103,10 @@ public class Mastermind extends JFrame{
 	/**
 	 * Affiche les aides si le mode développeur est actif.
 	 * @param mode
-	 * @param blocIndices 
-	 * @param blocTentative 
-	 * @param propositionIcon 
 	 * @param modelChal 
+	 * @param modelDef 
 	 */
-	private void initCadreDev(MastermindMode mode, JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices, ChallengerMastermindModel modelChal) {
+	private void initCadreDev(MastermindMode mode, ChallengerMastermindModel modelChal, DefenseurMastermindModel modelDef) {
 
 		if(bean.getDev()==1) {
 			JLabel codeSecret = new JLabel();
@@ -125,7 +123,8 @@ public class Mastermind extends JFrame{
 				modelChal.dev(espace2);
 			}
 			else if(mode.equals(MastermindMode.Defenseur)) {
-				text.setText("Code secret : ");
+				text.setText("Les indices : ");
+				modelDef.dev(espace2);
 			}
 		}
 	}
@@ -210,7 +209,7 @@ public class Mastermind extends JFrame{
 		}
 		blocTenta.add(clavier);
 		JPanel boutonCadre = new JPanel();
-		boutonCadre.setPreferredSize(new Dimension(60,60));
+		boutonCadre.setPreferredSize(new Dimension(60,30));
 		boutonCadre.setBackground(Color.DARK_GRAY);
 		boutonCadre.add(supprimer);
 		boutonCadre.add(ok);
@@ -230,6 +229,7 @@ public class Mastermind extends JFrame{
 					}
 				}
 				else if(mode.equals(MastermindMode.Defenseur)) {
+					vosTentative.setText("  Entrez les indices  ");
 					blocTenta.setVisible(false);
 					blocIndice.setVisible(true);
 					indice.setText(" ♦ : "+placerClick+"    ♢ : "+changerClick);
@@ -305,7 +305,7 @@ public class Mastermind extends JFrame{
 		refresh.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
 		refresh.addActionListener(IndicesListener);
 		blocIndice.setVisible(false);
-		blocIndice.setPreferredSize(new Dimension(160,70));
+		blocIndice.setPreferredSize(new Dimension(160,65));
 		blocIndice.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 		blocIndice.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
 		contentPane.add(blocIndice);
@@ -347,7 +347,6 @@ public class Mastermind extends JFrame{
 		JPanel espace = new JPanel ();
 		espace.setPreferredSize(new Dimension(320,25));
 		espace.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
-		JLabel vosTentative = new JLabel();
 		vosTentative.setText("  Entrez vos propositions  ");
 		vosTentative.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.65f, 0.64f)));
 		vosTentative.setOpaque(true);
@@ -369,6 +368,7 @@ public class Mastermind extends JFrame{
 		this.setTitle("Defenseur");
 		initBlocIndices(mode,propositionIcon,blocTentative,blocIndices,modelDef);
 		textProp.setText("Votre code secret : ");
+		vosTentative.setText("  Entrez votre code secret  ");
 		regle.setText(" L'ordinateur à "+bean.getTentatives()+" tentatives pour trouver le code secret à "+bean.getCases()+" couleurs.");
 		model.blocJeuSize(blocJeu,contentPane);
 	}

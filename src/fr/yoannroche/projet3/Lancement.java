@@ -94,17 +94,13 @@ public class Lancement extends JFrame{
 				regle.setVisible(true);
 			}
 		});
-		JPanel espaceInfosJeu = new JPanel();
-		espaceInfosJeu.setPreferredSize(new Dimension(10,30));
-		espaceInfosJeu.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
-		infosJeu.setText(" Règles ");
+		infosJeu.setText(" Règles : ");
 		infosJeu.setForeground(Color.WHITE);
 		infosJeu.setFont(impact);
 		menuBar.setPreferredSize(new Dimension(545,51));
 		menuBar.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
 		menuBar.setBorder(BorderFactory.createLineBorder(Color.black));
 		menuBar.add(infosJeu);
-		menuBar.add(espaceInfosJeu);
 		menuBar.add(masterMind);
 		menuBar.add(plusMoins);
 		menuBar.add(espace);

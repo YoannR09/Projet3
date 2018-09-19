@@ -20,6 +20,11 @@ import javax.swing.JTextArea;
 import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Lancement;
 
+/**
+ * Class qui gère l'affichage des règles du Mastermind.
+ * @author Pierrosan
+ *
+ */
 public class RegleMastermind extends JFrame {
 
 	private BeanReglage		bean				;
@@ -78,14 +83,14 @@ public class RegleMastermind extends JFrame {
 		regle.setEditable(false);
 		regle.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.534f, 0.85f, 0.54f)));
 		regle.setBackground(Color.getHSBColor(0.534f, 0.03f, 0.98f));
-		regle.setText( "  Le but : découvrir la combinaison à x chiffres \n"
+		regle.setText( "  Le but : découvrir la combinaison à x couleurs \n"
 				+ " de l'adversaire (le défenseur).\n\n"
 				+ " Pour ce faire, l'attaquant fait une proposition. \n"
 				+ "  Le défenseur indique \n"
-				+ " pour chaque chiffre de la combinaison proposée \n "
-				+ " si le chiffre de sa combinaison est plus\n"
-				+ " grand (+), plus petit (-) ou si c'est le bon \n"
-				+ " chiffre (=) \n \n"
+				+ " pour chaque couleur de la combinaison proposée \n "
+				+ " le nombre de couleur de\n"
+				+ " la proposition qui apparaissent à la bonne place et à la \n"
+				+ " mauvaise place dans la combinaison secrète. \n \n"
 				+ "   -Mode challenger- où vous devez trouver\n"
 				+ " la combinaison secrète de l'ordinateur\n \n" + 
 				"   -Mode défenseur- où c'est à l'ordinateur\n "

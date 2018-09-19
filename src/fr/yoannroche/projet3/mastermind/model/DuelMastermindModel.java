@@ -23,13 +23,10 @@ public class DuelMastermindModel {
 	private int				couleurSwitch			= 0;
 	private int				nombreTour				= 0;
 	private int				couleurOk				= 0;
-	private int				decal					= 0;
 	private int				placerOrdi				= 0;
 	private int				changerOrdi				= 0;
-	private boolean			debutDecal				= true;
 	private boolean			switchCouleur			= false;
 	private boolean			partiFini				= false;
-	private boolean			indiceOk				= false;
 	private ImageIcon		tentative1				= new ImageIcon("images/couleur/0.png");
 	private JLabel			propositionTab[]	    ;
 	private int				propositionOrdi[]	    ;
@@ -117,16 +114,13 @@ public class DuelMastermindModel {
 		blocIndices[nombreTentative].setText(" ♦ :  "+placer+"   ♢  : "+changer+" ");
 		blocTentative[nombreTentative].revalidate();
 		++nombreTentative;
-		if(nombreTentative==bean.getTentatives() & !partiFini) {
-			new Resultat(null, "Victoire", null,contentPane, jeu,bean).perdu();
-			partiFini=true;
-		}
 	}
 
-	public void finClick(JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices,int changerClick, int placerClick,JPanel contentPane, JLabel indice, boolean indiceOk, BeanReglage bean) {
+	public void finClick(JLabel[] propositionIcon, JPanel[] blocTentative,
+			JLabel[] blocIndices,int changerClick, int placerClick,JPanel contentPane,
+			JLabel indice, boolean indiceOk, BeanReglage bean, JLabel indiceSecret) {
 
 		boolean[] verif = new boolean [bean.getCases()];
-	
 
 		if(nombreTour==0) {		
 			blocTentative[nombreTour].removeAll();
@@ -151,10 +145,7 @@ public class DuelMastermindModel {
 				JOptionPane.showMessageDialog(null, "Donnez les bons indices !", "Attention", JOptionPane.WARNING_MESSAGE);
 			}			
 		}	
-		if(nombreTour==bean.getTentatives() & !partiFini) {
-			new Resultat(null, "Gagner",null,contentPane,jeu,bean).gagner();
-			partiFini=true;
-		}
+		indiceSecret.setText(" ♦ :  "+placerOrdi+"   ♢  : "+changerOrdi+" ");
 		indiceOk=false;
 	}
 
@@ -228,26 +219,18 @@ public class DuelMastermindModel {
 				blocTentative[nombreTour].add(propositionTab[i]);
 			}
 		}
-		else if(nombreTour>=2 & changerOrdi<=(bean.getCases()/2) & placerOrdi==0 & debutDecal==true & (placerOrdi+changerOrdi)<bean.getCases()) {
+		else if(nombreTour>1 & changerOrdi>0 & placerOrdi==0) {
 
-			for(int i =0; i<changerOrdi;i++) {
+			for(int i = 0;i<changerOrdi;i++) {
+				propositionTab[i]=model.createJLabel(); 
+				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+propositionOrdi[i]+".png"));
+				blocTentative[nombreTour].add(propositionTab[i]);
+			}
+			for(int i = changerOrdi;i<bean.getCases();i++) {
 				propositionTab[i]=model.createJLabel();
 				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
 				blocTentative[nombreTour].add(propositionTab[i]);
 			}
-
-			for(int i = changerOrdi;i<(changerOrdi+changerOrdi);i++) {
-				propositionTab[i]=model.createJLabel(); // Problème si il y a un chiffre imper.
-				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+propositionOrdi[(i-changerOrdi)]+".png"));
-				blocTentative[nombreTour].add(propositionTab[i]);
-			}
-			for(int i = (changerOrdi+changerOrdi);i<bean.getCases();i++) {
-				propositionTab[i]=model.createJLabel();
-				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
-				blocTentative[nombreTour].add(propositionTab[i]);
-			}
-			decal=changerOrdi+changerOrdi;
-			debutDecal=false;
 		}
 		else if(changerOrdi>2 & placerOrdi==0 & (placerOrdi+changerOrdi)<bean.getCases()) {
 			for(int i = 0;i<changerOrdi;i++) {
@@ -261,28 +244,6 @@ public class DuelMastermindModel {
 				blocTentative[nombreTour].add(propositionTab[i]);
 			}
 		}
-
-		else if(nombreTour>2 & changerOrdi>=1 & placerOrdi==0 & !debutDecal & (placerOrdi+changerOrdi)<bean.getCases()) {
-
-			for(int i =0; i<decal;i++) {
-				propositionTab[i]=model.createJLabel();
-				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
-				blocTentative[nombreTour].add(propositionTab[i]);
-			}
-
-			for(int i = decal;i<decal+changerOrdi;i++) {
-				propositionTab[i]=model.createJLabel();
-				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+propositionOrdi[decal-changerOrdi]+".png"));
-				blocTentative[nombreTour].add(propositionTab[i]);
-			}
-			for(int i = decal+changerOrdi;i<bean.getCases();i++) {
-				propositionTab[i]=model.createJLabel();
-				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
-				blocTentative[nombreTour].add(propositionTab[i]);
-			}
-			decal=decal+changerOrdi;
-		}
-
 		else if(nombreTour>1 & changerOrdi==0 & placerOrdi>=1 & (placerOrdi+changerOrdi)<bean.getCases()) {
 			for(int i = 0;i<placerOrdi;i++) {
 				propositionTab[i]=model.createJLabel();
@@ -335,17 +296,25 @@ public class DuelMastermindModel {
 				++couleurOk;
 			}
 		}
-		if(couleurOk==bean.getCases()) {
-			new Resultat(null, "Gagner",null,contentPane,jeu,bean).perdu();
+		if(couleurOk==bean.getCases() & !partiFini) {
+			new Resultat(null, "Perdu",null,contentPane,jeu,bean).perdu();
 			partiFini=true;
 		}
 		else {
 			couleurOk=0;
 		}
-
 		blocTentative[nombreTour].revalidate();
 	}
 
+	/**
+	 * Méthode qui regarde le nombre de couleur bien ou mal placé que l'ordinateur possède.
+	 * @param propositionIcon
+	 * @param blocTentative
+	 * @param blocIndices
+	 * @param propositionTab
+	 * @param propositionOrdi
+	 * @param verif
+	 */
 	public void check(JLabel [] propositionIcon,JPanel[] blocTentative,JLabel [] blocIndices, JLabel[] propositionTab, int[] propositionOrdi, boolean[] verif) {
 		/**
 		 * Boucle qui cherche si la couleur est bien placée
@@ -391,29 +360,54 @@ public class DuelMastermindModel {
 		}
 	}
 
+	/**
+	 * Méthode qui vérifie les indices donnés
+	 * @param placerClick
+	 * @param changerClick
+	 * @param blocIndicesOrdi
+	 * @param fin
+	 */
 	public void checkIndice(int placerClick, int changerClick, JLabel[] blocIndicesOrdi, JButton fin) {
 
 		if(changerClick==changerOrdi & placerClick==placerOrdi ) {
-			indiceOk=true;
-			blocIndicesOrdi[nombreTour-1].setText(" ♦ :  "+placerOrdi+"   ♢  : "+changerOrdi+" ");
+			blocIndicesOrdi[nombreTour-1].setText(" ♦  :  "+placerOrdi+"   ♢   :  "+changerOrdi+" ");
 			fin.setEnabled(false);
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "Donnez les bons indices !", "Attention", JOptionPane.WARNING_MESSAGE);
 		}
-
 	}
 
-	public void status(JLabel entrerProp, JLabel vosTentative, JLabel entrerIndi,boolean codeSecretOk) {
+	/**
+	 * Méthode qui gère l'éclairage des informations en haut des ecrans.
+	 * @param entrerProp
+	 * @param vosTentative
+	 * @param entrerIndi
+	 * @param codeSecretOk
+	 * @param status
+	 */
+	public void status(JLabel entrerProp, JLabel vosTentative, JLabel entrerIndi,boolean codeSecretOk,int status) {
 
-		if(indiceOk==true) {
+		if(status==1) {
 			vosTentative.setBackground(Color.getHSBColor(0.134f, 0.05f, 0.45f));
 			entrerProp.setBackground(Color.getHSBColor(0.134f, 0.25f, 0.95f));
 			entrerIndi.setBackground(Color.getHSBColor(0.134f, 0.05f, 0.45f));
 		}
-		else if(!indiceOk) {
+		else if(status==2) {
 			entrerProp.setBackground(Color.getHSBColor(0.134f, 0.05f, 0.45f));
 			entrerIndi.setBackground(Color.getHSBColor(0.134f, 0.25f, 0.95f));
-		}	
+		}
+	}
+
+	/**
+	 * Méthode qui gère l'affiche des infos du mode développeur.
+	 * @param content
+	 * @param indiceSecret 
+	 */
+	public void dev(JPanel content, JLabel indiceSecret){
+		JLabel [] indice = new JLabel[bean.getCases()];
+		for(int i=0;i<bean.getCases();i++) {
+			control.chiffreCouleur(couleurs[i],content,indice[i]);
+		}
 	}
 }

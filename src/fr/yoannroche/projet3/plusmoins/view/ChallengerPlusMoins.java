@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -15,9 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Generateur;
@@ -32,7 +28,6 @@ import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
 public class ChallengerPlusMoins extends JFrame{
 
 	private BeanReglage					bean				;
-	private static final Logger			logger				= LogManager.getLogger();
 	private int							nombreClick			= 0;
 	private JPanel						contentPane			= new JPanel();
 	private JTextField					proposition			= new JTextField();
@@ -61,7 +56,7 @@ public class ChallengerPlusMoins extends JFrame{
 		this.setContentPane(contentPane);
 		this.setResizable(false);
 		this.bean = bean;
-		
+
 		Generateur			gen					= new Generateur(bean);
 		int 				nombreString		= gen.getNombre();
 		contentPane.setBackground(Color.getHSBColor(0.534f, 0.35f, 0.34f));
@@ -81,7 +76,7 @@ public class ChallengerPlusMoins extends JFrame{
 	 */
 	private void initCadreDev(ChallengerPlusMoinsModel chal) {
 
-	
+
 		if(bean.getDev()==1) {
 			JLabel codeSecret = new JLabel();
 			codeSecret.setFont(arial2);
@@ -214,17 +209,13 @@ public class ChallengerPlusMoins extends JFrame{
 			public void actionPerformed(ActionEvent event){ 
 
 				chal.okClick(proposition, tentative, infosTentative,contentPane,blocProposition,nbreTentative);
-				logger.info("Récuperation de la proposition :"+proposition.getText());
 				++nbreTentative;
 				if(tentative.getText().length()!=bean.getCases()) {
-
 					nbreTentative=0;
 				}
 				nbreTen.setText("Nombre de tentatives : "+nbreTentative);
 				chal.chechTentative(nbreTentative,contentPane);
 				nombreClick = 0;
-
-
 			}  
 		});
 		supprimer.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
@@ -309,7 +300,7 @@ public class ChallengerPlusMoins extends JFrame{
 	}
 
 	class SourisListener2 implements MouseListener {
-		
+
 		ChallengerPlusMoinsModel chal = new ChallengerPlusMoinsModel(bean,0);
 
 		public void mouseClicked(MouseEvent arg0) {

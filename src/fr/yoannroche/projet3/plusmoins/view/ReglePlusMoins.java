@@ -19,6 +19,11 @@ import javax.swing.JTextArea;
 import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Lancement;
 
+/**
+ * Class qui gère l'affichage des règles du Plus ou Moins.
+ * @author Pierrosan
+ *
+ */
 public class ReglePlusMoins extends JFrame {
 
 	private BeanReglage			bean			;

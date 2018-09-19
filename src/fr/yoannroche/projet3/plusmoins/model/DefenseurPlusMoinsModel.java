@@ -2,7 +2,6 @@ package fr.yoannroche.projet3.plusmoins.model;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -41,7 +40,11 @@ public class DefenseurPlusMoinsModel {
 	private int							jeu					= 2;
 
 	public DefenseurPlusMoinsModel(BeanReglage bean, char[] tabProp, char[] tabMin, char[] tabMax) {
+		
 		this.bean = bean;
+		this.tabProp = tabProp;
+		this.tabMin = tabMin;
+		this.tabMax = tabMax;
 	}
 
 	/**

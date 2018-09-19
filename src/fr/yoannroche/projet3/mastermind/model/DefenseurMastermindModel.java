@@ -20,9 +20,7 @@ public class DefenseurMastermindModel {
 	private BeanReglage			bean				;
 	private int 				jeu					= 5;
 	private Control				control				;
-	private boolean				debutDecal			= true;
 	private int					couleurOk			= 0;
-	private int					decal				= 0;
 	private int					nombreTour			= 0;
 	private int					placer				= 0;
 	private int					changer				= 0;
@@ -167,26 +165,18 @@ public class DefenseurMastermindModel {
 				blocTentative[nombreTour].add(propositionTab[i]);
 			}
 		}
-		else if(nombreTour>=2 & changer<=2 & placer==0 & debutDecal==true & (placer+changer)<bean.getCases()) {
+		else if(nombreTour>1 & changer>0 & placer==0) {
 
-			for(int i =0; i<changer;i++) {
+			for(int i = 0;i<changer;i++) {
+				propositionTab[i]=model.createJLabel(); 
+				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+propositionOrdi[i]+".png"));
+				blocTentative[nombreTour].add(propositionTab[i]);
+			}
+			for(int i=changer;i<bean.getCases();i++) {
 				propositionTab[i]=model.createJLabel();
 				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
 				blocTentative[nombreTour].add(propositionTab[i]);
 			}
-
-			for(int i = changer;i<(changer+changer);i++) {
-				propositionTab[i]=model.createJLabel(); // Problème si il y a un chiffre imper.
-				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+propositionOrdi[(i-changer)]+".png"));
-				blocTentative[nombreTour].add(propositionTab[i]);
-			}
-			for(int i = (changer+changer);i<bean.getCases();i++) {
-				propositionTab[i]=model.createJLabel();
-				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
-				blocTentative[nombreTour].add(propositionTab[i]);
-			}
-			decal=changer+changer;
-			debutDecal=false;
 		}
 		else if(changer>2 & placer==0 & (placer+changer)<bean.getCases()) {
 			for(int i = 0;i<changer;i++) {
@@ -199,27 +189,6 @@ public class DefenseurMastermindModel {
 				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
 				blocTentative[nombreTour].add(propositionTab[i]);
 			}
-		}
-
-		else if(nombreTour>2 & changer>=1 & placer==0 & !debutDecal & (placer+changer)<bean.getCases()) {
-
-			for(int i =0; i<decal;i++) {
-				propositionTab[i]=model.createJLabel();
-				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
-				blocTentative[nombreTour].add(propositionTab[i]);
-			}
-
-			for(int i = decal;i<decal+changer;i++) {
-				propositionTab[i]=model.createJLabel();
-				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+propositionOrdi[decal-changer]+".png"));
-				blocTentative[nombreTour].add(propositionTab[i]);
-			}
-			for(int i = decal+changer;i<bean.getCases();i++) {
-				propositionTab[i]=model.createJLabel();
-				propositionTab[i].setIcon(new ImageIcon("images/couleur/"+nombreTour+".png"));
-				blocTentative[nombreTour].add(propositionTab[i]);
-			}
-			decal=decal+changer;
 		}
 
 		else if(nombreTour>1 & changer==0 & placer>=1 & (placer+changer)<bean.getCases()) {
