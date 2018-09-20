@@ -51,6 +51,7 @@ public class Mastermind extends JFrame{
 	private JPanel						blocJeu				= new JPanel();
 	private ImageIcon					vide				= new ImageIcon("images/couleur/vide.png");
 	private IndiceListener				IndicesListener     = new IndiceListener();
+	private JLabel						indiceSecret		= new JLabel();
 	private JLabel						indice				= new JLabel();
 	private JLabel						textProp			= new JLabel();
 	private JLabel						vosTentative		= new JLabel();
@@ -124,6 +125,8 @@ public class Mastermind extends JFrame{
 			}
 			else if(mode.equals(MastermindMode.Defenseur)) {
 				text.setText("Les indices : ");
+				espace2.add(indiceSecret);
+				indiceSecret.setForeground((Color.WHITE));
 				modelDef.dev(espace2);
 			}
 		}
@@ -209,7 +212,6 @@ public class Mastermind extends JFrame{
 		}
 		blocTenta.add(clavier);
 		JPanel boutonCadre = new JPanel();
-		boutonCadre.setPreferredSize(new Dimension(60,30));
 		boutonCadre.setBackground(Color.DARK_GRAY);
 		boutonCadre.add(supprimer);
 		boutonCadre.add(ok);
@@ -275,6 +277,7 @@ public class Mastermind extends JFrame{
 	 * @param modelDef 
 	 */
 	private void initBlocIndices(MastermindMode mode, JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices, DefenseurMastermindModel modelDef) {
+	
 		indice.setOpaque(true);
 		indice.setBackground(Color.WHITE);
 		indice.setPreferredSize(new Dimension(150,20));
@@ -297,7 +300,7 @@ public class Mastermind extends JFrame{
 		fin.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
 		fin.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
-				modelDef.finClick(propositionIcon,blocTentative,blocIndices, changerClick, placerClick,contentPane,indice,bean);
+				modelDef.finClick(propositionIcon,blocTentative,blocIndices,changerClick, placerClick,contentPane,indice,bean,indiceSecret);
 			}
 		});
 		blocIndice.add(refresh);

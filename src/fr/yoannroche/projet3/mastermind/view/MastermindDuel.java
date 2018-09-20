@@ -99,6 +99,7 @@ public class MastermindDuel extends JFrame{
 	}
 
 	private void initBlocOrdi(JPanel[] blocTentative, JLabel[] blocIndices, JLabel[] propositionIcon, JLabel[] propositionIconOrdi, JPanel[] blocTentativeOrdi, JLabel[] blocIndicesOrdi, DuelMastermindModel model, InterfaceModel modelInterface) {
+		
 		JScrollPane	scrollPaneOrdi=
 				new JScrollPane(cadreTentativeOrdi,
 						JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -150,6 +151,7 @@ public class MastermindDuel extends JFrame{
 	}
 
 	private void initBlocJoueur(JPanel[] blocTentative, JLabel[] blocIndices, JLabel[] propositionIcon, JLabel[] propositionIconOrdi, JPanel[] blocTentativeOrdi, JLabel[] blocIndicesOrdi, DuelMastermindModel model, InterfaceModel modelInterface) {
+		
 		JLabel joueur = new JLabel();
 		joueur.setText(" Joueur ");
 		joueur.setBackground(Color.DARK_GRAY);
@@ -186,8 +188,15 @@ public class MastermindDuel extends JFrame{
 		supprimer.addMouseListener(new SourisListener());
 		supprimer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
-				for(int i =0;i<bean.getCases();i++) {
-					propositionIcon[i].setIcon(vide);
+				if(!codeSecretOk) {
+					for(int i =0;i<bean.getCases();i++) {
+						propositionIconOrdi[i].setIcon(vide);
+					}
+				}
+				else if(codeSecretOk==true) {
+					for(int i =0;i<bean.getCases();i++) {
+						propositionIcon[i].setIcon(vide);
+					}
 				}
 				nombreClick=0;
 			}
@@ -229,7 +238,6 @@ public class MastermindDuel extends JFrame{
 			clavier.add(bouton[i]).setEnabled(true);
 		}
 		JPanel boutonCadre = new JPanel();
-		boutonCadre.setPreferredSize(new Dimension(60,30));
 		boutonCadre.setBackground(Color.DARK_GRAY);
 		boutonCadre.add(supprimer);
 		boutonCadre.add(ok);
@@ -245,7 +253,6 @@ public class MastermindDuel extends JFrame{
 					model.okClick(blocTentative,propositionIcon,blocIndices,changer,placer,contentPane,bean);
 					model.finClick(propositionIconOrdi, blocTentativeOrdi, blocIndicesOrdi, changerClick, placerClick, boutonCadre, textProp,indiceOk,bean,indiceSecret);
 					fin.setEnabled(true);
-
 				}
 				if(!codeSecretOk) {
 					codeSecretOk=true;
@@ -275,7 +282,6 @@ public class MastermindDuel extends JFrame{
 		blocJoueur.add(scrollPane);
 		blocJoueur.add(votreProp);
 		contentPane.add(blocJoueur);
-
 	}
 
 	private void initRegle() {
@@ -338,6 +344,7 @@ public class MastermindDuel extends JFrame{
 		espace.add(entrerIndi);
 		contentPane.add(espace);
 	}
+	
 	private void initBlocIndices(JLabel[] blocIndicesOrdi, DuelMastermindModel model) {
 
 		JPanel	blocIndice	= new JPanel();
@@ -359,12 +366,13 @@ public class MastermindDuel extends JFrame{
 		p.setBackground(Color.getHSBColor(0.534f, 0.55f, 0.74f));
 		p.addActionListener(IndicesListener);
 		blocIndice.add(fin);
+		JLabel nombreTourAffichage = new JLabel();
 		fin.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		fin.setBackground(Color.getHSBColor(0.345f, 0.48f, 0.78f));
 		fin.setEnabled(false);
 		fin.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
-				model.checkIndice(placerClick,changerClick,blocIndicesOrdi,fin);
+				model.checkIndice(placerClick,changerClick,blocIndicesOrdi,fin,nombreTourAffichage);
 				model.status(entrerProp,vosTentative,entrerIndi,codeSecretOk,1);
 			}
 		});
@@ -375,7 +383,7 @@ public class MastermindDuel extends JFrame{
 		blocIndice.setPreferredSize(new Dimension(160,70));
 		blocIndice.setBackground(Color.LIGHT_GRAY);
 		blocIndice.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
-		JLabel nombreTourAffichage = new JLabel();
+		
 		nombreTourAffichage.setOpaque(true);
 		nombreTourAffichage.setText("  Nombre de tour : 0  ");
 		nombreTourAffichage.setFont(impact);
@@ -408,8 +416,7 @@ public class MastermindDuel extends JFrame{
 			textIndi.setFont(arial2);
 			textIndi.setForeground(Color.WHITE);
 			textIndi.setText(" Les indices : ");
-			indiceSecret.setFont(arial2);
-			indiceSecret.setForeground((Color.getHSBColor(0.141f, 0.84f, 0.97f)));
+			indiceSecret.setForeground((Color.white));
 			indiceSecret.setText("");
 			espaceIndiDev.add(textIndi);
 			espaceIndiDev.add(indiceSecret);

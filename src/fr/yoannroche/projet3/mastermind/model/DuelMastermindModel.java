@@ -366,8 +366,9 @@ public class DuelMastermindModel {
 	 * @param changerClick
 	 * @param blocIndicesOrdi
 	 * @param fin
+	 * @param nombreTourAffichage 
 	 */
-	public void checkIndice(int placerClick, int changerClick, JLabel[] blocIndicesOrdi, JButton fin) {
+	public void checkIndice(int placerClick, int changerClick, JLabel[] blocIndicesOrdi, JButton fin, JLabel nombreTourAffichage) {
 
 		if(changerClick==changerOrdi & placerClick==placerOrdi ) {
 			blocIndicesOrdi[nombreTour-1].setText(" ♦  :  "+placerOrdi+"   ♢   :  "+changerOrdi+" ");
@@ -376,6 +377,7 @@ public class DuelMastermindModel {
 		else {
 			JOptionPane.showMessageDialog(null, "Donnez les bons indices !", "Attention", JOptionPane.WARNING_MESSAGE);
 		}
+		nombreTourAffichage.setText((" Nombre de tour : "+nombreTour+" "));
 	}
 
 	/**
@@ -386,7 +388,8 @@ public class DuelMastermindModel {
 	 * @param codeSecretOk
 	 * @param status
 	 */
-	public void status(JLabel entrerProp, JLabel vosTentative, JLabel entrerIndi,boolean codeSecretOk,int status) {
+	public void status(JLabel entrerProp, JLabel vosTentative,
+			JLabel entrerIndi,boolean codeSecretOk,int status) {
 
 		if(status==1) {
 			vosTentative.setBackground(Color.getHSBColor(0.134f, 0.05f, 0.45f));

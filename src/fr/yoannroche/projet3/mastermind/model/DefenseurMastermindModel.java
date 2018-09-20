@@ -57,8 +57,9 @@ public class DefenseurMastermindModel {
 	 * @param placerClick
 	 * @param contentPane
 	 * @param indice
+	 * @param indiceSecret 
 	 */
-	public void finClick(JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices,int changerClick, int placerClick,JPanel contentPane, JLabel indice,BeanReglage bean) {
+	public void finClick(JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices,int changerClick, int placerClick,JPanel contentPane, JLabel indice,BeanReglage bean, JLabel indiceSecret) {
 
 
 		boolean[] verif = new boolean [bean.getCases()]; 
@@ -91,6 +92,7 @@ public class DefenseurMastermindModel {
 			new Resultat(null, "Gagner",null,contentPane,jeu,bean).gagner();
 			partiFini=true;
 		}
+		indiceSecret.setText(" ♦ : "+placer+"    ♢ : "+changer);
 	}
 
 	/**
