@@ -118,7 +118,7 @@ public class DuelMastermindModel {
 
 	public void finClick(JLabel[] propositionIcon, JPanel[] blocTentative,
 			JLabel[] blocIndices,int changerClick, int placerClick,JPanel contentPane,
-			JLabel indice, boolean indiceOk, BeanReglage bean, JLabel indiceSecret) {
+			JLabel indice, BeanReglage bean, JLabel indiceSecret) {
 
 		boolean[] verif = new boolean [bean.getCases()];
 
@@ -146,7 +146,6 @@ public class DuelMastermindModel {
 			}			
 		}	
 		indiceSecret.setText(" ♦ :  "+placerOrdi+"   ♢  : "+changerOrdi+" ");
-		indiceOk=false;
 	}
 
 	/**
@@ -367,17 +366,27 @@ public class DuelMastermindModel {
 	 * @param blocIndicesOrdi
 	 * @param fin
 	 * @param nombreTourAffichage 
+	 * @param i 
+	 * @param codeSecretOk 
+	 * @param entrerIndi 
+	 * @param vosTentative 
+	 * @param entrerProp 
+	 * @param indiceOk 
 	 */
-	public void checkIndice(int placerClick, int changerClick, JLabel[] blocIndicesOrdi, JButton fin, JLabel nombreTourAffichage) {
+	public void checkIndice(int placerClick, int changerClick, JLabel[] blocIndicesOrdi, JButton fin, JLabel nombreTourAffichage,
+			JLabel entrerProp, JLabel vosTentative, JLabel entrerIndi, boolean codeSecretOk, int i, boolean verif) {
 
 		if(changerClick==changerOrdi & placerClick==placerOrdi ) {
 			blocIndicesOrdi[nombreTour-1].setText(" ♦  :  "+placerOrdi+"   ♢   :  "+changerOrdi+" ");
 			fin.setEnabled(false);
+			status(entrerProp,vosTentative,entrerIndi,codeSecretOk,1);
+			verif=true;
+			nombreTourAffichage.setText((" Nombre de tour : "+nombreTour+" "));
+			
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "Donnez les bons indices !", "Attention", JOptionPane.WARNING_MESSAGE);
 		}
-		nombreTourAffichage.setText((" Nombre de tour : "+nombreTour+" "));
 	}
 
 	/**

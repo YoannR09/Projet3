@@ -99,7 +99,7 @@ public class MastermindDuel extends JFrame{
 	}
 
 	private void initBlocOrdi(JPanel[] blocTentative, JLabel[] blocIndices, JLabel[] propositionIcon, JLabel[] propositionIconOrdi, JPanel[] blocTentativeOrdi, JLabel[] blocIndicesOrdi, DuelMastermindModel model, InterfaceModel modelInterface) {
-		
+
 		JScrollPane	scrollPaneOrdi=
 				new JScrollPane(cadreTentativeOrdi,
 						JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -151,7 +151,7 @@ public class MastermindDuel extends JFrame{
 	}
 
 	private void initBlocJoueur(JPanel[] blocTentative, JLabel[] blocIndices, JLabel[] propositionIcon, JLabel[] propositionIconOrdi, JPanel[] blocTentativeOrdi, JLabel[] blocIndicesOrdi, DuelMastermindModel model, InterfaceModel modelInterface) {
-		
+
 		JLabel joueur = new JLabel();
 		joueur.setText(" Joueur ");
 		joueur.setBackground(Color.DARK_GRAY);
@@ -248,20 +248,23 @@ public class MastermindDuel extends JFrame{
 		ok.setEnabled(false);
 		ok.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
-				if(codeSecretOk==true) {
-					model.status(entrerProp,vosTentative,entrerIndi,codeSecretOk,2);
-					model.okClick(blocTentative,propositionIcon,blocIndices,changer,placer,contentPane,bean);
-					model.finClick(propositionIconOrdi, blocTentativeOrdi, blocIndicesOrdi, changerClick, placerClick, boutonCadre, textProp,indiceOk,bean,indiceSecret);
-					fin.setEnabled(true);
-				}
-				if(!codeSecretOk) {
-					codeSecretOk=true;
-					model.status(entrerProp,vosTentative,entrerIndi,codeSecretOk,1);
-				}
-				ok.setEnabled(false);
-				nombreClick=0;
-				for(int i =0;i<bean.getCases();i++) {
-					propositionIcon[i].setIcon(vide);
+				if(indiceOk==true) {
+					if(codeSecretOk==true) {
+						model.status(entrerProp,vosTentative,entrerIndi,codeSecretOk,2);
+						model.okClick(blocTentative,propositionIcon,blocIndices,changer,placer,contentPane,bean);
+						model.finClick(propositionIconOrdi, blocTentativeOrdi, blocIndicesOrdi, changerClick, placerClick, boutonCadre, textProp,bean,indiceSecret);
+						fin.setEnabled(true);
+						indiceOk=false;
+					}
+					if(!codeSecretOk) {
+						codeSecretOk=true;
+						model.status(entrerProp,vosTentative,entrerIndi,codeSecretOk,1);
+					}
+					ok.setEnabled(false);
+					nombreClick=0;
+					for(int i =0;i<bean.getCases();i++) {
+						propositionIcon[i].setIcon(vide);
+					}
 				}
 			}
 		});
@@ -344,7 +347,7 @@ public class MastermindDuel extends JFrame{
 		espace.add(entrerIndi);
 		contentPane.add(espace);
 	}
-	
+
 	private void initBlocIndices(JLabel[] blocIndicesOrdi, DuelMastermindModel model) {
 
 		JPanel	blocIndice	= new JPanel();
@@ -372,8 +375,8 @@ public class MastermindDuel extends JFrame{
 		fin.setEnabled(false);
 		fin.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){
-				model.checkIndice(placerClick,changerClick,blocIndicesOrdi,fin,nombreTourAffichage);
-				model.status(entrerProp,vosTentative,entrerIndi,codeSecretOk,1);
+				model.checkIndice(placerClick,changerClick,blocIndicesOrdi,fin,nombreTourAffichage,entrerProp,vosTentative,entrerIndi,codeSecretOk,1,indiceOk);
+				indiceOk=true;
 			}
 		});
 		blocIndice.add(refresh);
@@ -383,14 +386,13 @@ public class MastermindDuel extends JFrame{
 		blocIndice.setPreferredSize(new Dimension(160,70));
 		blocIndice.setBackground(Color.LIGHT_GRAY);
 		blocIndice.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.24f)));
-		
 		nombreTourAffichage.setOpaque(true);
 		nombreTourAffichage.setText("  Nombre de tour : 0  ");
 		nombreTourAffichage.setFont(impact);
 		contentPane.add(nombreTourAffichage);
 		contentPane.add(blocIndice);
-
 	}
+
 	private void initCadreDev(DuelMastermindModel model) {
 
 		JPanel espace2 = new JPanel();
@@ -423,7 +425,6 @@ public class MastermindDuel extends JFrame{
 			model.dev(espace2,indiceSecret);
 		}
 	}
-
 
 	class SourisListener implements MouseListener {
 

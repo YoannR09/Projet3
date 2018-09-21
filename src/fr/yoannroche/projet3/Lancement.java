@@ -112,6 +112,13 @@ public class Lancement extends JFrame{
 		infos.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));
 		infos.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 056f, 0.64f)));
 		infos.addMouseListener(new SourisListener2());
+		infos.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent event){
+				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
+				Infos infos = new Infos(bean);
+				infos.setVisible(true);
+			}
+		});
 		contentPane.add(menuBar);
 		dev.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));
 		dev.addMouseListener(new SourisListener2());
@@ -227,7 +234,7 @@ public class Lancement extends JFrame{
 				infos.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 066f, 0.74f)));
 			}
 			if(arg0.getSource()==dev) {
-				dev.setBackground(Color.getHSBColor(0.112f, 076f, 0.84f));
+				dev.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));
 				dev.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 066f, 0.74f)));
 			}
 
@@ -240,6 +247,7 @@ public class Lancement extends JFrame{
 			plusMoins.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 			infos.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));
 			infos.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 056f, 0.64f)));
+			dev.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));
 			dev.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 056f, 0.64f)));
 
 		}
