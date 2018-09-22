@@ -181,7 +181,7 @@ public class DuelPlusMoinsModel {
 
 		if(proposition.equals(codeSecret2)){
 			if(gagner==false){
-				new Resultat(null,"Perdu" ,codeSecret2, contentPane,jeu,bean).perdu();
+				new Resultat(null,"Perdu" ,codeSecret2, contentPane,jeu,bean).perdu(null,null,jeu,nombreString);
 			}
 		}
 	}

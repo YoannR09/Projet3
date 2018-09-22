@@ -43,7 +43,7 @@ public class Reglage extends JFrame {
 	private Font				impact			= new Font ("impact", 17,15);
 	private int[]				clavier			= {4,5,6,7,8};
 	private JRadioButton[]		bouton;
-	private int[]				tenta			= {4,5,6,7,8};
+	private int[]				tenta			= {4,5,6,7,8,10,20};
 	private int[]				coul			= {4,5,6,7,8,9,10};
 	private JRadioButton[]		boutonTentative	;
 	private JRadioButton[]		boutonCouleur	;
@@ -206,7 +206,7 @@ public class Reglage extends JFrame {
 		tentative.setFont(arial);
 		tentative.setText("  Nombres de tentatives pour trouver le code ");
 
-		this.boutonTentative = new JRadioButton[5];
+		this.boutonTentative = new JRadioButton[7];
 		int i = 0;
 		for(int c : tenta){
 			this.boutonTentative[i] = new JRadioButton(String.valueOf(c).toUpperCase());
@@ -328,6 +328,12 @@ public class Reglage extends JFrame {
 			for(int i=0;i<tenta.length;i++) {
 				if(boutonTentative[i].isSelected()==true) {
 					int tentative=(i+4);
+					if(tentative==10) {
+						tentative=20;
+					}
+					else if(tentative==9) {
+						tentative=10;
+					}
 					bean.setTentatives(tentative);
 					prop.setProperty("tentatives",Integer.toString(tentative));
 				}

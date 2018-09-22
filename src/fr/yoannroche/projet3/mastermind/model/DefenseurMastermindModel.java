@@ -42,11 +42,6 @@ public class DefenseurMastermindModel {
 		this.model = modelInterface;
 	}
 
-	public void dev(JPanel content){
-		for(int i=0;i<bean.getCases();i++) {
-		}
-	}
-
 	/**
 	 * Méthode appelée à la fin du tour lors du click du bouton "ok" dans le cadre d'indices.
 	 * En focntion du tour , lance un méthode diffèrente.
@@ -246,7 +241,7 @@ public class DefenseurMastermindModel {
 			}
 		}
 		if(couleurOk==bean.getCases()) {
-			new Resultat(null, "Gagner",null,contentPane,jeu,bean).perdu();
+			new Resultat(null, "Gagner",null,contentPane,jeu,bean).perdu(null,null,0,null);
 			partiFini=true;
 		}
 		else {

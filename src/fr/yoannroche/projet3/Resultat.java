@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fr.yoannroche.projet3.mastermind.MastermindMode;
+import fr.yoannroche.projet3.mastermind.control.Control;
 import fr.yoannroche.projet3.mastermind.view.Mastermind;
 import fr.yoannroche.projet3.mastermind.view.MastermindDuel;
 import fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins;
@@ -31,6 +32,7 @@ public class Resultat extends JFrame {
 	private BeanReglage		bean			;
 	private JPanel			contentPane		= new JPanel();
 	private JPanel			contentPane2    = new JPanel();
+	private JPanel			cadreText		= new JPanel();
 	private JButton			relancer		= new JButton(" Relancer ");
 	private JButton			home			= new JButton(" Menu ");
 	private JButton			quitter			= new JButton(" Quitter ");
@@ -43,7 +45,7 @@ public class Resultat extends JFrame {
 
 		super(title);
 
-		this.setSize(270, 110);
+		this.setSize(350, 110);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setVisible(true);
@@ -62,8 +64,7 @@ public class Resultat extends JFrame {
 	 * Affiche le text en victoire/défaite.
 	 */
 	private void initText() {
-		JPanel cadreText = new JPanel();
-		cadreText.setPreferredSize(new Dimension(250,25));
+		cadreText.setPreferredSize(new Dimension(320,28));
 		cadreText.setBackground(Color.DARK_GRAY);
 		text.setFont(arial);
 		text.setForeground(Color.white);
@@ -151,9 +152,22 @@ public class Resultat extends JFrame {
 
 	/**
 	 * Méthode appelée en cas de défaite.
+	 * @param couleurs 
+	 * @param control 
 	 */
-	public void perdu(){
-		text.setText(" Vous avez perdu ! ");
+	public void perdu(int[] couleurs, Control control,int jeu, String nombre){
+		
+		text.setText(" Vous avez perdu !");
+		if(jeu == 4 || jeu==6) {
+			text.setText(text.getText()+" La réponse était : ");
+			JLabel [] indice = new JLabel[bean.getCases()];
+			for(int i=0;i<bean.getCases();i++) {
+				control.chiffreCouleur(couleurs[i],cadreText,indice[i]);
+			}
+		}
+		else if(jeu ==1 || jeu==3) {
+			text.setText(text.getText()+" La réponse était : "+nombre);
+		}
 	}
 
 	class SourisListener implements MouseListener {

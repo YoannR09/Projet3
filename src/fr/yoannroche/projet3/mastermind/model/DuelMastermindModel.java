@@ -15,7 +15,7 @@ import fr.yoannroche.projet3.mastermind.control.Control;
 public class DuelMastermindModel {
 
 	private BeanReglage		bean					;
-	private int				jeu						= 4;
+	private int				jeu						= 6;
 	private InterfaceModel	model					;
 	private Control			control					;
 	private int[]			couleurs				;
@@ -296,7 +296,7 @@ public class DuelMastermindModel {
 			}
 		}
 		if(couleurOk==bean.getCases() & !partiFini) {
-			new Resultat(null, "Perdu",null,contentPane,jeu,bean).perdu();
+			new Resultat(null, "Perdu",null,contentPane,jeu,bean).perdu(couleurs,control,jeu,null);
 			partiFini=true;
 		}
 		else {

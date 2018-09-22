@@ -40,8 +40,11 @@ public class InterfaceModel {
 		if(bean.getTentatives()==8) {
 			blocJeu.setPreferredSize(new Dimension(350,315));
 		}
-
-
+		if(bean.getTentatives()==10) {
+			blocJeu.setPreferredSize(new Dimension(350,410));
+		}
+		if(bean.getTentatives()==20) {
+			blocJeu.setPreferredSize(new Dimension(350,775));
+		}
 	}
-
 }

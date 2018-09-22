@@ -127,7 +127,6 @@ public class Mastermind extends JFrame{
 				text.setText("Les indices : ");
 				espace2.add(indiceSecret);
 				indiceSecret.setForeground((Color.WHITE));
-				modelDef.dev(espace2);
 			}
 		}
 	}

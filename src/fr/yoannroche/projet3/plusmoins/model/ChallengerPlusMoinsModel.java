@@ -76,7 +76,7 @@ public class ChallengerPlusMoinsModel {
 	public void chechTentative(int nbreTentative,JPanel contentPane) {
 
 		if(nbreTentative==bean.getTentatives()) {
-			new Resultat(null, "Perdu",nombreString,contentPane,jeu,bean).perdu();
+			new Resultat(null, "Perdu",nombreString,contentPane,jeu,bean).perdu(null,null,jeu,nombreString);
 		}
 	}
 

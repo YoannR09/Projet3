@@ -137,7 +137,7 @@ public class DefenseurPlusMoinsModel {
 
 		if(proposition.equals(codeSecret2)){
 			++gagner;
-			new Resultat(null, "Perdu",null,contentPane,jeu,bean).perdu();
+			new Resultat(null, "Perdu",null,contentPane,jeu,bean).perdu(null,null,jeu,null);
 		}
 	}
 

@@ -25,7 +25,7 @@ public class ChallengerMastermindModel {
 	private Control			control			;
 
 	public ChallengerMastermindModel(BeanReglage bean,Control control,int[] couleurs,InterfaceModel modelInterface) {
-		
+
 		this.bean = bean;
 		this.control = control;
 		this.couleurs = couleurs;
@@ -104,7 +104,7 @@ public class ChallengerMastermindModel {
 		blocTentative[nombreTentative].revalidate();
 		++nombreTentative;
 		if(nombreTentative==bean.getTentatives() & !partiFini) {
-			new Resultat(null, "Victoire", null,contentPane, jeu,bean).perdu();
+			new Resultat(null, "Victoire", null,contentPane,jeu,bean).perdu(couleurs,control,jeu,null);
 			partiFini=true;
 		}
 	}
