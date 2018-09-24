@@ -17,6 +17,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.mastermind.MastermindMode;
@@ -61,6 +64,7 @@ public class Mastermind extends JFrame{
 					JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	private int							placer,changer,nombreClick,placerClick,changerClick									
 	= 0;
+	final Logger						logger				= LogManager.getLogger();
 
 	/**
 	 * Gère l'interface du jeu Mastermind.
@@ -365,6 +369,7 @@ public class Mastermind extends JFrame{
 		textProp.setText("Votre proposition : ");
 		regle.setText("Vous avez "+bean.getTentatives()+" tentatives pour trouver le code secret à "+bean.getCases()+" couleurs.");
 		model.blocJeuSize(blocJeu,contentPane);
+		logger.info("Vous êtes dans le mode challenger du jeu Mastermind");
 	}
 	public void modeDefenseur(MastermindMode mode, JLabel[] propositionIcon, JPanel[] blocTentative, JLabel[] blocIndices, DefenseurMastermindModel modelDef, InterfaceModel model) {
 		this.setTitle("Defenseur");
@@ -373,6 +378,7 @@ public class Mastermind extends JFrame{
 		vosTentative.setText("  Entrez votre code secret  ");
 		regle.setText(" L'ordinateur à "+bean.getTentatives()+" tentatives pour trouver le code secret à "+bean.getCases()+" couleurs.");
 		model.blocJeuSize(blocJeu,contentPane);
+		logger.info("Vous êtes dans le mode défenseur du jeu Mastermind");
 	}
 
 	class SourisListener implements MouseListener {

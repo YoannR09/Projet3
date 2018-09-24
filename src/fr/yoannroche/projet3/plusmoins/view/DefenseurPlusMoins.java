@@ -19,6 +19,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.plusmoins.model.DefenseurPlusMoinsModel;
 
@@ -60,6 +63,7 @@ public class DefenseurPlusMoins extends JFrame{
 	private int							nombreTour			= 0;
 	private JButton						indi[];
 	private JButton						bouton[];
+	final Logger						logger				= LogManager.getLogger();
 
 
 
@@ -86,6 +90,7 @@ public class DefenseurPlusMoins extends JFrame{
 		initCadreDialogOrdi();
 		initDialog();
 		initCode(def);
+		logger.info("Vous êtes dans le mode défenseur du jeu +/- ");
 	}
 
 	private void initCadreDev() {

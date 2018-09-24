@@ -21,6 +21,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Class qui gère le réglage du fichier properties
  * Les réglages sont modifiable dans l'application.
@@ -47,6 +50,7 @@ public class Reglage extends JFrame {
 	private int[]				coul			= {4,5,6,7,8,9,10};
 	private JRadioButton[]		boutonTentative	;
 	private JRadioButton[]		boutonCouleur	;
+	final Logger				logger			= LogManager.getLogger();
 
 
 	public Reglage(BeanReglage bean) {
@@ -67,6 +71,7 @@ public class Reglage extends JFrame {
 		initDev();
 		initCouleur();
 		initSauv();
+		logger.info("Vous êtes dans les réglages");
 	}
 
 	/**

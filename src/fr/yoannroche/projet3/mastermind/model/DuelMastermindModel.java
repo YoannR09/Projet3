@@ -8,6 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Resultat;
 import fr.yoannroche.projet3.mastermind.control.Control;
@@ -30,6 +33,7 @@ public class DuelMastermindModel {
 	private ImageIcon		tentative1				= new ImageIcon("images/couleur/0.png");
 	private JLabel			propositionTab[]	    ;
 	private int				propositionOrdi[]	    ;
+	final Logger			logger					= LogManager.getLogger();
 
 
 	public DuelMastermindModel(BeanReglage bean, JLabel propositionTab[],int propositionOrdi[],Control control,int[]
@@ -40,6 +44,7 @@ public class DuelMastermindModel {
 		this.propositionTab = propositionTab;
 		this.propositionOrdi = propositionOrdi;
 		this.model = modelInterface;
+		logger.info("Vous êtes dans le mode duel du jeu Mastermind");
 	}
 
 	/**

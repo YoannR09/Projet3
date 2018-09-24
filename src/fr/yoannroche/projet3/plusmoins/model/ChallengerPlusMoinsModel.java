@@ -7,6 +7,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Resultat;
 
@@ -21,12 +24,13 @@ public class ChallengerPlusMoinsModel {
 	private String					nombreString	;
 	private Font					impact			= new Font ("impact", 12,12);
 	private int						jeu				= 1;
+	final Logger					logger			= LogManager.getLogger();
+	int								log				= 0;
 
 	public ChallengerPlusMoinsModel(BeanReglage bean,int nombreString2) {
 		
 		this.bean = bean;
-		this.nombreString = Integer.toString(nombreString2);
-		
+		this.nombreString = Integer.toString(nombreString2);	
 	}
 
 	/**

@@ -17,6 +17,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.plusmoins.model.DuelPlusMoinsModel;
@@ -59,6 +62,7 @@ public class DuelPlusMoins extends JFrame{
 	private JLabel			tour				= new JLabel();
 	private JButton			indi[];
 	private JButton			bouton[];
+	final Logger			logger				= LogManager.getLogger();
 
 	public DuelPlusMoins(BeanReglage bean) {
 
@@ -86,6 +90,7 @@ public class DuelPlusMoins extends JFrame{
 		initBlocProposition();
 		initBlocTest(duel);
 		initCadreDev(duel);
+		logger.info("Vous êtes dans le mode duel du jeu +/- ");
 	}
 
 	private void initCadreDev(DuelPlusMoinsModel duel) {

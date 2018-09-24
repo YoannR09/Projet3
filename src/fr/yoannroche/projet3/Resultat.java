@@ -45,7 +45,7 @@ public class Resultat extends JFrame {
 
 		super(title);
 
-		this.setSize(350, 110);
+		this.setSize(400, 110);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setVisible(true);
@@ -64,7 +64,7 @@ public class Resultat extends JFrame {
 	 * Affiche le text en victoire/défaite.
 	 */
 	private void initText() {
-		cadreText.setPreferredSize(new Dimension(320,28));
+		cadreText.setPreferredSize(new Dimension(370,28));
 		cadreText.setBackground(Color.DARK_GRAY);
 		text.setFont(arial);
 		text.setForeground(Color.white);
@@ -155,7 +155,7 @@ public class Resultat extends JFrame {
 	 * @param couleurs 
 	 * @param control 
 	 */
-	public void perdu(int[] couleurs, Control control,int jeu, String nombre){
+	public void perdu(int[] couleurs,Control control,int jeu, String nombre){
 		
 		text.setText(" Vous avez perdu !");
 		if(jeu == 4 || jeu==6) {

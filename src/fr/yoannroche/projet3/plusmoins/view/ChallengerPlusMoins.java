@@ -15,6 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import fr.yoannroche.projet3.BeanReglage;
 import fr.yoannroche.projet3.Generateur;
 import fr.yoannroche.projet3.plusmoins.model.ChallengerPlusMoinsModel;
@@ -46,6 +49,7 @@ public class ChallengerPlusMoins extends JFrame{
 	private JLabel						nbreTen				= new JLabel();
 	private JPanel						espace2				= new JPanel ();
 	private JButton						bouton[];
+	final Logger						logger				= LogManager.getLogger();
 
 	public ChallengerPlusMoins(BeanReglage bean) {
 
@@ -68,6 +72,7 @@ public class ChallengerPlusMoins extends JFrame{
 		initBlocProposition();
 		initBlocTest(chal);
 		initCadreDev(chal);
+		logger.info("Vous êtes dans le mode challenger du jeu +/- ");
 	}
 
 	/**
@@ -95,7 +100,6 @@ public class ChallengerPlusMoins extends JFrame{
 			espace2.add(codeSecret);
 			chal.dev(codeSecret);
 		}
-
 	}
 
 	/**
