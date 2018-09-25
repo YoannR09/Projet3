@@ -303,7 +303,7 @@ public class Reglage extends JFrame {
 	}
 
 	/**
-	 * Méthode qui gére le changement des variables dans le fichier Config.properties
+	 * Méthode qui gére le changement des variables dans le fichier Config.properties et dans l'application via les setters
 	 * @param temp 
 	 */
 	public void sauvegardeReglage() {

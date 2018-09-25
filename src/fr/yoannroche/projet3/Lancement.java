@@ -37,7 +37,6 @@ public class Lancement extends JFrame{
 	private JToolBar			menuBar			= new JToolBar();
 	private JButton				jeu1			= new JButton(new ImageIcon("images/master.png"));
 	private JButton				jeu2			= new JButton(new ImageIcon("images/plusmoins.png"));
-	private JButton				infos			= new JButton(" ? ");
 	private JLabel				infosJeu		= new JLabel();
 	private JButton				masterMind		= new JButton("  MasterMind  ");
 	private JButton				plusMoins		= new JButton("  Plus ou Moins  ");
@@ -106,19 +105,7 @@ public class Lancement extends JFrame{
 		menuBar.add(espace);
 		menuBar.add(dev);
 		menuBar.addSeparator();
-		menuBar.add(infos);
 		menuBar.addSeparator();
-		infos.setPreferredSize(new Dimension(30,40));
-		infos.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));
-		infos.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 056f, 0.64f)));
-		infos.addMouseListener(new SourisListener2());
-		infos.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent event){
-				((JFrame) contentPane.getTopLevelAncestor()).dispose() ;
-				Infos infos = new Infos(bean);
-				infos.setVisible(true);
-			}
-		});
 		contentPane.add(menuBar);
 		dev.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));
 		dev.addMouseListener(new SourisListener2());
@@ -229,10 +216,6 @@ public class Lancement extends JFrame{
 				plusMoins.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.getHSBColor(0.534f, 0.25f, 0.94f)));
 				plusMoins.setBackground(Color.getHSBColor(0.534f, 0.05f, 0.94f));
 			}
-			if(arg0.getSource()==infos) {
-				infos.setBackground(Color.getHSBColor(0.112f, 076f, 0.84f));
-				infos.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 066f, 0.74f)));
-			}
 			if(arg0.getSource()==dev) {
 				dev.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));
 				dev.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 066f, 0.74f)));
@@ -245,11 +228,8 @@ public class Lancement extends JFrame{
 			masterMind.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
 			plusMoins.setBorder(BorderFactory.createLineBorder(Color.black));
 			plusMoins.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));
-			infos.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));
-			infos.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 056f, 0.64f)));
 			dev.setBackground(Color.getHSBColor(0.112f, 066f, 0.74f));
 			dev.setBorder(BorderFactory.createLineBorder(Color.getHSBColor(0.112f, 056f, 0.64f)));
-
 		}
 
 		public void mousePressed(MouseEvent arg0) {

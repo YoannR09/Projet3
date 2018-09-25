@@ -182,6 +182,7 @@ public class Mastermind extends JFrame{
 				for(int i =0;i<bean.getCases();i++) {
 					propositionIcon[i].setIcon(vide);
 				}
+				ok.setEnabled(false);
 				nombreClick=0;
 			}
 		});

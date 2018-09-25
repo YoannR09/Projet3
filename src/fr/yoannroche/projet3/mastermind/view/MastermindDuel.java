@@ -198,6 +198,7 @@ public class MastermindDuel extends JFrame{
 						propositionIcon[i].setIcon(vide);
 					}
 				}
+				ok.setEnabled(false);
 				nombreClick=0;
 			}
 		});

@@ -36,6 +36,7 @@ public class Control {
 	
 /**
  * Changement des couleurs en chiffres.
+ * Place le chiffre dans le setProposition()
  * @param couleur
  * @param content
  */
