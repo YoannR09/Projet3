@@ -1,2 +1,23 @@
 17:11:57.668 [Projet 3] INFO  fr.yoannroche.projet3.Lancement - Bienvenue
 17:12:01.301 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.model.DuelMastermindModel - Vous êtes dans le mode duel du jeu Mastermind
+17:14:01.262 [Projet 3] INFO  fr.yoannroche.projet3.Lancement - Bienvenue
+17:14:04.262 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.view.Mastermind - Vous êtes dans le mode challenger du jeu Mastermind
+17:14:06.953 [Projet 3] INFO  fr.yoannroche.projet3.Reglage - Vous êtes dans les réglages
+17:14:27.537 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.view.Mastermind - Vous êtes dans le mode challenger du jeu Mastermind
+17:15:17.865 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.view.Mastermind - Vous êtes dans le mode challenger du jeu Mastermind
+17:16:11.942 [Projet 3] INFO  fr.yoannroche.projet3.Reglage - Vous êtes dans les réglages
+17:16:20.682 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.view.Mastermind - Vous êtes dans le mode défenseur du jeu Mastermind
+17:16:23.912 [Projet 3] INFO  fr.yoannroche.projet3.Reglage - Vous êtes dans les réglages
+17:16:27.808 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.view.Mastermind - Vous êtes dans le mode challenger du jeu Mastermind
+17:19:17.802 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.model.DuelMastermindModel - Vous êtes dans le mode duel du jeu Mastermind
+17:22:16.021 [Projet 3] INFO  fr.yoannroche.projet3.plusmoins.view.DefenseurPlusMoins - Vous êtes dans le mode défenseur du jeu +/- 
+17:22:25.098 [Projet 3] INFO  fr.yoannroche.projet3.plusmoins.view.DefenseurPlusMoins - Vous êtes dans le mode défenseur du jeu +/- 
+17:23:56.970 [Projet 3] INFO  fr.yoannroche.projet3.plusmoins.view.DuelPlusMoins - Vous êtes dans le mode duel du jeu +/- 
+17:24:09.609 [Projet 3] INFO  fr.yoannroche.projet3.Reglage - Vous êtes dans les réglages
+17:24:14.104 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.model.DuelMastermindModel - Vous êtes dans le mode duel du jeu Mastermind
+17:24:18.564 [Projet 3] INFO  fr.yoannroche.projet3.plusmoins.view.DuelPlusMoins - Vous êtes dans le mode duel du jeu +/- 
+17:26:44.930 [Projet 3] INFO  fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins - Vous êtes dans le mode challenger du jeu +/- 
+17:28:13.407 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.view.Mastermind - Vous êtes dans le mode défenseur du jeu Mastermind
+18:28:24.818 [Projet 3] INFO  fr.yoannroche.projet3.Lancement - Bienvenue
+18:28:28.675 [Projet 3] INFO  fr.yoannroche.projet3.Lancement - Bienvenue
+18:28:30.875 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.view.Mastermind - Vous êtes dans le mode défenseur du jeu Mastermind
