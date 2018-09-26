@@ -21,3 +21,27 @@
 18:28:24.818 [Projet 3] INFO  fr.yoannroche.projet3.Lancement - Bienvenue
 18:28:28.675 [Projet 3] INFO  fr.yoannroche.projet3.Lancement - Bienvenue
 18:28:30.875 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.view.Mastermind - Vous êtes dans le mode défenseur du jeu Mastermind
+19:43:44.167 [Projet 3] INFO  fr.yoannroche.projet3.Lancement - Bienvenue
+19:43:46.860 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.view.Mastermind - Vous êtes dans le mode défenseur du jeu Mastermind
+19:43:53.188 [Projet 3] INFO  fr.yoannroche.projet3.plusmoins.view.DefenseurPlusMoins - Vous êtes dans le mode défenseur du jeu +/- 
+19:44:15.005 [Projet 3] INFO  fr.yoannroche.projet3.Reglage - Vous êtes dans les réglages
+19:44:22.792 [Projet 3] INFO  fr.yoannroche.projet3.plusmoins.view.DefenseurPlusMoins - Vous êtes dans le mode défenseur du jeu +/- 
+19:44:37.263 [Projet 3] INFO  fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins - Vous êtes dans le mode challenger du jeu +/- 
+19:44:40.706 [Projet 3] INFO  fr.yoannroche.projet3.plusmoins.view.DefenseurPlusMoins - Vous êtes dans le mode défenseur du jeu +/- 
+19:44:52.222 [Projet 3] INFO  fr.yoannroche.projet3.plusmoins.view.DuelPlusMoins - Vous êtes dans le mode duel du jeu +/- 
+19:45:07.675 [Projet 3] INFO  fr.yoannroche.projet3.plusmoins.view.DuelPlusMoins - Vous êtes dans le mode duel du jeu +/- 
+19:47:26.919 [Projet 3] INFO  fr.yoannroche.projet3.Lancement - Bienvenue
+19:47:33.259 [Projet 3] INFO  fr.yoannroche.projet3.plusmoins.view.DefenseurPlusMoins - Vous êtes dans le mode défenseur du jeu +/- 
+06:55:59.395 [Projet 3] INFO  fr.yoannroche.projet3.Lancement - Bienvenue
+06:56:02.380 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.model.DuelMastermindModel - Vous êtes dans le mode duel du jeu Mastermind
+06:56:17.602 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.view.Mastermind - Vous êtes dans le mode challenger du jeu Mastermind
+06:56:21.720 [Projet 3] INFO  fr.yoannroche.projet3.plusmoins.view.ChallengerPlusMoins - Vous êtes dans le mode challenger du jeu +/- 
+06:56:23.984 [Projet 3] INFO  fr.yoannroche.projet3.plusmoins.view.DefenseurPlusMoins - Vous êtes dans le mode défenseur du jeu +/- 
+06:57:42.431 [Projet 3] INFO  fr.yoannroche.projet3.Lancement - Bienvenue
+06:57:43.583 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.view.Mastermind - Vous êtes dans le mode challenger du jeu Mastermind
+06:57:47.023 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.view.Mastermind - Vous êtes dans le mode défenseur du jeu Mastermind
+06:57:49.869 [Projet 3] INFO  fr.yoannroche.projet3.mastermind.model.DuelMastermindModel - Vous êtes dans le mode duel du jeu Mastermind
+06:57:58.029 [Projet 3] INFO  fr.yoannroche.projet3.plusmoins.view.DefenseurPlusMoins - Vous êtes dans le mode défenseur du jeu +/- 
+06:58:23.865 [Projet 3] INFO  fr.yoannroche.projet3.Lancement - Bienvenue
+06:58:26.118 [Projet 3] INFO  fr.yoannroche.projet3.plusmoins.view.DefenseurPlusMoins - Vous êtes dans le mode défenseur du jeu +/- 
+07:39:52.157 [Projet 3] INFO  fr.yoannroche.projet3.Lancement - Bienvenue

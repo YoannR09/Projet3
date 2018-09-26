@@ -34,7 +34,7 @@ public class MastermindDuel extends JFrame{
 	private IndiceListener				IndicesListener     		= new IndiceListener();
 	private JPanel                      contentPane					= new JPanel();
 	private JButton						ok							= new JButton(" OK ");
-	private JButton						supprimer					= new JButton(" ❌ ");
+	private JButton						supprimer					= new JButton(" Effacer ");
 	private JButton						retour						= new JButton(" Retour ");
 	private JButton						p							= new JButton( " ♢ ");
 	private JButton						o							= new JButton(" ♦ ");

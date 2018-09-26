@@ -45,7 +45,7 @@ public class Mastermind extends JFrame{
     private JPanel						espace2				= new JPanel();
     private JPanel						votreProp			= new JPanel();
 	private JButton						ok					= new JButton(" OK ");
-	private JButton						supprimer			= new JButton(" ❌ ");
+	private JButton						supprimer			= new JButton(" Effacer ");
 	private JButton						retour				= new JButton(" Retour ");
 	private Font						arial				= new Font ("arial", 14,14);
 	private Font						impact				= new Font ("impact", 12,12);

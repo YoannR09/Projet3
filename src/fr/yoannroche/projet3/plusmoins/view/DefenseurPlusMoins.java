@@ -39,7 +39,7 @@ public class DefenseurPlusMoins extends JFrame{
 	private JButton						ok					= new JButton(" Ok ");
 	private JButton						fin					= new JButton(" Ok ");
 	private JButton						refresh				= new JButton("⟲");
-	private JButton						supprimer			= new JButton(" Suppr ");
+	private JButton						supprimer			= new JButton(" Effacer ");
 	private String[]					indice				= {"+","-","="};
 	private JPanel						blocProposition 	= new JPanel();
 	private JPanel						blocTest			= new JPanel();
@@ -70,7 +70,7 @@ public class DefenseurPlusMoins extends JFrame{
 	public DefenseurPlusMoins(BeanReglage bean) {
 
 		this.setTitle(" Défenseur ");
-		this.setSize(400, 450);
+		this.setSize(405, 450);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
@@ -95,10 +95,7 @@ public class DefenseurPlusMoins extends JFrame{
 
 	private void initCadreDev() {
 
-		ResourceBundle reglage = ResourceBundle.getBundle("Config");
-		String devStatus = reglage.getString("dev");
-		int devMode = Integer.parseInt(devStatus);
-		if(devMode==1) {
+		if(bean.getDev()==1) {
 			JLabel text2 = new JLabel();
 			text2.setText(" Les indices à indiquer sont :");
 			text2.setFont(arial2);

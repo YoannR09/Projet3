@@ -39,7 +39,7 @@ public class ChallengerPlusMoins extends JFrame{
 	private JLabel						infosTentative		= new JLabel(); // La ou sera écrit + - = 
 	private JLabel						tentative			= new JLabel(); // Le texte généré de votre proposition quand vous cliquez sur Ok .
 	private JButton						ok					= new JButton(" OK ");
-	private JButton						supprimer			= new JButton(" Suppr ");
+	private JButton						supprimer			= new JButton(" Effacer ");
 	private JButton						retour				= new JButton(" Retour ");
 	private Font						impact				= new Font ("impact", 17,17);
 	private Font						arial				= new Font ("arial", 12,12);
