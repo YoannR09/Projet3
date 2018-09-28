@@ -296,7 +296,7 @@ public class DuelPlusMoins extends JFrame{
 		regle.setText(" Le plus rapide à trouver le code secret à "+ bean.getCases() +" chiffres de l'autre gagne.");
 		regle.setFont(arial);
 		attention.setFont(arial2);
-		attention.setText(" Le cadre jaune indique ou le joueur doit poser son attention ");
+		attention.setText(" Le cadre jaune indique où le joueur doit poser son attention ");
 		contentPane.add(retour);
 		contentPane.add(espaceRetour);
 		contentPane.add(aide);

@@ -54,7 +54,7 @@ public class ChallengerPlusMoins extends JFrame{
 	public ChallengerPlusMoins(BeanReglage bean) {
 
 		this.setTitle("Challenger");
-		this.setSize(400, 300);
+		this.setSize(410, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
@@ -178,7 +178,7 @@ public class ChallengerPlusMoins extends JFrame{
 		blocRegle.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,Color.getHSBColor(0.534f, 0.45f, 0.44f)));
 		blocRegle.setPreferredSize(new Dimension(500,40));
 		JLabel regle = new JLabel();
-		regle.setText("Vous avez "+ bean.getTentatives() +" tentative pour trouver le code secret à "+ bean.getCases() +" chiffres.");
+		regle.setText("Vous avez "+ bean.getTentatives() +" tentatives pour trouver le code secret à "+ bean.getCases() +" chiffres.");
 		regle.setFont(arial);
 		contentPane.add(retour);
 		contentPane.add(espaceRetour);
@@ -217,7 +217,7 @@ public class ChallengerPlusMoins extends JFrame{
 				if(tentative.getText().length()!=bean.getCases()) {
 					nbreTentative=0;
 				}
-				nbreTen.setText("Nombre de tentatives : "+nbreTentative);
+				nbreTen.setText("Nombre de tentative : "+nbreTentative);
 				chal.chechTentative(nbreTentative,contentPane);
 				nombreClick = 0;
 			}  

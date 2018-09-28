@@ -311,7 +311,7 @@ public class MastermindDuel extends JFrame{
 		regle.setText("Vous jouez contre l'ordinateur, le plus rapide à trouver le code secret à "+bean.getCouleurs()+" couleurs gagne la partie.");
 		regle.setFont(impact);
 		JLabel infos = new JLabel();
-		infos.setText("♦ : Nombre couleur bien placé.    ♢ : Nombre de couleur mal placée. ");
+		infos.setText("♦ : Nombre couleur bien placée.    ♢ : Nombre de couleur mal placée. ");
 		Font comic = new Font("New York",11,11);
 		infos.setFont(comic);
 		contentPane.add(retour);

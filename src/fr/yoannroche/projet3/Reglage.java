@@ -181,7 +181,7 @@ public class Reglage extends JFrame {
 		dev.setBackground(Color.DARK_GRAY);
 		dev.setForeground(Color.white);
 		dev.setFont(arial);
-		dev.setText("  Acive le mode développeur pour voir toutes les solutions ");
+		dev.setText("  Active le mode développeur pour voir toutes les solutions ");
 		dev.setPreferredSize(new Dimension(320,20));
 		cadreDev.setPreferredSize(new Dimension(330,60));
 		cadreDev.setBackground(Color.getHSBColor(0.534f, 0.15f, 0.84f));

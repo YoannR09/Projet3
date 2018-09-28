@@ -70,7 +70,7 @@ public class DefenseurPlusMoins extends JFrame{
 	public DefenseurPlusMoins(BeanReglage bean) {
 
 		this.setTitle(" Défenseur ");
-		this.setSize(405, 450);
+		this.setSize(410, 450);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(contentPane);
