@@ -290,9 +290,22 @@ public class DuelPlusMoinsModel {
 	public void tour2(JTextArea dialog, char []tabProp,char []tabCode,char[]tabMax,char [] tabMin,String codeCache, JLabel indiceDev, JPanel contentPane) {
 		for(int i=0; i<codeCache.length();i++) {
 			if(tabProp[i]!=tabCode[i]) {
-				resultMax = Character.getNumericValue(tabMin[i]);
-				resultMin = Character.getNumericValue(tabMax[i]);
-				tabProp[i]= intToChar((int)(Math.random()*(resultMax - resultMin))+resultMin); 
+				resultMin = Character.getNumericValue(tabMin[i]);
+				resultMax = Character.getNumericValue(tabMax[i]);
+				
+				
+				if(resultMin==5 & resultMax==7) {
+					tabProp[i]=intToChar(6);
+				}
+				else if(resultMin==7 & resultMax==9) {
+					tabProp[i]=intToChar(8);
+				}
+				else if(resultMin==0 & resultMax==2) {
+					tabProp[i]=intToChar(1);
+				}
+				else if(resultMin==2 & resultMax==5) {
+					tabProp[i]=intToChar(4);
+				}
 
 				if(tabProp[i]>tabCode[i]) {    
 					indiceDev.setText(indiceDev.getText()+"-");
